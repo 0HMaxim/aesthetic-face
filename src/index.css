@@ -1,0 +1,16 @@
+/* REPLACE IT WITH THIS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+  --foreground: #000; /* по умолчанию чёрный текст */
+}
+
+.dark {
+  --foreground: #fff; /* при dark-режиме белый текст */
+}

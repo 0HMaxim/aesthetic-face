@@ -1,0 +1,15 @@
+// models/Subservice.ts
+import type {ContentBlock} from "./ContentBlock.ts";
+import type {LocalizedText} from "./LocalizedText.ts";
+
+export interface Subservice {
+  id: string;
+  serviceId: string;
+  title: LocalizedText;
+  slug: string;
+  mainImage: string;
+  content: ContentBlock[];
+  prices?: { name: string; value: number }[];
+  faqs?: string[];
+  doctors?: string[];
+}
