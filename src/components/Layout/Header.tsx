@@ -20,19 +20,21 @@ export default function Header() {
   ];
 
   return (
-      <header className="flex items-center justify-between gap-4 p-4 w-full">
-
-        <nav className="flex gap-4 text-[1rem] font-[600] text-foreground">
+      <header className="w-full bg-white dark:bg-black text-black dark:text-white flex items-center justify-between p-4">
+        <nav className="flex gap-4 flex-wrap w-full">
           {tabs.map(tab => (
-              <Link key={tab.link} to={`/${lang}${tab.link}`} className="p-[2rem]">
+              <Link
+                  key={tab.link}
+                  to={`/${lang}${tab.link}`}
+                  className="p-2 text-[1rem] font-semibold text-foreground hover:text-blue-600"
+              >
                 {t(tab.title)}
               </Link>
           ))}
         </nav>
-        {/* Переключатель языка */}
-        <div className="flex">
-          <LanguageSwitcher/>
-          <ThemeSwitcher/>
+        <div className="flex gap-2 ml-4">
+          <LanguageSwitcher />
+          <ThemeSwitcher />
         </div>
       </header>
   );

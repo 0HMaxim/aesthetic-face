@@ -4,7 +4,7 @@ import { faqs } from "../data/services";
 export default function FAQ() {
 
   return (
-      <div className="container mx-auto py-8">
+      <div className="w-full px-4 lg:px-[10rem] py-8">
 
         <FAQList faqs={faqs} />
 

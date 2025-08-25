@@ -187,39 +187,141 @@ export const subservices: Subservice[] = [
 
 
   export const doctors: Doctor[] = [
-  {
-    id: "doctor1",
-    fullName: {
-      uk: "Бесєда Тетяна Павлівна",
-      ru: "Беседа Татьяна Павловна",
-      en: "Beseda Tetiana Pavlivna",
-      de: "Beseda Tetiana Pawliwna"
+    {
+      id: "doctor1",
+      fullName: {
+        uk: "Бесєда Тетяна Павлівна",
+        ru: "Беседа Татьяна Павловна",
+        en: "Beseda Tetiana Pavlivna",
+        de: "Beseda Tetiana Pawliwna"
+      },
+      position: {
+        uk: "Головний лікар, Дерматовенеролог, Трихолог",
+        ru: "Главный врач, Дерматовенеролог, Трихолог",
+        en: "Chief Doctor, Dermatovenereologist, Trichologist",
+        de: "Chefarzt, Dermatovenerologe, Trichologe"
+      },
+      specializations: [
+        { uk: "Дерматовенеролог", ru: "Дерматовенеролог", en: "Dermatovenereologist", de: "Dermatovenerologe" },
+        { uk: "Трихолог", ru: "Трихолог", en: "Trichologist", de: "Trichologe" }
+      ],
+      education: [
+        { uk: "Національний медичний університет", ru: "Национальный медицинский университет", en: "National Medical University", de: "Nationales Medizinisches Universität" }
+      ],
+      certificates: ["/certificates/doctor1-cert1.jpg"],
+      photo: "https://www.besedaclinic.com.ua/storage/gallery/1741612941.webp",
+      services: ["service1"],
+      subservices: ["sub1"],
+      shortName: {
+        uk: "Тетяни",
+        ru: "Татьяне",
+        en: "Tetyana",
+        de: "Tetyana"
+      }
+    }
+    ,{
+      id: "doctor3",
+      fullName: {
+        uk: "Бесєда Тетяна Павлівна",
+        ru: "Беседа Татьяна Павловна",
+        en: "Beseda Tetiana Pavlivna",
+        de: "Beseda Tetiana Pawliwna"
+      },
+      position: {
+        uk: "Головний лікар, Дерматовенеролог, Трихолог",
+        ru: "Главный врач, Дерматовенеролог, Трихолог",
+        en: "Chief Doctor, Dermatovenereologist, Trichologist",
+        de: "Chefarzt, Dermatovenerologe, Trichologe"
+      },
+      specializations: [
+        { uk: "Дерматовенеролог", ru: "Дерматовенеролог", en: "Dermatovenereologist", de: "Dermatovenerologe" },
+        { uk: "Трихолог", ru: "Трихолог", en: "Trichologist", de: "Trichologe" }
+      ],
+      education: [
+        { uk: "Національний медичний університет", ru: "Национальный медицинский университет", en: "National Medical University", de: "Nationales Medizinisches Universität" }
+      ],
+      certificates: ["/certificates/doctor1-cert1.jpg"],
+      photo: "https://www.besedaclinic.com.ua/storage/gallery/1734532587.webp",
+      services: ["service1"],
+      subservices: ["sub1","sub2",],
+      shortName: {
+        uk: "Тетяни",
+        ru: "Татьяне",
+        en: "Tetyana",
+        de: "Tetyana"
+      }
     },
-    position: {
-      uk: "Головний лікар, Дерматовенеролог, Трихолог",
-      ru: "Главный врач, Дерматовенеролог, Трихолог",
-      en: "Chief Doctor, Dermatovenereologist, Trichologist",
-      de: "Chefarzt, Dermatovenerologe, Trichologe"
+    {
+      id: "doctor2",
+      fullName: {
+        uk: "Бесєда Тетяна Павлівна",
+        ru: "Беседа Татьяна Павловна",
+        en: "Beseda Tetiana Pavlivna",
+        de: "Beseda Tetiana Pawliwna"
+      },
+      position: {
+        uk: "Головний лікар, Дерматовенеролог, Трихолог",
+        ru: "Главный врач, Дерматовенеролог, Трихолог",
+        en: "Chief Doctor, Dermatovenereologist, Trichologist",
+        de: "Chefarzt, Dermatovenerologe, Trichologe"
+      },
+      specializations: [
+        { uk: "Дерматовенеролог", ru: "Дерматовенеролог", en: "Dermatovenereologist", de: "Dermatovenerologe" },
+        { uk: "Трихолог", ru: "Трихолог", en: "Trichologist", de: "Trichologe" }
+      ],
+      education: [
+        { uk: "Національний медичний університет", ru: "Национальный медицинский университет", en: "National Medical University", de: "Nationales Medizinisches Universität" }
+      ],
+      certificates: ["/certificates/doctor1-cert1.jpg"],
+      photo: "https://www.besedaclinic.com.ua/storage/gallery/1713098704.webp",
+      services: ["service1"],
+      subservices: ["sub1"],
+      shortName: {
+        uk: "Тетяни",
+        ru: "Татьяне",
+        en: "Tetyana",
+        de: "Tetyana"
+      }
     },
-    specializations: [
-      { uk: "Дерматовенеролог", ru: "Дерматовенеролог", en: "Dermatovenereologist", de: "Dermatovenerologe" },
-      { uk: "Трихолог", ru: "Трихолог", en: "Trichologist", de: "Trichologe" }
-    ],
-    education: [
-      { uk: "Національний медичний університет", ru: "Национальный медицинский университет", en: "National Medical University", de: "Nationales Medizinisches Universität" }
-    ],
-    certificates: ["/certificates/doctor1-cert1.jpg"],
-    photo: "https://www.besedaclinic.com.ua/storage/gallery/1734532587.webp",
-    services: ["service1"],
-    subservices: ["sub1"]
-  },
+    {
+      id: "doctor5",
+      fullName: {
+        uk: "Бесєда Тетяна Павлівна",
+        ru: "Беседа Татьяна Павловна",
+        en: "Beseda Tetiana Pavlivna",
+        de: "Beseda Tetiana Pawliwna"
+      },
+      position: {
+        uk: "Головний лікар, Дерматовенеролог, Трихолог",
+        ru: "Главный врач, Дерматовенеролог, Трихолог",
+        en: "Chief Doctor, Dermatovenereologist, Trichologist",
+        de: "Chefarzt, Dermatovenerologe, Trichologe"
+      },
+      specializations: [
+        { uk: "Дерматовенеролог", ru: "Дерматовенеролог", en: "Dermatovenereologist", de: "Dermatovenerologe" },
+        { uk: "Трихолог", ru: "Трихолог", en: "Trichologist", de: "Trichologe" }
+      ],
+      education: [
+        { uk: "Національний медичний університет", ru: "Национальный медицинский университет", en: "National Medical University", de: "Nationales Medizinisches Universität" }
+      ],
+      certificates: ["/certificates/doctor1-cert1.jpg"],
+      photo: "https://www.besedaclinic.com.ua/storage/gallery/1734532587.webp",
+      services: ["service1","service2"],
+      subservices: ["sub1"],
+      shortName: {
+        uk: "Тетянукук",
+        ru: "Татьяне",
+        en: "Tetyana",
+        de: "Tetyana"
+      }
+    },
   {
-    id: "doctor2",
+    id: "doctor4",
     fullName: {
-      uk: "Кулик Наталія Андріївна",
-      ru: "Кулик Наталья Андреевна",
-      en: "Kulyk Natalia Andriivna",
-      de: "Kulyk Natalia Andriiwna"
+      uk: "Кулик Вікторя Андріївна",
+      ru: "Кулик Викторя Андреевна",
+      en: "Kulyk Vikroiria Andriivna",
+      de: "Kulyk Vikroiria Andriiwna"
     },
     position: {
       uk: "Дерматолог/Косметолог/Лазерний Спеціаліст",
@@ -238,7 +340,13 @@ export const subservices: Subservice[] = [
     certificates: ["/certificates/doctor2-cert1.jpg", "/certificates/doctor2-cert2.jpg"],
     photo: "https://www.besedaclinic.com.ua/storage/gallery/1713098704.webp",
     services: ["service1"],
-    subservices: ["sub1", "sub2"]
+    subservices: ["sub1", "sub2"],
+    shortName: {
+      uk: "Вікторії",
+      ru: "Викторие",
+      en: "Vikroirii",
+      de: "Vikroiriy"
+    }
   }
 ];
 

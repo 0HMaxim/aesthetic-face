@@ -15,13 +15,14 @@ export default function AppLayout() {
     }
   }, [lang, i18n]);
 
-  return (
-      <div className="grid min-h-dvh w-full grid-cols-1 grid-rows-[auto_1fr_auto] bg-white dark:bg-black text-black dark:text-white transition-colors duration-500">
-        <Header />
-        <main>
-          <Outlet />
-        </main>
-        <Footer />
-      </div>
-  );
-}
+
+    return (
+        <div className="grid min-h-screen w-full grid-rows-[auto_1fr_auto] bg-white dark:bg-black text-black dark:text-white transition-colors duration-500">
+          <Header />
+          <main className="w-full">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
+    );
+  }

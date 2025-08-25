@@ -18,13 +18,13 @@ import ServicePage from './pages/ServicePage';
 const App: React.FC = () => {
   return (
       <Routes>
-        {/* редирект на дефолтный язык */}
+
         <Route
             path="/"
             element={<Navigate to={`/${import.meta.env.VITE_APP_LOCALE || 'en'}`} replace />}
         />
 
-        {/* все маршруты внутри с языком */}
+
         <Route path=":lang/*" element={<AppLayout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />

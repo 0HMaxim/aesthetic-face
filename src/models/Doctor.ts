@@ -10,4 +10,5 @@ export interface Doctor {
   photo?: string;                    // Фото
   services?: string[];               // id услуг
   subservices?: string[];            // id подуслуг
+  shortName: LocalizedText;
 }

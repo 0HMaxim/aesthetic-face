@@ -8,9 +8,11 @@ body {
 }
 
 :root {
-  --foreground: #000; /* по умолчанию чёрный текст */
+  --foreground: #000;
+  --secondary: #6B7280;
 }
 
 .dark {
-  --foreground: #fff; /* при dark-режиме белый текст */
+  --foreground: #fff;
+  --secondary: #9CA3AF;
 }
