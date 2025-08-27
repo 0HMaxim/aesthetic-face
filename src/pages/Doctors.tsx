@@ -1,12 +1,12 @@
-import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { useParams , Link } from "react-router-dom";
 import { doctors } from "../data/services"; // твой массив с данными
+import { useTranslation } from "react-i18next";
 import type { Doctor } from "../models/Doctor.ts";
 import { Button } from "@heroui/react";
 
 export default function Doctors() {
-  const { t } = useTranslation();
-  const { lang } = useParams<{ lang: string }>();
+  const { i18n, t } = useTranslation();
+  const lang = i18n.language as "uk" | "ru" | "en" | "de";
   const minExperience = 7; // динамически укажешь сам
 
   return (
@@ -29,38 +29,40 @@ export default function Doctors() {
           {doctors.map((doctor: Doctor) => (
               <div
                   key={doctor.id}
-                  className="group rounded-2xl w-full max-w-sm shadow hover:shadow-lg transition-shadow flex flex-col"
+                  className="group rounded-2xl w-full transition-shadow flex flex-col"
               >
                 {/* Фото с увеличенной высотой */}
-                <div className="overflow-hidden rounded-xl w-full h-[28rem]">
+                <Button as={Link}
+                    to={`/${lang}/doctors/${doctor.slug}`}
+                    className="overflow-hidden rounded-xl w-full h-[28rem] block mb-[1.5rem]"
+                >
                   <img
                       src={doctor.photo || "/images/placeholder-doctor.jpg"}
                       alt={doctor.fullName[lang as keyof typeof doctor.fullName]}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-cover rounded-xl transition-transform duration-300  group-hover:scale-105"
                   />
-                </div>
+                </Button>
 
                 {/* Контент */}
                 <div className="p-6 flex flex-col flex-1">
-                  <p className="name fw500 text-xl font-medium mb-2">
-                    {doctor.fullName[lang as keyof typeof doctor.fullName]}
-                  </p>
 
-                  <p className="position fw500 text-foreground mb-2">
-                    {doctor.position[lang as keyof typeof doctor.position]}
-                  </p>
 
-                  <ul className="content_seo list-disc list-inside text-foreground mb-4 flex-1">
-                    {doctor.specializations.map((spec, i) => (
-                        <li key={i}>{spec[lang as keyof typeof spec]}</li>
-                    ))}
-                  </ul>
+                  <div className="text-[1.75rem] font-[700] mb-[1.5rem]">
+                    {doctor.fullName[lang]}
+                  </div>
 
-                  <Button className="w-full p-3 bg-black text-white mt-auto">
+                  <p className="text-[1.25rem] md:text-[1.5rem] text-foreground mb-[1.5rem] ">{doctor.position[lang]}</p>
+                  <Button
+                      as={Link}
+                      to={`/${lang}/doctors/${doctor.slug}`}
+                      className="w-full  p-[1rem] rounded-2xl text-center group-hover:bg-sky-600 duration-300 bg-black text-white mt-auto"
+                  >
                     {t("doctors.bookAppointment", {
-                      name: doctor.shortName[lang as keyof typeof doctor.shortName]
+                      name: doctor.shortName[lang],
                     })}
                   </Button>
+
+
                 </div>
               </div>
           ))}

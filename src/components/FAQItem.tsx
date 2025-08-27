@@ -1,13 +1,20 @@
 import { useState } from "react";
 import type { FAQ } from "../models/FAQ";
+import { useTranslation } from "react-i18next";
 
 interface FAQItemProps {
   faq: FAQ;
-  lang: keyof FAQ["question"];
 }
 
-export default function FAQItem({ faq, lang }: FAQItemProps) {
+export default function FAQItem({ faq }: FAQItemProps) {
   const [open, setOpen] = useState(true);
+
+  const { i18n } = useTranslation();
+  const lang = i18n.language as "uk" | "ru" | "en" | "de";
+
+
+
+
 
   return (
       <div className="border-b py-4">
@@ -16,17 +23,17 @@ export default function FAQItem({ faq, lang }: FAQItemProps) {
             onClick={() => setOpen(!open)}
             className="w-full flex justify-between items-center text-left"
         >
-        <span className="text-[1.9rem] font-[800] text-foreground">
+        <span className="md:text-[2rem] text-[1.5rem] font-[700] text-foreground">
           {faq.question[lang]}
         </span>
 
           {/* Иконка с анимацией поворота */}
           <span
-              className={`text-2xl transform transition-transform duration-300 ${
+              className={`text-[2rem] transform transition-transform duration-300 ${
                   open ? "rotate-180" : "rotate-0"
               }`}
           >
-          +
+          {"+"}
         </span>
         </button>
 
@@ -36,7 +43,7 @@ export default function FAQItem({ faq, lang }: FAQItemProps) {
                 open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 duration-0"
             }`}
         >
-          <div className="pt-[1.5vw] pr-[2vw] pb-0 pl-[2vw] mb-[1rem] text-foreground">
+          <div className="pt-[1.5vw] pr-[2vw] md:text-[1.5rem] text-[1rem] pb-0 pl-[2vw] mb-[1rem] text-foreground">
             {faq.answer[lang]}
           </div>
         </div>

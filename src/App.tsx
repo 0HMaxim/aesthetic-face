@@ -13,6 +13,7 @@ import Contact from './pages/Contact';
 import Blog from './pages/Blog';
 import Gallery from './pages/Gallery';
 import ServicePage from './pages/ServicePage';
+import DoctorPage from "./pages/DoctorPage.tsx";
 
 
 const App: React.FC = () => {
@@ -32,6 +33,7 @@ const App: React.FC = () => {
           <Route path="services" element={<Services />} />
           <Route path="services/:slug" element={<ServicePage />} />
           <Route path="doctors" element={<Doctors />} />
+          <Route path="doctors/:slug" element={<DoctorPage />} />
           <Route path="price" element={<Price />} />
           <Route path="faq" element={<FAQ />} />
           <Route path="gallery" element={<Gallery />} />

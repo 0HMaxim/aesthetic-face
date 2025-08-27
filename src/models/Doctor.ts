@@ -11,4 +11,5 @@ export interface Doctor {
   services?: string[];               // id услуг
   subservices?: string[];            // id подуслуг
   shortName: LocalizedText;
+  slug: string;             // для URL
 }

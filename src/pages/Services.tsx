@@ -9,12 +9,16 @@ export default function Services() {
   return (
       <div className="container mx-auto py-8">
 
-        <h1 className="text-3xl font-bold mb-6">
-          {t('services.title')}
-        </h1>
 
-        <div className="text-1xl ">
-          {t('services.description')}
+        <div className="py-8">
+          <h2 className="text-3xl lg:text-5xl font-[800] mb-4">
+            {t("services.title")}
+          </h2>
+
+
+          <p className="text-base lg:text-2xl font-normal text-foreground">
+            {t("services.description")}
+          </p>
         </div>
 
 

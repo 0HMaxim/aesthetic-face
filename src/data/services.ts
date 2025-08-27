@@ -186,169 +186,141 @@ export const subservices: Subservice[] = [
   ]
 
 
-  export const doctors: Doctor[] = [
-    {
-      id: "doctor1",
-      fullName: {
-        uk: "Бесєда Тетяна Павлівна",
-        ru: "Беседа Татьяна Павловна",
-        en: "Beseda Tetiana Pavlivna",
-        de: "Beseda Tetiana Pawliwna"
-      },
-      position: {
-        uk: "Головний лікар, Дерматовенеролог, Трихолог",
-        ru: "Главный врач, Дерматовенеролог, Трихолог",
-        en: "Chief Doctor, Dermatovenereologist, Trichologist",
-        de: "Chefarzt, Dermatovenerologe, Trichologe"
-      },
-      specializations: [
-        { uk: "Дерматовенеролог", ru: "Дерматовенеролог", en: "Dermatovenereologist", de: "Dermatovenerologe" },
-        { uk: "Трихолог", ru: "Трихолог", en: "Trichologist", de: "Trichologe" }
-      ],
-      education: [
-        { uk: "Національний медичний університет", ru: "Национальный медицинский университет", en: "National Medical University", de: "Nationales Medizinisches Universität" }
-      ],
-      certificates: ["/certificates/doctor1-cert1.jpg"],
-      photo: "https://www.besedaclinic.com.ua/storage/gallery/1741612941.webp",
-      services: ["service1"],
-      subservices: ["sub1"],
-      shortName: {
-        uk: "Тетяни",
-        ru: "Татьяне",
-        en: "Tetyana",
-        de: "Tetyana"
-      }
-    }
-    ,{
-      id: "doctor3",
-      fullName: {
-        uk: "Бесєда Тетяна Павлівна",
-        ru: "Беседа Татьяна Павловна",
-        en: "Beseda Tetiana Pavlivna",
-        de: "Beseda Tetiana Pawliwna"
-      },
-      position: {
-        uk: "Головний лікар, Дерматовенеролог, Трихолог",
-        ru: "Главный врач, Дерматовенеролог, Трихолог",
-        en: "Chief Doctor, Dermatovenereologist, Trichologist",
-        de: "Chefarzt, Dermatovenerologe, Trichologe"
-      },
-      specializations: [
-        { uk: "Дерматовенеролог", ru: "Дерматовенеролог", en: "Dermatovenereologist", de: "Dermatovenerologe" },
-        { uk: "Трихолог", ru: "Трихолог", en: "Trichologist", de: "Trichologe" }
-      ],
-      education: [
-        { uk: "Національний медичний університет", ru: "Национальный медицинский университет", en: "National Medical University", de: "Nationales Medizinisches Universität" }
-      ],
-      certificates: ["/certificates/doctor1-cert1.jpg"],
-      photo: "https://www.besedaclinic.com.ua/storage/gallery/1734532587.webp",
-      services: ["service1"],
-      subservices: ["sub1","sub2",],
-      shortName: {
-        uk: "Тетяни",
-        ru: "Татьяне",
-        en: "Tetyana",
-        de: "Tetyana"
-      }
-    },
-    {
-      id: "doctor2",
-      fullName: {
-        uk: "Бесєда Тетяна Павлівна",
-        ru: "Беседа Татьяна Павловна",
-        en: "Beseda Tetiana Pavlivna",
-        de: "Beseda Tetiana Pawliwna"
-      },
-      position: {
-        uk: "Головний лікар, Дерматовенеролог, Трихолог",
-        ru: "Главный врач, Дерматовенеролог, Трихолог",
-        en: "Chief Doctor, Dermatovenereologist, Trichologist",
-        de: "Chefarzt, Dermatovenerologe, Trichologe"
-      },
-      specializations: [
-        { uk: "Дерматовенеролог", ru: "Дерматовенеролог", en: "Dermatovenereologist", de: "Dermatovenerologe" },
-        { uk: "Трихолог", ru: "Трихолог", en: "Trichologist", de: "Trichologe" }
-      ],
-      education: [
-        { uk: "Національний медичний університет", ru: "Национальный медицинский университет", en: "National Medical University", de: "Nationales Medizinisches Universität" }
-      ],
-      certificates: ["/certificates/doctor1-cert1.jpg"],
-      photo: "https://www.besedaclinic.com.ua/storage/gallery/1713098704.webp",
-      services: ["service1"],
-      subservices: ["sub1"],
-      shortName: {
-        uk: "Тетяни",
-        ru: "Татьяне",
-        en: "Tetyana",
-        de: "Tetyana"
-      }
-    },
-    {
-      id: "doctor5",
-      fullName: {
-        uk: "Бесєда Тетяна Павлівна",
-        ru: "Беседа Татьяна Павловна",
-        en: "Beseda Tetiana Pavlivna",
-        de: "Beseda Tetiana Pawliwna"
-      },
-      position: {
-        uk: "Головний лікар, Дерматовенеролог, Трихолог",
-        ru: "Главный врач, Дерматовенеролог, Трихолог",
-        en: "Chief Doctor, Dermatovenereologist, Trichologist",
-        de: "Chefarzt, Dermatovenerologe, Trichologe"
-      },
-      specializations: [
-        { uk: "Дерматовенеролог", ru: "Дерматовенеролог", en: "Dermatovenereologist", de: "Dermatovenerologe" },
-        { uk: "Трихолог", ru: "Трихолог", en: "Trichologist", de: "Trichologe" }
-      ],
-      education: [
-        { uk: "Національний медичний університет", ru: "Национальный медицинский университет", en: "National Medical University", de: "Nationales Medizinisches Universität" }
-      ],
-      certificates: ["/certificates/doctor1-cert1.jpg"],
-      photo: "https://www.besedaclinic.com.ua/storage/gallery/1734532587.webp",
-      services: ["service1","service2"],
-      subservices: ["sub1"],
-      shortName: {
-        uk: "Тетянукук",
-        ru: "Татьяне",
-        en: "Tetyana",
-        de: "Tetyana"
-      }
-    },
+export const doctors: Doctor[] = [
   {
-    id: "doctor4",
+    id: "doctor1",
+    slug: "beseda-tetiana",
     fullName: {
-      uk: "Кулик Вікторя Андріївна",
-      ru: "Кулик Викторя Андреевна",
-      en: "Kulyk Vikroiria Andriivna",
-      de: "Kulyk Vikroiria Andriiwna"
+      uk: "Бесєда Тетяна Павлівна",
+      ru: "Беседа Татьяна Павловна",
+      en: "Beseda Tetiana Pavlivna",
+      de: "Beseda Tetiana Pawliwna"
     },
     position: {
-      uk: "Дерматолог/Косметолог/Лазерний Спеціаліст",
-      ru: "Дерматолог/Косметолог/Лазерный специалист",
-      en: "Dermatologist/Cosmetologist/Laser Specialist",
-      de: "Dermatologe/Kosmetologe/Laserspezialist"
+      uk: "Головний лікар, Дерматовенеролог, Трихолог",
+      ru: "Главный врач, Дерматовенеролог, Трихолог",
+      en: "Chief Doctor, Dermatovenereologist, Trichologist",
+      de: "Chefarzt, Dermatovenerologe, Trichologe"
     },
     specializations: [
-      { uk: "Дерматолог", ru: "Дерматолог", en: "Dermatologist", de: "Dermatologe" },
-      { uk: "Косметолог", ru: "Косметолог", en: "Cosmetologist", de: "Kosmetologe" },
-      { uk: "Лазерний спеціаліст", ru: "Лазерный специалист", en: "Laser Specialist", de: "Laserspezialist" }
+      { uk: "Дерматовенеролог", ru: "Дерматовенеролог", en: "Dermatovenereologist", de: "Dermatovenerologe" },
+      { uk: "Трихолог", ru: "Трихолог", en: "Trichologist", de: "Trichologe" }
     ],
     education: [
-      { uk: "Медичний університет м. Київ", ru: "Медицинский университет г. Киев", en: "Medical University Kyiv", de: "Medizinische Universität Kiew" }
+      { uk: "Національний медичний університет", ru: "Национальный медицинский университет", en: "National Medical University", de: "Nationales Medizinisches Universität" }
     ],
-    certificates: ["/certificates/doctor2-cert1.jpg", "/certificates/doctor2-cert2.jpg"],
-    photo: "https://www.besedaclinic.com.ua/storage/gallery/1713098704.webp",
+    certificates: ["https://marketplace.canva.com/EAGMPfFcHWI/1/0/1600w/canva-blue-and-white-simple-modern-certificate-of-appreciation-kYHEaKKpJI0.jpg", "https://5.imimg.com/data5/SELLER/Default/2024/2/382609921/MP/AN/IW/124928557/school-certificate-printing-service.jpg" ,"https://d2vyhi5ouo1we3.cloudfront.net/force_jpg/aHR0cHM6Ly9pbWFnZXMuYmFubmVyYmVhci5jb20vcmVxdWVzdHMvaW1hZ2VzLzAwOC85MjQvNTc5L29yaWdpbmFsL2VhYzQyY2FiZjM5YzIxY2Y4NThlNWY4NDRlZmM0YTA1MjJmOGUxNzkucG5nPzE2MzI4MDgzMDI=/image.jpg"],
+    photo: "https://www.besedaclinic.com.ua/storage/gallery/1741612941.webp",
     services: ["service1"],
-    subservices: ["sub1", "sub2"],
+    subservices: ["sub1"],
     shortName: {
-      uk: "Вікторії",
-      ru: "Викторие",
-      en: "Vikroirii",
-      de: "Vikroiriy"
+      uk: "Тетяни",
+      ru: "Татьяне",
+      en: "Tetyana",
+      de: "Tetyana"
+    }
+  },
+  {
+    id: "doctor6",
+    slug: "ivanenko-oleksandr",
+    fullName: {
+      uk: "Іваненко Олександр Михайлович",
+      ru: "Иваненко Александр Михайлович",
+      en: "Ivanenko Oleksandr Mykhailovych",
+      de: "Ivanenko Oleksandr Mykhailovych"
+    },
+    position: {
+      uk: "Хірург, Онколог",
+      ru: "Хирург, Онколог",
+      en: "Surgeon, Oncologist",
+      de: "Chirurg, Onkologe"
+    },
+    specializations: [
+      { uk: "Онкохірург", ru: "Онкохирург", en: "Oncosurgeon", de: "Onkochirurg" },
+      { uk: "Абдомінальний хірург", ru: "Абдоминальный хирург", en: "Abdominal Surgeon", de: "Abdominalchirurg" }
+    ],
+    education: [
+      { uk: "Львівський національний медичний університет", ru: "Львовский национальный медицинский университет", en: "Lviv National Medical University", de: "Lwiw Nationale Medizinische Universität" }
+    ],
+    certificates: ["https://marketplace.canva.com/EAGMPfFcHWI/1/0/1600w/canva-blue-and-white-simple-modern-certificate-of-appreciation-kYHEaKKpJI0.jpg", "https://5.imimg.com/data5/SELLER/Default/2024/2/382609921/MP/AN/IW/124928557/school-certificate-printing-service.jpg" ,"https://d2vyhi5ouo1we3.cloudfront.net/force_jpg/aHR0cHM6Ly9pbWFnZXMuYmFubmVyYmVhci5jb20vcmVxdWVzdHMvaW1hZ2VzLzAwOC85MjQvNTc5L29yaWdpbmFsL2VhYzQyY2FiZjM5YzIxY2Y4NThlNWY4NDRlZmM0YTA1MjJmOGUxNzkucG5nPzE2MzI4MDgzMDI=/image.jpg"],
+    photo: "https://images.unsplash.com/photo-1607746882042-944635dfe10e",
+    services: ["service2"],
+    subservices: ["sub3"],
+    shortName: {
+      uk: "Олександра",
+      ru: "Александра",
+      en: "Oleksandr",
+      de: "Oleksandr"
+    }
+  },
+  {
+    id: "doctor7",
+    slug: "petrenko-natalia",
+    fullName: {
+      uk: "Петренко Наталія Ігорівна",
+      ru: "Петренко Наталия Игоревна",
+      en: "Petrenko Natalia Ihorivna",
+      de: "Petrenko Natalia Ihorivna"
+    },
+    position: {
+      uk: "Кардіолог, Терапевт",
+      ru: "Кардиолог, Терапевт",
+      en: "Cardiologist, Therapist",
+      de: "Kardiologe, Therapeut"
+    },
+    specializations: [
+      { uk: "Кардіолог", ru: "Кардиолог", en: "Cardiologist", de: "Kardiologe" },
+      { uk: "Терапевт", ru: "Терапевт", en: "Therapist", de: "Therapeut" }
+    ],
+    education: [
+      { uk: "Київський медичний університет", ru: "Киевский медицинский университет", en: "Kyiv Medical University", de: "Kiew Medizinische Universität" }
+    ],
+    certificates: ["https://marketplace.canva.com/EAGMPfFcHWI/1/0/1600w/canva-blue-and-white-simple-modern-certificate-of-appreciation-kYHEaKKpJI0.jpg", "https://5.imimg.com/data5/SELLER/Default/2024/2/382609921/MP/AN/IW/124928557/school-certificate-printing-service.jpg" ,"https://d2vyhi5ouo1we3.cloudfront.net/force_jpg/aHR0cHM6Ly9pbWFnZXMuYmFubmVyYmVhci5jb20vcmVxdWVzdHMvaW1hZ2VzLzAwOC85MjQvNTc5L29yaWdpbmFsL2VhYzQyY2FiZjM5YzIxY2Y4NThlNWY4NDRlZmM0YTA1MjJmOGUxNzkucG5nPzE2MzI4MDgzMDI=/image.jpg"],
+    photo: "https://images.unsplash.com/photo-1527613426441-4da17471b66d",
+    services: ["service3"],
+    subservices: ["sub5"],
+    shortName: {
+      uk: "Наталії",
+      ru: "Натальи",
+      en: "Natalia",
+      de: "Natalia"
+    }
+  },
+  {
+    id: "doctor8",
+    slug: "shevchenko-iryna",
+    fullName: {
+      uk: "Шевченко Ірина Сергіївна",
+      ru: "Шевченко Ирина Сергеевна",
+      en: "Shevchenko Iryna Serhiivna",
+      de: "Shevchenko Iryna Serhiivna"
+    },
+    position: {
+      uk: "Педіатр, Неонатолог",
+      ru: "Педиатр, Неонатолог",
+      en: "Pediatrician, Neonatologist",
+      de: "Pädiater, Neonatologe"
+    },
+    specializations: [
+      { uk: "Педіатр", ru: "Педиатр", en: "Pediatrician", de: "Pädiater" },
+      { uk: "Неонатолог", ru: "Неонатолог", en: "Neonatologist", de: "Neonatologe" }
+    ],
+    education: [
+      { uk: "Харківський медичний університет", ru: "Харьковский медицинский университет", en: "Kharkiv Medical University", de: "Charkiw Medizinische Universität" }
+    ],
+    certificates: ["https://marketplace.canva.com/EAGMPfFcHWI/1/0/1600w/canva-blue-and-white-simple-modern-certificate-of-appreciation-kYHEaKKpJI0.jpg", "https://5.imimg.com/data5/SELLER/Default/2024/2/382609921/MP/AN/IW/124928557/school-certificate-printing-service.jpg" ,"https://d2vyhi5ouo1we3.cloudfront.net/force_jpg/aHR0cHM6Ly9pbWFnZXMuYmFubmVyYmVhci5jb20vcmVxdWVzdHMvaW1hZ2VzLzAwOC85MjQvNTc5L29yaWdpbmFsL2VhYzQyY2FiZjM5YzIxY2Y4NThlNWY4NDRlZmM0YTA1MjJmOGUxNzkucG5nPzE2MzI4MDgzMDI=/image.jpg"],
+    photo: "https://images.unsplash.com/photo-1550831107-1553da8c8464",
+    services: ["service4"],
+    subservices: ["sub6"],
+    shortName: {
+      uk: "Ірини",
+      ru: "Ирины",
+      en: "Iryna",
+      de: "Iryna"
     }
   }
 ];
+
 
 export const faqs: FAQ[] = [
   {
