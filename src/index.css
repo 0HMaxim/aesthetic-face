@@ -7,12 +7,23 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+
+
+
 :root {
-  --foreground: #000;
-  --secondary: #6B7280;
+  --background: background: -webkit-linear-gradient(90deg, #d0bdb7,#d1c4c0,#d0bdb7);background: linear-gradient(90deg, #d0bdb7,#d1c4c0,#d0bdb7);
+  --foreground: #1a1a1f;
+
+  --secondary: background: -webkit-linear-gradient(90deg, #1abc9c,#1f2c51);background: linear-gradient(90deg, #1abc9c,#1f2c51);
+  --primary: #019192;
 }
 
 .dark {
-  --foreground: #fff;
-  --secondary: #9CA3AF;
+  --background: background: -webkit-linear-gradient(90deg, #000000,#000000,#021392);background: linear-gradient(90deg, #000000,#000000,#021392);
+  --foreground: #f4f4f5;
+
+  --secondary: background: -webkit-linear-gradient(90deg, #1b2c55,#3d85a9,#63cac8,#b8edff);background: linear-gradient(90deg, #1b2c55,#3d85a9,#63cac8,#b8edff);
+  --primary: #3d85a9;
 }
+
+

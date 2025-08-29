@@ -13,9 +13,6 @@ export default function FAQItem({ faq }: FAQItemProps) {
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
 
-
-
-
   return (
       <div className="border-b py-4">
         {/* Вопрос */}

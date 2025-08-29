@@ -40,7 +40,7 @@ export default function LanguageSwitcher() {
             className="
           absolute left-0 mt-0 flex-col
           opacity-0 translate-y-1 pointer-events-none
-          transition-all duration-300 ease-in-out
+          transition-all duration-500 ease-in-out
           group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
           flex
         "

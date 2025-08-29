@@ -1,7 +1,9 @@
+// data/service.ts
 import type {Service} from "../models/Service.ts";
 import type {Subservice} from "../models/Subservice.ts";
 import type {Doctor} from "../models/Doctor.ts";
 import type {FAQ} from "../models/FAQ.ts";
+import type {Scpecials} from "../models/Scpecials.ts";
 
 export const services: Service[] = [
   {
@@ -16,7 +18,7 @@ export const services: Service[] = [
     mainImage: "https://www.besedaclinic.com.ua/storage/gallery/1704836044.webp",
     content: [
       { id: "c1", type: "text", content: { uk: "Безпечне видалення новоутворень різного типу.", ru: "Безопасное удаление новообразований разных типов.", en: "Safe removal of different types of skin growths.", de: "Sichere Entfernung von Hautwucherungen verschiedener Typen." } },
-      { id: "c2", type: "image", image: "/images/services/vidalennya-1.jpg" }
+      { id: "c2", type: "image", image: "https://salonnomer5.ru/assets/components/phpthumbof/cache/service-172.b483ceb3ceea83bee0f08e007b0b37bb.jpg" }
     ],
     faqs: ["faq1"],
     doctors: ["doctor1", "doctor2"],
@@ -469,6 +471,100 @@ export const faqs: FAQ[] = [
   }
 ];
 
+export const specials: Scpecials[] = [
+  {
+    id: "1",
+    title: {
+      uk: "Лазерна епіляція -30%",
+      de: "Laser-Haarentfernung -30%",
+      en: "Laser Hair Removal -30%",
+      ru: "Лазерная эпиляция -30%"
+    },
+    subtitle: {
+      uk: "Знижка на лазерні процедури цього місяця",
+      de: "Rabatt auf Laserbehandlungen diesen Monat",
+      en: "Discount on laser treatments this month",
+      ru: "Скидка на лазерные процедуры в этом месяце"
+    },
+    headerTitle: {
+      uk: "Акція на лазерну епіляцію",
+      de: "Aktion für Laser-Haarentfernung",
+      en: "Laser Hair Removal Promotion",
+      ru: "Акция на лазерную эпиляцию"
+    },
+    content: [
+      { id: "1-1", type: "text", content: { uk: "Щоб отримати знижку, запишіться на процедуру через наш сайт або телефон.", de: "Um den Rabatt zu erhalten, buchen Sie über unsere Website oder telefonisch.", en: "To get the discount, book your procedure via our website or phone.", ru: "Чтобы получить скидку, запишитесь на процедуру через наш сайт или по телефону." } },
+      { id: "1-2", type: "text", content: { uk: "Лазерна епіляція дозволяє швидко видаляти небажане волосся, забезпечуючи гладку шкіру.", de: "Die Laser-Haarentfernung entfernt unerwünschte Haare schnell und sorgt für glatte Haut.", en: "Laser hair removal quickly removes unwanted hair, leaving smooth skin.", ru: "Лазерная эпиляция позволяет быстро удалять нежелательные волосы, обеспечивая гладкую кожу." } },
+      { id: "1-3", type: "image", image: "https://www.health.com/thmb/7o5Q_4BNlWP8LEV4o3_DLSZ5cBg=/2121x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1409466138-f80dbd560dd64c2cb5357ae5f043586c.jpg" },
+      { id: "1-4", type: "text", content: { uk: "Після процедури шкіра стає гладкою та м’якою на дотик, а ризик подразнень мінімальний.", de: "Nach der Behandlung ist die Haut glatt und weich, das Risiko von Reizungen ist minimal.", en: "After the procedure, skin is smooth and soft, with minimal irritation risk.", ru: "После процедуры кожа становится гладкой и мягкой на ощупь, риск раздражений минимален." } },
+      { id: "1-5", type: "text", content: { uk: "Рекомендується курс процедур для досягнення стійкого результату та оптимальної ефективності.", de: "Eine Behandlungskur wird empfohlen, um dauerhafte Ergebnisse und maximale Wirksamkeit zu erzielen.", en: "A course of treatments is recommended for long-lasting results and maximum effectiveness.", ru: "Рекомендуется пройти курс процедур для стойкого результата и максимальной эффективности." } },
+      {
+        id: "3-5",
+        type: "faq", FAQs: faqs.filter(faq => ["faq5"].includes(faq.id)),
+      },
+    ],
+    slug: "laser-epilation",
+    mainImage: "https://cambridgelaserclinic.com/wp-content/uploads/laser-hair-removal-1-scaled.jpg",
+    images: ["/images/epilation1.jpg", "/images/epilation2.jpg"],
+  },
 
+  {
+    id: "2",
+    title: { uk: "Безкоштовна консультація", de: "Kostenlose Beratung", en: "Free Consultation", ru: "Бесплатная консультация" },
+    subtitle: { uk: "Для нових клієнтів", de: "Für Neukunden", en: "For new clients", ru: "Для новых клиентов" },
+    headerTitle: { uk: "Перша консультація безкоштовна", de: "Erste Beratung kostenlos", en: "First consultation free", ru: "Первая консультация бесплатна" },
+    content: [
+      { id: "2-1", type: "text", content: { uk: "Запишіться на консультацію онлайн або по телефону, щоб отримати персональні рекомендації.", de: "Buchen Sie die Beratung online oder telefonisch, um persönliche Empfehlungen zu erhalten.", en: "Book your consultation online or by phone to receive personalized advice.", ru: "Запишитесь на консультацию онлайн или по телефону, чтобы получить персональные рекомендации." } },
+      { id: "2-2", type: "text", content: { uk: "Спеціаліст проаналізує стан вашої шкіри та підбере оптимальні процедури.", de: "Der Spezialist analysiert Ihren Hautzustand und wählt die optimalen Behandlungen aus.", en: "The specialist will analyze your skin and select the optimal treatments.", ru: "Специалист проанализирует состояние вашей кожи и подберет оптимальные процедуры." } },
+      { id: "2-3", type: "image", image: "https://media.istockphoto.com/id/1404962365/photo/female-doctor-examining-a-patient-at-her-office.jpg?s=612x612&w=0&k=20&c=ASz3AWonL9oBb4qI-aKi69wZmZro1JXJVhS9zK4Lv00=" },
+      { id: "2-4", type: "text", content: { uk: "Ви отримаєте поради щодо домашнього догляду та способів підтримки результатів процедур.", de: "Sie erhalten Tipps zur Heimpflege und zur Aufrechterhaltung der Behandlungsergebnisse.", en: "You will receive tips for home care and maintaining treatment results.", ru: "Вы получите советы по домашнему уходу и поддержанию результатов процедур." } },
+      { id: "2-5", type: "text", content: { uk: "Консультація включає відповіді на всі ваші запитання та рекомендації спеціаліста.", de: "Die Beratung beantwortet alle Ihre Fragen und gibt Empfehlungen.", en: "The consultation answers all your questions and provides specialist recommendations.", ru: "Консультация отвечает на все ваши вопросы и дает рекомендации специалиста." } },
+      {
+        id: "2-6",
+        type: "faq",
+        FAQs: faqs.filter(faq => ["faq3", "faq4"].includes(faq.id))
+      },
+    ],
+    slug: "free-consultation",
+    mainImage: "https://dcimedicine.com/wp-content/uploads/2024/09/5-1024x1024.png",
+    images: [],
+  },
 
+  {
+    id: "3",
+    title: { uk: "Пілінг обличчя -20%", de: "Gesichtspeeling -20%", en: "Facial Peeling -20%", ru: "Пилинг лица -20%" },
+    subtitle: { uk: "Свіжа шкіра за вигідною ціною", de: "Frische Haut zum Vorteilspreis", en: "Fresh skin at a great price", ru: "Свежая кожа по выгодной цене" },
+    headerTitle: { uk: "Акція на пілінг", de: "Aktion für Peeling", en: "Facial Peeling Promotion", ru: "Акция на пилинг" },
+    content: [
+      { id: "3-1", type: "text", content: { uk: "Пілінг допомагає видалити відмерлі клітини та стимулює регенерацію шкіри.", de: "Das Peeling entfernt abgestorbene Zellen und stimuliert die Hautregeneration.", en: "Peeling helps remove dead cells and stimulates skin regeneration.", ru: "Пилинг помогает удалить омертвевшие клетки и стимулирует регенерацию кожи." } },
+      { id: "3-2", type: "image", image: "https://www.lincolndentalcenter.ca/wp-content/uploads/2025/03/10-Reasons-Why-You-Should-Consider-Botox-Cosmetic-Treatment.jpg" },
+      { id: "3-3", type: "text", content: { uk: "Процедура робить шкіру свіжою, гладкою та сяючою.", de: "Die Behandlung macht die Haut frisch, glatt und strahlend.", en: "The treatment makes skin fresh, smooth and glowing.", ru: "Процедура делает кожу свежей, гладкой и сияющей." } },
+      { id: "3-4", type: "text", content: { uk: "Рекомендується дотримуватись домашнього догляду після сеансу для тривалого ефекту.", de: "Empfohlen wird, die Heimpflege nach der Behandlung fortzusetzen.", en: "It is recommended to follow home care after the session for lasting results.", ru: "Рекомендуется соблюдать домашний уход после сеанса для долгого эффекта." } },
+      {
+        id: "2-6",
+        type: "faq",
+        FAQs: faqs.filter(faq => ["faq3", "faq4"].includes(faq.id))
+      },
+    ],
+    slug: "facial-peeling",
+    mainImage: "https://int.filorga.com/wp-content/uploads/sites/2/2025/03/Une-femme-qui-re%CC%81alise-un-peeling-visage-1620x1080.jpg",
+    images: [],
+  },
+
+  {
+    id: "4",
+    title: { uk: "Масаж спини -15%", de: "Rückenmassage -15%", en: "Back Massage -15%", ru: "Массаж спины -15%" },
+    subtitle: { uk: "Розслаблення та турбота про здоров'я", de: "Entspannung und Gesundheitspflege", en: "Relaxation and wellness", ru: "Расслабление и забота о здоровье" },
+    headerTitle: { uk: "Акція на масаж спини", de: "Aktion für Rückenmassage", en: "Back Massage Promotion", ru: "Акция на массаж спины" },
+    content: [
+      { id: "4-1", type: "text", content: { uk: "Масаж допомагає зняти напругу та покращити кровообіг.", de: "Massage hilft, Verspannungen zu lösen und die Durchblutung zu verbessern.", en: "Massage helps relieve tension and improve circulation.", ru: "Массаж помогает снять напряжение и улучшить кровообращение." } },
+      { id: "4-2", type: "image", image: "https://bellevie-cln.ru/wp-content/uploads/2024/09/kr6a1780-scaled-1.webp" },
+      { id: "4-3", type: "text", content: { uk: "Результат: менше стресу, більше комфорту та відчуття розслаблення.", de: "Ergebnis: weniger Stress, mehr Komfort und Entspannung.", en: "Result: less stress, more comfort, and feeling relaxed.", ru: "Результат: меньше стресса, больше комфорта и ощущение расслабления." } },
+      { id: "3-4", type: "text", content: { uk: "Рекомендується дотримуватись домашнього догляду після сеансу для тривалого ефекту.", de: "Empfohlen wird, die Heimpflege nach der Behandlung fortzusetzen.", en: "It is recommended to follow home care after the session for lasting results.", ru: "Рекомендуется соблюдать домашний уход после сеанса для долгого эффекта." } },
+    ],
+    slug: "back-massage",
+    mainImage: "https://www.allaboutbeauty-schwabach.de/wp-content/uploads/2022/07/rueckenmassage.jpg",
+    images: [],
+  }
+    ]
 

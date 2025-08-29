@@ -14,6 +14,7 @@ import Blog from './pages/Blog';
 import Gallery from './pages/Gallery';
 import ServicePage from './pages/ServicePage';
 import DoctorPage from "./pages/DoctorPage.tsx";
+import SpecialPage from "./pages/SpecialPage.tsx";
 
 
 const App: React.FC = () => {
@@ -30,6 +31,7 @@ const App: React.FC = () => {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="specials" element={<Specials />} />
+          <Route path="specials/:slug" element={<SpecialPage />} />
           <Route path="services" element={<Services />} />
           <Route path="services/:slug" element={<ServicePage />} />
           <Route path="doctors" element={<Doctors />} />

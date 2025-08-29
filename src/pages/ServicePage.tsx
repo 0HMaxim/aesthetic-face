@@ -7,8 +7,10 @@ import FAQList from "../components/FAQList";
 import { useTranslation } from "react-i18next";
 
 export default function ServicePage() {
-  const { slug, lang } = useParams<{ slug: string; lang: string }>();
-  const { t } = useTranslation();
+  const { slug } = useParams<{ slug: string }>();
+  const { i18n, t } = useTranslation();
+  const lang = i18n.language as "uk" | "ru" | "en" | "de";
+
 
   // Находим услугу по slug
   const service = services.find((s) => s.slug === slug);
@@ -18,18 +20,32 @@ export default function ServicePage() {
   }
 
   return (
+
+
+      <div className="w-full">
+        {/* Hero Section */}
+        <div
+            className="relative w-full h-[30rem] md:h-[25rem] flex items-center justify-center blur-[0.5rem]"
+            style={{
+              backgroundImage: `url(${service.mainImage})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+        >
+        </div>
+
       <div className="container mx-auto py-8">
+
+
+
+
+
         {/* Заголовок */}
         <h1 className="text-3xl font-bold mb-6">
           {service.title[lang as keyof typeof service.title]}
         </h1>
 
-        {/* Картинка */}
-        <img
-            src={service.mainImage}
-            alt={service.title[lang as keyof typeof service.title]}
-            className="w-full h-64 object-cover rounded-2xl mb-6"
-        />
+
 
         {/* Контент (тексты и картинки вперемешку) */}
         <div className="space-y-6">
@@ -124,5 +140,7 @@ export default function ServicePage() {
 
 
       </div>
+      </div>
+
   );
 }

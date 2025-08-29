@@ -1,3 +1,5 @@
+// tailwind.config.js
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
@@ -7,9 +9,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        background: "var(--background)",   // теперь есть bg-background
+        primary: "var(--primary)",         // bg-primary
+      },
       colors: {
-        foreground: 'var(--foreground)',
-        secondary: 'var(--secondary)',
+        foreground: "var(--foreground)",   // text-foreground
+        secondary: "var(--secondary)",     // text-secondary / bg-secondary
       },
     },
   },

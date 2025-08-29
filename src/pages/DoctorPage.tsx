@@ -101,7 +101,7 @@ export default function DoctorPage() {
         {/* СЕКЦИЯ СЕРТИФИКАТОВ */}
         {doctor.certificates && doctor.certificates.length > 0 && (
             <section className="mt-16">
-              <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">
+              <h2 className="text-3xl font-bold text-foreground text-center mb-8">
                 {t("doctorPage.certificates")}:
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
