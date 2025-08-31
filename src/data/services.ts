@@ -251,7 +251,7 @@ export const doctors: Doctor[] = [
       { uk: "Національний медичний університет", ru: "Национальный медицинский университет", en: "National Medical University", de: "Nationales Medizinisches Universität" }
     ],
     certificates: ["https://marketplace.canva.com/EAGMPfFcHWI/1/0/1600w/canva-blue-and-white-simple-modern-certificate-of-appreciation-kYHEaKKpJI0.jpg", "https://5.imimg.com/data5/SELLER/Default/2024/2/382609921/MP/AN/IW/124928557/school-certificate-printing-service.jpg" ,"https://d2vyhi5ouo1we3.cloudfront.net/force_jpg/aHR0cHM6Ly9pbWFnZXMuYmFubmVyYmVhci5jb20vcmVxdWVzdHMvaW1hZ2VzLzAwOC85MjQvNTc5L29yaWdpbmFsL2VhYzQyY2FiZjM5YzIxY2Y4NThlNWY4NDRlZmM0YTA1MjJmOGUxNzkucG5nPzE2MzI4MDgzMDI=/image.jpg"],
-    photo: "https://www.besedaclinic.com.ua/storage/gallery/1741612941.webp",
+    photo: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     services: ["service1"],
     subservices: ["sub1"],
     shortName: {
@@ -284,7 +284,7 @@ export const doctors: Doctor[] = [
       { uk: "Львівський національний медичний університет", ru: "Львовский национальный медицинский университет", en: "Lviv National Medical University", de: "Lwiw Nationale Medizinische Universität" }
     ],
     certificates: ["https://marketplace.canva.com/EAGMPfFcHWI/1/0/1600w/canva-blue-and-white-simple-modern-certificate-of-appreciation-kYHEaKKpJI0.jpg", "https://5.imimg.com/data5/SELLER/Default/2024/2/382609921/MP/AN/IW/124928557/school-certificate-printing-service.jpg" ,"https://d2vyhi5ouo1we3.cloudfront.net/force_jpg/aHR0cHM6Ly9pbWFnZXMuYmFubmVyYmVhci5jb20vcmVxdWVzdHMvaW1hZ2VzLzAwOC85MjQvNTc5L29yaWdpbmFsL2VhYzQyY2FiZjM5YzIxY2Y4NThlNWY4NDRlZmM0YTA1MjJmOGUxNzkucG5nPzE2MzI4MDgzMDI=/image.jpg"],
-    photo: "https://images.unsplash.com/photo-1607746882042-944635dfe10e",
+    photo: "https://plus.unsplash.com/premium_photo-1661764878654-3d0fc2eefcca?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     services: ["service2"],
     subservices: ["sub3"],
     shortName: {
@@ -317,7 +317,7 @@ export const doctors: Doctor[] = [
       { uk: "Київський медичний університет", ru: "Киевский медицинский университет", en: "Kyiv Medical University", de: "Kiew Medizinische Universität" }
     ],
     certificates: ["https://marketplace.canva.com/EAGMPfFcHWI/1/0/1600w/canva-blue-and-white-simple-modern-certificate-of-appreciation-kYHEaKKpJI0.jpg", "https://5.imimg.com/data5/SELLER/Default/2024/2/382609921/MP/AN/IW/124928557/school-certificate-printing-service.jpg" ,"https://d2vyhi5ouo1we3.cloudfront.net/force_jpg/aHR0cHM6Ly9pbWFnZXMuYmFubmVyYmVhci5jb20vcmVxdWVzdHMvaW1hZ2VzLzAwOC85MjQvNTc5L29yaWdpbmFsL2VhYzQyY2FiZjM5YzIxY2Y4NThlNWY4NDRlZmM0YTA1MjJmOGUxNzkucG5nPzE2MzI4MDgzMDI=/image.jpg"],
-    photo: "https://images.unsplash.com/photo-1527613426441-4da17471b66d",
+    photo: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     services: ["service3"],
     subservices: ["sub5"],
     shortName: {
@@ -350,7 +350,7 @@ export const doctors: Doctor[] = [
       { uk: "Харківський медичний університет", ru: "Харьковский медицинский университет", en: "Kharkiv Medical University", de: "Charkiw Medizinische Universität" }
     ],
     certificates: ["https://marketplace.canva.com/EAGMPfFcHWI/1/0/1600w/canva-blue-and-white-simple-modern-certificate-of-appreciation-kYHEaKKpJI0.jpg", "https://5.imimg.com/data5/SELLER/Default/2024/2/382609921/MP/AN/IW/124928557/school-certificate-printing-service.jpg" ,"https://d2vyhi5ouo1we3.cloudfront.net/force_jpg/aHR0cHM6Ly9pbWFnZXMuYmFubmVyYmVhci5jb20vcmVxdWVzdHMvaW1hZ2VzLzAwOC85MjQvNTc5L29yaWdpbmFsL2VhYzQyY2FiZjM5YzIxY2Y4NThlNWY4NDRlZmM0YTA1MjJmOGUxNzkucG5nPzE2MzI4MDgzMDI=/image.jpg"],
-    photo: "https://images.unsplash.com/photo-1550831107-1553da8c8464",
+    photo: "https://plus.unsplash.com/premium_photo-1723514536306-26fe5c4adeb7?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     services: ["service4"],
     subservices: ["sub6"],
     shortName: {
@@ -717,35 +717,80 @@ export const prices: PriceModel[] = [
 ];
 
 
+
 export const photos: Photo[] = [
   {
     id: "1",
-    mainImage: "https://picsum.photos/id/1015/800/600",
+    mainImage: "https://plus.unsplash.com/premium_photo-1661603790515-33c1cd3d89f0?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imgArr: [
-      "https://picsum.photos/id/1016/800/600",
-      "https://picsum.photos/id/1018/800/600",
-      "https://picsum.photos/id/1020/800/600",
+      { src: "https://images.unsplash.com/photo-1745327883508-b6cd32e5dde5?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Preparation", ru: "Подготовка", uk: "Підготовка", de: "Vorbereitung" }, description: { en: "Using aromatic oils.", ru: "Использование ароматических масел.", uk: "Використання ароматичних олій.", de: "Verwendung von aromatischen Ölen." } },
+      { src: "https://images.unsplash.com/photo-1700522924565-9fad1c05469e?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Process", ru: "Процесс", uk: "Процес", de: "Prozess" }, description: { en: "Stone therapy in action.", ru: "Стоун-терапия в действии.", uk: "Стоун-терапія в дії.", de: "Steintherapie in Aktion." } },
     ],
+    title: { en: "Relaxing massage", ru: "Расслабляющий массаж", uk: "Розслабляючий масаж", de: "Entspannende Massage" },
+    description: { en: "Deep relaxation and stress relief", ru: "Глубокое расслабление и снятие стресса", uk: "Глибоке розслаблення і зняття стресу", de: "Tiefe Entspannung und Stressabbau" },
+    service: { id: "s1", title: { en: "Massage", ru: "Массаж", uk: "Масаж", de: "Massage" }, slug: "massage" },
+    subservice: { id: "s1-1", title: { en: "Spa massage", ru: "СПА массаж", uk: "СПА масаж", de: "Spa-Massage" }, slug: "spa-massage" },
+    doctor: { id: "d1", fullName: "Dr. Anna Petrova" },
   },
   {
     id: "2",
-    mainImage: "https://picsum.photos/id/1024/800/600",
+    mainImage: "https://plus.unsplash.com/premium_photo-1732576711193-bc2b59d5fd2c?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imgArr: [
-      "https://picsum.photos/id/1025/800/600",
-      "https://picsum.photos/id/1027/800/600",
-      "https://picsum.photos/id/1031/800/600",
+      { src: "https://plus.unsplash.com/premium_photo-1661645623435-41d9869758d9?q=80&w=2056&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Before", ru: "До", uk: "До", de: "Vorher" }, description: { en: "Initial skin condition.", ru: "Начальное состояние кожи.", uk: "Початковий стан шкіри.", de: "Anfangszustand der Haut." } },
+      { src: "https://plus.unsplash.com/premium_photo-1661645601775-7ea2247c2ec0?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Procedure", ru: "Процедура", uk: "Процедура", de: "Prozedur" }, description: { en: "Gentle peeling in progress.", ru: "Процесс мягкого пилинга.", uk: "Процес ніжного пілінгу.", de: "Sanftes Peeling im Gange." } },
+      { src: "https://plus.unsplash.com/premium_photo-1716626436810-2f3ffeea98fb?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "After", ru: "После", uk: "Після", de: "Nachher" }, description: { en: "Smooth and glowing skin.", ru: "Гладкая и сияющая кожа.", uk: "Гладка та сяюча шкіра.", de: "Glatte und strahlende Haut." } },
     ],
+    title: { en: "Facial peeling", ru: "Пилинг лица", uk: "Пілінг обличчя", de: "Gesichtspeeling" },
+    description: { en: "Cleansing and renewal of the skin", ru: "Очищение и обновление кожи", uk: "Очищення та оновлення шкіри", de: "Reinigung und Hauterneuerung" },
+    service: { id: "s2", title: { en: "Cosmetology", ru: "Косметология", uk: "Косметологія", de: "Kosmetologie" }, slug: "cosmetology" },
+    subservice: { id: "s2-1", title: { en: "Peeling", ru: "Пилинг", uk: "Пілінг", de: "Peeling" }, slug: "peeling" },
+    doctor: { id: "d2", fullName: "Dr. Olena Ivanova" },
   },
   {
     id: "3",
-    mainImage: "https://picsum.photos/id/1035/800/600",
+    mainImage: "https://plus.unsplash.com/premium_photo-1661295770914-090b07d3e92d?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     imgArr: [
-      "https://picsum.photos/id/1036/800/600",
-      "https://picsum.photos/id/1037/800/600",
-      "https://picsum.photos/id/1039/800/600",
-    ],
+      { src: "https://plus.unsplash.com/premium_photo-1743025737228-d68d2352dc5b?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Setup", ru: "Подготовка", uk: "Підготовка", de: "Vorbereitung" }, description: { en: "Laser equipment preparation.", ru: "Подготовка лазерного оборудования.", uk: "Підготовка лазерного обладнання.", de: "Vorbereitung des Laserequipments." } },
+      { src: "https://images.unsplash.com/photo-1670201203150-bf8771401590?q=80&w=860&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Procedure", ru: "Процедура", uk: "Процедура", de: "Prozedur" }, description: { en: "Laser hair removal in action.", ru: "Лазерная эпиляция в действии.", uk: "Лазерна епіляція в дії.", de: "Laser-Haarentfernung in Aktion." } },
+      { src: "https://images.unsplash.com/photo-1590718313039-da29f5ef56d5?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Result", ru: "Результат", uk: "Результат", de: "Ergebnis" }, description: { en: "Smooth skin after procedure.", ru: "Гладкая кожа после процедуры.", uk: "Гладка шкіра після процедури.", de: "Glatte Haut nach der Behandlung." } },
+],
+    title: { en: "Lip augmentation", ru: "Увеличение губ", uk: "Збільшення губ", de: "Lippenvergrößerung" },
+    description: { en: "Correction of lip shape and volume", ru: "Коррекция формы и объема губ", uk: "Корекція форми та об’єму губ", de: "Korrektur von Lippenform und -volumen" },
+    service: { id: "s3", title: { en: "Injections", ru: "Инъекции", uk: "Ін'єкції", de: "Injektionen" }, slug: "injections" },
+    subservice: { id: "s3-1", title: { en: "Lip fillers", ru: "Филлеры для губ", uk: "Філери для губ", de: "Lippenfüller" }, slug: "lip-fillers" },
+    doctor: { id: "d3", fullName: "Dr. Kateryna Shevchenko" },
   },
+  {
+    id: "4",
+    mainImage: "https://plus.unsplash.com/premium_photo-1661386084694-0523d8d1fc9e?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imgArr: [
+      { src: "https://images.unsplash.com/photo-1700760933574-9f0f4ea9aa3b?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Consultation", ru: "Консультация", uk: "Консультація", de: "Beratung" }, description: { en: "Choosing the filler type.", ru: "Выбор типа филлера.", uk: "Вибір типу філлера.", de: "Wahl des Füllstoffs." } },
+      { src: "https://images.unsplash.com/photo-1700760934166-4c766d708139?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Procedure", ru: "Процедура", uk: "Процедура", de: "Prozedur" }, description: { en: "Lip contour correction.", ru: "Коррекция контура губ.", uk: "Корекція контуру губ.", de: "Lippenkonturkorrektur." } },
+      { src: "https://plus.unsplash.com/premium_photo-1661726996340-8398be0d48ae?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Result", ru: "Результат", uk: "Результат", de: "Ergebnis" }, description: { en: "Natural and harmonious look.", ru: "Естественный и гармоничный вид.", uk: "Природний і гармонійний вигляд.", de: "Natürliches und harmonisches Aussehen." } },
+    ],
+    title: { en: "Laser hair removal", ru: "Лазерная эпиляция", uk: "Лазерна епіляція", de: "Laser-Haarentfernung" },
+    description: { en: "Safe and effective hair removal", ru: "Безопасное и эффективное удаление волос", uk: "Безпечне та ефективне видалення волосся", de: "Sichere und effektive Haarentfernung" },
+    service: { id: "s4", title: { en: "Epilation", ru: "Эпиляция", uk: "Епіляція", de: "Epilieren" }, slug: "epilation" },
+    subservice: { id: "s4-1", title: { en: "Laser epilation", ru: "Лазерная эпиляция", uk: "Лазерна епіляція", de: "Laser-Epilation" }, slug: "laser-epilation" },
+    doctor: { id: "d4", fullName: "Dr. Maria Kovalenko" },
+  },
+  {
+    id: "5",
+    mainImage: "https://plus.unsplash.com/premium_photo-1745168404740-98c70a68c4b5?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imgArr: [
+      { src: "https://plus.unsplash.com/premium_photo-1745168450664-402507bfffdd?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Consultation", ru: "Консультация", uk: "Консультація", de: "Beratung" }, description: { en: "Choosing the best treatment plan.", ru: "Выбор оптимального плана лечения.", uk: "Вибір оптимального плану лікування.", de: "Auswahl des besten Behandlungsplans." } },
+      { src: "https://plus.unsplash.com/premium_photo-1745168450685-20c69bb58d82?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Procedure", ru: "Процедура", uk: "Процедура", de: "Prozedur" }, description: { en: "Injecting botox.", ru: "Введение ботокса.", uk: "Введення ботоксу.", de: "Botox-Injektion." } },
+      { src: "https://images.unsplash.com/photo-1713085085470-fba013d67e65?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", title: { en: "Result", ru: "Результат", uk: "Результат", de: "Ergebnis" }, description: { en: "Youthful appearance and smooth skin.", ru: "Молодой вид и гладкая кожа.", uk: "Молодий вигляд та гладка шкіра.", de: "Jugendliches Aussehen und glatte Haut." } },
+    ],
+    title: { en: "Botox injections", ru: "Инъекции ботокса", uk: "Ін'єкції ботоксу", de: "Botox-Injektionen" },
+    description: { en: "Wrinkle reduction and skin rejuvenation", ru: "Уменьшение морщин и омоложение кожи", uk: "Зменшення зморшок та омолодження шкіри", de: "Faltenreduktion und Hautverjüngung" },
+    service: { id: "s5", title: { en: "Injections", ru: "Инъекции", uk: "Ін'єкції", de: "Injektionen" }, slug: "injections" },
+    subservice: { id: "s5-1", title: { en: "Botox", ru: "Ботокс", uk: "Ботокс", de: "Botox" }, slug: "botox" },
+    doctor: { id: "d5", fullName: "Dr. Ihor Melnyk" },
+  }
+
 ];
+
 
 
 

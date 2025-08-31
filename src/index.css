@@ -31,3 +31,20 @@ body {
 }
 
 
+  /* Выравнивание заголовка в галерее по центру */
+.yarl__slide_title {
+  text-align: center !important;
+}
+
+.yarl__thumbnails_container, .yarl__carousel {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.yarl__thumbnails_vignette {
+  display: none !important;
+}
+
+.yarl__thumbnails_thumbnail {
+  border-radius: 3rem !important;
+  padding: 0
+}

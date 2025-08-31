@@ -6,7 +6,7 @@ export interface Service {
   id: string;
   title: LocalizedText
   slug: string;             // для URL
-  mainImage: string;
+  mainImage?: string;
   content: ContentBlock[];  // контент страницы (тексты и картинки вперемешку)
   faqs?: string[];          // id FAQ
   doctors?: string[];       // id врачей

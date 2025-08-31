@@ -15,8 +15,6 @@ export default function Specials() {
 
   return (
 
-
-
       <div className="w-full items-center justify-center ">
 
         {imagee && (

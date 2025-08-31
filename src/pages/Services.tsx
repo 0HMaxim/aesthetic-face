@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import {services} from "../data/services";
-import {Button} from "@heroui/react";
 
 export default function Services() {
 
