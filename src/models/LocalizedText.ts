@@ -4,4 +4,5 @@ export interface LocalizedText {
   ru: string;
   en: string;
   de: string;
+  [key: string]: string;
 }

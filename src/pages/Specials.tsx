@@ -55,7 +55,7 @@ export default function Specials() {
                 <Link
                     key={item.id}
                     to={`/${lang}/specials/${item.slug}`}
-                    className="group rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden
+                    className="group rounded-[10rem] shadow-md hover:shadow-xl transition overflow-hidden
                     h-[45rem]
                     w-[99rem]
                     justify-between
@@ -64,7 +64,7 @@ export default function Specials() {
                     mb-[6rem]"
                 >
 
-                  <div className="p-[2.5rem] text-foreground w-2/6 duration-500 ">
+                  <div className="pl-[3.5rem] pt-[3.5rem] text-foreground w-2/6 duration-500 ">
                     <h2 className="text-[2rem] font-extrabold mb-[1.5rem]">{item.title[lang]}</h2>
 
                     <p className="text-[1.2rem] font-light mb-[2.5rem] pl-[2rem] duration-500">{item.subtitle[lang]}</p>

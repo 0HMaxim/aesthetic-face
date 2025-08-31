@@ -1,9 +1,8 @@
-import {doctors, specials} from "../data/services"; // твой массив с данными
+import {doctors } from "../data/services"; // твой массив с данными
 import { useTranslation } from "react-i18next";
 import type { Doctor } from "../models/Doctor.ts";
 import { Button } from "@heroui/react";
-import {Link, useParams} from "react-router-dom";
-import type {Scpecials} from "../models/Scpecials.ts";
+import {Link} from "react-router-dom";
 
 export default function Doctors() {
   const { i18n, t } = useTranslation();
@@ -54,7 +53,7 @@ export default function Doctors() {
                   <Link
                       key={item.id}
                       to={`/${lang}/doctors/${item.slug}`}
-                      className="group rounded-2xl shadow-md  transition overflow-hidden
+                      className="group rounded-[10rem] shadow-md  transition overflow-hidden
                     h-[40rem]
                     w-[51rem]
                     mr-[2rem]
@@ -65,7 +64,7 @@ export default function Doctors() {
                     mb-[6rem]"
                   >
 
-                    <div className="p-[2.5rem] text-foreground duration-500 w-fit">
+                    <div className="pl-[3.5rem] pt-[3.5rem] text-foreground duration-500 w-fit">
                       <h2 className="text-[2rem] font-extrabold mb-[1.5rem]">{item.fullName[lang]}</h2>
 
                       <p className="text-[1.2rem] font-light mb-[2.5rem] pl-[2rem] duration-500">{item.position[lang]}</p>

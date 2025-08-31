@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const ContentBlockRenderer: React.FC<Props> = ({ content}) => {
-  const { i18n, t } = useTranslation();
+  const { i18n  } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
 
@@ -18,7 +18,7 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content}) => {
           switch (block.type) {
             case "text":
               return (
-                  <p key={block.id} className="text-base md:text-xl mb-6 text-foreground ">
+                  <p key={block.id} className="text-base md:text-xl mb-6 text-foreground duration-500">
                     {block.content?.[lang]}
                   </p>
               );
@@ -35,7 +35,7 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content}) => {
             case "faq":
               return (
                   <div key={block.id} className="mb-6 p-4 rounded-lg">
-                    <FAQList faqs={block.FAQs}/>
+                    {block.FAQs && <FAQList faqs={block.FAQs} />}
                   </div>
               );
             default:

@@ -16,14 +16,18 @@ body {
 
   --secondary: background: -webkit-linear-gradient(90deg, #1abc9c,#1f2c51);background: linear-gradient(90deg, #1abc9c,#1f2c51);
   --primary: #019192;
+
+  --muted: #a3a3a3;
 }
 
 .dark {
-  --background: background: -webkit-linear-gradient(90deg, #000000,#000000,#021392);background: linear-gradient(90deg, #000000,#000000,#021392);
   --foreground: #f4f4f5;
+  --background: background: -webkit-linear-gradient(90deg, #000000,#000000,#021392);background: linear-gradient(90deg, #000000,#000000,#021392);
 
   --secondary: background: -webkit-linear-gradient(90deg, #1b2c55,#3d85a9,#63cac8,#b8edff);background: linear-gradient(90deg, #1b2c55,#3d85a9,#63cac8,#b8edff);
-  --primary: #3d85a9;
+    --primary: #3d85a9;
+
+  --muted: #d1d5db;
 }
 
 

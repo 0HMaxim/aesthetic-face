@@ -4,9 +4,7 @@ import {useTranslation} from "react-i18next";
 
 export default function FAQ() {
 
-  const { i18n, t } = useTranslation();
-  const lang = i18n.language as "uk" | "ru" | "en" | "de";
-
+  const { t } = useTranslation();
 
   const imagee = "s";
 
@@ -37,7 +35,7 @@ export default function FAQ() {
             <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">
               </span>
 
-            <p className="text-base lg:text-2xl font-normal text-foreground">
+            <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
               {t("FAQList.subtitle")}
             </p>
           </div>

@@ -1,11 +1,12 @@
 import { useTranslation } from 'react-i18next';
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {services} from "../data/services";
 import {Button} from "@heroui/react";
 
 export default function Services() {
-  const { t } = useTranslation();
-  const { lang } = useParams<{ lang: string }>();
+
+  const { i18n, t } = useTranslation();
+  const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
   const imagee = "https://nextmedasia.com/wp-content/uploads/2022/11/lede.jpg"; // динамически укажешь сам
 
@@ -38,7 +39,7 @@ export default function Services() {
               <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">
               </span>
 
-                <p className="text-base lg:text-2xl font-normal text-foreground">
+                <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
                   {t("services.description")}
                 </p>
           </div>
@@ -52,37 +53,31 @@ export default function Services() {
                 <Link
                     key={service.id}
                     to={`/${lang}/services/${service.slug}`}
-                    className="group rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden
-                    h-[21rem]
-                    w-[32rem]
-                    mr-[2rem]
-                    justify-between
-                    relative flex-col
-                    hover:bg-[var(--primary)] duration-500
-                    mb-[6rem]"
+                    className="group rounded-[10rem] shadow-md transition overflow-hidden
+             h-[23rem]
+             w-[32rem]
+             mr-[2rem]
+             mb-[4rem]
+             hover:bg-[var(--primary)]
+             duration-500
+             hover:shadow-xl relative"
                 >
-
-
                   {service.mainImage && (
-                      <Button as={Link}
-                              to={`/${lang}/services/${service.slug}`}
-                              className="overflow-hidden w-full h-4/5 block p-0"
-                      >
-                        <img
-                            src={service.mainImage}
-                            alt={service.title[lang]}
-                            className="w-full  h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </Button>
+                      <img
+                          src={service.mainImage}
+                          alt={service.title[lang]}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
                   )}
 
-                  <div className="p-[1rem] text-foreground duration-500 w-fit">
-                    <h2 className="text-[1.2rem] font-extrabold mb-[1.5rem]">{service.title[lang]}</h2>
-
+                  {/* Текст поверх картинки внизу */}
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full  bg-black/30 text-white p-4 text-center">
+                    <p className="text-base md:text-[1.5rem] font-normal p-[1.5rem]">
+                      {service.title[lang]}
+                    </p>
                   </div>
-
-
                 </Link>
+
             ))}
           </div>
         </div>

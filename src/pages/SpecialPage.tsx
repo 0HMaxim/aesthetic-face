@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from "react-router-dom";
-import {doctors, services, specials} from "../data/services";
+import {specials} from "../data/services";
 import {Button} from "@heroui/react";
 import type {Scpecials} from "../models/Scpecials.ts";
 import {ContentBlockRenderer} from "../components/ContentBlockRenderer.tsx";
@@ -12,9 +12,10 @@ export default function SpecialPage() {
 
   const special = specials.find((spec) => spec.slug === slug);
 
-
-  const imagee = special.mainImage; // динамически укажешь сам
-
+  if (!special) {
+    return <div className="w-full text-center py-8">Special not found</div>;
+  }
+  const imagee = special.mainImage; // теперь TS уверен, что special существует
 
   return (
       <div className="w-full items-center justify-center ">
@@ -39,11 +40,11 @@ export default function SpecialPage() {
               {special.headerTitle[lang]}
             </h2>
 
-            <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">
+            <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem] duration-500">
               {special.subtitle[lang]}
             </span>
 
-            <p className="text-base lg:text-2xl font-normal text-foreground">
+            <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
               {special.subtitle[lang]}
             </p>
 

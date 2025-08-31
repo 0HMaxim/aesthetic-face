@@ -14,13 +14,13 @@ export default function FAQItem({ faq }: FAQItemProps) {
 
 
   return (
-      <div className="border-b py-4">
+      <div className="border-b border-muted py-4 ">
         {/* Вопрос */}
         <button
             onClick={() => setOpen(!open)}
             className="w-full flex justify-between items-center text-left"
         >
-        <span className="md:text-[2rem] text-[1.5rem] font-[700] text-foreground">
+        <span className="md:text-[2rem] text-[1.5rem] font-[700] text-foreground duration-500">
           {faq.question[lang]}
         </span>
 
@@ -40,7 +40,7 @@ export default function FAQItem({ faq }: FAQItemProps) {
                 open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 duration-0"
             }`}
         >
-          <div className="pt-[1.5vw] pr-[2vw] md:text-[1.5rem] text-[1rem] pb-0 pl-[2vw] mb-[1rem] text-foreground">
+          <div className="pt-[1.5vw] pr-[2vw] md:text-[1.5rem] text-[1rem] pb-0 pl-[2vw] mb-[1rem] text-foreground duration-500">
             {faq.answer[lang]}
           </div>
         </div>

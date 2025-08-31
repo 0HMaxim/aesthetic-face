@@ -16,6 +16,7 @@ module.exports = {
       colors: {
         foreground: "var(--foreground)",   // text-foreground
         secondary: "var(--secondary)",     // text-secondary / bg-secondary
+        muted: "var(--muted)",     // text-secondary / bg-secondary
       },
     },
   },

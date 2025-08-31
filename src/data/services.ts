@@ -4,6 +4,8 @@ import type {Subservice} from "../models/Subservice.ts";
 import type {Doctor} from "../models/Doctor.ts";
 import type {FAQ} from "../models/FAQ.ts";
 import type {Scpecials} from "../models/Scpecials.ts";
+import type {PriceModel} from "../models/Price";
+import type {Photo} from "../models/Photo.ts";
 
 export const services: Service[] = [
   {
@@ -15,7 +17,7 @@ export const services: Service[] = [
       de: "Entfernung von Hautwucherungen"
     },
     slug: "vidalennya-novoutvoren",
-    mainImage: "https://www.besedaclinic.com.ua/storage/gallery/1704836044.webp",
+    mainImage: "https://plus.unsplash.com/premium_photo-1706557115599-c5ce88552cdc?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     content: [
       { id: "c1", type: "text", content: { uk: "Безпечне видалення новоутворень різного типу.", ru: "Безопасное удаление новообразований разных типов.", en: "Safe removal of different types of skin growths.", de: "Sichere Entfernung von Hautwucherungen verschiedener Typen." } },
       { id: "c2", type: "image", image: "https://salonnomer5.ru/assets/components/phpthumbof/cache/service-172.b483ceb3ceea83bee0f08e007b0b37bb.jpg" }
@@ -33,10 +35,10 @@ export const services: Service[] = [
       de: "Laserkosmetik"
     },
     slug: "lazernaya-kosmetologiya",
-    mainImage: "https://www.besedaclinic.com.ua/storage/gallery/1710252886.webp",
+    mainImage: "https://plus.unsplash.com/premium_photo-1661769314574-0b6844cea9d8?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     content: [
       { id: "c3", type: "text", content: { uk: "Процедури для омолодження та видалення пігментації.", ru: "Процедуры для омоложения и удаления пигментации.", en: "Procedures for rejuvenation and pigmentation removal.", de: "Verfahren zur Verjüngung und Entfernung von Pigmentierung." } },
-      { id: "c4", type: "image", image: "/images/services/laser-1.jpg" }
+      { id: "c4", type: "image", image: "https://images.unsplash.com/photo-1603398938378-0f947d7f7ed5?auto=format&fit=crop&w=800&q=80" }
     ],
     faqs: ["faq2"],
     doctors: ["doctor3"],
@@ -51,10 +53,10 @@ export const services: Service[] = [
       de: "Dermatologie"
     },
     slug: "dermatologiya",
-    mainImage: "https://www.besedaclinic.com.ua/storage/gallery/1709124268.webp",
+    mainImage: "https://plus.unsplash.com/premium_photo-1661769358914-1d33c22bd7ba?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     content: [
       { id: "c5", type: "text", content: { uk: "Діагностика та лікування захворювань шкіри.", ru: "Диагностика и лечение заболеваний кожи.", en: "Diagnosis and treatment of skin diseases.", de: "Diagnose und Behandlung von Hautkrankheiten." } },
-      { id: "c6", type: "image", image: "/images/services/dermatology-1.jpg" }
+      { id: "c6", type: "image", image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=800&q=80" }
     ],
     faqs: ["faq3"],
     doctors: ["doctor2", "doctor4"],
@@ -69,16 +71,53 @@ export const services: Service[] = [
       de: "Trichologie"
     },
     slug: "trichologiya",
-    mainImage: "https://www.besedaclinic.com.ua/storage/gallery/1709139818.webp",
+    mainImage: "https://plus.unsplash.com/premium_photo-1674841252420-d64bb3997e9c?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     content: [
       { id: "c7", type: "text", content: { uk: "Лікування волосся та шкіри голови.", ru: "Лечение волос и кожи головы.", en: "Hair and scalp treatment.", de: "Behandlung von Haar und Kopfhaut." } },
-      { id: "c8", type: "image", image: "/images/services/trichology-1.jpg" }
+      { id: "c8", type: "image", image: "https://images.unsplash.com/photo-1612832021136-2d77e671b79c?auto=format&fit=crop&w=800&q=80" }
     ],
     faqs: ["faq4"],
     doctors: ["doctor1", "doctor5"],
     subservices: ["sub5"]
+  },
+  {
+    id: "service5",
+    title: {
+      uk: "Пілінг обличчя",
+      ru: "Пилинг лица",
+      en: "Facial peeling",
+      de: "Gesichtspeling"
+    },
+    slug: "facial-peeling",
+    mainImage: "https://images.unsplash.com/photo-1670914886351-d2e1f626b6d3?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: [
+      { id: "c9", type: "text", content: { uk: "Очищення та відновлення шкіри за допомогою пілінгу.", ru: "Очистка и восстановление кожи с помощью пилинга.", en: "Cleansing and skin rejuvenation through peeling.", de: "Reinigung und Hautverjüngung durch Peeling." } },
+      { id: "c10", type: "image", image: "https://images.unsplash.com/photo-1606813903564-2dbd3f8a3e2e?auto=format&fit=crop&w=800&q=80" }
+    ],
+    faqs: ["faq5"],
+    doctors: ["doctor3", "doctor6"],
+    subservices: ["sub6"]
+  },
+  {
+    id: "service6",
+    title: {
+      uk: "Мезотерапія",
+      ru: "Мезотерапия",
+      en: "Mesotherapy",
+      de: "Mesotherapie"
+    },
+    slug: "mesotherapy",
+    mainImage: "https://plus.unsplash.com/premium_photo-1664299123684-aa21e2ccedd8?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    content: [
+      { id: "c11", type: "text", content: { uk: "Введення вітамінів та корисних речовин в шкіру.", ru: "Введение витаминов и полезных веществ в кожу.", en: "Injection of vitamins and nutrients into the skin.", de: "Einbringen von Vitaminen und Nährstoffen in die Haut." } },
+      { id: "c12", type: "image", image: "https://images.unsplash.com/photo-1588776814546-3f85192a8be3?auto=format&fit=crop&w=800&q=80" }
+    ],
+    faqs: ["faq6"],
+    doctors: ["doctor2", "doctor5"],
+    subservices: ["sub7"]
   }
 ];
+
 
 export const subservices: Subservice[] = [
     {
@@ -565,6 +604,148 @@ export const specials: Scpecials[] = [
     slug: "back-massage",
     mainImage: "https://www.allaboutbeauty-schwabach.de/wp-content/uploads/2022/07/rueckenmassage.jpg",
     images: [],
-  }
-    ]
+  },]
+
+
+
+export const prices: PriceModel[] = [
+  {
+    category: { uk: "ТРИХОЛОГІЯ", ru: "ТРИХОЛОГИЯ", en: "Trichology", de: "Trichologie" },
+    columns: {
+      duration: { uk: "Тривалість", ru: "Длительность", en: "Duration", de: "Dauer" },
+      procedure: { uk: "Процедура", ru: "Процедура", en: "Procedure", de: "Prozedur" },
+      price: { uk: "Вартість", ru: "Стоимость", en: "Price", de: "Preis" },
+    },
+    sections: [
+      {
+        subtitle: { uk: "КОНСУЛЬТАЦІЯ", ru: "КОНСУЛЬТАЦИЯ", en: "Consultation", de: "Beratung" },
+        items: [
+          { duration: "45 хв", procedure: { uk: "Трихоскопія + консультація трихолога (головного лікаря)", ru: "Трихоскопия + консультация трихолога (главного врача)", en: "Trichoscopy + trichologist consultation (head doctor)", de: "Trichoskopie + Trichologenkonsultation (Chefarzt)" }, price: "₴ 1200" },
+          { duration: "45 хв", procedure: { uk: "Трихоскопія + консультація трихолога", ru: "Трихоскопия + консультация трихолога", en: "Trichoscopy + trichologist consultation", de: "Trichoskopie + Trichologenkonsultation" }, price: "₴ 1000" },
+          { duration: "30 хв", procedure: { uk: "Контрольний огляд трихолога", ru: "Контрольный осмотр трихолога", en: "Follow-up trichologist check", de: "Kontrolluntersuchung Trichologe" }, price: "₴ 400" },
+        ],
+      },
+      {
+        subtitle: { uk: "СТИМУЛЯЦІЯ РОСТУ ВОЛОССЯ / ЛІКУВАННЯ ВИПАДІННЯ ВОЛОССЯ / ЛІКУВАННЯ АЛОПЕЦІЇ", ru: "СТИМУЛЯЦИЯ РОСТА ВОЛОС / ЛЕЧЕНИЕ ВЫПАДЕНИЯ ВОЛОС / ЛЕЧЕНИЕ АЛОПЕЦИИ", en: "Hair Growth Stimulation / Hair Loss Treatment / Alopecia Treatment", de: "Haarwuchsstimulation / Haarausfallbehandlung / Alopezie Behandlung" },
+        items: [
+          { duration: "30 хв", procedure: { uk: "Мезотерапія волосистої частини голови Dermaheal (Корея) - 2,5 мл", ru: "Мезотерапия волосистой части головы Dermaheal (Корея) - 2,5 мл", en: "Mesotherapy scalp Dermaheal (Korea) - 2.5 ml", de: "Mesotherapie Kopfhaut Dermaheal (Korea) - 2,5 ml" }, price: "₴ 2500" },
+          { duration: "30 хв", procedure: { uk: "Hair Vital лікування вогнищевої та дифузної алопеції 2,5", ru: "Hair Vital лечение очаговой и диффузной алопеции 2,5", en: "Hair Vital treatment for focal and diffuse alopecia 2.5", de: "Hair Vital Behandlung fokale und diffuse Alopezie 2,5" }, price: "₴ 2500" },
+          { duration: "30 хв", procedure: { uk: "Hair Loss Control лікування андрогенної алопеції у чоловіків та жінок", ru: "Hair Loss Control лечение андрогенной алопеции у мужчин и женщин", en: "Hair Loss Control androgenic alopecia treatment for men and women", de: "Hair Loss Control Behandlung androgenetischer Alopezie bei Männern und Frauen" }, price: "₴ 2500" },
+        ],
+      },
+    ],
+  },
+  {
+    category: { uk: "БіОРЕВІТАЛІЗАЦІЯ / БІОРЕПАРАЦІЯ", ru: "БИОРЕВИТАЛИЗАЦИЯ / БИОРЕПАРАЦИЯ", en: "Biorevitalization / Bioreparation", de: "Biorevitalisierung / Bioreparation" },
+    columns: {
+      duration: { uk: "Тривалість", ru: "Длительность", en: "Duration", de: "Dauer" },
+      procedure: { uk: "Процедура", ru: "Процедура", en: "Procedure", de: "Prozedur" },
+      price: { uk: "Вартість", ru: "Стоимость", en: "Price", de: "Preis" },
+    },
+    sections: [
+      {
+        subtitle: { uk: "БІОРЕПАРАЦІЯ", ru: "БИОРЕПАРАЦИЯ", en: "Bioreparation", de: "Bioreparation" },
+        items: [
+          { duration: "45 хв", procedure: { uk: "TWAC 2.0 (Великобританія) - 3 мл", ru: "TWAC 2.0 (Великобритания) - 3 мл", en: "TWAC 2.0 (UK) - 3 ml", de: "TWAC 2.0 (UK) - 3 ml" }, price: "₴ 5700" },
+          { duration: "45 хв", procedure: { uk: "TWAC 3.0 (Великобританія) - 3 мл", ru: "TWAC 3.0 (Великобритания) - 3 мл", en: "TWAC 3.0 (UK) - 3 ml", de: "TWAC 3.0 (UK) - 3 ml" }, price: "₴ 6700" },
+          { duration: "45 хв", procedure: { uk: "Plinest fast (Mastelli, Іспанія) - 2 мл", ru: "Plinest fast (Mastelli, Испания) - 2 мл", en: "Plinest fast (Mastelli, Spain) - 2 ml", de: "Plinest fast (Mastelli, Spanien) - 2 ml" }, price: "₴ 4500" },
+        ],
+      },
+      {
+        subtitle: { uk: "БіОРЕВІТАЛІЗАЦІЯ", ru: "БИОРЕВИТАЛИЗАЦИЯ", en: "Biorevitalization", de: "Biorevitalisierung" },
+        items: [
+          { duration: "60 хв", procedure: { uk: "RRS HA Long Lasting 3 ml", ru: "RRS HA Long Lasting 3 ml", en: "RRS HA Long Lasting 3 ml", de: "RRS HA Long Lasting 3 ml" }, price: "₴ 6500" },
+          { duration: "45 хв", procedure: { uk: "Juvederm Volite (Allergan, США) - 1 мл", ru: "Juvederm Volite (Allergan, США) - 1 мл", en: "Juvederm Volite (Allergan, USA) - 1 ml", de: "Juvederm Volite (Allergan, USA) - 1 ml" }, price: "₴ 6000" },
+          { duration: "45 хв", procedure: { uk: "Saypha Rich (Австрія) 1 мл", ru: "Saypha Rich (Австрия) 1 мл", en: "Saypha Rich (Austria) 1 ml", de: "Saypha Rich (Österreich) 1 ml" }, price: "₴ 3900" },
+        ],
+      },
+    ],
+  },
+  {
+    category: { uk: "ТРИХОЛОГІЯ", ru: "ТРИХОЛОГИЯ", en: "Trichology", de: "Trichologie" },
+    columns: {
+      duration: { uk: "Тривалість", ru: "Длительность", en: "Duration", de: "Dauer" },
+      procedure: { uk: "Процедура", ru: "Процедура", en: "Procedure", de: "Prozedur" },
+      price: { uk: "Вартість", ru: "Стоимость", en: "Price", de: "Preis" },
+    },
+    sections: [
+      {
+        subtitle: { uk: "КОНСУЛЬТАЦІЯ", ru: "КОНСУЛЬТАЦИЯ", en: "Consultation", de: "Beratung" },
+        items: [
+          { duration: "45 хв", procedure: { uk: "Трихоскопія + консультація трихолога (головного лікаря)", ru: "Трихоскопия + консультация трихолога (главного врача)", en: "Trichoscopy + trichologist consultation (head doctor)", de: "Trichoskopie + Trichologenkonsultation (Chefarzt)" }, price: "₴ 1200" },
+          { duration: "45 хв", procedure: { uk: "Трихоскопія + консультація трихолога", ru: "Трихоскопия + консультация трихолога", en: "Trichoscopy + trichologist consultation", de: "Trichoskopie + Trichologenkonsultation" }, price: "₴ 1000" },
+          { duration: "30 хв", procedure: { uk: "Контрольний огляд трихолога", ru: "Контрольный осмотр трихолога", en: "Follow-up trichologist check", de: "Kontrolluntersuchung Trichologe" }, price: "₴ 400" },
+        ],
+      },
+      {
+        subtitle: { uk: "СТИМУЛЯЦІЯ РОСТУ ВОЛОССЯ / ЛІКУВАННЯ ВИПАДІННЯ ВОЛОССЯ / ЛІКУВАННЯ АЛОПЕЦІЇ", ru: "СТИМУЛЯЦИЯ РОСТА ВОЛОС / ЛЕЧЕНИЕ ВЫПАДЕНИЯ ВОЛОС / ЛЕЧЕНИЕ АЛОПЕЦИИ", en: "Hair Growth Stimulation / Hair Loss Treatment / Alopecia Treatment", de: "Haarwuchsstimulation / Haarausfallbehandlung / Alopezie Behandlung" },
+        items: [
+          { duration: "30 хв", procedure: { uk: "Мезотерапія волосистої частини голови Dermaheal (Корея) - 2,5 мл", ru: "Мезотерапия волосистой части головы Dermaheal (Корея) - 2,5 мл", en: "Mesotherapy scalp Dermaheal (Korea) - 2.5 ml", de: "Mesotherapie Kopfhaut Dermaheal (Korea) - 2,5 ml" }, price: "₴ 2500" },
+          { duration: "30 хв", procedure: { uk: "Hair Vital лікування вогнищевої та дифузної алопеції 2,5", ru: "Hair Vital лечение очаговой и диффузной алопеции 2,5", en: "Hair Vital treatment for focal and diffuse alopecia 2.5", de: "Hair Vital Behandlung fokale und diffuse Alopezie 2,5" }, price: "₴ 2500" },
+          { duration: "30 хв", procedure: { uk: "Hair Loss Control лікування андрогенної алопеції у чоловіків та жінок", ru: "Hair Loss Control лечение андрогенной алопеции у мужчин и женщин", en: "Hair Loss Control androgenic alopecia treatment for men and women", de: "Hair Loss Control Behandlung androgenetischer Alopezie bei Männern und Frauen" }, price: "₴ 2500" },
+        ],
+      },
+    ],
+  },
+
+  {
+    category: { uk: "БіОРЕВІТАЛІЗАЦІЯ / БІОРЕПАРАЦІЯ", ru: "БИОРЕВИТАЛИЗАЦИЯ / БИОРЕПАРАЦИЯ", en: "Biorevitalization / Bioreparation", de: "Biorevitalisierung / Bioreparation" },
+    columns: {
+      duration: { uk: "Тривалість", ru: "Длительность", en: "Duration", de: "Dauer" },
+      procedure: { uk: "Процедура", ru: "Процедура", en: "Procedure", de: "Prozedur" },
+      price: { uk: "Вартість", ru: "Стоимость", en: "Price", de: "Preis" },
+    },
+    sections: [
+      {
+        subtitle: { uk: "БІОРЕПАРАЦІЯ", ru: "БИОРЕПАРАЦИЯ", en: "Bioreparation", de: "Bioreparation" },
+        items: [
+          { duration: "45 хв", procedure: { uk: "TWAC 2.0 (Великобританія) - 3 мл", ru: "TWAC 2.0 (Великобритания) - 3 мл", en: "TWAC 2.0 (UK) - 3 ml", de: "TWAC 2.0 (UK) - 3 ml" }, price: "₴ 5700" },
+          { duration: "45 хв", procedure: { uk: "TWAC 3.0 (Великобританія) - 3 мл", ru: "TWAC 3.0 (Великобритания) - 3 мл", en: "TWAC 3.0 (UK) - 3 ml", de: "TWAC 3.0 (UK) - 3 ml" }, price: "₴ 6700" },
+          { duration: "45 хв", procedure: { uk: "Plinest fast (Mastelli, Іспанія) - 2 мл", ru: "Plinest fast (Mastelli, Испания) - 2 мл", en: "Plinest fast (Mastelli, Spain) - 2 ml", de: "Plinest fast (Mastelli, Spanien) - 2 ml" }, price: "₴ 4500" },
+        ],
+      },
+      {
+        subtitle: { uk: "БіОРЕВІТАЛІЗАЦІЯ", ru: "БИОРЕВИТАЛИЗАЦИЯ", en: "Biorevitalization", de: "Biorevitalisierung" },
+        items: [
+          { duration: "60 хв", procedure: { uk: "RRS HA Long Lasting 3 ml", ru: "RRS HA Long Lasting 3 ml", en: "RRS HA Long Lasting 3 ml", de: "RRS HA Long Lasting 3 ml" }, price: "₴ 6500" },
+          { duration: "45 хв", procedure: { uk: "Juvederm Volite (Allergan, США) - 1 мл", ru: "Juvederm Volite (Allergan, США) - 1 мл", en: "Juvederm Volite (Allergan, USA) - 1 ml", de: "Juvederm Volite (Allergan, USA) - 1 ml" }, price: "₴ 6000" },
+          { duration: "45 хв", procedure: { uk: "Saypha Rich (Австрія) 1 мл", ru: "Saypha Rich (Австрия) 1 мл", en: "Saypha Rich (Austria) 1 ml", de: "Saypha Rich (Österreich) 1 ml" }, price: "₴ 3900" },
+        ],
+      },
+    ],
+  },
+];
+
+
+export const photos: Photo[] = [
+  {
+    id: "1",
+    mainImage: "https://picsum.photos/id/1015/800/600",
+    imgArr: [
+      "https://picsum.photos/id/1016/800/600",
+      "https://picsum.photos/id/1018/800/600",
+      "https://picsum.photos/id/1020/800/600",
+    ],
+  },
+  {
+    id: "2",
+    mainImage: "https://picsum.photos/id/1024/800/600",
+    imgArr: [
+      "https://picsum.photos/id/1025/800/600",
+      "https://picsum.photos/id/1027/800/600",
+      "https://picsum.photos/id/1031/800/600",
+    ],
+  },
+  {
+    id: "3",
+    mainImage: "https://picsum.photos/id/1035/800/600",
+    imgArr: [
+      "https://picsum.photos/id/1036/800/600",
+      "https://picsum.photos/id/1037/800/600",
+      "https://picsum.photos/id/1039/800/600",
+    ],
+  },
+];
+
+
 
