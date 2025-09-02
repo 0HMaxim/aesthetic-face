@@ -6,10 +6,14 @@ export interface Doctor {
   position: LocalizedText;           // Должность
   specializations: LocalizedText[];  // Список специализаций
   education: LocalizedText[];        // Список образований
-  certificates?: string[];           // Сертификаты (можно хранить пути к PDF/изображениям)
-  photo?: string;                    // Фото
+
+
+  certificates?: string[];
+  photo?: string;
+
   services?: string[];               // id услуг
   subservices?: string[];            // id подуслуг
+
   shortName: LocalizedText;
   slug: string;             // для URL
 }

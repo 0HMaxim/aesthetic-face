@@ -16,11 +16,37 @@ export default function DoctorPage() {
     return <div className="p-8 text-center text-red-500 text-xl">Лікаря не знайдено</div>;
   }
 
+  const imagee = "https://www.aestheticclinicmalaysia.com/wp-content/uploads/2023/10/Aesthetic-Clinic-Malaysia.jpg";
+
   return (
 
-      <div className="w-full px-4 lg:px-[10rem] py-8">
-        {/* ГЛАВНЫЙ ЗАГОЛОВОК С ИМЕНЕМ ВРАЧА */}
+      <div className="w-full items-center justify-center ">
 
+        {imagee && (
+            <div className="overflow-hidden w-full h-[15rem] relative p-0 blur-[0.5rem] mb-[3.5rem]"
+            >
+              <img
+                  src={imagee}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+        )}
+
+
+
+        <div className="w-full px-4 md:px-[10rem]">
+
+
+          {/*<div className="py-8 mb-[3.5rem]">*/}
+          {/*  <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">*/}
+          {/*    {t("doctors.title")}*/}
+          {/*  </h2>*/}
+          {/*  <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">*/}
+          {/*      </span>*/}
+          {/*  <p className="text-base lg:text-2xl font-normal text-foreground duration-500">*/}
+          {/*    {t("doctors.experience")}*/}
+          {/*  </p>*/}
+          {/*</div>*/}
 
         <h1 className="text-3xl md:text-5xl mb-[2.5rem] font-[700] md:text-center text-foreground">
           {doctor.fullName[lang]}
@@ -29,14 +55,14 @@ export default function DoctorPage() {
 
 
 
-        <div className="mt-10 flex flex-col md:flex-row gap-[5.5rem]">
+        <div className="mt-10 flex flex-col md:flex-row gap-[5.5rem] rounded-[10rem] shadow-md  transition overflow-hidden    duration-500
+                    hover:shadow-xl">
           {/* ЛЕВАЯ КОЛОНКА */}
 
             <div className="flex flex-col items-start">
               {doctor.photo && (
                   <img
                       src={doctor.photo}
-                      alt={doctor.fullName[lang]}
                       className="w-full object-cover rounded-xl shadow-lg md:w-[40rem] md:h-[43rem] mb-[1.5rem]"
                   />
               )}
@@ -115,7 +141,6 @@ export default function DoctorPage() {
                     >
                       <img
                           src={cert}
-                          alt={`${t('certificate')} ${index + 1}`}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                       />
                     </a>
@@ -123,6 +148,7 @@ export default function DoctorPage() {
               </div>
             </section>
         )}
+        </div>
       </div>
   );
 }

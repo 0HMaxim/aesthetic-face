@@ -8,8 +8,8 @@ export interface Subservice {
   title: LocalizedText;
   slug: string;
   mainImage: string;
-  content: ContentBlock[];
-  prices?: { name: string; value: number }[];
+  content?: ContentBlock[];
+  prices?: string[];
   faqs?: string[];
   doctors?: string[];
 }

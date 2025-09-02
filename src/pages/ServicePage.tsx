@@ -1,146 +1,149 @@
-import { useParams } from "react-router-dom";
-import { services } from "../data/services";
+import {Link, useParams} from "react-router-dom";
+import {photos, services, subservices} from "../data/services";
 import { doctors } from "../data/services";
-import { subservices } from "../data/services";
 import { faqs } from "../data/services";
 import FAQList from "../components/FAQList";
 import { useTranslation } from "react-i18next";
+import PhotoList from "../components/PhotoList.tsx";
+import {ContentBlockRenderer} from "../components/ContentBlockRenderer.tsx";
+import PriceTable from "../components/PriceTable.tsx";
 
 export default function ServicePage() {
   const { slug } = useParams<{ slug: string }>();
   const { i18n, t } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
+  // Ищем сначала услугу, потом подуслугу
+  const service = services.find(s => s.slug === slug);
+  const subservice = subservices.find(ss => ss.slug === slug);
+  const currentItem = service || subservice;
 
-  // Находим услугу по slug
-  const service = services.find((s) => s.slug === slug);
-
-  if (!service) {
+  if (!currentItem) {
     return <div className="container mx-auto py-8">Service not found</div>;
   }
 
+  // Фото для текущей сущности
+  const currentPhotos = photos
+  .filter(p => p.serviceId === currentItem.id || p.subserviceId === currentItem.id)
+  .map(photo => ({
+    ...photo,
+    service: photo.serviceId ? services.find(s => s.id === photo.serviceId) : undefined,
+    subservice: photo.subserviceId ? subservices.find(ss => ss.id === photo.subserviceId) : undefined,
+    doctor: photo.doctorId ? doctors.find(d => d.id === photo.doctorId) : undefined,
+  }));
+
+  // Подуслуги — только если currentItem это Service
+  const subservicesForService =
+      service && service.subservices?.length
+          ? service.subservices
+          .map(subId => subservices.find(ss => ss.id === subId))
+          .filter(Boolean)
+          : [];
+
   return (
-
-
       <div className="w-full">
         {/* Hero Section */}
-        <div
-            className="relative w-full h-[30rem] md:h-[25rem] flex items-center justify-center blur-[0.5rem]"
-            style={{
-              backgroundImage: `url(${service.mainImage})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-        >
-        </div>
-
-      <div className="container mx-auto py-8">
-
-
-
-
-
-        {/* Заголовок */}
-        <h1 className="text-3xl font-bold mb-6">
-          {service.title[lang as keyof typeof service.title]}
-        </h1>
-
-
-
-        {/* Контент (тексты и картинки вперемешку) */}
-        <div className="space-y-6">
-          {service.content.map((block) => {
-            if (block.type === "text" && block.content) {
-              return (
-                  <p key={block.id} className="text-lg">
-                    {block.content[lang as keyof typeof block.content]}
-                  </p>
-              );
-            }
-            if (block.type === "image" && block.image) {
-              return (
-                  <img
-                      key={block.id}
-                      src={block.image}
-                      alt=""
-                      className="w-full rounded-xl"
-                  />
-              );
-            }
-            return null;
-          })}
-        </div>
-
-        {/* Подуслуги */}
-        {service.subservices && (
-            <div className="mt-10">
-              <h2 className="text-2xl font-semibold mb-4">{t("services.subservices")}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {subservices
-                .filter((sub) => service.subservices?.includes(sub.id))
-                .map((sub) => (
-                    <div key={sub.id} className="p-4 border rounded-xl shadow">
-                      <img
-                          src={sub.mainImage}
-                          alt={sub.title[lang as keyof typeof sub.title]}
-                          className="w-full h-40 object-cover rounded-lg mb-2"
-                      />
-                      <h3 className="text-xl font-medium">
-                        {sub.title[lang as keyof typeof sub.title]}
-                      </h3>
-                    </div>
-                ))}
-              </div>
-            </div>
+        {currentItem.mainImage && (
+            <div
+                className="relative w-full h-[15rem] flex items-center justify-center blur-[0.5rem]"
+                style={{
+                  backgroundImage: `url(${currentItem.mainImage})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+            />
         )}
 
-        {/* Врачи */}
-        {service.doctors && (
-            <div className="mt-10">
-              <h2 className="text-2xl font-semibold mb-4">{t("servicePage.doctors")}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {doctors
-                .filter((doc) => service.doctors?.includes(doc.id))
-                .map((doc) => (
-                    <div key={doc.id} className="p-4 rounded-xl shadow flex gap-4 items-center">
-                      <img
-                          src={doc.photo}
-                          alt={doc.fullName[lang as keyof typeof doc.fullName]}
-                          className="w-24 h-24 object-cover rounded-full"
-                      />
-                      <div>
-                        <h3 className="text-lg font-bold">
-                          {doc.fullName[lang as keyof typeof doc.fullName]}
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          {doc.position[lang as keyof typeof doc.position]}
+        <div className="container mx-auto py-8">
+          <h1 className="text-3xl font-bold mb-6">
+            {currentItem.title[lang]}
+          </h1>
+
+          <div className="mb-[3.5rem]">
+            <ContentBlockRenderer content={currentItem.content} />
+          </div>
+
+
+          {/* Подуслуги */}
+          {subservicesForService.length > 0 && (
+              <div className="flex flex-wrap mb-12">
+                {subservicesForService.map(sub => (
+                    <Link
+                        key={sub.id}
+                        to={`/${lang}/services/${sub.slug}`}
+                        className="group rounded-[10rem] shadow-md transition overflow-hidden h-[12rem] w-[15rem] mr-[2rem] mb-[4rem] hover:bg-[var(--primary)] duration-500 hover:shadow-xl relative"
+                    >
+                      {sub.mainImage && (
+                          <img
+                              src={sub.mainImage}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                      )}
+                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
+                        <p className="text-base md:text-[1rem] font-normal p-[1.5rem]">
+                          {sub.title[lang]}
                         </p>
                       </div>
-                    </div>
+                    </Link>
                 ))}
               </div>
-            </div>
-        )}
+          )}
+
+          {/* Врачи */}
+          {currentItem.doctors && currentItem.doctors.length > 0 && (
+              <div className="mt-10">
+                <h2 className="text-2xl font-semibold mb-4">{t("servicePage.doctors")}</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {doctors
+                  .filter(d => currentItem.doctors?.includes(d.id))
+                  .map(doc => (
+                      <div key={doc.id} className="p-4 rounded-xl shadow flex gap-4 items-center">
+                        <img
+                            src={doc.photo}
+                            className="w-24 h-24 object-cover rounded-full"
+                        />
+                        <div>
+                          <h3 className="text-lg font-bold">
+                            {doc.fullName[lang]}
+                          </h3>
+                          <p className="text-sm text-gray-600">
+                            {doc.position[lang]}
+                          </p>
+                        </div>
+                      </div>
+                  ))}
+                </div>
+              </div>
+          )}
+
+          {/* FAQ */}
+          {(() => {
+            let relatedFaqs = [];
+
+            if (service) {
+              // Если это страница услуги
+              relatedFaqs = faqs.filter(
+                  (faq) =>
+                      faq.serviceId === service.id ||
+                      (faq.subserviceId && service.subservices?.includes(faq.subserviceId))
+              );
+            } else if (subservice) {
+              // Если это страница подуслуги
+              relatedFaqs = faqs.filter(
+                  (faq) => faq.subserviceId === subservice.id || faq.serviceId === subservice.serviceId
+              );
+            }
+
+            if (relatedFaqs.length === 0) return null;
+            return <FAQList faqs={relatedFaqs} />;
+          })()}
 
 
-        {(() => {
-          const relatedFaqs = faqs.filter(
-              (faq) =>
-                  faq.serviceId === service.id ||
-                  (faq.subserviceId && service.subservices?.includes(faq.subserviceId))
-          );
+          <PhotoList photos={currentPhotos} />
 
-          if (relatedFaqs.length === 0) return null;
-
-          return (
-              <FAQList faqs={relatedFaqs} />
-          );
-        })()}
-
-
-
+          <PriceTable serviceId={currentItem.id} />
+        </div>
       </div>
-      </div>
-
   );
 }
+

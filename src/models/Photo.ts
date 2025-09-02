@@ -1,9 +1,6 @@
 // models/Service.ts
 import type { LocalizedText } from "./LocalizedText.ts";
-import type { Service } from "./Service.ts";
-import type { Doctor } from "./Doctor.ts";
 
-// Новый тип для элемента галереи внутри лайтбокса
 export interface ImageItem {
   src: string;
   title?: LocalizedText;
@@ -12,14 +9,13 @@ export interface ImageItem {
 
 export interface Photo {
   id: string;
-  service?: Service;
-  subservice?: Service;
-  doctor?: Doctor;
+  serviceId?: string;       // привязка к услуге
+  subserviceId?: string;    // привязка к подуслуге
+  doctorId?: string;        // привязка к врачу
 
-  title?: LocalizedText;       // Это заголовок для всей карточки
-  description?: LocalizedText; // Это описание для всей карточки
+  title?: LocalizedText;
+  description?: LocalizedText;
 
   mainImage: string;
-  // Теперь imgArr - это массив объектов ImageItem
-  imgArr?: ImageItem[];
+  imgArr?: ImageItem[];     // дополнительные фото для лайтбокса
 }

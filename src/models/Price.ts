@@ -12,6 +12,8 @@ export interface PriceSection {
 }
 
 export interface PriceModel {
+  serviceId?: string;
+  subserviceId?: string;
   category: LocalizedText;
   columns: {
     duration: LocalizedText;

@@ -7,7 +7,7 @@ export default function Services() {
   const { i18n, t } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
-  const imagee = "https://nextmedasia.com/wp-content/uploads/2022/11/lede.jpg"; // динамически укажешь сам
+  const imagee = "https://nextmedasia.com/wp-content/uploads/2022/11/lede.jpg";
 
 
 
@@ -16,11 +16,10 @@ export default function Services() {
       <div className="w-full items-center justify-center ">
 
         {imagee && (
-            <div className="overflow-hidden w-full h-[22rem] relative p-0 blur-[0.5rem] mb-[3.5rem]"
+            <div className="overflow-hidden w-full h-[15rem] relative p-0 blur-[0.5rem] mb-[3.5rem]"
             >
               <img
                   src={imagee}
-                  alt={imagee}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -53,23 +52,22 @@ export default function Services() {
                     key={service.id}
                     to={`/${lang}/services/${service.slug}`}
                     className="group rounded-[10rem] shadow-md transition overflow-hidden
-             h-[23rem]
-             w-[32rem]
-             mr-[2rem]
-             mb-[4rem]
-             hover:bg-[var(--primary)]
-             duration-500
-             hover:shadow-xl relative"
+                     h-[23rem]
+                     w-[32rem]
+                     mr-[2rem]
+                     mb-[4rem]
+                     hover:bg-[var(--primary)]
+                     duration-500
+                     hover:shadow-xl relative"
                 >
                   {service.mainImage && (
                       <img
                           src={service.mainImage}
-                          alt={service.title[lang]}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                   )}
 
-                  {/* Текст поверх картинки внизу */}
+
                   <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full  bg-black/30 text-white p-4 text-center">
                     <p className="text-base md:text-[1.5rem] font-normal p-[1.5rem]">
                       {service.title[lang]}

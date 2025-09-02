@@ -19,11 +19,10 @@ export default function Doctors() {
         <div className="w-full items-center justify-center ">
 
           {imagee && (
-              <div className="overflow-hidden w-full h-[22rem] relative p-0 blur-[0.5rem] mb-[3.5rem]"
+              <div className="overflow-hidden w-full h-[15rem] relative p-0 blur-[0.5rem] mb-[3.5rem]"
               >
                 <img
                     src={imagee}
-                    alt={imagee}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -97,7 +96,6 @@ export default function Doctors() {
                         >
                           <img
                               src={item.photo}
-                              alt={item.fullName[lang]}
                               className="w-full  h-full object-cover group-hover:scale-105 transition-transform duration-300"
                           />
                         </Button>

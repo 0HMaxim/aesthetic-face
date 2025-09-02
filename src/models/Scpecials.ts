@@ -1,6 +1,7 @@
 // models/Service.ts
 import type {ContentBlock} from "./ContentBlock.ts";
 import type {LocalizedText} from "./LocalizedText.ts";
+import type {Service} from "./Service.ts";
 
 export interface Scpecials {
   id: string;
@@ -8,9 +9,14 @@ export interface Scpecials {
   subtitle: LocalizedText
   headerTitle: LocalizedText
 
-  content: ContentBlock[];  // контент страницы (тексты и картинки вперемешку)
-  slug: string;             // для URL
+
+  service?: Service;
+  subservice?: Service;
+
+  content: ContentBlock[];
+  slug: string;
 
   mainImage: string;
   images: string[];
+  prices?: string[];
 }

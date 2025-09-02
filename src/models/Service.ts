@@ -4,11 +4,11 @@ import type {LocalizedText} from "./LocalizedText.ts";
 
 export interface Service {
   id: string;
-  title: LocalizedText
-  slug: string;             // для URL
+  title: LocalizedText;
+  slug: string;
   mainImage?: string;
-  content: ContentBlock[];  // контент страницы (тексты и картинки вперемешку)
-  faqs?: string[];          // id FAQ
-  doctors?: string[];       // id врачей
-  subservices?: string[];   // id подуслуг
+  content?: ContentBlock[];
+  faqs?: string[];
+  doctors?: string[];
+  subservices?: string[];
 }

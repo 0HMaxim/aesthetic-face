@@ -15,17 +15,16 @@ export default function SpecialPage() {
   if (!special) {
     return <div className="w-full text-center py-8">Special not found</div>;
   }
-  const imagee = special.mainImage; // теперь TS уверен, что special существует
+  const imagee = special.mainImage;
 
   return (
       <div className="w-full items-center justify-center ">
 
         {imagee && (
-            <div className="overflow-hidden w-full h-[22rem] relative p-0 blur-[0.5rem] mb-[3.5rem]"
+            <div className="overflow-hidden w-full h-[15rem] relative p-0 blur-[0.5rem] mb-[3.5rem]"
             >
               <img
                   src={imagee}
-                  alt={imagee}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
@@ -97,12 +96,10 @@ export default function SpecialPage() {
                           as={Link}
                           to={`/${lang}/specials/${item.slug}`}
                           className="overflow-hidden w-4/6 h-full block p-0
-
                           "
                       >
                         <img
                             src={item.mainImage}
-                            alt={item.title[lang]}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       </Button>

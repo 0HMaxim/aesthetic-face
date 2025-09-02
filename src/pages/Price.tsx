@@ -1,12 +1,9 @@
 import {useTranslation} from "react-i18next";
-import {prices} from "../data/services.ts";
 import PriceTable from "../components/PriceTable.tsx";
 
-export default function FAQ() {
+export default function Price() {
 
   const { t } = useTranslation();
-
-
 
 
   const imagee = "s";
@@ -16,11 +13,10 @@ export default function FAQ() {
 
 
         {imagee && (
-            <div className="overflow-hidden w-full h-[22rem] relative p-0 blur-[0.5rem] mb-[3.5rem]"
+            <div className="overflow-hidden w-full h-[15rem] relative p-0 blur-[0.5rem] mb-[3.5rem]"
             >
               <img
                   src={imagee}
-                  alt={imagee}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -44,16 +40,11 @@ export default function FAQ() {
           </div>
 
 
-
-          {prices.map((block, i) => (
-            <PriceTable key={i} data={block} defaultOpen={i === 0} />
-          ))}
+          <PriceTable defaultOpen={true} />
 
         </div>
 
-
       </div>
-
 
   );
 
