@@ -51,7 +51,7 @@ export default function Doctors() {
                       key={item.id}
                       to={`/${lang}/doctors/${item.slug}`}
                       className="group rounded-[10rem] shadow-md  transition overflow-hidden
-                    h-[40rem]
+                    min-h-[40rem]
                     w-[51rem]
                     mr-[2rem]
                     justify-between
@@ -64,7 +64,7 @@ export default function Doctors() {
                     <div className="pl-[3.5rem] pt-[3.5rem] text-foreground duration-500 w-fit">
                       <h2 className="text-[2rem] font-extrabold mb-[1.5rem]">{item.fullName[lang]}</h2>
 
-                      <p className="text-[1.2rem] font-light mb-[2.5rem] pl-[2rem] duration-500">{item.position[lang]}</p>
+                      <p className="text-[1.2rem] font-light mb-[2.5rem] pb-[4.5rem] pl-[2rem] duration-500">{item.position[lang]}</p>
 
 
                       <Button
@@ -77,8 +77,7 @@ export default function Doctors() {
                           bg-black
                           object-cover
                           hover:bg-[var(--primary)] duration-500 w-fit
-                          bottom-0 absolute mb-[3.5rem]
-                         "
+                          bottom-0 absolute mb-[3.5rem] "
                       >
                         {t("doctors.bookAppointment", {
                           name: item.shortName[lang],
@@ -90,7 +89,7 @@ export default function Doctors() {
                     {item.photo && (
                         <Button as={Link}
                                 to={`/${lang}/doctors/${item.slug}`}
-                                className="overflow-hidden w-4/6 h-full block p-0"
+                                className="overflow-hidden w-4/6 min-h-full block p-0"
                         >
                           <img
                               src={item.photo}

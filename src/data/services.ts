@@ -8,7 +8,6 @@ import type {PriceModel} from "../models/Price";
 import type {Photo} from "../models/Photo.ts";
 
 
-
 export const services: Service[] = [
 
   {
@@ -206,8 +205,7 @@ export const services: Service[] = [
         }
       }
     ],
-    faqs: ["faq1", "faq2", "faq3"],
-    doctors: ["doctor1", "doctor2", "doctor8"],
+    doctors: ["doctor1", "doctor2", "doctor3", "doctor4", "doctor5", "doctor6"],
     subservices: ["subservice1", "subservice2", "subservice3", "subservice4", "subservice5"]
   },
 
@@ -351,7 +349,6 @@ export const services: Service[] = [
         }
       }
     ],
-    faqs: ["faq1", "faq2", "faq3"],
     doctors: ["doctor4", "doctor5", "doctor1"],
     subservices: ["subservice6", "subservice7", "subservice8", "subservice9", "subservice10"]
   },
@@ -496,7 +493,6 @@ export const services: Service[] = [
           }
         }
       ],
-      faqs: ["faq1", "faq2", "faq3"],
       doctors: ["doctor6", "doctor7"],
       subservices: ["subservice11", "subservice12", "subservice13", "subservice14"]
     },
@@ -651,7 +647,6 @@ export const services: Service[] = [
           }
         }
       ],
-      faqs: ["faq1", "faq2", "faq3"],
       doctors: ["doctor1", "doctor2", "doctor4"],
       subservices: ["subservice15", "subservice16", "subservice17", "subservice18"]
     },
@@ -796,7 +791,6 @@ export const services: Service[] = [
           }
         }
       ],
-      faqs: ["faq1", "faq2", "faq3"],
       doctors: ["doctor3", "doctor5", "doctor1"],
       subservices: ["subservice19", "subservice20", "subservice21", "subservice22"]
     },
@@ -941,7 +935,6 @@ export const services: Service[] = [
           }
         }
       ],
-      faqs: ["faq1", "faq2", "faq3", "faq4"],
       doctors: ["doctor1", "doctor4", "doctor2"],
       subservices: ["subservice23", "subservice24", "subservice25", "subservice26"]
     },
@@ -1077,7 +1070,6 @@ export const services: Service[] = [
           }
         }
       ],
-      faqs: ["faq1", "faq2", "faq3"],
       doctors: ["doctor8", "doctor1"],
       subservices: ["subservice27", "subservice28", "subservice29", "subservice30"]
     },
@@ -1214,7 +1206,6 @@ export const services: Service[] = [
           }
         }
       ],
-      faqs: ["faq1", "faq2", "faq3"],
       doctors: ["doctor2", "doctor4", "doctor5", "doctor8"],
       subservices: ["subservice31", "subservice32", "subservice33", "subservice34"]
     },
@@ -1342,7 +1333,6 @@ slug: "biorevitalizatsiya-bioreparatsiya",
     }
   }
 ],
-    faqs: ["faq1", "faq2", "faq3"],
     doctors: ["doctor1", "doctor2", "doctor4"],
     subservices: ["subservice35", "subservice36", "subservice37", "subservice38"]
 },
@@ -1478,7 +1468,6 @@ slug: "biorevitalizatsiya-bioreparatsiya",
           }
         }
       ],
-      faqs: ["faq1", "faq2", "faq3"],
       doctors: ["doctor7", "doctor8", "doctor5"],
       subservices: ["subservice39", "subservice40", "subservice41", "subservice42"]
     },
@@ -1615,7 +1604,6 @@ slug: "biorevitalizatsiya-bioreparatsiya",
     }
   }
 ],
-    faqs: ["faq1", "faq2", "faq3"],
     doctors: ["doctor1", "doctor3", "doctor5"],
     subservices: ["subservice43", "subservice44", "subservice45", "subservice46"]
 },
@@ -1742,7 +1730,6 @@ slug: "biorevitalizatsiya-bioreparatsiya",
         }
       }
     ],
-    faqs: ["faq1", "faq2", "faq3"],
     doctors: ["doctor3", "doctor5", "doctor1"],
     subservices: ["subservice47", "subservice48", "subservice49", "subservice50"]
   },
@@ -1759,25 +1746,132 @@ slug: "biorevitalizatsiya-bioreparatsiya",
     slug: "intimnaya-kosmetologiya",
     mainImage: "https://img.freepik.com/premium-photo/laser-bikini-hair-removal-cosmetology-women-health-intimate-hygiene-beautiful-woman-s-body-with-smooth-soft-skin-epilation-spa-concept-depilation-bikini-zone_124463-703.jpg",
     content: [
-      { type: "heading", content: { uk: "Що таке інтимна косметологія", ru: "Что такое интимная косметология", en: "What is Intimate Cosmetology", de: "Was ist Intime Kosmetik" } },
-      { type: "text", content: { uk: "Інтимна косметологія включає методи догляду за інтимними зонами для покращення зовнішнього вигляду та здоров’я.", ru: "Интимная косметология включает методы ухода за интимными зонами для улучшения внешнего вида и здоровья.", en: "Intimate cosmetology includes care methods for intimate areas to enhance appearance and health.", de: "Intime Kosmetik umfasst Pflegemethoden für intime Bereiche zur Verbesserung von Aussehen und Gesundheit." } },
-      { type: "image", content: { image: "https://img.freepik.com/premium-photo/bikini-laser-epilation-cosmetology-hair-removal-cosmetology-procedure-laser-epilation-cosmetology-cosmetology-spa-concept_553815-103.jpg" }, sideText: { uk: "Процедури безпечні, комфортні та індивідуально підібрані.", ru: "Процедуры безопасны, комфортны и индивидуально подобраны.", en: "Procedures are safe, comfortable, and individually tailored.", de: "Behandlungen sind sicher, komfortabel und individuell angepasst." } },
-      { type: "text", content: { uk: "Методи включають відбілювання, ліфтинг тканин та догляд за чутливою шкірою.", ru: "Методы включают отбеливание, лифтинг тканей и уход за чувствительной кожей.", en: "Methods include whitening, tissue lifting, and care for sensitive skin.", de: "Methoden umfassen Aufhellung, Gewebelifting und Pflege empfindlicher Haut." } },
-      { type: "heading", content: { uk: "Переваги процедур", ru: "Преимущества процедур", en: "Procedure Benefits", de: "Vorteile der Verfahren" } },
-      { type: "text", content: { uk: "Покращення естетики інтимних зон.", ru: "Улучшение эстетики интимных зон.", en: "Improves the aesthetics of intimate areas.", de: "Verbessert die Ästhetik der Intimbereiche." } },
-      { type: "text", content: { uk: "Підвищення комфорту та впевненості пацієнта.", ru: "Повышение комфорта и уверенности пациента.", en: "Enhances comfort and patient confidence.", de: "Steigert Komfort und Selbstvertrauen des Patienten." } },
-      { type: "text", content: { uk: "Безпечні ін’єкційні та апаратні методики.", ru: "Безопасные инъекционные и аппаратные методики.", en: "Safe injection and device-based methods.", de: "Sichere Injektions- und Geräteverfahren." } },
-      { type: "image", content: { image: "https://img.freepik.com/premium-photo/laser-epilation-cosmetology-beauty-salon-hair-removal-procedure-laser-epilation-cosmetology-spa-hair-removal-concept-beautiful-woman-getting-hair-removing-legs_124463-677.jpg" }, sideText: { uk: "Індивідуальний підхід та конфіденційність.", ru: "Индивидуальный подход и конфиденциальность.", en: "Individual approach and confidentiality.", de: "Individueller Ansatz und Vertraulichkeit." } },
-      { type: "text", content: { uk: "М’який догляд за шкірою, без подразнень.", ru: "Мягкий уход за кожей, без раздражений.", en: "Gentle skin care without irritation.", de: "Sanfte Hautpflege ohne Reizungen." } },
-      { type: "text", content: { uk: "Профілактика дискомфорту та сухості шкіри.", ru: "Профилактика дискомфорта и сухости кожи.", en: "Prevents discomfort and dryness.", de: "Vorbeugung von Unbehagen und Hauttrockenheit." } },
-      { type: "heading", content: { uk: "Рекомендації", ru: "Рекомендации", en: "Recommendations", de: "Empfehlungen" } },
-      { type: "text", content: { uk: "Регулярні процедури для підтримки здоров’я та естетики.", ru: "Регулярные процедуры для поддержания здоровья и эстетики.", en: "Regular treatments maintain health and aesthetics.", de: "Regelmäßige Behandlungen zur Erhaltung von Gesundheit und Ästhetik." } },
-      { type: "text", content: { uk: "Консультація перед процедурою обов’язкова.", ru: "Консультация перед процедурой обязательна.", en: "Consultation before treatment is mandatory.", de: "Beratung vor der Behandlung ist Pflicht." } },
-      { type: "text", content: { uk: "Після процедур рекомендується дотримуватися гігієнічних рекомендацій.", ru: "После процедур рекомендуется соблюдать гигиенические рекомендации.", en: "Follow hygiene recommendations after procedures.", de: "Befolgen Sie nach der Behandlung die Hygieneempfehlungen." } },
-      { type: "text", content: { uk: "Процедури комфортні та безболісні.", ru: "Процедуры комфортные и безболезненные.", en: "Procedures are comfortable and painless.", de: "Behandlungen sind komfortabel und schmerzlos." } },
-      { type: "text", content: { uk: "Ми гарантуємо конфіденційність та професіоналізм на кожному етапі.", ru: "Мы гарантируем конфиденциальность и профессионализм на каждом этапе.", en: "We guarantee confidentiality and professionalism at every step.", de: "Wir garantieren Vertraulichkeit und Professionalität in jedem Schritt." } }
+      {
+        type: "heading",
+        content: {
+          uk: "Інтимна косметологія: делікатне вирішення естетичних та функціональних проблем",
+          ru: "Интимная косметология: деликатное решение эстетических и функциональных проблем",
+          en: "Intimate Cosmetology: A Delicate Solution for Aesthetic and Functional Concerns",
+          de: "Intime Kosmetik: Eine diskrete Lösung für ästhetische und funktionelle Probleme"
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Інтимна косметологія — це сучасний напрямок естетичної медицини, що дозволяє вирішувати широкий спектр делікатних проблем. Ці процедури розроблені для покращення зовнішнього вигляду інтимних зон, підвищення їхньої чутливості та усунення дискомфорту, пов'язаного зі старінням, пологами або іншими змінами. Ми пропонуємо безпечні, неінвазивні та малоінвазивні методи, що допомагають відновити впевненість у собі та покращити якість життя.",
+          ru: "Интимная косметология — это современное направление эстетической медицины, позволяющее решать широкий спектр деликатных проблем. Эти процедуры разработаны для улучшения внешнего вида интимных зон, повышения их чувствительности и устранения дискомфорта, связанного со старением, родами или другими изменениями. Мы предлагаем безопасные, неинвазивные и малоинвазивные методы, помогающие восстановить уверенность в себе и улучшить качество жизни.",
+          en: "Intimate cosmetology is a modern field of aesthetic medicine that addresses a wide range of delicate issues. These procedures are designed to improve the appearance of intimate areas, enhance their sensitivity, and eliminate discomfort associated with aging, childbirth, or other changes. We offer safe, non-invasive, and minimally invasive methods that help restore self-confidence and improve quality of life.",
+          de: "Die intime Kosmetik ist ein moderner Zweig der ästhetischen Medizin, der eine breite Palette von sensiblen Problemen löst. Diese Verfahren wurden entwickelt, um das Aussehen intimer Zonen zu verbessern, ihre Empfindlichkeit zu steigern und Beschwerden, die mit dem Altern, Geburten oder anderen Veränderungen verbunden sind, zu beseitigen. Wir bieten sichere, nicht-invasive und minimal-invasive Methoden an, die dazu beitragen, das Selbstvertrauen wiederherzustellen und die Lebensqualität zu verbessern."
+        }
+      },
+      {
+        type: "heading",
+        content: {
+          uk: "Основні напрямки інтимної косметології",
+          ru: "Основные направления интимной косметологии",
+          en: "Main Areas of Intimate Cosmetology",
+          de: "Hauptanwendungsbereiche der Intimkosmetik"
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Ми пропонуємо комплексний підхід, який включає як ін'єкційні, так і апаратні методики для досягнення найкращого результату.",
+          ru: "Мы предлагаем комплексный подход, который включает как инъекционные, так и аппаратные методики для достижения наилучшего результата.",
+          en: "We offer a comprehensive approach that includes both injection and hardware techniques to achieve the best results.",
+          de: "Wir bieten einen umfassenden Ansatz, der sowohl Injektions- als auch apparative Verfahren zur Erzielung der besten Ergebnisse umfasst."
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "**Інтимна контурна пластика:** Процедура з використанням гіалуронової кислоти для корекції об'єму, форми та естетики інтимних зон. Допомагає підвищити зволоження і поліпшити якість статевого життя.",
+          ru: "**Интимная контурная пластика:** Процедура с использованием гиалуроновой кислоты для коррекции объема, формы и эстетики интимных зон. Помогает повысить увлажнение и улучшить качество половой жизни.",
+          en: "**Intimate Contour Plastic:** A procedure using hyaluronic acid to correct the volume, shape, and aesthetics of intimate areas. It helps increase moisture and improve the quality of sexual life.",
+          de: "**Intime Konturplastik:** Ein Verfahren mit Hyaluronsäure zur Korrektur des Volumens, der Form und der Ästhetik intimer Zonen. Es hilft, die Feuchtigkeit zu erhöhen und die Qualität des Sexuallebens zu verbessern."
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "**Інтимне омолодження:** Апаратні методи, такі як радіочастотний ліфтинг, стимулюють вироблення колагену та еластину, підвищуючи тонус і пружність тканин. Процедури є безболісними та ефективними.",
+          ru: "**Интимное омоложение:** Аппаратные методы, такие как радиочастотный лифтинг, стимулируют выработку коллагена и эластина, повышая тонус и упругость тканей. Процедуры являются безболезненными и эффективными.",
+          en: "**Intimate Rejuvenation:** Hardware-based methods like radiofrequency lifting stimulate the production of collagen and elastin, increasing tissue tone and firmness. These procedures are painless and effective.",
+          de: "**Intime Verjüngung:** Apparative Methoden wie das Radiofrequenz-Lifting stimulieren die Produktion von Kollagen und Elastin, was den Tonus und die Festigkeit des Gewebes erhöht. Diese Verfahren sind schmerzfrei und effektiv."
+        }
+      },
+      {
+        type: "image",
+        content: { image: "https://img.freepik.com/premium-photo/laser-epilation-cosmetology-beauty-salon-hair-removal-procedure-laser-epilation-cosmetology-spa-hair-removal-concept-beautiful-woman-getting-hair-removing-legs_124463-677.jpg" },
+        sideText: {
+          uk: "Усі процедури проводяться в умовах повної конфіденційності та комфорту.",
+          ru: "Все процедуры проводятся в условиях полной конфиденциальности и комфорта.",
+          en: "All procedures are performed with complete confidentiality and comfort.",
+          de: "Alle Behandlungen werden unter vollständiger Vertraulichkeit und Bequemlichkeit durchgeführt."
+        }
+      },
+      {
+        type: "heading",
+        content: {
+          uk: "Показання до інтимної косметології",
+          ru: "Показания к интимной косметологии",
+          en: "Indications for Intimate Cosmetology",
+          de: "Indikationen für die intime Kosmetik"
+        }
+      },
+      {
+        type: "list",
+        content: {
+          uk: [
+            "Втрата тонусу та еластичності після вагітності та пологів",
+            "Сухість і дискомфорт в інтимній зоні",
+            "Пігментація і нерівний тон шкіри",
+            "Вікові зміни",
+            "Неестетичний зовнішній вигляд, що викликає психологічний дискомфорт"
+          ],
+          ru: [
+            "Потеря тонуса и эластичности после беременности и родов",
+            "Сухость и дискомфорт в интимной зоне",
+            "Пигментация и неровный тон кожи",
+            "Возрастные изменения",
+            "Неэстетичный внешний вид, вызывающий психологический дискомфорт"
+          ],
+          en: [
+            "Loss of tone and elasticity after pregnancy and childbirth",
+            "Dryness and discomfort in the intimate area",
+            "Pigmentation and uneven skin tone",
+            "Age-related changes",
+            "Aesthetic imperfections that cause psychological discomfort"
+          ],
+          de: [
+            "Verlust von Tonus und Elastizität nach Schwangerschaft und Geburt",
+            "Trockenheit und Unbehagen im Intimbereich",
+            "Pigmentierung und ungleichmäßiger Hautton",
+            "Altersbedingte Veränderungen",
+            "Ästhetische Mängel, die psychologisches Unbehagen verursachen"
+          ]
+        }
+      },
+      {
+        type: "image",
+        content: { image: "https://ime-istituto.ru/upload/iblock/d07/d0708f663fd9e6e2637d0dd672bab524.jpg" },
+        sideText: {
+          uk: "Перед будь-якою процедурою проводиться обов’язкова консультація з лікарем для вибору оптимального курсу лікування.",
+          ru: "Перед любой процедурой проводится обязательная консультация с врачом для выбора оптимального курса лечения.",
+          en: "Before any procedure, a mandatory consultation with a doctor is held to select the optimal course of treatment.",
+          de: "Vor jedem Eingriff findet eine obligatorische ärztliche Beratung statt, um den optimalen Behandlungsplan festzulegen."
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "У нашій клініці інтимні косметологічні процедури проводяться лише висококваліфікованими спеціалістами, які мають багаторічний досвід роботи. Ми гарантуємо повну анонімність, безпеку та індивідуальний підхід до кожної пацієнтки, щоб забезпечити максимальний комфорт і досягти бажаного результату.",
+          ru: "В нашей клинике интимные косметологические процедуры проводятся только высококвалифицированными специалистами, имеющими многолетний опыт работы. Мы гарантируем полную анонимность, безопасность и индивидуальный подход к каждой пациентке, чтобы обеспечить максимальный комфорт и достичь желаемого результата.",
+          en: "At our clinic, intimate cosmetology procedures are performed only by highly qualified specialists with many years of experience. We guarantee complete anonymity, safety, and a personalized approach to each patient to ensure maximum comfort and achieve the desired results.",
+          de: "In unserer Klinik werden intime kosmetische Verfahren ausschließlich von hochqualifizierten Spezialisten mit langjähriger Erfahrung durchgeführt. Wir garantieren vollständige Anonymität, Sicherheit und einen individuellen Ansatz für jede Patientin, um maximalen Komfort zu gewährleisten und die gewünschten Ergebnisse zu erzielen."
+        }
+      }
     ],
-    faqs: ["faq14"],
     doctors: ["doctor2", "doctor5"],
     subservices: ["subservice51", "subservice52", "subservice53", "subservice54", "subservice55", "subservice56"]
   },
@@ -1913,7 +2007,6 @@ slug: "biorevitalizatsiya-bioreparatsiya",
         }
       }
     ],
-    faqs: ["faq1", "faq2", "faq3"],
     doctors: ["doctor2", "doctor4", "doctor1", "doctor8"],
     subservices: ["subservice57", "subservice58", "subservice59", "subservice60"]
   },
@@ -2042,7 +2135,6 @@ slug: "biorevitalizatsiya-bioreparatsiya",
 
       }
     ],
-    faqs: ["faq1", "faq2", "faq3"],
     doctors: ["doctor8"],
     subservices: ["subservice61", "subservice62", "subservice63", "subservice64"]
   },
@@ -2159,7 +2251,6 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq1", "faq2"],
     doctors: ["doctor1", "doctor3"]
   },
 
@@ -2368,7 +2459,6 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_mole_1", "faq_mole_2", "faq_mole_3"],
     doctors: ["doctor1", "doctor2"]
     },
 
@@ -2567,7 +2657,6 @@ export const subservices: Subservice[] = [
           }
         }
       ],
-      faqs: ["faq_papilloma_1", "faq_papilloma_2"],
       doctors: ["doctor1", "doctor3"]
     },
     {
@@ -2701,7 +2790,6 @@ export const subservices: Subservice[] = [
           }
         }
       ],
-      faqs: ["faq_keratoma_1", "faq_keratoma_2"],
       doctors: ["doctor1", "doctor2"]
     },
 
@@ -2845,7 +2933,6 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_condyloma_1", "faq_condyloma_2"],
     doctors: ["doctor1", "doctor2", "doctor4"] // Возможно, потребуются гинекологи/урологи
   },
 
@@ -2989,7 +3076,6 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq1", "faq_cleansing_2"],
     doctors: ["doctor1", "doctor2"]
   },
 
@@ -3133,8 +3219,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_peeling_1", "faq_peeling_2", "faq_peeling_3"],
-    doctors: ["doctor_cosmetologist_1", "doctor_cosmetologist_2"]
+    doctors: ["doctor7", "doctor8"]
   },
 
   {
@@ -3250,8 +3335,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_carboxy_1", "faq_carboxy_2"],
-    doctors: ["doctor_cosmetologist_1", "doctor_cosmetologist_2"]
+    doctors: ["doctor2", "doctor3"]
   },
 
 
@@ -3377,8 +3461,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_body_1", "faq_body_2"],
-    doctors: ["doctor_cosmetologist_1", "doctor_body_specialist_1"]
+    doctors: ["doctor3", "doctor5"]
   },
 
   {
@@ -3494,8 +3577,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_rf_lifting_1", "faq_rf_lifting_2"],
-    doctors: ["doctor_cosmetologist_1", "doctor_cosmetologist_2", "doctor_body_specialist_1"]
+    doctors: ["doctor4", "doctor5", "doctor6"]
   },
 
   {
@@ -3593,8 +3675,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_massage_classic_1", "faq_massage_classic_2"],
-    doctors: ["doctor1", "doctor_massage_therapist_2"]
+    doctors: ["doctor1", "doctor9"]
   },
 
   {
@@ -3692,8 +3773,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_lymphatic_massage_1", "faq_lymphatic_massage_2"],
-    doctors: ["doctor1", "doctor_massage_therapist_3"]
+    doctors: ["doctor1", "doctor10"]
   },
 
 
@@ -3792,7 +3872,6 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_cellulite_massage_1", "faq_cellulite_massage_2"],
     doctors: ["doctor1", "doctor2", "doctor3"]
   },
 
@@ -3891,8 +3970,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq6"],
-    doctors: ["doctor3", "doctor_massage_therapist_2"]
+    doctors: ["doctor3", "doctor11"]
   },
 
   {
@@ -4008,8 +4086,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_lips_1", "faq_lips_2", "faq_lips_3"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_cosmetologist_injector_2"]
+    doctors: ["doctor8", "doctor7"]
   },
 
   {
@@ -4107,8 +4184,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_cheeks_1", "faq_cheeks_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_cosmetologist_injector_2"]
+    doctors: ["doctor6", "doctor5"]
   },
 
   {
@@ -4206,8 +4282,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_chin_1", "faq_chin_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_cosmetologist_injector_2"]
+    doctors: ["doctor5", "doctor4"]
   },
 
   {
@@ -4305,8 +4380,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_nasolabial_1", "faq_nasolabial_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_cosmetologist_injector_2"]
+    doctors: ["doctor3", "doctor2"]
   },
 
   {
@@ -4404,8 +4478,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_ipl_veins_1", "faq_ipl_veins_2"],
-    doctors: ["doctor_cosmetologist_1", "doctor_cosmetologist_2"]
+    doctors: ["doctor1", "doctor3"]
   },
 
   {
@@ -4503,8 +4576,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_ipl_pigment_1", "faq_ipl_pigment_2"],
-    doctors: ["doctor_cosmetologist_1", "doctor_cosmetologist_2"]
+    doctors: ["doctor5", "doctor6"]
   },
 
 
@@ -4603,8 +4675,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_ipl_acne_1", "faq_ipl_acne_2"],
-    doctors: ["doctor_cosmetologist_1", "doctor_dermatologist_1"]
+    doctors: ["doctor8", "doctor7"]
   },
 
   {
@@ -4711,8 +4782,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_ipl_rejuvenation_1", "faq_ipl_rejuvenation_2"],
-    doctors: ["doctor_cosmetologist_1", "doctor_cosmetologist_2", "doctor_dermatologist_1"]
+    doctors: ["doctor6", "doctor5", "doctor4"]
   },
 
   {
@@ -4810,8 +4880,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_botox_wrinkles_1", "faq_botox_wrinkles_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_cosmetologist_injector_2"]
+    doctors: ["doctor3", "doctor2"]
   },
 
   {
@@ -4909,8 +4978,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_hyperhidrosis_1", "faq_hyperhidrosis_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_dermatologist_1"]
+    doctors: ["doctor10", "doctor11"]
   },
 
   {
@@ -5008,8 +5076,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_botox_corners_1"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_cosmetologist_injector_2"]
+    doctors: ["doctor12", "doctor5"]
   },
 
   {
@@ -5107,8 +5174,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_botox_crows_feet_1", "faq_botox_crows_feet_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_cosmetologist_injector_2"]
+    doctors: ["doctor6", "doctor5"]
   },
 
   {
@@ -5206,8 +5272,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_trichoscopy_1", "faq_trichoscopy_2"],
-    doctors: ["doctor_trichologist_1", "doctor_dermatologist_1"]
+    doctors: ["doctor4", "doctor5"]
   },
 
   {
@@ -5305,8 +5370,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_seborrhea_1", "faq_seborrhea_2"],
-    doctors: ["doctor_trichologist_1", "doctor_dermatologist_1"]
+    doctors: ["doctor7", "doctor2"]
   },
 
   {
@@ -5404,8 +5468,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_hair_loss_1", "faq_hair_loss_2", "faq_hair_loss_3"],
-    doctors: ["doctor_trichologist_1", "doctor_dermatologist_1"]
+    doctors: ["doctor7", "doctor8"]
   },
 
 
@@ -5513,8 +5576,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_meso_hair_1", "faq_meso_hair_2"],
-    doctors: ["doctor_trichologist_1", "doctor_cosmetologist_injector_1"]
+    doctors: ["doctor7", "doctor6"]
   },
 
   {
@@ -5612,8 +5674,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_meso_face_1", "faq_meso_face_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_cosmetologist_2"]
+    doctors: ["doctor4", "doctor5"]
   },
 
   {
@@ -5711,8 +5772,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_meso_body_1", "faq_meso_body_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_body_specialist_1"]
+    doctors: ["doctor2", "doctor3"]
   },
 
   {
@@ -5819,8 +5879,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_meso_hair_1", "faq_meso_hair_2"],
-    doctors: ["doctor_trichologist_1", "doctor_cosmetologist_injector_1"]
+    doctors: ["doctor9", "doctor8"]
   },
       {
     id: "subservice34", // НОВАЯ ПОДУСЛУГА
@@ -5917,8 +5976,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_meso_cellulite_1", "faq_meso_cellulite_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_body_specialist_1"]
+    doctors: ["doctor6", "doctor7"]
   },
 
   {
@@ -6016,8 +6074,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_biorev_1", "faq_biorev_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_cosmetologist_2"]
+    doctors: ["doctor4", "doctor5"]
   },
 
 
@@ -6116,8 +6173,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_ha_injections_1", "faq_ha_injections_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_cosmetologist_injector_2"]
+    doctors: ["doctor8", "doctor4"]
   },
 
 
@@ -6207,8 +6263,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_complex_1", "faq_complex_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_cosmetologist_injector_2", "doctor_dermatologist_1"]
+    doctors: ["doctor5", "doctor7", "doctor9"]
   },
 
   {
@@ -6306,8 +6361,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_laser_face_1", "faq_laser_face_2"],
-    doctors: ["doctor_laser_specialist_1", "doctor_cosmetologist_1"]
+    doctors: ["doctor6", "doctor2"]
   },
 
   {
@@ -6405,8 +6459,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_laser_arms_1", "faq_laser_arms_2"],
-    doctors: ["doctor_laser_specialist_1", "doctor_laser_specialist_2"]
+    doctors: ["doctor5", "doctor3"]
   },
 
 
@@ -6505,8 +6558,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_laser_legs_1", "faq_laser_legs_2"],
-    doctors: ["doctor_laser_specialist_1", "doctor_laser_specialist_2"]
+    doctors: ["doctor4", "doctor2"]
   },
 
   {
@@ -6604,8 +6656,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_laser_bikini_1", "faq_laser_bikini_2"],
-    doctors: ["doctor_laser_specialist_1", "doctor_laser_specialist_2"]
+    doctors: ["doctor2", "doctor4"]
   },
 
 
@@ -6704,8 +6755,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_laser_postacne_1", "faq_laser_postacne_2"],
-    doctors: ["doctor_dermatologist_1", "doctor_cosmetologist_1"]
+    doctors: ["doctor5", "doctor3"]
   },
 
   {
@@ -6803,8 +6853,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_laser_scars_1", "faq_laser_scars_2"],
-    doctors: ["doctor_dermatologist_1", "doctor_laser_specialist_1"]
+    doctors: ["doctor4", "doctor7"]
   },
 
   {
@@ -6902,8 +6951,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_laser_stretch_marks_1", "faq_laser_stretch_marks_2"],
-    doctors: ["doctor_dermatologist_1", "doctor_laser_specialist_1", "doctor_body_specialist_1"]
+    doctors: ["doctor4", "doctor3", "doctor1"]
   },
 
   {
@@ -7001,8 +7049,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_laser_atrophic_scars_1", "faq_laser_atrophic_scars_2"],
-    doctors: ["doctor_dermatologist_1", "doctor_laser_specialist_1"]
+    doctors: ["doctor6", "doctor7"]
   },
 
   {
@@ -7100,8 +7147,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_resurfx_face_1", "faq_resurfx_face_2"],
-    doctors: ["doctor_dermatologist_1", "doctor_laser_specialist_1", "doctor_cosmetologist_1"]
+    doctors: ["doctor8", "doctor4", "doctor5"]
   },
 
   {
@@ -7199,8 +7245,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_resurfx_neck_1", "faq_resurfx_neck_2"],
-    doctors: ["doctor_dermatologist_1", "doctor_laser_specialist_1", "doctor_cosmetologist_1"]
+    doctors: ["doctor10", "doctor11", "doctor9"]
   },
   {
     id: "subservice49", // НОВАЯ ПОДУСЛУГА
@@ -7297,8 +7342,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_resurfx_postacne_1", "faq_resurfx_postacne_2"],
-    doctors: ["doctor_dermatologist_1", "doctor_laser_specialist_1", "doctor_cosmetologist_1"]
+    doctors: ["doctor9", "doctor11", "doctor12"]
   },
     
     {
@@ -7396,8 +7440,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_intimate_peeling_1", "faq_intimate_peeling_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_gynecologist_1"]
+    doctors: ["doctor7", "doctor8"]
   },
 
 
@@ -7496,8 +7539,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_intimate_biorev_1", "faq_intimate_biorev_2"],
-    doctors: ["doctor_gynecologist_1", "doctor_cosmetologist_injector_1"]
+    doctors: ["doctor5", "doctor6"]
   },
 
   {
@@ -7595,8 +7637,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_intimate_meso_1"],
-    doctors: ["doctor_gynecologist_1", "doctor_cosmetologist_injector_1"]
+    doctors: ["doctor4", "doctor3"]
   },
 
 
@@ -7695,8 +7736,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_intimate_filler_1", "faq_intimate_filler_2"],
-    doctors: ["doctor_gynecologist_1", "doctor_cosmetologist_injector_1"]
+    doctors: ["doctor1", "doctor2"]
   },
 
   {
@@ -7794,8 +7834,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_intimate_laser_1", "faq_intimate_laser_2"],
-    doctors: ["doctor_gynecologist_1"]
+    doctors: ["doctor6"]
   },
 
     {
@@ -7893,8 +7932,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_intimate_hyperhidrosis_1"],
-    doctors: ["doctor_gynecologist_1", "doctor_dermatologist_1", "doctor_cosmetologist_injector_1"]
+    doctors: ["doctor5", "doctor6", "doctor8"]
   },
 
   {
@@ -7992,8 +8030,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_prp_face_1", "faq_prp_face_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_dermatologist_1"]
+    doctors: ["doctor8", "doctor9"]
   },
 
   {
@@ -8091,8 +8128,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_prp_hair_1", "faq_prp_hair_2"],
-    doctors: ["doctor_trichologist_1", "doctor_dermatologist_1", "doctor_cosmetologist_injector_1"]
+    doctors: ["doctor3", "doctor5", "doctor6"]
   },
 
   {
@@ -8190,8 +8226,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_prp_neck_1", "faq_prp_neck_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_dermatologist_1"]
+    doctors: ["doctor9", "doctor1"]
   },
 
   {
@@ -8289,8 +8324,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_prp_hands_1", "faq_prp_hands_2"],
-    doctors: ["doctor_cosmetologist_injector_1", "doctor_dermatologist_1"]
+    doctors: ["doctor11", "doctor10"]
   },
 
   {
@@ -8396,8 +8430,7 @@ export const subservices: Subservice[] = [
         content: { image: "https://clinicaboli.ru/upload/resize_cache/sprint.editor/49f/1224_486_2/8nfrqg69zgnrjtisupykcm1d4336ry4z.jpg" },
       }
     ],
-    faqs: ["faq_sclero_spider_veins_1", "faq_sclero_spider_veins_2"],
-    doctors: ["doctor_phlebologist_1"]
+    doctors: ["doctor12"]
   },
 
 
@@ -8502,8 +8535,7 @@ export const subservices: Subservice[] = [
         }
       }
     ],
-    faqs: ["faq_sclero_varicose_1", "faq_sclero_varicose_2"],
-    doctors: ["doctor_phlebologist_1"]
+    doctors: ["doctor9"]
   },
 
   {
@@ -8606,8 +8638,7 @@ export const subservices: Subservice[] = [
       },
 
     ],
-    faqs: ["faq_microsclero_1"],
-    doctors: ["doctor_phlebologist_1"]
+    doctors: ["doctor8"]
   },
 ]
 
@@ -8653,8 +8684,6 @@ export const doctors: Doctor[] = [
     ],
     certificates: [],
     photo: "https://plus.unsplash.com/premium_photo-1661745702156-cd4b0382455f?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    services: ["service1", "service2"],
-    subservices: ["subservise1", "subservice2"],
     shortName: { uk: "Андрію", ru: "Андрею", en: "Andrii", de: "Andrij" }
   },
   {
@@ -8698,8 +8727,6 @@ export const doctors: Doctor[] = [
     ],
     certificates: [],
     photo: "https://images.unsplash.com/photo-1688588162416-f7a7e726e0bf?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    services: ["service3", "service4"],
-    subservices: ["subservise3", "subservice4"],
     shortName: { uk: "Ользі", ru: "Ольге", en: "Olha", de: "Olha" }
   },
   {
@@ -8738,8 +8765,6 @@ export const doctors: Doctor[] = [
     ],
     certificates: [],
     photo: "https://img.freepik.com/free-photo/african-american-black-doctor-man-with-stethoscope-isolated-white-background_231208-2222.jpg",
-    services: ["service5"],
-    subservices: ["subservise5"],
     shortName: { uk: "Олександру", ru: "Александру", en: "Oleksandr", de: "Oleksandr" }
   },
   {
@@ -8778,8 +8803,6 @@ export const doctors: Doctor[] = [
     ],
     certificates: [],
     photo: "https://i.pinimg.com/736x/1b/52/fd/1b52fd81c2282b432b85dc6a8a01f13d.jpg",
-    services: ["service6"],
-    subservices: ["subservise6"],
     shortName: { uk: "Анні", ru: "Анне", en: "Anna", de: "Anna" }
   },
   {
@@ -8817,8 +8840,6 @@ export const doctors: Doctor[] = [
     ],
     certificates: [],
     photo: "https://i.pinimg.com/564x/65/00/ed/6500edde63ff653629baf862eff5013d.jpg",
-    services: ["service7"],
-    subservices: ["subservise7"],
     shortName: { uk: "Дмитру", ru: "Дмитрию", en: "Dmytro", de: "Dmytro" }
   },
   {
@@ -8856,8 +8877,6 @@ export const doctors: Doctor[] = [
     ],
     certificates: [],
     photo: "https://i.pinimg.com/736x/f4/c9/ef/f4c9ef33d04a22050038e9e53eeb7d85.jpg",
-    services: ["service8"],
-    subservices: ["subservise8"],
     shortName: { uk: "Ігорю", ru: "Игорю", en: "Ihor", de: "Ihor" }
   },
   {
@@ -8895,8 +8914,6 @@ export const doctors: Doctor[] = [
     ],
     certificates: [],
     photo: "https://i.pinimg.com/474x/2a/12/5c/2a125c7aa0d47538b857291fa0901286.jpg",
-    services: ["service9"],
-    subservices: ["subservise9"],
     shortName: { uk: "Юлії", ru: "Юлии", en: "Yuliia", de: "Julija" }
   },
   {
@@ -8933,8 +8950,6 @@ export const doctors: Doctor[] = [
     ],
     certificates: [],
     photo: "https://previews.123rf.com/images/edhar/edhar1112/edhar111200367/11480871-senior-handsome-man-doctor.jpg",
-    services: ["service10"],
-    subservices: ["subservise10"],
     shortName: { uk: "Сергію", ru: "Сергею", en: "Serhii", de: "Serhij" }
   },
   {
@@ -8969,8 +8984,6 @@ export const doctors: Doctor[] = [
     ],
     certificates: [],
     photo: "https://previews.123rf.com/images/karelnoppe/karelnoppe1408/karelnoppe140800011/30606941-close-up-portrait-of-young-male-doctor-isolated-on-white-background.jpg",
-    services: ["service11"],
-    subservices: ["subservise11"],
     shortName: { uk: "Михайлу", ru: "Михаилу", en: "Mykhailo", de: "Mychajlo" }
   },
   {
@@ -9008,8 +9021,6 @@ export const doctors: Doctor[] = [
     ],
     certificates: [],
     photo: "https://previews.123rf.com/images/lithian/lithian1603/lithian160300106/53995140-portrait-of-a-beautiful-young-woman-doctor-with-stethoscope.jpg",
-    services: ["service12"],
-    subservices: ["subservise12"],
     shortName: { uk: "Світлані", ru: "Светлане", en: "Svitlana", de: "Switlana" }
   },
   {
@@ -9047,8 +9058,6 @@ export const doctors: Doctor[] = [
     ],
     certificates: [],
     photo: "https://cdn6.dissolve.com/p/D2115_159_258/D2115_159_258_1200.jpg",
-    services: ["service13"],
-    subservices: ["subservise13"],
     shortName: { uk: "Марії", ru: "Марии", en: "Mariia", de: "Marija" }
   },
   {
@@ -9086,17 +9095,31 @@ export const doctors: Doctor[] = [
     ],
     certificates: [],
     photo: "https://upload.wikimedia.org/wikipedia/commons/c/c2/Drmike_%28cropped%29.png",
-    services: ["service14"],
-    subservices: ["subservise14"],
     shortName: { uk: "Віктору", ru: "Виктору", en: "Viktor", de: "Wiktor" }
   }
 ];
 
 
 export const faqs: FAQ[] = [
-  // Service 1: Видалення новоутворень
+  // Service 1: Entfernung von Hautwucherungen
   {
     id: "faq1",
+    serviceId: "service1",
+    question: {
+      uk: "Які види новоутворень можна видалити у вас?",
+      ru: "Какие виды новообразований можно удалить у вас?",
+      en: "What types of skin growths can be removed at your clinic?",
+      de: "Welche Arten von Hautwucherungen können Sie bei Ihnen entfernen lassen?"
+    },
+    answer: {
+      uk: "Ми видаляємо бородавки, папіломи, родимки, кератоми та кондиломи.",
+      ru: "Мы удаляем бородавки, папилломы, родинки, кератомы и кондиломы.",
+      en: "We remove warts, papillomas, moles, keratomas, and condylomas.",
+      de: "Wir entfernen Warzen, Papillome, Muttermale, Keratome und Kondylome."
+    }
+  },
+  {
+    id: "faq2",
     serviceId: "service1",
     question: {
       uk: "Чи боляче видаляти новоутворення?",
@@ -9105,651 +9128,1471 @@ export const faqs: FAQ[] = [
       de: "Ist die Entfernung von Hautwucherungen schmerzhaft?"
     },
     answer: {
-      uk: "Усі процедури з видалення проводяться під місцевою анестезією (укол або знеболюючий крем), тому є абсолютно комфортними та безболісними.",
-      ru: "Все процедуры по удалению проводятся под местной анестезией (укол или обезболивающий крем), поэтому являются абсолютно комфортными и безболезненными.",
-      en: "All removal procedures are performed under local anesthesia (injection or numbing cream), making them completely comfortable and painless.",
-      de: "Alle Entfernungsverfahren werden unter örtlicher Betäubung (Injektion oder Betäubungscreme) durchgeführt und sind daher absolut angenehm und schmerzfrei."
-    }
-  },
-  {
-    id: "faq2",
-    serviceId: "service1",
-    question: {
-      uk: "Чи відправляєте ви видалені родимки на гістологію?",
-      ru: "Отправляете ли вы удаленные родинки на гистологию?",
-      en: "Do you send removed moles for histology?",
-      de: "Senden Sie entfernte Muttermale zur Histologie ein?"
-    },
-    answer: {
-      uk: "Так, обов'язково. Будь-яке пігментне новоутворення, яке видаляється, ми відправляємо на гістологічне дослідження для підтвердження його доброякісності. Це золотий стандарт безпеки.",
-      ru: "Да, обязательно. Любое пигментное новообразование, которое удаляется, мы отправляем на гистологическое исследование для подтверждения его доброкачественности. Это золотой стандарт безопасности.",
-      en: "Yes, absolutely. Any pigmented growth that is removed is sent for histological examination to confirm its benign nature. This is the gold standard for safety.",
-      de: "Ja, absolut. Jede entfernte pigmentierte Wucherung wird zur histologischen Untersuchung geschickt, um ihre Gutartigkeit zu bestätigen. Dies ist der Goldstandard für Sicherheit."
+      uk: "Усі процедури з видалення проводяться під місцевою анестезією, тому є абсолютно комфортними та безболісними.",
+      ru: "Все процедуры по удалению проводятся под местной анестезией, поэтому являются абсолютно комфортными и безболезненными.",
+      en: "All removal procedures are performed under local anesthesia, making them completely comfortable and painless.",
+      de: "Alle Entfernungsverfahren werden unter örtlicher Betäubung durchgeführt, wodurch sie völlig schmerzfrei sind."
     }
   },
   {
     id: "faq3",
-    subserviceId: "subservice1", // Видалення бородавок
+    subserviceId: "subservice1",
     question: {
-      uk: "Чи може бородавка з'явитися знову після видалення?",
-      ru: "Может ли бородавка появиться снова после удаления?",
-      en: "Can a wart reappear after removal?",
-      de: "Kann eine Warze nach der Entfernung wieder auftreten?"
+      uk: "Чи можуть бородавки з'явитися знову після видалення?",
+      ru: "Могут ли бородавки появиться снова после удаления?",
+      en: "Can warts reappear after removal?",
+      de: "Können Warzen nach der Entfernung wiederkehren?"
     },
     answer: {
-      uk: "Бородавки викликані вірусом ВПЛ. Сучасні методи повністю руйнують тканину бородавки, але вірус може залишатися в організмі. При зниженні імунітету є невеликий ризик рецидиву. Лікар може порадити додаткову терапію.",
-      ru: "Бородавки вызваны вирусом ВПЧ. Современные методы полностью разрушают ткань бородавки, но вирус может оставаться в организме. При снижении иммунитета есть небольшой риск рецидива. Врач может посоветовать дополнительную терапию.",
-      en: "Warts are caused by the HPV virus. Modern methods completely destroy the wart tissue, but the virus can remain in the body. If the immune system is weakened, there is a small risk of recurrence. The doctor may recommend additional therapy.",
-      de: "Warzen werden durch das HPV-Virus verursacht. Moderne Methoden zerstören das Warzengewebe vollständig, aber das Virus kann im Körper verbleiben. Bei geschwächtem Immunsystem besteht ein geringes Risiko eines Wiederauftretens. Der Arzt kann eine zusätzliche Therapie empfehlen."
+      uk: "Існує невеликий ризик повторного появи, оскільки вірус папіломи людини (ВПЛ) може залишатися в організмі. Для запобігання рецидивам рекомендується дотримуватися рекомендацій лікаря.",
+      ru: "Существует небольшой риск повторного появления, так как вирус папилломы человека (ВПЧ) может оставаться в организме. Для предотвращения рецидивов рекомендуется соблюдать рекомендации врача.",
+      en: "There is a small risk of recurrence, as the human papillomavirus (HPV) may remain in the body. Following your doctor's recommendations can help prevent recurrence.",
+      de: "Es besteht ein geringes Risiko für ein Wiederauftreten, da das humane Papillomavirus (HPV) im Körper verbleiben kann. Um Rezidiven vorzubeugen, sollten die Empfehlungen des Arztes befolgt werden."
     }
   },
-  // Service 2: Косметологія обличчя та тіла
   {
     id: "faq4",
-    serviceId: "service2",
+    subserviceId: "subservice2",
     question: {
-      uk: "Як часто потрібно робити чистку обличчя?",
-      ru: "Как часто нужно делать чистку лица?",
-      en: "How often should I get a facial cleansing?",
-      de: "Wie oft sollte ich eine Gesichtsreinigung durchführen lassen?"
+      uk: "Чи залишаються шрами після видалення родимки?",
+      ru: "Остаются ли шрамы после удаления родинки?",
+      en: "Do scars remain after mole removal?",
+      de: "Bleiben nach der Entfernung eines Muttermals Narben zurück?"
     },
     answer: {
-      uk: "Це залежить від типу вашої шкіри. Для жирної та проблемної шкіри рекомендується раз на 1-1.5 місяця. Для нормальної та сухої — раз на 2-3 місяці або за потребою.",
-      ru: "Это зависит от типа вашей кожи. Для жирной и проблемной кожи рекомендуется раз в 1-1.5 месяца. Для нормальной и сухой — раз в 2-3 месяца или по необходимости.",
-      en: "It depends on your skin type. For oily and problematic skin, it is recommended once every 1-1.5 months. For normal and dry skin - once every 2-3 months or as needed.",
-      de: "Das hängt von Ihrem Hauttyp ab. Bei fettiger und problematischer Haut wird es alle 1-1,5 Monate empfohlen. Bei normaler und trockener Haut - alle 2-3 Monate oder nach Bedarf."
+      uk: "Зазвичай, після видалення родимок сучасними методами залишається лише невеликий слід, який з часом стає практично непомітним. Ми використовуємо методи, які мінімізують ризик рубців.",
+      ru: "Обычно, после удаления родинок современными методами остается лишь небольшой след, который со временем становится практически незаметным. Мы используем методы, которые минимизируют риск рубцевания.",
+      en: "Typically, modern mole removal methods leave only a small mark that becomes virtually invisible over time. We use techniques that minimize the risk of scarring.",
+      de: "Normalerweise bleibt nach der Entfernung von Muttermalen mit modernen Methoden nur eine kleine Spur zurück, die im Laufe der Zeit praktisch unsichtbar wird. Wir verwenden Techniken, die das Narbenrisiko minimieren."
     }
   },
   {
     id: "faq5",
-    subserviceId: "subservice7", // Хімічний пілінг
+    subserviceId: "subservice3",
     question: {
-      uk: "Чи можна робити хімічний пілінг влітку?",
-      ru: "Можно ли делать химический пилинг летом?",
-      en: "Can I get a chemical peel in the summer?",
-      de: "Kann ich im Sommer ein chemisches Peeling machen lassen?"
+      uk: "Чи потрібна спеціальна підготовка перед видаленням папілом?",
+      ru: "Нужна ли специальная подготовка перед удалением папиллом?",
+      en: "Is special preparation needed before papilloma removal?",
+      de: "Ist eine spezielle Vorbereitung vor der Papillomentfernung erforderlich?"
     },
     answer: {
-      uk: "Так, але тільки поверхневі, всесезонні пілінги (наприклад, мигдальний, молочний). Серединні пілінги в період активного сонця робити не рекомендується. Обов'язковою умовою є використання крему з SPF 50+.",
-      ru: "Да, но только поверхностные, всесезонные пилинги (например, миндальный, молочный). Срединные пилинги в период активного солнца делать не рекомендуется. Обязательным условием является использование крема с SPF 50+.",
-      en: "Yes, but only superficial, all-season peels (e.g., mandelic, lactic). Medium-depth peels are not recommended during the active sun period. The mandatory condition is the use of a cream with SPF 50+.",
-      de: "Ja, aber nur oberflächliche, ganzjährige Peelings (z.B. Mandel-, Milchsäure). Mitteltiefe Peelings werden während der aktiven Sonnenperiode nicht empfohlen. Die zwingende Voraussetzung ist die Verwendung einer Creme mit LSF 50+."
+      uk: "Особливої підготовки не потрібно. Рекомендується лише утриматися від сонячних ванн і не наносити косметику на ділянку видалення за день до процедури.",
+      ru: "Особой подготовки не требуется. Рекомендуется лишь воздержаться от солнечных ванн и не наносить косметику на участок удаления за день до процедуры.",
+      en: "No special preparation is required. It is only recommended to avoid sun exposure and not apply cosmetics to the removal area the day before the procedure.",
+      de: "Eine besondere Vorbereitung ist nicht erforderlich. Es wird lediglich empfohlen, am Tag vor dem Eingriff auf Sonnenbäder und die Anwendung von Kosmetika im Behandlungsbereich zu verzichten."
     }
   },
-  // Service 3: Масаж
   {
     id: "faq6",
-    serviceId: "service3",
+    subserviceId: "subservice4",
     question: {
-      uk: "Який масаж краще обрати, якщо я ніколи його не робив?",
-      ru: "Какой массаж лучше выбрать, если я никогда его не делал?",
-      en: "Which massage should I choose if I've never had one?",
-      de: "Welche Massage sollte ich wählen, wenn ich noch nie eine hatte?"
+      uk: "Яким методом видаляють кератоми?",
+      ru: "Каким методом удаляют кератомы?",
+      en: "What method is used to remove keratomas?",
+      de: "Mit welcher Methode werden Keratome entfernt?"
     },
     answer: {
-      uk: "Для першого разу ідеально підійде класичний масаж всього тіла або релакс-масаж. Вони допоможуть зняти загальну напругу та познайомитися з процедурою. Розкажіть масажисту про свої відчуття, і він підбере оптимальну інтенсивність.",
-      ru: "Для первого раза идеально подойдет классический массаж всего тела или релакс-массаж. Они помогут снять общее напряжение и познакомиться с процедурой. Расскажите массажисту о своих ощущениях, и он подберет оптимальную интенсивность.",
-      en: "For a first time, a classic full-body massage or a relaxation massage is ideal. They will help relieve general tension and introduce you to the procedure. Tell the therapist about your sensations, and they will select the optimal intensity.",
-      de: "Für das erste Mal ist eine klassische Ganzkörpermassage oder eine Entspannungsmassage ideal. Sie helfen, allgemeine Verspannungen zu lösen und Sie mit dem Verfahren vertraut zu machen. Sprechen Sie mit dem Therapeuten über Ihre Empfindungen, und er wird die optimale Intensität auswählen."
+      uk: "Кератоми зазвичай видаляють за допомогою лазерної терапії або радіохвильового методу. Вибір методу залежить від розміру та типу кератоми.",
+      ru: "Кератомы обычно удаляют с помощью лазерной терапии или радиоволнового метода. Выбор метода зависит от размера и типа кератомы.",
+      en: "Keratomas are usually removed using laser therapy or a radio wave method. The choice of method depends on the size and type of the keratoma.",
+      de: "Keratome werden in der Regel mit Lasertherapie oder der Radiowellenmethode entfernt. Die Wahl der Methode hängt von der Größe und Art des Keratoms ab."
     }
   },
-  {
-    id: "faq7",
-    subserviceId: "subservice13", // Антицелюлітний масаж
-    question: {
-      uk: "Антицелюлітний масаж — це дуже боляче?",
-      ru: "Антицеллюлитный массаж — это очень больно?",
-      en: "Is anti-cellulite massage very painful?",
-      de: "Ist eine Anti-Cellulite-Massage sehr schmerzhaft?"
-    },
-    answer: {
-      uk: "Процедура може бути чутливою, особливо перші 2-3 сеанси, коли тканини ще набряклі. Можлива поява невеликих синців. Однак досвідчений масажист завжди працює в межах вашого больового порогу, і з кожною процедурою дискомфорт зменшується.",
-      ru: "Процедура может быть чувствительной, особенно первые 2-3 сеанса, когда ткани еще отечные. Возможно появление небольших синяков. Однако опытный массажист всегда работает в пределах вашего болевого порога, и с каждой процедурой дискомфорт уменьшается.",
-      en: "The procedure can be sensitive, especially the first 2-3 sessions when the tissues are still swollen. Small bruises may appear. However, an experienced therapist always works within your pain threshold, and the discomfort decreases with each procedure.",
-      de: "Das Verfahren kann empfindlich sein, insbesondere die ersten 2-3 Sitzungen, wenn das Gewebe noch geschwollen ist. Es können kleine blaue Flecken auftreten. Ein erfahrener Therapeut arbeitet jedoch immer innerhalb Ihrer Schmerzgrenze, und das Unbehagen nimmt mit jeder Behandlung ab."
-    }
-  },
-  // Service 4: Контурна пластика
+
+      // Service 2: Gesichts- und Körperkosmetologie
+      {
+        id: "faq7",
+        serviceId: "service2",
+        question: {
+          uk: "Як часто потрібно робити чистку обличчя?",
+          ru: "Как часто нужно делать чистку лица?",
+          en: "How often should I get a facial cleansing?",
+          de: "Wie oft sollte ich eine Gesichtsreinigung durchführen lassen?"
+        },
+        answer: {
+          uk: "Частота залежить від типу вашої шкіри та її стану. Зазвичай рекомендується проводити процедуру раз на 1-3 місяці.",
+          ru: "Частота зависит от типа вашей кожи и ее состояния. Обычно рекомендуется проводить процедуру раз в 1-3 месяца.",
+          en: "The frequency depends on your skin type and condition. It is usually recommended to have the procedure every 1-3 months.",
+          de: "Die Häufigkeit hängt von Ihrem Hauttyp und -zustand ab. Normalerweise wird der Eingriff alle 1 bis 3 Monate empfohlen."
+        }
+      },
   {
     id: "faq8",
-    serviceId: "service4",
+    serviceId: "service2",
     question: {
-      uk: "Як довго тримається ефект від філерів?",
-      ru: "Как долго держится эффект от филлеров?",
-      en: "How long do the effects of fillers last?",
-      de: "Wie lange hält die Wirkung von Fillern an?"
+      uk: "Чи можна робити косметичні процедури під час вагітності?",
+      ru: "Можно ли делать косметические процедуры во время беременности?",
+      en: "Can cosmetic procedures be performed during pregnancy?",
+      de: "Können kosmetische Eingriffe während der Schwangerschaft durchgeführt werden?"
     },
     answer: {
-      uk: "Тривалість ефекту залежить від препарату, зони введення та індивідуальних особливостей метаболізму. В середньому, ефект від корекції губ триває 8-12 місяців, а від моделювання вилиць та підборіддя — 12-24 місяці.",
-      ru: "Длительность эффекта зависит от препарата, зоны введения и индивидуальных особенностей метаболизма. В среднем, эффект от коррекции губ длится 8-12 месяцев, а от моделирования скул и подбородка — 12-24 месяца.",
-      en: "The duration of the effect depends on the product, the injection area, and individual metabolic features. On average, the effect of lip correction lasts 8-12 months, and for cheekbone and chin modeling - 12-24 months.",
-      de: "Die Dauer der Wirkung hängt vom Produkt, dem Injektionsbereich und den individuellen Stoffwechseleigenschaften ab. Im Durchschnitt hält die Wirkung der Lippenkorrektur 8-12 Monate an, bei Wangenknochen- und Kinnmodellierung - 12-24 Monate."
+      uk: "Не всі процедури дозволені. Перед записом обов'язково повідомте лікаря про вагітність, і він підбере безпечні для вас та дитини методи.",
+      ru: "Не все процедуры разрешены. Перед записью обязательно сообщите врачу о беременности, и он подберет безопасные для вас и ребенка методы.",
+      en: "Not all procedures are permitted. Before booking, be sure to inform the doctor about your pregnancy so they can select safe methods for you and your baby.",
+      de: "Nicht alle Verfahren sind erlaubt. Informieren Sie den Arzt vor der Buchung unbedingt über Ihre Schwangerschaft, damit er sichere Methoden für Sie und Ihr Baby auswählen kann."
     }
   },
   {
     id: "faq9",
-    subserviceId: "subservice15", // Збільшення губ
+    subserviceId: "subservice6",
     question: {
-      uk: "Чи будуть мої губи виглядати природно?",
-      ru: "Будут ли мои губы выглядеть естественно?",
-      en: "Will my lips look natural?",
-      de: "Werden meine Lippen natürlich aussehen?"
+      uk: "Чим відрізняється ультразвукова чистка від механічної?",
+      ru: "Чем отличается ультразвуковая чистка от механической?",
+      en: "What is the difference between ultrasonic and manual facial cleansing?",
+      de: "Worin besteht der Unterschied zwischen Ultraschall- und mechanischer Gesichtsreinigung?"
     },
     answer: {
-      uk: "Так. Сучасні техніки та препарати дозволяють досягти максимально природного результату. Наш лікар завжди враховує ваші індивідуальні пропорції та побажання, щоб лише підкреслити вашу красу, а не змінити до невпізнання.",
-      ru: "Да. Современные техники и препараты позволяют достичь максимально естественного результата. Наш врач всегда учитывает ваши индивидуальные пропорции и пожелания, чтобы лишь подчеркнуть вашу красоту, а не изменить до неузнаваемости.",
-      en: "Yes. Modern techniques and products allow for the most natural results. Our doctor always considers your individual proportions and wishes to only enhance your beauty, not change you beyond recognition.",
-      de: "Ja. Moderne Techniken und Produkte ermöglichen die natürlichsten Ergebnisse. Unser Arzt berücksichtigt immer Ihre individuellen Proportionen und Wünsche, um Ihre Schönheit nur zu unterstreichen und Sie nicht bis zur Unkenntlichkeit zu verändern."
+      uk: "Ультразвукова чистка більш м'яка та атравматична, вона очищує пори за допомогою вібрацій. Механічна чистка є більш глибокою, виконується вручну і підходить для шкіри з сильними забрудненнями.",
+      ru: "Ультразвуковая чистка более мягкая и атравматичная, она очищает поры с помощью вибраций. Механическая чистка является более глубокой, выполняется вручную и подходит для кожи с сильными загрязнениями.",
+      en: "Ultrasonic cleansing is gentler and non-invasive, cleaning pores with vibrations. Manual cleansing is deeper, performed by hand, and is suitable for heavily congested skin.",
+      de: "Die Ultraschallreinigung ist sanfter und nicht-invasiv, sie reinigt die Poren mittels Vibrationen. Die mechanische Reinigung ist tiefgehender, wird manuell durchgeführt und eignet sich für stark verunreinigte Haut."
     }
   },
-  // Service 5: IPL Shiny
   {
     id: "faq10",
-    serviceId: "service5",
+    subserviceId: "subservice7",
     question: {
-      uk: "Наскільки болючою є процедура IPL?",
-      ru: "Насколько болезненна процедура IPL?",
-      en: "How painful is the IPL procedure?",
-      de: "Wie schmerzhaft ist das IPL-Verfahren?"
+      uk: "Чи безпечні хімічні пілінги?",
+      ru: "Безопасны ли химические пилинги?",
+      en: "Are chemical peels safe?",
+      de: "Sind chemische Peelings sicher?"
     },
     answer: {
-      uk: "Під час спалаху ви відчуваєте тепло та легке поколювання, схоже на клацання гумкою по шкірі. Наш апарат оснащений потужною системою охолодження, що робить процедуру комфортною.",
-      ru: "Во время вспышки вы ощущаете тепло и легкое покалывание, похожее на щелчок резинкой по коже. Наш аппарат оснащен мощной системой охлаждения, что делает процедуру комфортной.",
-      en: "During the flash, you feel warmth and a slight tingling, similar to a rubber band snap on the skin. Our device is equipped with a powerful cooling system, which makes the procedure comfortable.",
-      de: "Während des Blitzes spüren Sie Wärme und ein leichtes Kribbeln, ähnlich wie bei einem Gummiband-Schnapper auf der Haut. Unser Gerät ist mit einem leistungsstarken Kühlsystem ausgestattet, was das Verfahren angenehm macht."
+      uk: "Так, за умови, що їх проводить кваліфікований фахівець після оцінки стану вашої шкіри. Ми використовуємо лише сертифіковані препарати.",
+      ru: "Да, при условии, что их проводит квалифицированный специалист после оценки состояния вашей кожи. Мы используем только сертифицированные препараты.",
+      en: "Yes, provided they are performed by a qualified specialist after evaluating your skin condition. We use only certified products.",
+      de: "Ja, vorausgesetzt, sie werden von einem qualifizierten Spezialisten nach einer Beurteilung Ihres Hautzustands durchgeführt. Wir verwenden ausschließlich zertifizierte Produkte."
     }
   },
-  {
-    id: "faq11",
-    subserviceId: "subservice19", // Лікування судинних зірочок
-    question: {
-      uk: "Скільки потрібно процедур IPL, щоб прибрати судини?",
-      ru: "Сколько нужно процедур IPL, чтобы убрать сосуды?",
-      en: "How many IPL procedures are needed to remove vessels?",
-      de: "Wie viele IPL-Behandlungen sind erforderlich, um Gefäße zu entfernen?"
-    },
-    answer: {
-      uk: "Кількість процедур залежить від розміру та глибини судин. Зазвичай для повного видалення судинної сіточки або куперозу потрібен курс з 2-5 процедур з інтервалом 3-4 тижні.",
-      ru: "Количество процедур зависит от размера и глубины сосудов. Обычно для полного удаления сосудистой сеточки или купероза требуется курс из 2-5 процедур с интервалом 3-4 недели.",
-      en: "The number of procedures depends on the size and depth of the vessels. Usually, a course of 2-5 procedures with an interval of 3-4 weeks is required for the complete removal of a vascular network or rosacea.",
-      de: "Die Anzahl der Behandlungen hängt von der Größe und Tiefe der Gefäße ab. In der Regel ist ein Kurs von 2-5 Behandlungen im Abstand von 3-4 Wochen erforderlich, um ein Gefäßnetz oder Couperose vollständig zu entfernen."
-    }
-  },
-  // Service 6: Ботулінотерапія
+
+      // Service 3: Massage
+      {
+        id: "faq11",
+        serviceId: "service3",
+        question: {
+          uk: "Чи допомагає масаж при болях у спині?",
+          ru: "Помогает ли массаж при болях в спине?",
+          en: "Does massage help with back pain?",
+          de: "Hilft Massage bei Rückenschmerzen?"
+        },
+        answer: {
+          uk: "Так, класичний і лімфодренажний масаж ефективно знімає м'язову напругу і покращує кровообіг, що сприяє зменшенню болю.",
+          ru: "Да, классический и лимфодренажный массаж эффективно снимает мышечное напряжение и улучшает кровообращение, что способствует уменьшению боли.",
+          en: "Yes, classic and lymphatic drainage massage effectively relieves muscle tension and improves blood circulation, which helps to reduce pain.",
+          de: "Ja, die klassische Massage und Lymphdrainage bauen Muskelverspannungen ab und verbessern die Durchblutung, was zur Linderung von Schmerzen beiträgt."
+        }
+      },
   {
     id: "faq12",
-    serviceId: "service6",
+    subserviceId: "subservice11",
     question: {
-      uk: "Чи не буде моє обличчя схожим на маску після ботулінотерапії?",
-      ru: "Не будет ли мое лицо похоже на маску после ботулинотерапии?",
-      en: "Will my face look like a mask after botulinum toxin therapy?",
-      de: "Wird mein Gesicht nach der Botulinumtoxin-Therapie wie eine Maske aussehen?"
+      uk: "Кому показаний класичний масаж?",
+      ru: "Кому показан классический массаж?",
+      en: "Who is a classic massage recommended for?",
+      de: "Wem wird eine klassische Massage empfohlen?"
     },
     answer: {
-      uk: "Ні. Ефект «маски» виникає при введенні надмірної дози препарату. Наші лікарі використовують техніку «живого обличчя», підбираючи дозування індивідуально, щоб розслабити лише ті м'язи, що утворюють зморшки, і зберегти вашу природну міміку.",
-      ru: "Нет. Эффект «маски» возникает при введении избыточной дозы препарата. Наши врачи используют технику «живого лица», подбирая дозировку индивидуально, чтобы расслабить только те мышцы, которые образуют морщины, и сохранить вашу естественную мимику.",
-      en: "No. The \"mask\" effect occurs when an excessive dose of the drug is administered. Our doctors use the \"live face\" technique, selecting the dosage individually to relax only the muscles that form wrinkles and preserve your natural facial expressions.",
-      de: "Nein. Der „Masken“-Effekt tritt auf, wenn eine übermäßige Dosis des Medikaments verabreicht wird. Unsere Ärzte verwenden die „lebendiges Gesicht“-Technik und wählen die Dosierung individuell aus, um nur die Muskeln zu entspannen, die Falten bilden, und Ihre natürlichen Gesichtsausdrücke zu erhalten."
+      uk: "Класичний масаж показаний при м'язових болях, перенапрузі, стресі, а також для загального розслаблення та підтримки тонусу м'язів.",
+      ru: "Классический массаж показан при мышечных болях, перенапряжении, стрессе, а также для общего расслабления и поддержания тонуса мышц.",
+      en: "Classic massage is recommended for muscle pain, tension, stress, as well as for general relaxation and maintaining muscle tone.",
+      de: "Die klassische Massage wird bei Muskelschmerzen, Überlastung, Stress sowie zur allgemeinen Entspannung und zur Erhaltung des Muskeltonus empfohlen."
     }
   },
   {
     id: "faq13",
-    subserviceId: "subservice24", // Лікування гіпергідрозу
+    subserviceId: "subservice13",
     question: {
-      uk: "Чи безпечно блокувати потові залози?",
-      ru: "Безопасно ли блокировать потовые железы?",
-      en: "Is it safe to block sweat glands?",
-      de: "Ist es sicher, Schweißdrüsen zu blockieren?"
+      uk: "Скільки сеансів антицелюлітного масажу потрібно?",
+      ru: "Сколько сеансов антицеллюлитного массажа нужно?",
+      en: "How many anti-cellulite massage sessions are needed?",
+      de: "Wie viele Anti-Cellulite-Massage-Sitzungen sind erforderlich?"
     },
     answer: {
-      uk: "Так, це абсолютно безпечно. Процедура проводиться локально (наприклад, в пахвах), і це ніяк не впливає на загальну терморегуляцію організму, оскільки ми продовжуємо потіти через мільйони інших залоз по всьому тілу.",
-      ru: "Да, это абсолютно безопасно. Процедура проводится локально (например, в подмышках), и это никак не влияет на общую терморегуляцию организма, так как мы продолжаем потеть через миллионы других желез по всему телу.",
-      en: "Yes, it is completely safe. The procedure is performed locally (e.g., in the armpits), and it does not affect the body's overall thermoregulation, as we continue to sweat through millions of other glands throughout the body.",
-      de: "Ja, es ist absolut sicher. Das Verfahren wird lokal durchgeführt (z. B. in den Achselhöhlen) und beeinträchtigt die allgemeine Thermoregulation des Körpers nicht, da wir weiterhin durch Millionen anderer Drüsen am ganzen Körper schwitzen."
+      uk: "Кількість сеансів залежить від стадії целюліту, але зазвичай рекомендується курс із 10-15 процедур для досягнення видимого результату.",
+      ru: "Количество сеансов зависит от стадии целлюлита, но обычно рекомендуется курс из 10-15 процедур для достижения видимого результата.",
+      en: "The number of sessions depends on the stage of cellulite, but a course of 10-15 procedures is usually recommended to achieve a visible result.",
+      de: "Die Anzahl der Sitzungen hängt vom Stadium der Cellulite ab, aber in der Regel wird eine Kur von 10-15 Behandlungen empfohlen, um sichtbare Ergebnisse zu erzielen."
     }
   },
-  // Service 7: Трихологія
-  {
-    id: "faq14",
-    serviceId: "service7",
-    question: {
-      uk: "Що таке трихоскопія і чи це боляче?",
-      ru: "Что такое трихоскопия и больно ли это?",
-      en: "What is trichoscopy and is it painful?",
-      de: "Was ist Trichoskopie und ist es schmerzhaft?"
-    },
-    answer: {
-      uk: "Трихоскопія — це комп'ютерна діагностика стану волосся та шкіри голови за допомогою камери з багаторазовим збільшенням. Це абсолютно безболісна та неінвазивна процедура, схожа на УЗД.",
-      ru: "Трихоскопия — это компьютерная диагностика состояния волос и кожи головы с помощью камеры с многократным увеличением. Это абсолютно безболезненная и неинвазивная процедура, похожая на УЗИ.",
-      en: "Trichoscopy is a computer-based diagnosis of the condition of the hair and scalp using a camera with multiple magnification. It is a completely painless and non-invasive procedure, similar to an ultrasound.",
-      de: "Die Trichoskopie ist eine computergestützte Diagnose des Zustands von Haar und Kopfhaut mit einer Kamera mit mehrfacher Vergrößerung. Es ist ein völlig schmerzloses und nicht-invasives Verfahren, ähnlich wie ein Ultraschall."
-    }
-  },
+
+      // Service 4: Konturplastik (Dermale Füller)
+      {
+        id: "faq14",
+        serviceId: "service4",
+        question: {
+          uk: "Як довго тримається ефект від контурної пластики?",
+          ru: "Как долго держится эффект от контурной пластики?",
+          en: "How long does the effect of contour plastic last?",
+          de: "Wie lange hält der Effekt der Konturplastik an?"
+        },
+        answer: {
+          uk: "Ефект тримається від 6 місяців до 2 років, залежно від препарату, зони корекції та індивідуальних особливостей організму.",
+          ru: "Эффект держится от 6 месяцев до 2 лет, в зависимости от препарата, зоны коррекции и индивидуальных особенностей организма.",
+          en: "The effect lasts from 6 months to 2 years, depending on the product, the corrected area, and individual body characteristics.",
+          de: "Der Effekt hält zwischen 6 Monaten und 2 Jahren, abhängig vom Präparat, der korrigierten Zone und individuellen Körpereigenschaften."
+        }
+      },
   {
     id: "faq15",
-    subserviceId: "subservice29", // Терапія випадіння волосся
+    subserviceId: "subservice15",
     question: {
-      uk: "Чому шампуні від випадіння не допомагають?",
-      ru: "Почему шампуни от выпадения не помогают?",
-      en: "Why don't hair loss shampoos help?",
-      de: "Warum helfen Shampoos gegen Haarausfall nicht?"
+      uk: "Чи буде боляче при збільшенні губ?",
+      ru: "Будет ли больно при увеличении губ?",
+      en: "Will it be painful to get lip augmentation?",
+      de: "Wird die Lippenvergrößerung schmerzhaft sein?"
     },
     answer: {
-      uk: "Причини випадіння волосся (алопеції) зазвичай є внутрішніми (гормони, дефіцити, стрес). Шампунь діє лише на поверхні шкіри і не може вплинути на ці процеси. Він може лише покращити зовнішній вигляд волосся. Для лікування потрібен комплексний підхід, призначений лікарем.",
-      ru: "Причины выпадения волос (алопеции) обычно внутренние (гормоны, дефициты, стресс). Шампунь действует только на поверхности кожи и не может повлиять на эти процессы. Он может лишь улучшить внешний вид волос. Для лечения нужен комплексный подход, назначенный врачом.",
-      en: "The causes of hair loss (alopecia) are usually internal (hormones, deficiencies, stress). A shampoo only acts on the surface of the skin and cannot influence these processes. It can only improve the appearance of the hair. Treatment requires a comprehensive approach prescribed by a doctor.",
-      de: "Die Ursachen für Haarausfall (Alopezie) sind in der Regel intern (Hormone, Mangelerscheinungen, Stress). Ein Shampoo wirkt nur auf der Hautoberfläche und kann diese Prozesse nicht beeinflussen. Es kann nur das Aussehen der Haare verbessern. Die Behandlung erfordert einen umfassenden, von einem Arzt verordneten Ansatz."
+      uk: "Процедура проводиться з використанням місцевої анестезії або анестезуючого крему, тому ви відчуватимете мінімальний дискомфорт.",
+      ru: "Процедура проводится с использованием местной анестезии или обезболивающего крема, поэтому вы будете ощущать минимальный дискомфорт.",
+      en: "The procedure is performed using local anesthesia or numbing cream, so you will feel minimal discomfort.",
+      de: "Der Eingriff wird unter örtlicher Betäubung oder mit einer betäubenden Creme durchgeführt, so dass Sie nur minimale Beschwerden verspüren."
     }
   },
-  // Service 8: Мезотерапія
-  {
-    id: "faq16",
-    serviceId: "service8",
-    question: {
-      uk: "Яка різниця між мезотерапією та біоревіталізацією?",
-      ru: "Какая разница между мезотерапией и биоревитализацией?",
-      en: "What is the difference between mesotherapy and biorevitalization?",
-      de: "Was ist der Unterschied zwischen Mesotherapie und Biorevitalisierung?"
-    },
-    answer: {
-      uk: "Основна різниця — в концентрації гіалуронової кислоти та цілях. Мезотерапія — це «вітамінні коктейлі» для вирішення широкого спектру проблем. Біоревіталізація використовує високу концентрацію ГК і спрямована в першу чергу на глибоке зволоження та стимуляцію колагену.",
-      ru: "Основная разница — в концентрации гиалуроновой кислоты и целях. Мезотерапия — это «витаминные коктейли» для решения широкого спектра проблем. Биоревитализация использует высокую концентрацию ГК и направлена в первую очередь на глубокое увлажнение и стимуляцию коллагена.",
-      en: "The main difference is in the concentration of hyaluronic acid and the goals. Mesotherapy uses \"vitamin cocktails\" to solve a wide range of problems. Biorevitalization uses a high concentration of HA and is primarily aimed at deep hydration and collagen stimulation.",
-      de: "Der Hauptunterschied liegt in der Konzentration der Hyaluronsäure und den Zielen. Die Mesotherapie verwendet „Vitamin-Cocktails“, um eine breite Palette von Problemen zu lösen. Die Biorevitalisierung verwendet eine hohe Konzentration von HA und zielt hauptsächlich auf eine tiefe Hydratation und Kollagenstimulation ab."
-    }
-  },
-  // Service 9: Біоревіталізація
+
+      // Service 5: IPL Shiny
+      {
+        id: "faq16",
+        serviceId: "service5",
+        question: {
+          uk: "Чи безпечна IPL-терапія?",
+          ru: "Безопасна ли IPL-терапия?",
+          en: "Is IPL therapy safe?",
+          de: "Ist die IPL-Therapie sicher?"
+        },
+        answer: {
+          uk: "Так, це безпечний метод, якщо процедуру проводить кваліфікований фахівець з використанням сертифікованого обладнання.",
+          ru: "Да, это безопасный метод, если процедуру проводит квалифицированный специалист с использованием сертифицированного оборудования.",
+          en: "Yes, it is a safe method if the procedure is performed by a qualified specialist using certified equipment.",
+          de: "Ja, es ist eine sichere Methode, wenn der Eingriff von einem qualifizierten Spezialisten mit zertifizierter Ausrüstung durchgeführt wird."
+        }
+      },
   {
     id: "faq17",
-    subserviceId: "subservice35", // Біоревіталізація обличчя
+    subserviceId: "subservice20",
     question: {
-      uk: "Що таке папули після біоревіталізації і як довго вони тримаються?",
-      ru: "Что такое папулы после биоревитализации и как долго они держатся?",
-      en: "What are papules after biorevitalization and how long do they last?",
-      de: "Was sind Papeln nach der Biorevitalisierung und wie lange halten sie an?"
+      uk: "Скільки сеансів потрібно для видалення пігментних плям?",
+      ru: "Сколько сеансов нужно для удаления пигментных пятен?",
+      en: "How many sessions are needed to remove pigmented spots?",
+      de: "Wie viele Sitzungen sind zur Entfernung von Pigmentflecken erforderlich?"
     },
     answer: {
-      uk: "Папули — це невеликі горбки в місцях ін'єкцій, що містять депо препарату. Це нормальна і очікувана реакція. Вони повністю розсмоктуються самостійно протягом 1-3 днів, поступово насичуючи шкіру гіалуроновою кислотою.",
-      ru: "Папулы — это небольшие бугорки в местах инъекций, содержащие депо препарата. Это нормальная и ожидаемая реакция. Они полностью рассасываются самостоятельно в течение 1-3 дней, постепенно насыщая кожу гиалуроновой кислотой.",
-      en: "Papules are small bumps at the injection sites that contain a depot of the product. This is a normal and expected reaction. They resolve completely on their own within 1-3 days, gradually saturating the skin with hyaluronic acid.",
-      de: "Papeln sind kleine Beulen an den Injektionsstellen, die ein Depot des Produkts enthalten. Dies ist eine normale und erwartete Reaktion. Sie bilden sich innerhalb von 1-3 Tagen von selbst vollständig zurück und sättigen die Haut allmählich mit Hyaluronsäure."
+      uk: "Кількість сеансів залежить від розміру, глибини та типу пігментації. Зазвичай, для повного видалення необхідно від 2 до 5 процедур.",
+      ru: "Количество сеансов зависит от размера, глубины и типа пигментации. Обычно для полного удаления необходимо от 2 до 5 процедур.",
+      en: "The number of sessions depends on the size, depth, and type of pigmentation. Usually, 2 to 5 procedures are needed for complete removal.",
+      de: "Die Anzahl der Sitzungen hängt von der Größe, Tiefe und Art der Pigmentierung ab. In der Regel sind 2 bis 5 Behandlungen für eine vollständige Entfernung erforderlich."
     }
   },
-  // Service 10: Лазерна епіляція
   {
     id: "faq18",
-    serviceId: "service10",
+    subserviceId: "subservice21",
     question: {
-      uk: "Лазерна епіляція — це назавжди?",
-      ru: "Лазерная эпиляция — это навсегда?",
-      en: "Is laser hair removal permanent?",
-      de: "Ist die Laser-Haarentfernung dauerhaft?"
+      uk: "Чи можна лікувати акне IPL-терапією?",
+      ru: "Можно ли лечить акне IPL-терапией?",
+      en: "Can acne be treated with IPL therapy?",
+      de: "Kann Akne mit IPL-Therapie behandelt werden?"
     },
     answer: {
-      uk: "Після повного курсу руйнується до 95% волосяних фолікулів. Результат є довготривалим, але через гормональні зміни або інші фактори з часом можуть активуватися «сплячі» фолікули. Для підтримки ідеального результату рекомендується проводити 1-2 підтримуючі процедури на рік.",
-      ru: "После полного курса разрушается до 95% волосяных фолликулов. Результат долговременный, но из-за гормональных изменений или других факторов со временем могут активироваться «спящие» фолликулы. Для поддержания идеального результата рекомендуется проводить 1-2 поддерживающие процедуры в год.",
-      en: "After a full course, up to 95% of hair follicles are destroyed. The result is long-lasting, but due to hormonal changes or other factors, \"dormant\" follicles may become active over time. To maintain the ideal result, 1-2 maintenance procedures per year are recommended.",
-      de: "Nach einem vollständigen Kurs werden bis zu 95% der Haarfollikel zerstört. Das Ergebnis ist langanhaltend, aber aufgrund hormoneller Veränderungen oder anderer Faktoren können im Laufe der Zeit „ruhende“ Follikel aktiv werden. Um das ideale Ergebnis zu erhalten, werden 1-2 Erhaltungsbehandlungen pro Jahr empfohlen."
+      uk: "Так, IPL-терапія ефективно впливає на бактерії, що викликають акне, та зменшує запалення, що призводить до значного поліпшення стану шкіри.",
+      ru: "Да, IPL-терапия эффективно воздействует на бактерии, вызывающие акне, и уменьшает воспаление, что приводит к значительному улучшению состояния кожи.",
+      en: "Yes, IPL therapy effectively targets acne-causing bacteria and reduces inflammation, leading to a significant improvement in skin condition.",
+      de: "Ja, die IPL-Therapie wirkt effektiv gegen Akne-verursachende Bakterien und reduziert Entzündungen, was zu einer deutlichen Verbesserung des Hautzustands führt."
     }
   },
-  {
-    id: "faq19",
-    subserviceId: "subservice39", // Лазерна епіляція обличчя
-    question: {
-      uk: "Чи не буде волосся на обличчі рости ще сильніше після лазера?",
-      ru: "Не будут ли волосы на лице расти еще сильнее после лазера?",
-      en: "Will facial hair grow back thicker after laser?",
-      de: "Wird das Gesichtshaar nach dem Laser dicker nachwachsen?"
-    },
-    answer: {
-      uk: "Ні, це міф. Лазер руйнує фолікул, тому волосся з нього або не росте зовсім, або виростає значно світлішим та тоншим. Лазерна епіляція не стимулює ріст нового волосся.",
-      ru: "Нет, это миф. Лазер разрушает фолликул, поэтому волос из него либо не растет совсем, либо вырастает значительно более светлым и тонким. Лазерная эпиляция не стимулирует рост новых волос.",
-      en: "No, that's a myth. The laser destroys the follicle, so hair either doesn't grow back at all, or it grows back much lighter and thinner. Laser hair removal does not stimulate new hair growth.",
-      de: "Nein, das ist ein Mythos. Der Laser zerstört den Follikel, sodass das Haar entweder gar nicht mehr nachwächst oder viel heller und dünner nachwächst. Die Laser-Haarentfernung stimuliert kein neues Haarwachstum."
-    }
-  },
-  // Service 11: Лазерне видалення розтяжок / шрамів
+
+      // Service 6: Botulinumtoxin-Therapie
+      {
+        id: "faq19",
+        serviceId: "service6",
+        question: {
+          uk: "Як швидко видно результат від ботулінотерапії?",
+          ru: "Как быстро виден результат от ботулинотерапии?",
+          en: "How quickly are the results of botulinum therapy visible?",
+          de: "Wie schnell sind die Ergebnisse der Botulinum-Therapie sichtbar?"
+        },
+        answer: {
+          uk: "Перші зміни помітні вже через 2-3 дні, а максимальний ефект настає через 10-14 днів.",
+          ru: "Первые изменения заметны уже через 2-3 дня, а максимальный эффект наступает через 10-14 дней.",
+          en: "The first changes are noticeable within 2-3 days, with the maximum effect appearing in 10-14 days.",
+          de: "Die ersten Veränderungen sind bereits nach 2-3 Tagen sichtbar, der maximale Effekt tritt nach 10-14 Tagen ein."
+        }
+      },
   {
     id: "faq20",
-    serviceId: "service11",
+    subserviceId: "subservice24",
     question: {
-      uk: "Наскільки болючою є процедура лазерного шліфування?",
-      ru: "Насколько болезненна процедура лазерной шлифовки?",
-      en: "How painful is laser resurfacing?",
-      de: "Wie schmerzhaft ist das Laser-Resurfacing?"
+      uk: "Наскільки ефективне лікування гіпергідрозу ботоксом?",
+      ru: "Насколько эффективно лечение гипергидроза ботоксом?",
+      en: "How effective is hyperhidrosis treatment with Botox?",
+      de: "Wie wirksam ist die Hyperhidrose-Behandlung mit Botox?"
     },
     answer: {
-      uk: "Процедура проводиться під аплікаційною анестезією (знеболюючий крем), що робить її комфортною. Під час сеансу ви можете відчувати тепло та поколювання. Після процедури відчуття схожі на сонячний опік.",
-      ru: "Процедура проводится под аппликационной анестезией (обезболивающий крем), что делает её комфортной. Во время сеанса вы можете ощущать тепло и покалывание. После процедуры ощущения похожи на солнечный ожог.",
-      en: "The procedure is performed under topical anesthesia (numbing cream), which makes it comfortable. During the session, you may feel warmth and a tingling sensation. After the procedure, the sensations are similar to a sunburn.",
-      de: "Das Verfahren wird unter topischer Anästhesie (Betäubungscreme) durchgeführt, was es angenehm macht. Während der Sitzung können Sie Wärme und ein Kribbeln spüren. Nach dem Eingriff ähneln die Empfindungen einem Sonnenbrand."
+      uk: "Ботулінотерапія є одним із найефективніших методів лікування гіпергідрозу, що дозволяє позбутися надмірного потовиділення на 6-12 місяців.",
+      ru: "Ботулинотерапия является одним из самых эффективных методов лечения гипергидроза, что позволяет избавиться от избыточного потоотделения на 6-12 месяцев.",
+      en: "Botulinum therapy is one of the most effective methods for treating hyperhidrosis, allowing for relief from excessive sweating for 6-12 months.",
+      de: "Die Botulinum-Therapie ist eine der wirksamsten Methoden zur Behandlung von Hyperhidrose, die eine Linderung des übermäßigen Schwitzens für 6-12 Monate ermöglicht."
     }
   },
-  {
-    id: "faq21",
-    subserviceId: "subservice45", // Видалення розтяжок
-    question: {
-      uk: "Чи можна повністю прибрати розтяжки лазером?",
-      ru: "Можно ли полностью убрать растяжки лазером?",
-      en: "Can stretch marks be completely removed with a laser?",
-      de: "Können Dehnungsstreifen vollständig mit einem Laser entfernt werden?"
-    },
-    answer: {
-      uk: "Повністю видалити розтяжки неможливо, оскільки це атрофічний рубець. Однак курс процедур лазерного шліфування дозволяє зробити їх на 80-90% менш помітними, вирівнявши рельєф та колір шкіри.",
-      ru: "Полностью удалить растяжки невозможно, так как это атрофический рубец. Однако курс процедур лазерной шлифовки позволяет сделать их на 80-90% менее заметными, выровняв рельеф и цвет кожи.",
-      en: "It is impossible to completely remove stretch marks, as they are atrophic scars. However, a course of laser resurfacing procedures can make them 80-90% less noticeable by evening out the skin's texture and color.",
-      de: "Es ist unmöglich, Dehnungsstreifen vollständig zu entfernen, da es sich um atrophische Narben handelt. Ein Kurs von Laser-Resurfacing-Verfahren kann sie jedoch zu 80-90% weniger sichtbar machen, indem die Hauttextur und -farbe ausgeglichen werden."
-    }
-  },
-  // Service 12: Фракційне омолодження RESUR-FX
+
+      // Service 7: Trichologie
+      {
+        id: "faq21",
+        serviceId: "service7",
+        question: {
+          uk: "З якими проблемами волосся і шкіри голови можна звернутися до трихолога?",
+          ru: "С какими проблемами волос и кожи головы можно обратиться к трихологу?",
+          en: "What hair and scalp problems can a trichologist help with?",
+          de: "Bei welchen Haar- und Kopfhautproblemen kann ein Trichologe helfen?"
+        },
+        answer: {
+          uk: "Трихолог займається проблемами випадіння волосся (алопеція), себореї, лупи, пошкодженого волосся та іншими захворюваннями шкіри голови.",
+          ru: "Трихолог занимается проблемами выпадения волос (алопеция), себореи, перхоти, поврежденных волос и другими заболеваниями кожи головы.",
+          en: "A trichologist deals with hair loss (alopecia), seborrhea, dandruff, damaged hair, and other scalp diseases.",
+          de: "Ein Trichologe befasst sich mit Haarausfall (Alopezie), Seborrhoe, Schuppen, geschädigtem Haar und anderen Kopfhauterkrankungen."
+        }
+      },
   {
     id: "faq22",
-    serviceId: "service12",
+    subserviceId: "subservice27",
     question: {
-      uk: "Яка різниця між ResurFX та звичайним лазерним шліфуванням?",
-      ru: "Какая разница между ResurFX и обычной лазерной шлифовкой?",
-      en: "What is the difference between ResurFX and regular laser resurfacing?",
-      de: "Was ist der Unterschied zwischen ResurFX und normalem Laser-Resurfacing?"
+      uk: "Що таке трихоскопія?",
+      ru: "Что такое трихоскопия?",
+      en: "What is trichoscopy?",
+      de: "Was ist Trichoskopie?"
     },
     answer: {
-      uk: "ResurFX — це неаблятивний лазер. Він прогріває глибокі шари шкіри, не пошкоджуючи її поверхню. Це забезпечує ефективне омолодження з мінімальним періодом реабілітації (1-2 дні). Класичне (аблятивне) шліфування випаровує поверхню шкіри і вимагає більш тривалого відновлення.",
-      ru: "ResurFX — это неаблятивный лазер. Он прогревает глубокие слои кожи, не повреждая её поверхность. Это обеспечивает эффективное омоложение с минимальным периодом реабилитации (1-2 дня). Классическая (аблятивная) шлифовка испаряет поверхность кожи и требует более длительного восстановления.",
-      en: "ResurFX is a non-ablative laser. It heats the deep layers of the skin without damaging its surface. This provides effective rejuvenation with a minimal recovery period (1-2 days). Classic (ablative) resurfacing vaporizes the skin's surface and requires a longer recovery.",
-      de: "ResurFX ist ein nicht-ablativer Laser. Er erwärmt die tiefen Hautschichten, ohne die Oberfläche zu beschädigen. Dies sorgt für eine effektive Verjüngung mit einer minimalen Erholungszeit (1-2 Tage). Das klassische (ablative) Resurfacing verdampft die Hautoberfläche und erfordert eine längere Erholung."
+      uk: "Трихоскопія - це комп'ютерна діагностика стану волосся та шкіри голови за допомогою спеціальної камери-трихоскопа, що дозволяє точно встановити діагноз.",
+      ru: "Трихоскопия - это компьютерная диагностика состояния волос и кожи головы с помощью специальной камеры-трихоскопа, что позволяет точно установить диагноз.",
+      en: "Trichoscopy is a computer-aided diagnosis of the condition of the hair and scalp using a special trichoscope camera, which allows for an accurate diagnosis.",
+      de: "Die Trichoskopie ist eine computergestützte Diagnose des Zustands von Haaren und Kopfhaut mithilfe einer speziellen Trichoskop-Kamera, die eine genaue Diagnose ermöglicht."
     }
   },
-  // Service 13: Інтимна косметологія
   {
     id: "faq23",
-    serviceId: "service13",
+    subserviceId: "subservice29",
     question: {
-      uk: "Чи безпечні ін'єкційні процедури в інтимній зоні?",
-      ru: "Безопасны ли инъекционные процедуры в интимной зоне?",
-      en: "Are injection procedures in the intimate area safe?",
-      de: "Sind Injektionsverfahren im Intimbereich sicher?"
+      uk: "Який метод лікування алопеції найефективніший?",
+      ru: "Какой метод лечения алопеции самый эффективный?",
+      en: "What is the most effective method for treating alopecia?",
+      de: "Welche Methode zur Behandlung von Alopezie ist am effektivsten?"
     },
     answer: {
-      uk: "Так, абсолютно. Процедури проводяться лікарем-гінекологом або спеціально навченим косметологом з дотриманням усіх правил асептики та антисептики. Використовуються лише сертифіковані препарати, розроблені спеціально для цієї делікатної зони.",
-      ru: "Да, абсолютно. Процедуры проводятся врачом-гинекологом или специально обученным косметологом с соблюдением всех правил асептики и антисептики. Используются только сертифицированные препараты, разработанные специально для этой деликатной зоны.",
-      en: "Yes, absolutely. The procedures are performed by a gynecologist or a specially trained cosmetologist in compliance with all rules of asepsis and antisepsis. Only certified preparations specifically designed for this delicate area are used.",
-      de: "Ja, absolut. Die Verfahren werden von einem Gynäkologen oder einem speziell ausgebildeten Kosmetologen unter Einhaltung aller Asepsis- und Antisepsis-Regeln durchgeführt. Es werden nur zertifizierte Präparate verwendet, die speziell für diesen empfindlichen Bereich entwickelt wurden."
+      uk: "Одним з найефективніших методів є мезотерапія шкіри голови, оскільки вона доставляє поживні речовини безпосередньо до волосяних фолікулів.",
+      ru: "Одним из самых эффективных методов является мезотерапия кожи головы, так как она доставляет питательные вещества непосредственно к волосяным фолликулам.",
+      en: "One of the most effective methods is scalp mesotherapy, as it delivers nutrients directly to the hair follicles.",
+      de: "Eine der wirksamsten Methoden ist die Kopfhaut-Mesotherapie, da sie Nährstoffe direkt an die Haarfollikel liefert."
     }
   },
-  {
-    id: "faq24",
-    subserviceId: "subservice54", // Інтимна контурна пластика
-    question: {
-      uk: "Чи впливає збільшення точки G на чутливість?",
-      ru: "Влияет ли увеличение точки G на чувствительность?",
-      en: "Does G-spot augmentation affect sensitivity?",
-      de: "Beeinflusst die G-Punkt-Vergrößerung die Empfindlichkeit?"
-    },
-    answer: {
-      uk: "Так, це одна з головних цілей процедури. Введення філера робить цю зону більш доступною для стимуляції, що у багатьох жінок призводить до посилення сексуальних відчуттів та полегшення досягнення оргазму.",
-      ru: "Да, это одна из главных целей процедуры. Введение филлера делает эту зону более доступной для стимуляции, что у многих женщин приводит к усилению сексуальных ощущений и облегчению достижения оргазма.",
-      en: "Yes, that is one of the main goals of the procedure. The introduction of the filler makes this area more accessible for stimulation, which for many women leads to enhanced sexual sensations and easier achievement of orgasm.",
-      de: "Ja, das ist eines der Hauptziele des Verfahrens. Die Einführung des Füllstoffs macht diesen Bereich zugänglicher für die Stimulation, was bei vielen Frauen zu gesteigerten sexuellen Empfindungen und einem leichteren Erreichen des Orgasmus führt."
-    }
-  },
-  // Service 14: Плазмоліфтинг
+
+      {
+        id: "faq24",
+        serviceId: "service8",
+        question: {
+          uk: "Коли видно перший результат після мезотерапії?",
+          ru: "Когда виден первый результат после мезотерапии?",
+          en: "When are the first results visible after mesotherapy?",
+          de: "Wann sind die ersten Ergebnisse nach einer Mesotherapie sichtbar?"
+        },
+        answer: {
+          uk: "Перший результат, як правило, помітний після 2-3 сеансів, але для стійкого ефекту потрібен повний курс процедур.",
+          ru: "Первый результат, как правило, заметен после 2-3 сеансов, но для стойкого эффекта требуется полный курс процедур.",
+          en: "The first results are usually noticeable after 2-3 sessions, but a full course of procedures is needed for a lasting effect.",
+          de: "Die ersten Ergebnisse sind in der Regel nach 2-3 Sitzungen sichtbar, aber für einen dauerhaften Effekt ist eine vollständige Kur erforderlich."
+        }
+      },
+
   {
     id: "faq25",
-    serviceId: "service14",
+    subserviceId: "subservice34",
     question: {
-      uk: "Наскільки безпечний плазмоліфтинг?",
-      ru: "Насколько безопасен плазмолифтинг?",
-      en: "How safe is plasmolifting?",
-      de: "Wie sicher ist Plasmalifting?"
+      uk: "Мезотерапія дійсно допомагає від целюліту?",
+      ru: "Мезотерапия действительно помогает от целлюлита?",
+      en: "Does mesotherapy really help with cellulite?",
+      de: "Hilft Mesotherapie wirklich bei Cellulite?"
     },
     answer: {
-      uk: "Це одна з найбезпечніших ін'єкційних процедур, оскільки використовується ваша власна кров. Це на 100% виключає ризик алергічних реакцій, відторгнення чи інфікування.",
-      ru: "Это одна из самых безопасных инъекционных процедур, так как используется ваша собственная кровь. Это на 100% исключает риск аллергических реакций, отторжения или инфицирования.",
-      en: "It is one of the safest injection procedures, as it uses your own blood. This 100% eliminates the risk of allergic reactions, rejection, or infection.",
-      de: "Es ist eines der sichersten Injektionsverfahren, da Ihr eigenes Blut verwendet wird. Dies schließt das Risiko von allergischen Reaktionen, Abstoßung oder Infektionen zu 100% aus."
+      uk: "Так, мезотерапія ефективна для боротьби з целюлітом завдяки введенню спеціальних коктейлів, що покращують мікроциркуляцію і розщеплюють жирові відкладення.",
+      ru: "Да, мезотерапия эффективна для борьбы с целлюлитом благодаря введению специальных коктейлей, улучшающих микроциркуляцию и расщепляющих жировые отложения.",
+      en: "Yes, mesotherapy is effective in combating cellulite by introducing special cocktails that improve microcirculation and break down fat deposits.",
+      de: "Ja, Mesotherapie ist wirksam im Kampf gegen Cellulite, da spezielle Cocktails die Mikrozirkulation verbessern und Fettdepots abbauen."
     }
   },
-  // Service 15: Склеротерапія
-  {
-    id: "faq26",
-    serviceId: "service15",
-    question: {
-      uk: "Що буде, якщо не носити компресійний трикотаж після склеротерапії?",
-      ru: "Что будет, если не носить компрессионный трикотаж после склеротерапии?",
-      en: "What happens if I don't wear compression stockings after sclerotherapy?",
-      de: "Was passiert, wenn ich nach der Sklerotherapie keine Kompressionsstrümpfe trage?"
-    },
-    answer: {
-      uk: "Носіння компресійного трикотажу — це обов'язкова та найважливіша частина лікування. Без компресії стінки вени не зможуть надійно «склеїтися», і процедура буде неефективною. Вена може відновити свій просвіт.",
-      ru: "Ношение компрессионного трикотажа — это обязательная и важнейшая часть лечения. Без компрессии стенки вены не смогут надежно «склеиться», и процедура будет неэффективной. Вена может восстановить свой просвет.",
-      en: "Wearing compression hosiery is a mandatory and crucial part of the treatment. Without compression, the vein walls will not be able to reliably \"stick together,\" and the procedure will be ineffective. The vein may recanalize.",
-      de: "Das Tragen von Kompressionsstrümpfen ist ein obligatorischer und entscheidender Teil der Behandlung. Ohne Kompression können die Venenwände nicht zuverlässig „verkleben“, und das Verfahren ist unwirksam. Die Vene kann sich wieder öffnen."
-    }
-  },
+
+
+      // Service 9: Biorevitalisierung / Bioreparation
+      {
+        id: "faq26",
+        serviceId: "service9",
+        question: {
+          uk: "У чому різниця між біоревіталізацією та біорепарацією?",
+          ru: "В чем разница между биоревитализацией и биорепарацией?",
+          en: "What is the difference between biorevitalization and bioreparation?",
+          de: "Was ist der Unterschied zwischen Biorevitalisierung und Bioreparation?"
+        },
+        answer: {
+          uk: "Біоревіталізація зволожує шкіру гіалуроновою кислотою, тоді як біорепарація додатково живить її вітамінами та амінокислотами для більш комплексного омолодження.",
+          ru: "Биоревитализация увлажняет кожу гиалуроновой кислотой, тогда как биорепарация дополнительно питает ее витаминами и аминокислотами для более комплексного омоложения.",
+          en: "Biorevitalization moisturizes the skin with hyaluronic acid, while bioreparation additionally nourishes it with vitamins and amino acids for a more comprehensive rejuvenation.",
+          de: "Die Biorevitalisierung befeuchtet die Haut mit Hyaluronsäure, während die Bioreparation sie zusätzlich mit Vitaminen und Aminosäuren für eine umfassendere Verjüngung nährt."
+        }
+      },
   {
     id: "faq27",
-    subserviceId: "subservice61", // Склеротерапія судинних зірочок
+    subserviceId: "subservice35",
     question: {
-      uk: "Коли зникнуть вени після склеротерапії?",
-      ru: "Когда исчезнут вены после склеротерапии?",
-      en: "When will the veins disappear after sclerotherapy?",
-      de: "Wann werden die Venen nach der Sklerotherapie verschwinden?"
+      uk: "Чи можна робити біоревіталізацію влітку?",
+      ru: "Можно ли делать биоревитализацию летом?",
+      en: "Can biorevitalization be done in the summer?",
+      de: "Kann eine Biorevitalisierung im Sommer durchgeführt werden?"
     },
     answer: {
-      uk: "Дрібні капіляри стають невидимими майже одразу. Більші судини можуть тимчасово потемніти або виглядати як синець. Процес повного розсмоктування вени займає від 3-4 тижнів до кількох місяців, залежно від її діаметру.",
-      ru: "Мелкие капилляры становятся невидимыми почти сразу. Более крупные сосуды могут временно потемнеть или выглядеть как синяк. Процесс полного рассасывания вены занимает от 3-4 недель до нескольких месяцев, в зависимости от её диаметра.",
-      en: "Small capillaries become invisible almost immediately. Larger vessels may temporarily darken or look like a bruise. The process of complete absorption of the vein takes from 3-4 weeks to several months, depending on its diameter.",
-      de: "Kleine Kapillaren werden fast sofort unsichtbar. Größere Gefäße können vorübergehend dunkler werden oder wie ein blauer Fleck aussehen. Der Prozess der vollständigen Resorption der Vene dauert je nach Durchmesser 3-4 Wochen bis mehrere Monate."
+      uk: "Біоревіталізація є однією з небагатьох процедур, яку можна проводити влітку, оскільки вона зволожує та захищає шкіру від зневоднення, спричиненого сонцем.",
+      ru: "Биоревитализация является одной из немногих процедур, которую можно проводить летом, так как она увлажняет и защищает кожу от обезвоживания, вызванного солнцем.",
+      en: "Biorevitalization is one of the few procedures that can be performed in the summer, as it moisturizes and protects the skin from sun-induced dehydration.",
+      de: "Die Biorevitalisierung ist eine der wenigen Behandlungen, die im Sommer durchgeführt werden können, da sie die Haut mit Feuchtigkeit versorgt und vor sonnenbedingter Austrocknung schützt."
     }
   },
-  // Додаткові загальні питання
-  {
-    id: "faq28",
-    serviceId: "service4",
-    question: {
-      uk: "Чи є протипоказання до ін'єкційних процедур?",
-      ru: "Есть ли противопоказания к инъекционным процедурам?",
-      en: "Are there any contraindications to injection procedures?",
-      de: "Gibt es Kontraindikationen für Injektionsverfahren?"
-    },
-    answer: {
-      uk: "Так. Основними протипоказаннями є вагітність та лактація, онкологічні захворювання, аутоімунні хвороби в стадії загострення, порушення згортання крові та запальні процеси в зоні ін'єкцій. Перед будь-якою процедурою лікар проводить детальну консультацію.",
-      ru: "Да. Основными противопоказаниями являются беременность и лактация, онкологические заболевания, аутоиммунные болезни в стадии обострения, нарушения свертываемости крови и воспалительные процессы в зоне инъекций. Перед любой процедурой врач проводит подробную консультацию.",
-      en: "Yes. The main contraindications are pregnancy and lactation, oncological diseases, autoimmune diseases in the acute stage, blood clotting disorders, and inflammatory processes in the injection area. Before any procedure, the doctor conducts a detailed consultation.",
-      de: "Ja. Die Hauptkontraindikationen sind Schwangerschaft und Stillzeit, onkologische Erkrankungen, Autoimmunerkrankungen im akuten Stadium, Blutgerinnungsstörungen und entzündliche Prozesse im Injektionsbereich. Vor jedem Eingriff führt der Arzt eine ausführliche Beratung durch."
-    }
-  },
+
+
+      // Service 10: Laser-Haarentfernung
+      {
+        id: "faq28",
+        serviceId: "service10",
+        question: {
+          uk: "Чи ефективна лазерна епіляція для світлого волосся?",
+          ru: "Эффективна ли лазерная эпиляция для светлых волос?",
+          en: "Is laser hair removal effective for light-colored hair?",
+          de: "Ist die Laser-Haarentfernung bei hellem Haar wirksam?"
+        },
+        answer: {
+          uk: "Лазерна епіляція найбільш ефективна для темного волосся. Для світлого, сивого або рудого волосся вона менш ефективна через відсутність пігменту (меланіну).",
+          ru: "Лазерная эпиляция наиболее эффективна для темных волос. Для светлых, седых или рыжих волос она менее эффективна из-за отсутствия пигмента (меланина).",
+          en: "Laser hair removal is most effective for dark hair. For light, gray, or red hair, it is less effective due to the lack of pigment (melanin).",
+          de: "Die Laser-Haarentfernung ist bei dunklen Haaren am effektivsten. Bei hellen, grauen oder roten Haaren ist sie aufgrund des fehlenden Pigments (Melanin) weniger wirksam."
+        }
+      },
   {
     id: "faq29",
-    serviceId: "service10",
+    subserviceId: "subservice42",
     question: {
-      uk: "Чи можна робити лазерну епіляцію на засмаглій шкірі?",
-      ru: "Можно ли делать лазерную эпиляцию на загорелой коже?",
-      en: "Can laser hair removal be done on tanned skin?",
-      de: "Kann eine Laser-Haarentfernung auf gebräunter Haut durchgeführt werden?"
+      uk: "Чи можна робити лазерну епіляцію в зоні бікіні?",
+      ru: "Можно ли делать лазерную эпиляцию в зоне бикини?",
+      en: "Is it possible to do laser hair removal in the bikini area?",
+      de: "Kann man eine Laser-Haarentfernung im Bikinibereich durchführen lassen?"
     },
     answer: {
-      uk: "Ні, категорично не рекомендується. Лазер реагує на меланін, і на засмаглій шкірі є високий ризик отримання опіку. Необхідно утриматися від засмаги щонайменше 2 тижні до та після процедури.",
-      ru: "Нет, категорически не рекомендуется. Лазер реагирует на меланин, и на загорелой коже есть высокий риск получения ожога. Необходимо воздержаться от загара как минимум 2 недели до и после процедуры.",
-      en: "No, it is strictly not recommended. The laser reacts to melanin, and on tanned skin, there is a high risk of getting a burn. It is necessary to refrain from tanning for at least 2 weeks before and after the procedure.",
-      de: "Nein, es wird dringend davon abgeraten. Der Laser reagiert auf Melanin, und auf gebräunter Haut besteht ein hohes Risiko für Verbrennungen. Es ist notwendig, mindestens 2 Wochen vor und nach dem Eingriff auf Sonnenbaden zu verzichten."
+      uk: "Так, це одна з найпопулярніших зон для лазерної епіляції. Процедура безпечна і дає тривалий результат.",
+      ru: "Да, это одна из самых популярных зон для лазерной эпиляции. Процедура безопасна и дает длительный результат.",
+      en: "Yes, this is one of the most popular areas for laser hair removal. The procedure is safe and provides long-lasting results.",
+      de: "Ja, dies ist einer der beliebtesten Bereiche für die Laser-Haarentfernung. Der Eingriff ist sicher und führt zu langanhaltenden Ergebnissen."
     }
   },
-  {
-    id: "faq30",
-    serviceId: "service6",
-    question: {
-      uk: "З якого віку можна робити ін'єкції ботулотоксину?",
-      ru: "С какого возраста можно делать инъекции ботулотоксина?",
-      en: "From what age can botulinum toxin injections be done?",
-      de: "Ab welchem Alter können Botulinumtoxin-Injektionen durchgeführt werden?"
-    },
-    answer: {
-      uk: "Процедуру можна робити з 18 років за наявності показань. Часто ботулінотерапію починають робити в 25-30 років з профілактичною метою, щоб запобігти утворенню глибоких статичних зморшок.",
-      ru: "Процедуру можно делать с 18 лет при наличии показаний. Часто ботулинотерапию начинают делать в 25-30 лет с профилактической целью, чтобы предотвратить образование глубоких статических морщин.",
-      en: "The procedure can be done from the age of 18 if there are indications. Often, botulinum toxin therapy is started at the age of 25-30 for preventive purposes, to prevent the formation of deep static wrinkles.",
-      de: "Das Verfahren kann ab 18 Jahren bei entsprechenden Indikationen durchgeführt werden. Oft wird die Botulinumtoxin-Therapie im Alter von 25-30 Jahren zu präventiven Zwecken begonnen, um die Bildung tiefer statischer Falten zu verhindern."
-    }
-  },
+
+
+      // Service 11: Laserentfernung von Dehnungsstreifen & Narben
+      {
+        id: "faq30",
+        serviceId: "service11",
+        question: {
+          uk: "Скільки сеансів потрібно для видалення розтяжок?",
+          ru: "Сколько сеансов нужно для удаления растяжек?",
+          en: "How many sessions are needed to remove stretch marks?",
+          de: "Wie viele Sitzungen sind zur Entfernung von Dehnungsstreifen erforderlich?"
+        },
+        answer: {
+          uk: "Для досягнення помітного результату потрібно від 3 до 6 сеансів, залежно від віку та глибини розтяжок.",
+          ru: "Для достижения заметного результата требуется от 3 до 6 сеансов, в зависимости от возраста и глубины растяжек.",
+          en: "To achieve noticeable results, 3 to 6 sessions are needed, depending on the age and depth of the stretch marks.",
+          de: "Um sichtbare Ergebnisse zu erzielen, sind 3 bis 6 Sitzungen erforderlich, je nach Alter und Tiefe der Dehnungsstreifen."
+        }
+      },
   {
     id: "faq31",
-    subserviceId: "subservice47", // Омолодження обличчя ResurFX
+    subserviceId: "subservice43",
     question: {
-      uk: "Як швидко я побачу результат від омолодження ResurFX?",
-      ru: "Как быстро я увижу результат от омоложения ResurFX?",
-      en: "How quickly will I see results from ResurFX rejuvenation?",
-      de: "Wie schnell werde ich Ergebnisse von der ResurFX-Verjüngung sehen?"
+      uk: "Чи ефективне лазерне шліфування для лікування постакне?",
+      ru: "Эффективна ли лазерная шлифовка для лечения постакне?",
+      en: "Is laser resurfacing effective for post-acne treatment?",
+      de: "Ist die Laser-Hautstraffung zur Behandlung von Post-Akne wirksam?"
     },
     answer: {
-      uk: "Перші покращення текстури та тону шкіри помітні вже через 2-3 тижні після першої процедури. Оскільки ефект є накопичувальним і пов'язаний з виробленням нового колагену, фінальний результат оцінюється через 3-6 місяців після завершення курсу.",
-      ru: "Первые улучшения текстуры и тона кожи заметны уже через 2-3 недели после первой процедуры. Поскольку эффект накопительный и связан с выработкой нового коллагена, финальный результат оценивается через 3-6 месяцев после завершения курса.",
-      en: "The first improvements in skin texture and tone are noticeable 2-3 weeks after the first procedure. Since the effect is cumulative and related to the production of new collagen, the final result is assessed 3-6 months after the course is completed.",
-      de: "Die ersten Verbesserungen der Hauttextur und des Hauttons sind 2-3 Wochen nach der ersten Behandlung spürbar. Da die Wirkung kumulativ ist und mit der Produktion von neuem Kollagen zusammenhängt, wird das Endergebnis 3-6 Monate nach Abschluss des Kurses bewertet."
+      uk: "Так, лазерне шліфування - один з найкращих методів для вирівнювання рельєфу шкіри та видалення рубців постакне, оскільки воно стимулює вироблення колагену.",
+      ru: "Да, лазерная шлифовка - один из лучших методов для выравнивания рельефа кожи и удаления рубцов постакне, так как она стимулирует выработку коллагена.",
+      en: "Yes, laser resurfacing is one of the best methods for evening out skin texture and removing post-acne scars, as it stimulates collagen production.",
+      de: "Ja, die Laser-Hautstraffung ist eine der besten Methoden, um das Hautbild zu glätten und Post-Akne-Narben zu entfernen, da sie die Kollagenproduktion anregt."
     }
   },
-  {
-    id: "faq32",
-    subserviceId: "subservice33", // Мезотерапія шкіри голови
-    question: {
-      uk: "Наскільки болюча мезотерапія шкіри голови?",
-      ru: "Насколько болезненна мезотерапия кожи головы?",
-      en: "How painful is scalp mesotherapy?",
-      de: "Wie schmerzhaft ist die Mesotherapie der Kopfhaut?"
-    },
-    answer: {
-      uk: "Процедура може бути чутливою, але цілком терпимою. Використовуються дуже тонкі та короткі голки. Відчуття можна порівняти з легкими уколами. За бажанням можна нанести місцевий анестетик.",
-      ru: "Процедура может быть чувствительной, но вполне терпимой. Используются очень тонкие и короткие иглы. Ощущения можно сравнить с легкими уколами. По желанию можно нанести местный анестетик.",
-      en: "The procedure can be sensitive but is quite tolerable. Very thin and short needles are used. The sensations can be compared to light pricks. A local anesthetic can be applied if desired.",
-      de: "Das Verfahren kann empfindlich sein, ist aber durchaus erträglich. Es werden sehr dünne und kurze Nadeln verwendet. Die Empfindungen können mit leichten Stichen verglichen werden. Auf Wunsch kann ein lokales Anästhetikum aufgetragen werden."
-    }
-  },
+
+
+      // Service 12: Fraktionierte Verjüngung RESUR-FX
+      {
+        id: "faq32",
+        serviceId: "service12",
+        question: {
+          uk: "Як працює фракційне омолодження?",
+          ru: "Как работает фракционное омоложение?",
+          en: "How does fractional rejuvenation work?",
+          de: "Wie funktioniert die fraktionierte Verjüngung?"
+        },
+        answer: {
+          uk: "Лазерний промінь створює мікроскопічні зони впливу, що стимулює організм до природного оновлення шкіри, вироблення колагену та еластину.",
+          ru: "Лазерный луч создает микроскопические зоны воздействия, что стимулирует организм к естественному обновлению кожи, выработке коллагена и эластина.",
+          en: "The laser beam creates microscopic treatment zones, which stimulates the body's natural skin renewal, collagen, and elastin production.",
+          de: "Der Laserstrahl erzeugt mikroskopisch kleine Behandlungszonen, die den Körper zur natürlichen Hauterneuerung und zur Produktion von Kollagen und Elastin anregen."
+        }
+      },
   {
     id: "faq33",
-    subserviceId: "subservice57", // Плазмоліфтинг обличчя
+    subserviceId: "subservice47",
     question: {
-      uk: "Чи потрібна підготовка до плазмоліфтингу?",
-      ru: "Нужна ли подготовка к плазмолифтингу?",
-      en: "Is preparation required for plasmolifting?",
-      de: "Ist eine Vorbereitung für das Plasmalifting erforderlich?"
+      uk: "Коли видно результат від фракційного омолодження?",
+      ru: "Когда виден результат от фракционного омоложения?",
+      en: "When are the results of fractional rejuvenation visible?",
+      de: "Wann sind die Ergebnisse der fraktionierten Verjüngung sichtbar?"
     },
     answer: {
-      uk: "Так, для отримання якісної плазми за 2-3 дні до процедури рекомендується виключити з раціону жирну, смажену їжу та алкоголь, а також пити більше чистої води.",
-      ru: "Да, для получения качественной плазмы за 2-3 дня до процедуры рекомендуется исключить из рациона жирную, жареную пищу и алкоголь, а также пить больше чистой воды.",
-      en: "Yes, to obtain high-quality plasma, it is recommended to exclude fatty, fried foods, and alcohol from your diet 2-3 days before the procedure, and to drink more pure water.",
-      de: "Ja, um hochwertiges Plasma zu erhalten, wird empfohlen, 2-3 Tage vor dem Eingriff auf fettige, frittierte Speisen und Alkohol zu verzichten und mehr reines Wasser zu trinken."
+      uk: "Перші поліпшення помітні через тиждень, а максимальний ефект наростає протягом 1-3 місяців після процедури.",
+      ru: "Первые улучшения заметны через неделю, а максимальный эффект нарастает в течение 1-3 месяцев после процедуры.",
+      en: "The first improvements are noticeable after a week, and the maximum effect builds up over 1-3 months following the procedure.",
+      de: "Die ersten Verbesserungen sind nach einer Woche sichtbar, und der maximale Effekt baut sich innerhalb von 1-3 Monaten nach dem Eingriff auf."
     }
   },
   {
     id: "faq34",
-    serviceId: "service13",
+    subserviceId: "subservice49",
     question: {
-      uk: "Наскільки конфіденційними є процедури інтимної косметології?",
-      ru: "Насколько конфиденциальны процедуры интимной косметологии?",
-      en: "How confidential are intimate cosmetology procedures?",
-      de: "Wie vertraulich sind intimkosmetische Behandlungen?"
+      uk: "Чи можна застосовувати цю процедуру при активному акне?",
+      ru: "Можно ли применять эту процедуру при активном акне?",
+      en: "Can this procedure be used for active acne?",
+      de: "Kann dieses Verfahren bei aktiver Akne angewendet werden?"
     },
     answer: {
-      uk: "Ми гарантуємо 100% конфіденційність та делікатний підхід. Уся інформація про ваше здоров'я та процедури є лікарською таємницею.",
-      ru: "Мы гарантируем 100% конфиденциальность и деликатный подход. Вся информация о вашем здоровье и процедурах является врачебной тайной.",
-      en: "We guarantee 100% confidentiality and a delicate approach. All information about your health and procedures is protected by medical confidentiality.",
-      de: "Wir garantieren 100% Vertraulichkeit und einen sensiblen Umgang. Alle Informationen über Ihre Gesundheit und Behandlungen unterliegen der ärztlichen Schweigepflicht."
+      uk: "Ні, процедура не призначена для лікування активного запалення. Спочатку потрібно вилікувати активне акне, а потім приступати до роботи з постакне та рубцями.",
+      ru: "Нет, процедура не предназначена для лечения активного воспаления. Сначала нужно вылечить активное акне, а затем приступать к работе с постакне и рубцами.",
+      en: "No, the procedure is not designed to treat active inflammation. You must first treat the active acne before working on post-acne and scars.",
+      de: "Nein, das Verfahren ist nicht für die Behandlung aktiver Entzündungen vorgesehen. Zuerst muss die aktive Akne behandelt werden, bevor mit der Behandlung von Post-Akne und Narben begonnen wird."
     }
   },
-  {
-    id: "faq35",
-    subserviceId: "subservice62", // Склеротерапія варикозних вен
-    question: {
-      uk: "Чи може варикоз повернутися після склеротерапії?",
-      ru: "Может ли варикоз вернуться после склеротерапии?",
-      en: "Can varicose veins return after sclerotherapy?",
-      de: "Können Krampfadern nach der Sklerotherapie wieder auftreten?"
-    },
-    answer: {
-      uk: "Вени, які були оброблені склерозантом, зникають назавжди. Однак склеротерапія не усуває причину варикозної хвороби. При наявності схильності з часом можуть розширитися інші вени. Тому важливо дотримуватися рекомендацій флеболога.",
-      ru: "Вены, которые были обработаны склерозантом, исчезают навсегда. Однако склеротерапия не устраняет причину варикозной болезни. При наличии предрасположенности со временем могут расшириться другие вены. Поэтому важно соблюдать рекомендации флеболога.",
-      en: "Veins that have been treated with a sclerosant disappear forever. However, sclerotherapy does not eliminate the cause of varicose disease. If there is a predisposition, other veins may dilate over time. Therefore, it is important to follow the phlebologist's recommendations.",
-      de: "Venen, die mit einem Sklerosierungsmittel behandelt wurden, verschwinden für immer. Die Sklerotherapie beseitigt jedoch nicht die Ursache der Krampfadererkrankung. Bei einer Veranlagung können sich im Laufe der Zeit andere Venen erweitern. Daher ist es wichtig, die Empfehlungen des Phlebologen zu befolgen."
-    }
-  },
+
+      {
+        id: "faq35",
+        serviceId: "service13",
+        question: {
+          uk: "Які проблеми вирішує інтимна косметологія?",
+          ru: "Какие проблемы решает интимная косметология?",
+          en: "What problems does intimate cosmetology solve?",
+          de: "Welche Probleme löst die intime Kosmetik?"
+        },
+        answer: {
+          uk: "Інтимна косметологія допомагає вирішити проблеми втрати пружності, сухості, пігментації, вікових змін та естетичних недоліків інтимних зон.",
+          ru: "Интимная косметология помогает решить проблемы потери упругости, сухости, пигментации, возрастных изменений и эстетических недостатков интимных зон.",
+          en: "Intimate cosmetology helps solve problems of lost elasticity, dryness, pigmentation, age-related changes, and aesthetic imperfections in intimate areas.",
+          de: "Die intime Kosmetik hilft bei Problemen wie Elastizitätsverlust, Trockenheit, Pigmentierung, altersbedingten Veränderungen und ästhetischen Mängeln in den Intimbereichen."
+        }
+      },
   {
     id: "faq36",
-    serviceId: "service2",
+    subserviceId: "subservice51",
     question: {
-      uk: "Чи можна поєднувати декілька косметологічних процедур в один день?",
-      ru: "Можно ли сочетать несколько косметологических процедур в один день?",
-      en: "Can several cosmetology procedures be combined in one day?",
-      de: "Können mehrere kosmetische Behandlungen an einem Tag kombiniert werden?"
+      uk: "Чи безпечний інтимний пілінг?",
+      ru: "Безопасен ли интимный пилинг?",
+      en: "Is intimate peeling safe?",
+      de: "Ist ein intimes Peeling sicher?"
     },
     answer: {
-      uk: "Так, багато процедур чудово поєднуються. Наприклад, чистку обличчя можна поєднати з карбокситерапією. Ваш лікар-косметолог на консультації складе для вас оптимальний план.",
-      ru: "Да, многие процедуры прекрасно сочетаются. Например, чистку лица можно совместить с карбокситерапией. Ваш врач-косметолог на консультации составит для вас оптимальный план.",
-      en: "Yes, many procedures combine well. For example, a facial cleansing can be combined with carboxytherapy. Your cosmetologist will create an optimal plan for you during the consultation.",
-      de: "Ja, viele Behandlungen lassen sich gut kombinieren. Zum Beispiel kann eine Gesichtsreinigung mit einer Carboxytherapie kombiniert werden. Ihr Kosmetologe wird während der Beratung einen optimalen Plan für Sie erstellen."
+      uk: "Так, процедура абсолютно безпечна, якщо проводиться кваліфікованим фахівцем. Використовуються спеціальні, м'які склади, призначені саме для делікатних зон.",
+      ru: "Да, процедура абсолютно безопасна, если проводится квалифицированным специалистом. Используются специальные, мягкие составы, предназначенные именно для деликатных зон.",
+      en: "Yes, the procedure is completely safe when performed by a qualified specialist. Special, gentle formulas designed specifically for delicate areas are used.",
+      de: "Ja, das Verfahren ist absolut sicher, wenn es von einem qualifizierten Fachmann durchgeführt wird. Es werden spezielle, sanfte Formeln verwendet, die speziell für empfindliche Bereiche entwickelt wurden."
     }
   },
   {
     id: "faq37",
-    serviceId: "service11",
+    subserviceId: "subservice54",
     question: {
-      uk: "Коли краще починати лікування рубців?",
-      ru: "Когда лучше начинать лечение рубцов?",
-      en: "When is the best time to start scar treatment?",
-      de: "Wann ist die beste Zeit, um mit der Narbenbehandlung zu beginnen?"
+      uk: "Чи ефективна інтимна контурна пластика?",
+      ru: "Эффективна ли интимная контурная пластика?",
+      en: "Is intimate contouring effective?",
+      de: "Ist die intime Konturierung wirksam?"
     },
     answer: {
-      uk: "Чим «свіжіший» рубець, тим краще він піддається корекції. Лікування можна починати після повного загоєння рани, коли рубець ще рожевий. Однак сучасні лазери ефективно працюють і з застарілими, білими рубцями.",
-      ru: "Чем «свежее» рубец, тем лучше он поддается коррекции. Лечение можно начинать после полного заживления раны, когда рубец еще розовый. Однако современные лазеры эффективно работают и с застарелыми, белыми рубцами.",
-      en: "The \"fresher\" the scar, the better it responds to correction. Treatment can begin after the wound has completely healed, while the scar is still pink. However, modern lasers also work effectively on old, white scars.",
-      de: "Je „frischer“ die Narbe ist, desto besser spricht sie auf eine Korrektur an. Die Behandlung kann beginnen, nachdem die Wunde vollständig verheilt ist, während die Narbe noch rosa ist. Moderne Laser arbeiten jedoch auch bei alten, weißen Narben effektiv."
+      uk: "Так, контурна пластика дозволяє швидко та ефективно відновити об'єм, усунути асиметрію та підвищити чутливість, що значно покращує якість життя.",
+      ru: "Да, контурная пластика позволяет быстро и эффективно восстановить объем, устранить асимметрию и повысить чувствительность, что значительно улучшает качество жизни.",
+      en: "Yes, contouring allows for a fast and effective restoration of volume, elimination of asymmetry, and enhancement of sensitivity, which significantly improves quality of life.",
+      de: "Ja, die Konturplastik ermöglicht eine schnelle und effektive Wiederherstellung des Volumens, die Beseitigung von Asymmetrien und die Steigerung der Empfindlichkeit, was die Lebensqualität erheblich verbessert."
     }
   },
-  {
-    id: "faq38",
-    serviceId: "service10",
-    question: {
-      uk: "Чому перед лазерною епіляцією потрібно голити волосся, а не виривати?",
-      ru: "Почему перед лазерной эпиляцией нужно брить волосы, а не вырывать?",
-      en: "Why do you need to shave hair before laser hair removal, not pluck it?",
-      de: "Warum müssen Sie die Haare vor der Laser-Haarentfernung rasieren und nicht zupfen?"
-    },
-    answer: {
-      uk: "Мішенню для лазера є пігмент у волосяному фолікулі (корені). Якщо ви вириваєте волосся з коренем (воском, епілятором), лазеру не буде на що подіяти. Гоління залишає корінь неушкодженим, що забезпечує ефективність процедури.",
-      ru: "Мишенью для лазера является пигмент в волосяном фолликуле (корне). Если вы вырываете волос с корнем (воском, эпилятором), лазеру не на что будет подействовать. Бритье оставляет корень нетронутым, что обеспечивает эффективность процедуры.",
-      en: "The target for the laser is the pigment in the hair follicle (root). If you pluck the hair out by the root (with wax, an epilator), the laser will have nothing to act on. Shaving leaves the root intact, which ensures the effectiveness of the procedure.",
-      de: "Das Ziel für den Laser ist das Pigment im Haarfollikel (Wurzel). Wenn Sie das Haar an der Wurzel auszupfen (mit Wachs, einem Epilierer), hat der Laser nichts, worauf er einwirken kann. Das Rasieren lässt die Wurzel intakt, was die Wirksamkeit des Verfahrens gewährleistet."
-    }
-  },
+
+
+
+      // Service 14: Plasmalifting (PRP-Therapie)
+      {
+        id: "faq38",
+        serviceId: "service14",
+        question: {
+          uk: "Чи безпечний плазмоліфтинг?",
+          ru: "Безопасен ли плазмолифтинг?",
+          en: "Is plasmolifting safe?",
+          de: "Ist Plasmolifting sicher?"
+        },
+        answer: {
+          uk: "Так, це абсолютно безпечна процедура, оскільки використовується власна плазма пацієнта, що виключає ризик алергічної реакції.",
+          ru: "Да, это абсолютно безопасная процедура, так как используется собственная плазма пациента, что исключает риск аллергической реакции.",
+          en: "Yes, this is a completely safe procedure, as the patient's own plasma is used, which eliminates the risk of an allergic reaction.",
+          de: "Ja, dies ist ein absolut sicheres Verfahren, da das eigene Plasma des Patienten verwendet wird, was das Risiko einer allergischen Reaktion ausschließt."
+        }
+      },
   {
     id: "faq39",
-    serviceId: "service4",
+    subserviceId: "subservice58",
     question: {
-      uk: "Що буде з філерами через рік?",
-      ru: "Что будет с филлерами через год?",
-      en: "What will happen to the fillers in a year?",
-      de: "Was passiert mit den Fillern in einem Jahr?"
+      uk: "Як часто потрібно робити плазмоліфтинг шкіри голови?",
+      ru: "Как часто нужно делать плазмолифтинг кожи головы?",
+      en: "How often should I do scalp plasmolifting?",
+      de: "Wie oft sollte ich ein Kopfhaut-Plasmolifting durchführen lassen?"
     },
     answer: {
-      uk: "Філери на основі гіалуронової кислоти є біодеградуючими. Це означає, що вони поступово розсмоктуються і природним шляхом виводяться з організму. Шкіра повертається до свого початкового стану, часто навіть у трохи кращому стані завдяки стимуляції колагену.",
-      ru: "Филлеры на основе гиалуроновой кислоты являются биодеградируемыми. Это означает, что они постепенно рассасываются и естественным путем выводятся из организма. Кожа возвращается в свое первоначальное состояние, часто даже в немного лучшем состоянии благодаря стимуляции коллагена.",
-      en: "Hyaluronic acid-based fillers are biodegradable. This means they gradually dissolve and are naturally eliminated from the body. The skin returns to its original state, often even in a slightly better condition due to collagen stimulation.",
-      de: "Füllstoffe auf Hyaluronsäurebasis sind biologisch abbaubar. Das bedeutet, dass sie sich allmählich auflösen und auf natürliche Weise aus dem Körper ausgeschieden werden. Die Haut kehrt in ihren ursprünglichen Zustand zurück, oft sogar in einem etwas besseren Zustand aufgrund der Kollagenstimulation."
+      uk: "Для досягнення максимального ефекту зазвичай рекомендується курс з 3-5 процедур з інтервалом в 2-4 тижні.",
+      ru: "Для достижения максимального эффекта обычно рекомендуется курс из 3-5 процедур с интервалом в 2-4 недели.",
+      en: "To achieve the maximum effect, a course of 3-5 procedures with an interval of 2-4 weeks is usually recommended.",
+      de: "Um den maximalen Effekt zu erzielen, wird in der Regel eine Kur von 3-5 Behandlungen im Abstand von 2-4 Wochen empfohlen."
     }
   },
   {
     id: "faq40",
-    serviceId: "service9",
+    subserviceId: "subservice57",
     question: {
-      uk: "Чим біорепарація краща за біоревіталізацію?",
-      ru: "Чем биорепарация лучше биоревитализации?",
-      en: "How is bioreparation better than biorevitalization?",
-      de: "Wie ist die Bioreparation besser als die Biorevitalisierung?"
+      uk: "Як плазмоліфтинг впливає на шкіру обличчя?",
+      ru: "Как плазмолифтинг влияет на кожу лица?",
+      en: "How does plasmolifting affect facial skin?",
+      de: "Wie wirkt sich Plasmolifting auf die Gesichtshaut aus?"
     },
     answer: {
-      uk: "Біорепарація — це більш комплексний підхід. Окрім гіалуронової кислоти для зволоження, препарати містять вітаміни, пептиди та амінокислоти, які додатково живлять шкіру, борються з вільними радикалами та надають більш виражений омолоджуючий ефект. Це кращий вибір для шкіри з ознаками старіння.",
-      ru: "Биорепарация — это более комплексный подход. Кроме гиалуроновой кислоты для увлажнения, препараты содержат витамины, пептиды и аминокислоты, которые дополнительно питают кожу, борются со свободными радикалами и оказывают более выраженный омолаживающий эффект. Это лучший выбор для кожи с признаками старения.",
-      en: "Bioreparation is a more comprehensive approach. In addition to hyaluronic acid for hydration, the preparations contain vitamins, peptides, and amino acids that additionally nourish the skin, fight free radicals, and provide a more pronounced anti-aging effect. It is a better choice for skin with signs of aging.",
-      de: "Die Bioreparation ist ein umfassenderer Ansatz. Neben Hyaluronsäure zur Hydratation enthalten die Präparate Vitamine, Peptide und Aminosäuren, die die Haut zusätzlich nähren, freie Radikale bekämpfen und eine ausgeprägtere Anti-Aging-Wirkung haben. Es ist eine bessere Wahl für Haut mit Anzeichen von Alterung."
+      uk: "Процедура стимулює процеси регенерації, покращує колір обличчя, підвищує пружність шкіри, зменшує зморшки та прискорює загоєння.",
+      ru: "Процедура стимулирует процессы регенерации, улучшает цвет лица, повышает упругость кожи, уменьшает морщины и ускоряет заживление.",
+      en: "The procedure stimulates regeneration processes, improves complexion, increases skin firmness, reduces wrinkles, and accelerates healing.",
+      de: "Das Verfahren stimuliert Regenerationsprozesse, verbessert den Teint, erhöht die Hautfestigkeit, reduziert Falten und beschleunigt die Heilung."
     }
-  }
+  },
+
+
+
+      // Service 15: Sklerotherapie
+      {
+        id: "faq41",
+        serviceId: "service15",
+        question: {
+          uk: "Чи потрібне носіння компресійної білизни після склеротерапії?",
+          ru: "Нужно ли носить компрессионное белье после склеротерапии?",
+          en: "Is it necessary to wear compression garments after sclerotherapy?",
+          de: "Ist es notwendig, nach einer Sklerotherapie Kompressionsstrümpfe zu tragen?"
+        },
+        answer: {
+          uk: "Так, носіння компресійної білизни є обов'язковим для досягнення найкращого результату та запобігання ускладнень. Лікар надасть індивідуальні рекомендації.",
+          ru: "Да, ношение компрессионного белья является обязательным для достижения наилучшего результата и предотвращения осложнений. Врач предоставит индивидуальные рекомендации.",
+          en: "Yes, wearing compression garments is mandatory to achieve the best results and prevent complications. Your doctor will provide individual recommendations.",
+          de: "Ja, das Tragen von Kompressionsstrümpfen ist obligatorisch, um die besten Ergebnisse zu erzielen und Komplikationen vorzubeugen. Ihr Arzt wird individuelle Empfehlungen geben."
+        }
+      },
+  {
+    id: "faq42",
+    serviceId: "service15",
+    question: {
+      uk: "Які відчуття під час склеротерапії?",
+      ru: "Какие ощущения во время склеротерапии?",
+      en: "What does sclerotherapy feel like?",
+      de: "Wie fühlt sich die Sklerotherapie an?"
+    },
+    answer: {
+      uk: "Під час процедури можливе легке печіння або поколювання в місці уколу, але це швидко проходить. Загалом процедура вважається малоболісною.",
+      ru: "Во время процедуры возможно легкое жжение или покалывание в месте укола, но это быстро проходит. В целом, процедура считается малоболезненной.",
+      en: "During the procedure, you may feel a slight burning or tingling sensation at the injection site, but this quickly subsides. Overall, the procedure is considered to be minimally painful.",
+      de: "Während des Eingriffs ist ein leichtes Brennen oder Kribbeln an der Einstichstelle möglich, das jedoch schnell wieder verschwindet. Insgesamt gilt die Behandlung als wenig schmerzhaft."
+    }
+  },
+  {
+    id: "faq43",
+    subserviceId: "subservice61",
+    question: {
+      uk: "Чи є які-небудь обмеження після склеротерапії?",
+      ru: "Есть ли какие-либо ограничения после склеротерапии?",
+      en: "Are there any restrictions after sclerotherapy?",
+      de: "Gibt es Einschränkungen nach einer Sklerotherapie?"
+    },
+    answer: {
+      uk: "Так, рекомендується уникати інтенсивних фізичних навантажень, гарячих ванн, саун і сонячних ванн протягом певного часу, щоб забезпечити найкращий результат.",
+      ru: "Да, рекомендуется избегать интенсивных физических нагрузок, горячих ванн, саун и солнечных ванн в течение определенного времени, чтобы обеспечить наилучший результат.",
+      en: "Yes, it is recommended to avoid intense physical activity, hot baths, saunas, and sun exposure for a certain period to ensure the best results.",
+      de: "Ja, es wird empfohlen, intensive körperliche Anstrengung, heiße Bäder, Saunen und Sonnenbäder für eine bestimmte Zeit zu vermeiden, um die besten Ergebnisse zu erzielen."
+    }
+  },
+
+  {
+    id: "faq44",
+    subserviceId: "subservice5",
+    question: {
+      uk: "Чи можна видаляти кондиломи в зоні бікіні?",
+      ru: "Можно ли удалять кондиломы в зоне бикини?",
+      en: "Can condylomas be removed from the bikini area?",
+      de: "Können Kondylome im Bikinibereich entfernt werden?"
+    },
+    answer: {
+      uk: "Так, видалення кондилом у зоні бікіні можливе. Процедура проводиться швидко та з дотриманням усіх правил асептики, щоб мінімізувати дискомфорт.",
+      ru: "Да, удаление кондилом в зоне бикини возможно. Процедура проводится быстро и с соблюдением всех правил асептики, чтобы минимизировать дискомфорт.",
+      en: "Yes, condyloma removal in the bikini area is possible. The procedure is performed quickly and with all aseptic precautions to minimize discomfort.",
+      de: "Ja, die Entfernung von Kondylomen im Bikinibereich ist möglich. Der Eingriff wird schnell und unter Einhaltung aller aseptischen Regeln durchgeführt, um Unannehmlichkeiten zu minimieren."
+    }
+  },
+  {
+    id: "faq45",
+    subserviceId: "subservice5",
+    question: {
+      uk: "Чи потрібно повторювати процедуру видалення кондилом?",
+      ru: "Нужно ли повторять процедуру удаления кондилом?",
+      en: "Is it necessary to repeat the condyloma removal procedure?",
+      de: "Muss der Eingriff zur Entfernung von Kondylomen wiederholt werden?"
+    },
+    answer: {
+      uk: "Існує ризик повторної появи, тому лікар може порекомендувати додатковий огляд та, за необхідності, повторну процедуру.",
+      ru: "Существует риск повторного появления, поэтому врач может порекомендовать дополнительный осмотр и, при необходимости, повторную процедуру.",
+      en: "There is a risk of recurrence, so the doctor may recommend a follow-up examination and, if necessary, a repeat procedure.",
+      de: "Es besteht ein Risiko für ein erneutes Auftreten, daher kann der Arzt eine Nachuntersuchung und bei Bedarf einen weiteren Eingriff empfehlen."
+    }
+  },
+
+      // FAQ для subservice8: Карбокситерапія обличчя
+      {
+        id: "faq46",
+        subserviceId: "subservice8",
+        question: {
+          uk: "Чи є якісь протипоказання для карбокситерапії?",
+          ru: "Есть ли какие-то противопоказания для карбокситерапии?",
+          en: "Are there any contraindications for carboxytherapy?",
+          de: "Gibt es Kontraindikationen für die Carboxytherapie?"
+        },
+        answer: {
+          uk: "Процедура має мінімум протипоказань, але не рекомендується при вагітності, гострих запальних процесах, серцевій недостатності та інфекційних захворюваннях.",
+          ru: "Процедура имеет минимум противопоказаний, но не рекомендуется при беременности, острых воспалительных процессах, сердечной недостаточности и инфекционных заболеваниях.",
+          en: "The procedure has minimal contraindications but is not recommended during pregnancy, acute inflammatory processes, heart failure, and infectious diseases.",
+          de: "Das Verfahren hat nur minimale Kontraindikationen, wird aber nicht bei Schwangerschaft, akuten Entzündungsprozessen, Herzinsuffizienz und Infektionskrankheiten empfohlen."
+        }
+      },
+  {
+    id: "faq47",
+    subserviceId: "subservice8",
+    question: {
+      uk: "Коли видно результат від карбокситерапії?",
+      ru: "Когда виден результат от карбокситерапии?",
+      en: "When are the results of carboxytherapy visible?",
+      de: "Wann sind die Ergebnisse der Carboxytherapie sichtbar?"
+    },
+    answer: {
+      uk: "Результат можна побачити вже після першого сеансу, але для стійкого ефекту рекомендується пройти повний курс.",
+      ru: "Результат можно увидеть уже после первого сеанса, но для стойкого эффекта рекомендуется пройти полный курс.",
+      en: "Results can be seen after the first session, but a full course is recommended for a lasting effect.",
+      de: "Ergebnisse sind bereits nach der ersten Sitzung sichtbar, für einen dauerhaften Effekt wird jedoch eine vollständige Kur empfohlen."
+    }
+  },
+
+
+      // FAQ для subservice9: Доглядові процедури для тіла
+      {
+        id: "faq48",
+        subserviceId: "subservice9",
+        question: {
+          uk: "Для чого потрібні обгортання?",
+          ru: "Для чего нужны обертывания?",
+          en: "What is the purpose of body wraps?",
+          de: "Wozu dienen Körperwickel?"
+        },
+        answer: {
+          uk: "Обгортання допомагають зволожити шкіру, боротися з целюлітом, виводити токсини та покращувати загальний тонус тіла.",
+          ru: "Обертывания помогают увлажнить кожу, бороться с целлюлитом, выводить токсины и улучшать общий тонус тела.",
+          en: "Body wraps help moisturize the skin, fight cellulite, detoxify the body, and improve overall body tone.",
+          de: "Körperwickel helfen, die Haut mit Feuchtigkeit zu versorgen, Cellulite zu bekämpfen, Giftstoffe auszuscheiden und den allgemeinen Körpertonus zu verbessern."
+        }
+      },
+
+
+      // FAQ для subservice10: Ліфтинг-термопроцедури (RF-ліфтинг)
+      {
+        id: "faq49",
+        subserviceId: "subservice10",
+        question: {
+          uk: "Як RF-ліфтинг омолоджує шкіру?",
+          ru: "Как RF-лифтинг омолаживает кожу?",
+          en: "How does RF lifting rejuvenate the skin?",
+          de: "Wie verjüngt RF-Lifting die Haut?"
+        },
+        answer: {
+          uk: "RF-ліфтинг використовує радіочастотну енергію для прогріву глибоких шарів шкіри, стимулюючи вироблення нового колагену. Це призводить до підтяжки шкіри та зменшення зморшок.",
+          ru: "RF-лифтинг использует радиочастотную энергию для прогрева глубоких слоев кожи, стимулируя выработку нового коллагена. Это приводит к подтяжке кожи и уменьшению морщин.",
+          en: "RF lifting uses radiofrequency energy to heat deep layers of the skin, stimulating the production of new collagen. This leads to skin tightening and wrinkle reduction.",
+          de: "RF-Lifting verwendet Radiofrequenzenergie, um die tiefen Hautschichten zu erwärmen und die Produktion von neuem Kollagen zu stimulieren. Dies führt zu einer Straffung der Haut und einer Reduzierung von Falten."
+        }
+      },
+  {
+    id: "faq50",
+    subserviceId: "subservice10",
+    question: {
+      uk: "Скільки сеансів RF-ліфтингу потрібно?",
+      ru: "Сколько сеансов RF-лифтинга нужно?",
+      en: "How many RF lifting sessions are needed?",
+      de: "Wie viele RF-Lifting-Sitzungen sind erforderlich?"
+    },
+    answer: {
+      uk: "Зазвичай для досягнення стійкого результату потрібен курс від 4 до 8 процедур з інтервалом в 1-2 тижні.",
+      ru: "Обычно для достижения стойкого результата требуется курс от 4 до 8 процедур с интервалом в 1-2 недели.",
+      en: "A course of 4 to 8 sessions with an interval of 1-2 weeks is usually required to achieve a lasting result.",
+      de: "Normalerweise ist für ein dauerhaftes Ergebnis eine Kur von 4 bis 8 Sitzungen im Abstand von 1-2 Wochen erforderlich."
+    }
+  },
+
+
+      // FAQ для subservice12: Лімфодренажний масаж
+      {
+        id: "faq51",
+        subserviceId: "subservice12",
+        question: {
+          uk: "Кому показаний лімфодренажний масаж?",
+          ru: "Кому показан лимфодренажный массаж?",
+          en: "Who is a lymphatic drainage massage recommended for?",
+          de: "Wem wird eine Lymphdrainage-Massage empfohlen?"
+        },
+        answer: {
+          uk: "Лімфодренажний масаж особливо корисний при набряках, після хірургічних втручань, при целюліті, а також для детоксикації організму та покращення загального самопочуття.",
+          ru: "Лимфодренажный массаж особенно полезен при отеках, после хирургических вмешательств, при целлюлите, а также для детоксикации организма и улучшения общего самочувствия.",
+          en: "Lymphatic drainage massage is especially beneficial for swelling, after surgery, for cellulite, and also for detoxifying the body and improving general well-being.",
+          de: "Eine Lymphdrainage-Massage ist besonders hilfreich bei Schwellungen, nach chirurgischen Eingriffen, bei Cellulite sowie zur Entgiftung des Körpers und zur Verbesserung des allgemeinen Wohlbefindens."
+        }
+      },
+
+
+      // FAQ для subservice14: Релакс-масаж
+      {
+        id: "faq52",
+        subserviceId: "subservice14",
+        question: {
+          uk: "Який ефект дає релакс-масаж?",
+          ru: "Какой эффект дает релакс-массаж?",
+          en: "What is the effect of a relaxation massage?",
+          de: "Welche Wirkung hat eine Entspannungsmassage?"
+        },
+        answer: {
+          uk: "Релакс-масаж допомагає зняти стрес, зменшити м'язову напругу, покращити настрій та якість сну.",
+          ru: "Релакс-массаж помогает снять стресс, уменьшить мышечное напряжение, улучшить настроение и качество сна.",
+          en: "A relaxation massage helps relieve stress, reduce muscle tension, improve mood, and enhance sleep quality.",
+          de: "Eine Entspannungsmassage hilft, Stress abzubauen, Muskelverspannungen zu reduzieren, die Stimmung zu verbessern und die Schlafqualität zu steigern."
+        }
+      },
+
+
+      // FAQ для subservice16: Контурна корекція вилиць
+      {
+        id: "faq53",
+        subserviceId: "subservice16",
+        question: {
+          uk: "Кому підходить контурна корекція вилиць?",
+          ru: "Кому подходит контурная коррекция скул?",
+          en: "Who is cheekbone contouring suitable for?",
+          de: "Für wen ist eine Wangenknochen-Konturierung geeignet?"
+        },
+        answer: {
+          uk: "Процедура ідеально підходить для тих, хто хоче надати обличчю більш виразні риси, відновити втрачений об'єм або скоригувати асиметрію.",
+          ru: "Процедура идеально подходит для тех, кто хочет придать лицу более выразительные черты, восстановить утраченный объем или скорректировать асимметрию.",
+          en: "The procedure is ideal for those who want to give their face more defined features, restore lost volume, or correct asymmetry.",
+          de: "Das Verfahren ist ideal für alle, die dem Gesicht ausdrucksvollere Züge verleihen, verlorenes Volumen wiederherstellen oder Asymmetrien korrigieren möchten."
+        }
+      },
+  {
+    id: "faq54",
+    subserviceId: "subservice16",
+    question: {
+      uk: "Чи боляче робити корекцію вилиць?",
+      ru: "Больно ли делать коррекцию скул?",
+      en: "Is cheekbone correction painful?",
+      de: "Ist die Korrektur der Wangenknochen schmerzhaft?"
+    },
+    answer: {
+      uk: "Процедура проводиться з використанням місцевої анестезії, що робить її практично безболісною. Можливий невеликий дискомфорт під час ін'єкцій.",
+      ru: "Процедура проводится с использованием местной анестезии, что делает ее практически безболезненной. Возможен небольшой дискомфорт во время инъекций.",
+      en: "The procedure is performed with local anesthesia, making it virtually painless. There may be minor discomfort during the injections.",
+      de: "Der Eingriff wird unter örtlicher Betäubung durchgeführt, wodurch er nahezu schmerzfrei ist. Während der Injektionen kann es zu leichten Beschwerden kommen."
+    }
+  },
+
+
+      // FAQ для subservice17: Моделювання підборіддя
+      {
+        id: "faq55",
+        subserviceId: "subservice17",
+        question: {
+          uk: "Як довго тримається ефект від моделювання підборіддя?",
+          ru: "Как долго держится эффект от моделирования подбородка?",
+          en: "How long does the effect of chin modeling last?",
+          de: "Wie lange hält der Effekt der Kinnmodellierung an?"
+        },
+        answer: {
+          uk: "Ефект від моделювання підборіддя філером триває від 1 до 2 років, залежно від типу препарату і метаболізму пацієнта.",
+          ru: "Эффект от моделирования подбородка филлером длится от 1 до 2 лет, в зависимости от типа препарата и метаболизма пациента.",
+          en: "The effect of chin modeling with a filler lasts from 1 to 2 years, depending on the type of product and the patient's metabolism.",
+          de: "Die Wirkung der Kinnmodellierung mit einem Füllstoff hält je nach Art des Präparats und dem Stoffwechsel des Patienten 1 bis 2 Jahre an."
+        }
+      },
+
+
+      // FAQ для subservice18: Корекція носогубних складок
+      {
+        id: "faq56",
+        subserviceId: "subservice18",
+        question: {
+          uk: "Чи можуть носогубні складки з'явитися знову після корекції?",
+          ru: "Могут ли носогубные складки появиться снова после коррекции?",
+          en: "Can nasolabial folds reappear after correction?",
+          de: "Können Nasolabialfalten nach der Korrektur wieder auftreten?"
+        },
+        answer: {
+          uk: "Ефект від корекції тимчасовий, оскільки гіалуронова кислота поступово розсмоктується. Для підтримання результату процедуру потрібно повторювати.",
+          ru: "Эффект от коррекции временный, так как гиалуроновая кислота постепенно рассасывается. Для поддержания результата процедуру нужно повторять.",
+          en: "The effect of the correction is temporary, as hyaluronic acid is gradually absorbed. The procedure needs to be repeated to maintain the results.",
+          de: "Die Wirkung der Korrektur ist vorübergehend, da sich Hyaluronsäure allmählich auflöst. Um das Ergebnis aufrechtzuerhalten, muss das Verfahren wiederholt werden."
+        }
+      },
+
+
+      // FAQ для subservice19: Лікування судинних зірочок (куперозу)
+      {
+        id: "faq57",
+        subserviceId: "subservice19",
+        question: {
+          uk: "Як IPL-терапія допомагає при куперозі?",
+          ru: "Как IPL-терапия помогает при куперозе?",
+          en: "How does IPL therapy help with couperose?",
+          de: "Wie hilft die IPL-Therapie bei Couperose?"
+        },
+        answer: {
+          uk: "IPL-промінь селективно поглинається гемоглобіном у розширених судинах. Енергія перетворюється на тепло, що викликає коагуляцію судини, і вона з часом стає менш помітною або зникає.",
+          ru: "IPL-луч селективно поглощается гемоглобином в расширенных сосудах. Энергия преобразуется в тепло, что вызывает коагуляцию сосуда, и он со временем становится менее заметным или исчезает.",
+          en: "The IPL beam is selectively absorbed by the hemoglobin in dilated blood vessels. The energy is converted into heat, which causes the vessel to coagulate, making it less visible or disappear over time.",
+          de: "Der IPL-Strahl wird selektiv vom Hämoglobin in den erweiterten Blutgefäßen absorbiert. Die Energie wird in Wärme umgewandelt, was eine Koagulation des Gefäßes verursacht, das im Laufe der Zeit weniger sichtbar wird oder verschwindet."
+        }
+      },
+  {
+    id: "faq58",
+    subserviceId: "subservice19",
+    question: {
+      uk: "Скільки сеансів потрібно для лікування куперозу?",
+      ru: "Сколько сеансов нужно для лечения купероза?",
+      en: "How many sessions are needed for couperose treatment?",
+      de: "Wie viele Sitzungen sind für die Couperose-Behandlung erforderlich?"
+    },
+    answer: {
+      uk: "Кількість процедур залежить від площі ураження та інтенсивності куперозу, зазвичай це 2-4 сеанси з інтервалом у 3-4 тижні.",
+      ru: "Количество процедур зависит от площади поражения и интенсивности купероза, обычно это 2-4 сеанса с интервалом в 3-4 недели.",
+      en: "The number of procedures depends on the affected area and the intensity of the couperose, usually 2-4 sessions with an interval of 3-4 weeks.",
+      de: "Die Anzahl der Behandlungen hängt von der Größe des betroffenen Bereichs und der Intensität der Couperose ab, in der Regel sind 2-4 Sitzungen im Abstand von 3-4 Wochen erforderlich."
+    }
+  },
+
+      // FAQ для subservice22: Омолодження шкіри IPL (Фотоомолодження)
+      {
+        id: "faq59",
+        subserviceId: "subservice22",
+        question: {
+          uk: "Який ефект від фотоомолодження IPL?",
+          ru: "Какой эффект от фотоомоложения IPL?",
+          en: "What is the effect of IPL photorejuvenation?",
+          de: "Welche Wirkung hat die IPL-Photorejuvenation?"
+        },
+        answer: {
+          uk: "Фотоомолодження IPL допомагає усунути пігментні плями, звузити пори, зменшити дрібні зморшки та вирівняти тон шкіри, надаючи їй здоровий вигляд.",
+          ru: "Фотоомоложение IPL помогает устранить пигментные пятна, сузить поры, уменьшить мелкие морщины и выровнять тон кожи, придавая ей здоровый вид.",
+          en: "IPL photorejuvenation helps to eliminate pigmented spots, reduce pore size, minimize fine wrinkles, and even out skin tone, giving it a healthy appearance.",
+          de: "Die IPL-Photorejuvenation hilft, Pigmentflecken zu beseitigen, Poren zu verfeinern, feine Falten zu reduzieren und den Hautton auszugleichen, was zu einem gesunden Aussehen führt."
+        }
+      },
+  {
+    id: "faq60",
+    subserviceId: "subservice22",
+    question: {
+      uk: "Чи можна робити фотоомолодження влітку?",
+      ru: "Можно ли делать фотоомоложение летом?",
+      en: "Can photorejuvenation be done in the summer?",
+      de: "Kann Photorejuvenation im Sommer durchgeführt werden?"
+    },
+    answer: {
+      uk: "Фотоомолодження IPL рекомендується проводити в осінньо-зимовий період, коли сонячна активність мінімальна, щоб уникнути ризику гіперпігментації.",
+      ru: "Фотоомоложение IPL рекомендуется проводить в осенне-зимний период, когда солнечная активность минимальна, чтобы избежать риска гиперпигментации.",
+      en: "IPL photorejuvenation is recommended during the autumn and winter when solar activity is minimal to avoid the risk of hyperpigmentation.",
+      de: "Die IPL-Photorejuvenation wird im Herbst und Winter empfohlen, wenn die Sonnenaktivität minimal ist, um das Risiko einer Hyperpigmentierung zu vermeiden."
+    }
+  },
+
+      {
+        id: "faq61",
+        subserviceId: "subservice23",
+        question: {
+          uk: "Чи можна ботулінотерапією прибрати всі мімічні зморшки?",
+          ru: "Можно ли ботулинотерапией убрать все мимические морщины?",
+          en: "Can botulinum therapy remove all expression lines?",
+          de: "Können mit der Botulinum-Therapie alle Mimikfalten entfernt werden?"
+        },
+        answer: {
+          uk: "Ботулінотерапія ефективна для динамічних зморшок, викликаних активною мімікою. Для глибоких, статичних зморшок можуть знадобитися додаткові процедури, такі як контурна пластика.",
+          ru: "Ботулинотерапия эффективна для динамических морщин, вызванных активной мимикой. Для глубоких, статических морщин могут потребоваться дополнительные процедуры, такие как контурная пластика.",
+          en: "Botulinum therapy is effective for dynamic wrinkles caused by active facial expressions. For deep, static wrinkles, additional procedures like dermal fillers may be needed.",
+          de: "Die Botulinum-Therapie ist wirksam bei dynamischen Falten, die durch aktive Mimik verursacht werden. Bei tiefen, statischen Falten können zusätzliche Verfahren wie die Konturplastik erforderlich sein."
+        }
+      },
+
+      // FAQ для subservice25: Підйом куточків губ
+      {
+        id: "faq62",
+        subserviceId: "subservice25",
+        question: {
+          uk: "Наскільки ефективне підняття куточків губ?",
+          ru: "Насколько эффективно поднятие уголков губ?",
+          en: "How effective is lifting the corners of the lips?",
+          de: "Wie effektiv ist das Anheben der Mundwinkel?"
+        },
+        answer: {
+          uk: "Процедура дає помітний естетичний ефект, роблячи обличчя більш доброзичливим та молодим. Результат зберігається до 6-8 місяців.",
+          ru: "Процедура дает заметный эстетический эффект, делая лицо более доброжелательным и молодым. Результат сохраняется до 6-8 месяцев.",
+          en: "The procedure provides a noticeable aesthetic effect, making the face look friendlier and younger. The result lasts up to 6-8 months.",
+          de: "Der Eingriff erzielt einen sichtbaren ästhetischen Effekt, der das Gesicht freundlicher und jünger aussehen lässt. Das Ergebnis hält bis zu 6-8 Monate an."
+        }
+      },
+
+      // FAQ для subservice26: Корекція «гусячих лапок»
+      {
+        id: "faq63",
+        subserviceId: "subservice26",
+        question: {
+          uk: "Чи небезпечно коригувати «гусячі лапки»?",
+          ru: "Не опасно ли корректировать «гусиные лапки»?",
+          en: "Is it dangerous to correct crow's feet?",
+          de: "Ist es gefährlich, 'Krähenfüße' zu korrigieren?"
+        },
+        answer: {
+          uk: "Процедура є безпечною, якщо її виконує досвідчений лікар. Ін'єкції ботулінотерапії вводяться в м'язи, що відповідають за міміку, не впливаючи на інші тканини.",
+          ru: "Процедура безопасна, если ее выполняет опытный врач. Инъекции ботулинотерапии вводятся в мышцы, отвечающие за мимику, не затрагивая другие ткани.",
+          en: "The procedure is safe when performed by an experienced doctor. Botulinum therapy injections are administered into the muscles responsible for facial expressions, without affecting other tissues.",
+          de: "Das Verfahren ist sicher, wenn es von einem erfahrenen Arzt durchgeführt wird. Botulinum-Therapie-Injektionen werden in die für die Mimik zuständigen Muskeln verabreicht, ohne andere Gewebe zu beeinträchtigen."
+        }
+      },
+
+      // FAQ для subservice28: Лікування себореї
+      {
+        id: "faq64",
+        subserviceId: "subservice28",
+        question: {
+          uk: "Чи можна повністю вилікувати себорею?",
+          ru: "Можно ли полностью вылечить себорею?",
+          en: "Can seborrhea be completely cured?",
+          de: "Kann Seborrhoe vollständig geheilt werden?"
+        },
+        answer: {
+          uk: "Себорея є хронічним захворюванням, але її симптоми можна ефективно контролювати за допомогою спеціально підібраної терапії.",
+          ru: "Себорея является хроническим заболеванием, но ее симптомы можно эффективно контролировать с помощью специально подобранной терапии.",
+          en: "Seborrhea is a chronic condition, but its symptoms can be effectively managed with specially selected therapy.",
+          de: "Seborrhoe ist eine chronische Erkrankung, aber ihre Symptome können mit einer speziell ausgewählten Therapie wirksam kontrolliert werden."
+        }
+      },
+
+      // FAQ для subservice30: Мезотерапія шкіри голови
+      {
+        id: "faq65",
+        subserviceId: "subservice30",
+        question: {
+          uk: "Чи ефективна мезотерапія для росту волосся?",
+          ru: "Эффективна ли мезотерапия для роста волос?",
+          en: "Is mesotherapy effective for hair growth?",
+          de: "Ist die Mesotherapie für das Haarwachstum wirksam?"
+        },
+        answer: {
+          uk: "Так, мезотерапія забезпечує волосяні фолікули необхідними поживними речовинами, що стимулює ріст волосся, зміцнює його і покращує загальний стан.",
+          ru: "Да, мезотерапия обеспечивает волосяные фолликулы необходимыми питательными веществами, что стимулирует рост волос, укрепляет их и улучшает общее состояние.",
+          en: "Yes, mesotherapy provides hair follicles with essential nutrients, which stimulates hair growth, strengthens it, and improves overall hair condition.",
+          de: "Ja, die Mesotherapie versorgt die Haarfollikel mit wichtigen Nährstoffen, was das Haarwachstum anregt, es stärkt und den allgemeinen Zustand verbessert."
+        }
+      },
+
+      // FAQ для subservice31: Мезотерапія обличчя
+      {
+        id: "faq66",
+        subserviceId: "subservice31",
+        question: {
+          uk: "Які переваги мезотерапії обличчя?",
+          ru: "Какие преимущества мезотерапии лица?",
+          en: "What are the benefits of facial mesotherapy?",
+          de: "Welche Vorteile hat die Gesichtsmesotherapie?"
+        },
+        answer: {
+          uk: "Мезотерапія обличчя допомагає зволожити шкіру, покращити її тургор, розгладити дрібні зморшки, вирівняти колір обличчя і звузити пори.",
+          ru: "Мезотерапия лица помогает увлажнить кожу, улучшить ее тургор, разгладить мелкие морщины, выровнять цвет лица и сузить поры.",
+          en: "Facial mesotherapy helps to moisturize the skin, improve its turgor, smooth fine wrinkles, even out the complexion, and reduce pore size.",
+          de: "Die Gesichtsmesotherapie hilft, die Haut mit Feuchtigkeit zu versorgen, ihren Turgor zu verbessern, feine Falten zu glätten, den Teint auszugleichen und die Poren zu verfeinern."
+        }
+      },
+
+      // FAQ для subservice32: Мезотерапія тіла
+      {
+        id: "faq67",
+        subserviceId: "subservice32",
+        question: {
+          uk: "Чи ефективна мезотерапія тіла для схуднення?",
+          ru: "Эффективна ли мезотерапия тела для похудения?",
+          en: "Is body mesotherapy effective for weight loss?",
+          de: "Ist die Körpermesotherapie zur Gewichtsabnahme wirksam?"
+        },
+        answer: {
+          uk: "Так, процедура допомагає розщеплювати локальні жирові відкладення та боротися з целюлітом. Для досягнення результату потрібен курс з кількох процедур.",
+          ru: "Да, процедура помогает расщеплять локальные жировые отложения и бороться с целлюлитом. Для достижения результата требуется курс из нескольких процедур.",
+          en: "Yes, the procedure helps break down local fat deposits and fight cellulite. A course of several procedures is needed to achieve results.",
+          de: "Ja, das Verfahren hilft, lokale Fettablagerungen abzubauen und Cellulite zu bekämpfen. Um Ergebnisse zu erzielen, ist eine Kur von mehreren Behandlungen erforderlich."
+        }
+      },
+
+      // FAQ для subservice33: Мезотерапія волосистої частини голови
+      {
+        id: "faq68",
+        subserviceId: "subservice33",
+        question: {
+          uk: "Коли варто починати мезотерапію для волосся?",
+          ru: "Когда стоит начинать мезотерапию для волос?",
+          en: "When should I start mesotherapy for hair?",
+          de: "Wann sollte ich mit der Mesotherapie für die Haare beginnen?"
+        },
+        answer: {
+          uk: "Рекомендується починати мезотерапію при перших ознаках випадіння волосся, його ослабленні або погіршенні стану шкіри голови. Чим раніше почати, тим кращим буде результат.",
+          ru: "Рекомендуется начинать мезотерапию при первых признаках выпадения волос, их ослаблении или ухудшении состояния кожи головы. Чем раньше начать, тем лучше будет результат.",
+          en: "It is recommended to start mesotherapy at the first signs of hair loss, weakening, or deterioration of the scalp's condition. The earlier you start, the better the result will be.",
+          de: "Es wird empfohlen, mit der Mesotherapie bei den ersten Anzeichen von Haarausfall, Haarschwäche oder einer Verschlechterung des Kopfhautzustands zu beginnen. Je früher Sie anfangen, desto besser sind die Ergebnisse."
+        }
+      },
+
+      // FAQ для subservice38: Комплексні програми омолодження
+      {
+        id: "faq69",
+        subserviceId: "subservice38",
+        question: {
+          uk: "Які переваги комплексних програм омолодження?",
+          ru: "Какие преимущества комплексных программ омоложения?",
+          en: "What are the benefits of complex rejuvenation programs?",
+          de: "Welche Vorteile haben umfassende Verjüngungsprogramme?"
+        },
+        answer: {
+          uk: "Комплексні програми дозволяють поєднувати кілька методів для досягнення більш вираженого та довготривалого результату, працюючи одночасно з різними проблемами шкіри.",
+          ru: "Комплексные программы позволяют сочетать несколько методов для достижения более выраженного и долговременного результата, работая одновременно с разными проблемами кожи.",
+          en: "Complex programs allow for the combination of several methods to achieve a more pronounced and long-lasting result, addressing various skin problems simultaneously.",
+          de: "Umfassende Programme ermöglichen die Kombination mehrerer Methoden, um ein ausgeprägteres und dauerhafteres Ergebnis zu erzielen und gleichzeitig verschiedene Hautprobleme anzugehen."
+        }
+      },
+
+      // FAQ для subservice39: Лазерна епіляція обличчя
+      {
+        id: "faq70",
+        subserviceId: "subservice39",
+        question: {
+          uk: "Як підготуватися до лазерної епіляції обличчя?",
+          ru: "Как подготовиться к лазерной эпиляции лица?",
+          en: "How to prepare for facial laser hair removal?",
+          de: "Wie bereitet man sich auf eine Gesichts-Laser-Haarentfernung vor?"
+        },
+        answer: {
+          uk: "За 2 тижні до процедури слід уникати сонячних ванн, а за добу до - голити волосся в зоні проведення епіляції.",
+          ru: "За 2 недели до процедуры следует избегать солнечных ванн, а за сутки до - сбрить волосы в зоне проведения эпиляции.",
+          en: "Avoid sun exposure for 2 weeks before the procedure, and shave the hair in the treatment area one day prior.",
+          de: "Vermeiden Sie 2 Wochen vor dem Eingriff Sonnenbäder und rasieren Sie die Haare im Behandlungsbereich einen Tag vorher."
+        }
+      },
+
+      // FAQ для subservice40: Лазерна епіляція рук
+      {
+        id: "faq71",
+        subserviceId: "subservice40",
+        question: {
+          uk: "Чи можна робити лазерну епіляцію на руках, якщо шкіра чутлива?",
+          ru: "Можно ли делать лазерную эпиляцию на руках, если кожа чувствительная?",
+          en: "Can laser hair removal be done on arms if the skin is sensitive?",
+          de: "Kann eine Laser-Haarentfernung an den Armen bei empfindlicher Haut durchgeführt werden?"
+        },
+        answer: {
+          uk: "Завдяки сучасним технологіям та системам охолодження, процедура безпечна навіть для чутливої шкіри. Лікар підбере оптимальні налаштування апарату.",
+          ru: "Благодаря современным технологиям и системам охлаждения, процедура безопасна даже для чувствительной кожи. Врач подберет оптимальные настройки аппарата.",
+          en: "Thanks to modern technology and cooling systems, the procedure is safe even for sensitive skin. The doctor will select the optimal settings for the device.",
+          de: "Dank moderner Technologien und Kühlsysteme ist das Verfahren auch bei empfindlicher Haut sicher. Der Arzt wählt die optimalen Einstellungen für das Gerät."
+        }
+      },
+
+      // FAQ для subservice41: Лазерна епіляція ніг
+      {
+        id: "faq72",
+        subserviceId: "subservice41",
+        question: {
+          uk: "Через скільки процедур буде видно результат на ногах?",
+          ru: "Через сколько процедур будет виден результат на ногах?",
+          en: "After how many procedures will results be visible on the legs?",
+          de: "Nach wie vielen Behandlungen sind Ergebnisse an den Beinen sichtbar?"
+        },
+        answer: {
+          uk: "Видимий результат, як правило, досягається після 2-3 процедур. Повний курс становить 6-10 сеансів.",
+          ru: "Видимый результат, как правило, достигается после 2-3 процедур. Полный курс составляет 6-10 сеансов.",
+          en: "Visible results are usually achieved after 2-3 procedures. A full course consists of 6-10 sessions.",
+          de: "Sichtbare Ergebnisse werden in der Regel nach 2-3 Behandlungen erzielt. Eine vollständige Kur besteht aus 6-10 Sitzungen."
+        }
+      },
+
+      // FAQ для subservice44: Видалення рубців після операцій
+      {
+        id: "faq73",
+        subserviceId: "subservice44",
+        question: {
+          uk: "Чи можна видалити старі післяопераційні рубці?",
+          ru: "Можно ли удалить старые послеоперационные рубцы?",
+          en: "Is it possible to remove old post-operative scars?",
+          de: "Können alte postoperative Narben entfernt werden?"
+        },
+        answer: {
+          uk: "За допомогою лазерних технологій ми можемо значно зменшити видимість навіть давніх рубців. Для отримання остаточного результату необхідний курс процедур.",
+          ru: "С помощью лазерных технологий мы можем значительно уменьшить видимость даже давних рубцов. Для получения окончательного результата необходим курс процедур.",
+          en: "With laser technology, we can significantly reduce the visibility of even old scars. A course of procedures is necessary to achieve the final result.",
+          de: "Mit Lasertechnologie können wir die Sichtbarkeit selbst alter Narben erheblich reduzieren. Für das Endergebnis ist eine Kur erforderlich."
+        }
+      },
+
+      // FAQ для subservice45: Видалення розтяжок після вагітності
+      {
+        id: "faq74",
+        subserviceId: "subservice45",
+        question: {
+          uk: "Коли можна починати видалення розтяжок після вагітності?",
+          ru: "Когда можно начинать удаление растяжек после беременности?",
+          en: "When can one start removing stretch marks after pregnancy?",
+          de: "Wann kann man mit der Entfernung von Dehnungsstreifen nach der Schwangerschaft beginnen?"
+        },
+        answer: {
+          uk: "Процедуру можна починати після завершення грудного вигодовування та стабілізації гормонального фону, зазвичай через 6-12 місяців після пологів.",
+          ru: "Процедуру можно начинать после завершения грудного вскармливания и стабилизации гормонального фона, обычно через 6-12 месяцев после родов.",
+          en: "The procedure can be started after breastfeeding is finished and hormonal levels have stabilized, usually 6-12 months after childbirth.",
+          de: "Das Verfahren kann nach Beendigung des Stillens und Stabilisierung des Hormonhaushalts, in der Regel 6-12 Monate nach der Geburt, begonnen werden."
+        }
+      },
+
+      // FAQ для subservice46: Шліфування атрофічних рубців
+      {
+        id: "faq75",
+        subserviceId: "subservice46",
+        question: {
+          uk: "Чи можна повністю прибрати атрофічні рубці?",
+          ru: "Можно ли полностью убрать атрофические рубцы?",
+          en: "Is it possible to completely remove atrophic scars?",
+          de: "Ist es möglich, atrophische Narben vollständig zu entfernen?"
+        },
+        answer: {
+          uk: "Лазерне шліфування значно покращує зовнішній вигляд атрофічних рубців, роблячи їх майже непомітними, але повне видалення є складним. Мета — максимальне вирівнювання рельєфу шкіри.",
+          ru: "Лазерная шлифовка значительно улучшает внешний вид атрофических рубцов, делая их почти незаметными, но полное удаление является сложным. Цель — максимальное выравнивание рельефа кожи.",
+          en: "Laser resurfacing significantly improves the appearance of atrophic scars, making them almost unnoticeable, but complete removal is difficult. The goal is to maximally even out the skin's texture.",
+          de: "Die Laser-Hautstraffung verbessert das Erscheinungsbild atrophischer Narben erheblich und macht sie fast unsichtbar, aber eine vollständige Entfernung ist schwierig. Ziel ist die maximale Glättung des Hautbildes."
+        }
+      },
+
+      // FAQ для subservice48: Омолодження зони шиї та декольте
+      {
+        id: "faq76",
+        subserviceId: "subservice48",
+        question: {
+          uk: "Чи можна застосовувати фракційне омолодження на шиї та декольте?",
+          ru: "Можно ли применять фракционное омоложение на шее и декольте?",
+          en: "Can fractional rejuvenation be applied to the neck and décolleté?",
+          de: "Kann die fraktionierte Verjüngung auf Hals und Dekolleté angewendet werden?"
+        },
+        answer: {
+          uk: "Так, процедура ефективно бореться зі зморшками, пігментацією та втратою пружності шкіри в цих делікатних зонах.",
+          ru: "Да, процедура эффективно борется с морщинами, пигментацией и потерей упругости кожи в этих деликатных зонах.",
+          en: "Yes, the procedure effectively combats wrinkles, pigmentation, and loss of skin firmness in these delicate areas.",
+          de: "Ja, das Verfahren bekämpft effektiv Falten, Pigmentierung und den Verlust der Hautfestigkeit in diesen empfindlichen Bereichen."
+        }
+      },
+
+      // FAQ для subservice52: Інтимна біоревіталізація/біорепарація
+      {
+        id: "faq77",
+        subserviceId: "subservice52",
+        question: {
+          uk: "Як швидко видно ефект від інтимної біоревіталізації?",
+          ru: "Как быстро виден эффект от интимной биоревитализации?",
+          en: "How quickly are the results of intimate biorevitalization visible?",
+          de: "Wie schnell sind die Ergebnisse der intimen Biorevitalisierung sichtbar?"
+        },
+        answer: {
+          uk: "Ефект помітний вже після першої процедури, але для досягнення стійкого результату необхідний курс з 2-3 сеансів.",
+          ru: "Эффект заметен уже после первой процедуры, но для достижения стойкого результата необходим курс из 2-3 сеансов.",
+          en: "The effect is noticeable after the first procedure, but a course of 2-3 sessions is needed to achieve a lasting result.",
+          de: "Der Effekt ist bereits nach der ersten Behandlung sichtbar, aber um ein nachhaltiges Ergebnis zu erzielen, ist eine Kur von 2-3 Sitzungen erforderlich."
+        }
+      },
+
+      // FAQ для subservice53: Мезотерапія інтимних зон
+      {
+        id: "faq78",
+        subserviceId: "subservice53",
+        question: {
+          uk: "Чи можна поєднувати мезотерапію та інші процедури?",
+          ru: "Можно ли сочетать мезотерапию и другие процедуры?",
+          en: "Can mesotherapy be combined with other procedures?",
+          de: "Kann Mesotherapie mit anderen Behandlungen kombiniert werden?"
+        },
+        answer: {
+          uk: "Так, мезотерапія інтимних зон часто поєднується з біоревіталізацією або апаратними методами для досягнення більш вираженого ефекту омолодження і зволоження.",
+          ru: "Да, мезотерапия интимных зон часто сочетается с биоревитализацией или аппаратными методами для достижения более выраженного эффекта омоложения и увлажнения.",
+          en: "Yes, mesotherapy of intimate areas is often combined with biorevitalization or hardware-based methods to achieve a more pronounced rejuvenating and moisturizing effect.",
+          de: "Ja, die Mesotherapie des Intimbereichs wird oft mit Biorevitalisierung oder apparativen Methoden kombiniert, um eine ausgeprägtere verjüngende und feuchtigkeitsspendende Wirkung zu erzielen."
+        }
+      },
+
+      // FAQ для subservice54: Інтимна контурна пластика
+      {
+        id: "faq79",
+        subserviceId: "subservice54",
+        question: {
+          uk: "Чи ефективна інтимна контурна пластика?",
+          ru: "Эффективна ли интимная контурная пластика?",
+          en: "Is intimate contouring effective?",
+          de: "Ist die intime Konturierung wirksam?"
+        },
+        answer: {
+          uk: "Так, контурна пластика дозволяє швидко та ефективно відновити об'єм, усунути асиметрію та підвищити чутливість, що значно покращує якість життя.",
+          ru: "Да, контурная пластика позволяет быстро и эффективно восстановить объем, устранить асимметрию и повысить чувствительность, что значительно улучшает качество жизни.",
+          en: "Yes, contouring allows for a fast and effective restoration of volume, elimination of asymmetry, and enhancement of sensitivity, which significantly improves quality of life.",
+          de: "Ja, die Konturplastik ermöglicht eine schnelle und effektive Wiederherstellung des Volumens, die Beseitigung von Asymmetrien und die Steigerung der Empfindlichkeit, was die Lebensqualität erheblich verbessert."
+        }
+      },
+
+      // FAQ для subservice55: Апаратне інтимне омолодження
+      {
+        id: "faq80",
+        subserviceId: "subservice55",
+        question: {
+          uk: "Які переваги апаратного інтимного омолодження?",
+          ru: "Какие преимущества аппаратного интимного омоложения?",
+          en: "What are the benefits of hardware intimate rejuvenation?",
+          de: "Welche Vorteile hat die apparative Intimverjüngung?"
+        },
+        answer: {
+          uk: "Апаратне омолодження є неінвазивним, безболісним та стимулює вироблення власного колагену, що забезпечує довготривалий ефект і покращення тонусу тканин.",
+          ru: "Аппаратное омоложение является неинвазивным, безболезненным и стимулирует выработку собственного коллагена, что обеспечивает долговременный эффект и улучшение тонуса тканей.",
+          en: "Hardware-based rejuvenation is non-invasive, painless, and stimulates the production of the body's own collagen, providing a long-lasting effect and improved tissue tone.",
+          de: "Die apparative Verjüngung ist nicht-invasiv, schmerzfrei und stimuliert die Produktion von körpereigenem Kollagen, was einen langanhaltenden Effekt und eine verbesserte Gewebestraffheit gewährleistet."
+        }
+      },
+
+      // FAQ для subservice56: Лікування гіпергідрозу інтимних зон
+      {
+        id: "faq81",
+        subserviceId: "subservice56",
+        question: {
+          uk: "Як діє лікування гіпергідрозу ботулінотоксином в інтимній зоні?",
+          ru: "Как действует лечение гипергидроза ботулотоксином в интимной зоне?",
+          en: "How does botulinum toxin treatment work for hyperhidrosis in the intimate area?",
+          de: "Wie wirkt die Botulinum-Toxin-Behandlung bei Hyperhidrose im Intimbereich?"
+        },
+        answer: {
+          uk: "Ботулінотоксин блокує нервові імпульси до потових залоз, тим самим значно зменшуючи виділення поту на тривалий час (до 6-12 місяців).",
+          ru: "Ботулотоксин блокирует нервные импульсы к потовым железам, тем самым значительно уменьшая выделение пота на длительное время (до 6-12 месяцев).",
+          en: "Botulinum toxin blocks nerve impulses to the sweat glands, thereby significantly reducing sweat production for an extended period (up to 6-12 months).",
+          de: "Botulinumtoxin blockiert Nervenimpulse zu den Schweißdrüsen und reduziert so die Schweißproduktion für einen längeren Zeitraum (bis zu 6-12 Monate)."
+        }
+      },
+
+      // FAQ для subservice58: Плазмоліфтинг шкіри голови
+      {
+        id: "faq82",
+        subserviceId: "subservice58",
+        question: {
+          uk: "Як часто потрібно робити плазмоліфтинг шкіри голови?",
+          ru: "Как часто нужно делать плазмолифтинг кожи головы?",
+          en: "How often should I do scalp plasmolifting?",
+          de: "Wie oft sollte ich ein Kopfhaut-Plasmolifting durchführen lassen?"
+        },
+        answer: {
+          uk: "Для досягнення максимального ефекту зазвичай рекомендується курс з 3-5 процедур з інтервалом в 2-4 тижні.",
+          ru: "Для достижения максимального эффекта обычно рекомендуется курс из 3-5 процедур с интервалом в 2-4 недели.",
+          en: "To achieve the maximum effect, a course of 3-5 procedures with an interval of 2-4 weeks is usually recommended.",
+          de: "Um den maximalen Effekt zu erzielen, wird in der Regel eine Kur von 3-5 Behandlungen im Abstand von 2-4 Wochen empfohlen."
+        }
+      },
+
+      // FAQ для subservice59: Плазмотерапія зони шиї та декольте
+      {
+        id: "faq83",
+        subserviceId: "subservice59",
+        question: {
+          uk: "Чи допомагає плазмотерапія від зморшок на шиї?",
+          ru: "Помогает ли плазмотерапия от морщин на шее?",
+          en: "Does plasmotherapy help with neck wrinkles?",
+          de: "Hilft die Plasmatherapie bei Halsfalten?"
+        },
+        answer: {
+          uk: "Так, плазмотерапія ефективно стимулює вироблення колагену та еластину, що допомагає розгладити дрібні зморшки та підвищити пружність шкіри шиї та декольте.",
+          ru: "Да, плазмотерапия эффективно стимулирует выработку коллагена и эластина, что помогает разгладить мелкие морщины и повысить упругость кожи шеи и декольте.",
+          en: "Yes, plasmotherapy effectively stimulates collagen and elastin production, which helps smooth fine wrinkles and increase the firmness of the neck and décolleté skin.",
+          de: "Ja, die Plasmatherapie stimuliert effektiv die Kollagen- und Elastinproduktion, was hilft, feine Falten zu glätten und die Festigkeit der Haut an Hals und Dekolleté zu erhöhen."
+        }
+      },
+
+      {
+        id: "faq84",
+        subserviceId: "subservice60",
+        question: {
+          uk: "Чи можна за допомогою плазмоліфтингу омолодити шкіру рук?",
+          ru: "Можно ли с помощью плазмолифтинга омолодить кожу рук?",
+          en: "Can plasmolifting be used to rejuvenate the skin on the hands?",
+          de: "Kann Plasmolifting zur Verjüngung der Haut an den Händen eingesetzt werden?"
+        },
+        answer: {
+          uk: "Так, процедура ефективно бореться з пігментацією, віковими змінами та втратою тонусу шкіри на руках, роблячи її більш гладкою та молодою.",
+          ru: "Да, процедура эффективно борется с пигментацией, возрастными изменениями и потерей тонуса кожи на руках, делая ее более гладкой и молодой.",
+          en: "Yes, the procedure effectively combats pigmentation, age-related changes, and loss of skin tone on the hands, making the skin smoother and younger.",
+          de: "Ja, das Verfahren bekämpft effektiv Pigmentierung, altersbedingte Veränderungen und den Verlust der Hautspannung an den Händen, wodurch die Haut glatter und jünger wird."
+        }
+      },
+
+      {
+        id: "faq85",
+        subserviceId: "subservice62",
+        question: {
+          uk: "Склеротерапія лікує варикозні вени?",
+          ru: "Склеротерапия лечит варикозные вены?",
+          en: "Does sclerotherapy treat varicose veins?",
+          de: "Behandelt die Sklerotherapie Krampfadern?"
+        },
+        answer: {
+          uk: "Склеротерапія ефективна для лікування невеликих та середніх варикозних вен. Вона допомагає усунути симптоми і покращити естетичний вигляд, але великі вени можуть вимагати інших методів лікування.",
+          ru: "Склеротерапия эффективна для лечения небольших и средних варикозных вен. Она помогает устранить симптомы и улучшить эстетический вид, но крупные вены могут потребовать других методов лечения.",
+          en: "Sclerotherapy is effective for treating small and medium-sized varicose veins. It helps eliminate symptoms and improve aesthetic appearance, but large veins may require other treatment methods.",
+          de: "Die Sklerotherapie ist wirksam bei der Behandlung von kleinen bis mittelgroßen Krampfadern. Sie hilft, Symptome zu beseitigen und das ästhetische Erscheinungsbild zu verbessern, aber große Venen können andere Behandlungsmethoden erfordern."
+        }
+      },
+
+
+      // FAQ для subservice63: Мікросклеротерапія
+      {
+        id: "faq86",
+        subserviceId: "subservice63",
+        question: {
+          uk: "Яка різниця між склеротерапією та мікросклеротерапією?",
+          ru: "Какая разница между склеротерапией и микросклеротерапией?",
+          en: "What is the difference between sclerotherapy and microsclerotherapy?",
+          de: "Was ist der Unterschied zwischen Sklerotherapie und Mikrosklerotherapie?"
+        },
+        answer: {
+          uk: "Мікросклеротерапія - це різновид склеротерапії, що використовується для видалення дрібних судинних зірочок та сіток. Вона проводиться за допомогою дуже тонких голок, що мінімізує пошкодження тканин.",
+          ru: "Микросклеротерапия - это разновидность склеротерапии, используемая для удаления мелких сосудистых звездочек и сеток. Она проводится с помощью очень тонких игл, что минимизирует повреждение тканей.",
+          en: "Microsclerotherapy is a type of sclerotherapy used to remove small spider veins and networks. It is performed using very fine needles, which minimizes tissue damage.",
+          de: "Die Mikrosklerotherapie ist eine Art der Sklerotherapie, die zur Entfernung kleiner Besenreiser und Venennetze eingesetzt wird. Sie wird mit sehr feinen Nadeln durchgeführt, was Gewebeschäden minimiert."
+        }
+      }
+
 ];
 
 export const specials: Scpecials[] = [
@@ -9759,95 +10602,225 @@ export const specials: Scpecials[] = [
       uk: "Лазерна епіляція -30%",
       de: "Laser-Haarentfernung -30%",
       en: "Laser Hair Removal -30%",
-      ru: "Лазерная эпиляция -30%"
+      ru: "Лазерная эпиляция -30%",
     },
     subtitle: {
       uk: "Знижка на лазерні процедури цього місяця",
       de: "Rabatt auf Laserbehandlungen diesen Monat",
       en: "Discount on laser treatments this month",
-      ru: "Скидка на лазерные процедуры в этом месяце"
+      ru: "Скидка на лазерные процедуры в этом месяце",
     },
     headerTitle: {
       uk: "Акція на лазерну епіляцію",
       de: "Aktion für Laser-Haarentfernung",
       en: "Laser Hair Removal Promotion",
-      ru: "Акция на лазерную эпиляцию"
+      ru: "Акция на лазерную эпиляцию",
     },
     content: [
-      { id: "1-1", type: "text", content: { uk: "Щоб отримати знижку, запишіться на процедуру через наш сайт або телефон.", de: "Um den Rabatt zu erhalten, buchen Sie über unsere Website oder telefonisch.", en: "To get the discount, book your procedure via our website or phone.", ru: "Чтобы получить скидку, запишитесь на процедуру через наш сайт или по телефону." } },
-      { id: "1-2", type: "text", content: { uk: "Лазерна епіляція дозволяє швидко видаляти небажане волосся, забезпечуючи гладку шкіру.", de: "Die Laser-Haarentfernung entfernt unerwünschte Haare schnell und sorgt für glatte Haut.", en: "Laser hair removal quickly removes unwanted hair, leaving smooth skin.", ru: "Лазерная эпиляция позволяет быстро удалять нежелательные волосы, обеспечивая гладкую кожу." } },
-      { id: "1-3", type: "image", image: "https://www.health.com/thmb/7o5Q_4BNlWP8LEV4o3_DLSZ5cBg=/2121x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1409466138-f80dbd560dd64c2cb5357ae5f043586c.jpg" },
-      { id: "1-4", type: "text", content: { uk: "Після процедури шкіра стає гладкою та м’якою на дотик, а ризик подразнень мінімальний.", de: "Nach der Behandlung ist die Haut glatt und weich, das Risiko von Reizungen ist minimal.", en: "After the procedure, skin is smooth and soft, with minimal irritation risk.", ru: "После процедуры кожа становится гладкой и мягкой на ощупь, риск раздражений минимален." } },
-      { id: "1-5", type: "text", content: { uk: "Рекомендується курс процедур для досягнення стійкого результату та оптимальної ефективності.", de: "Eine Behandlungskur wird empfohlen, um dauerhafte Ergebnisse und maximale Wirksamkeit zu erzielen.", en: "A course of treatments is recommended for long-lasting results and maximum effectiveness.", ru: "Рекомендуется пройти курс процедур для стойкого результата и максимальной эффективности." } },
       {
-        id: "3-5",
-        type: "faq", FAQs: faqs.filter(faq => ["faq5"].includes(faq.id)),
+        type: "paragraph",
+        content: {
+          uk: "Щоб отримати знижку, запишіться на процедуру через наш сайт або телефон.",
+          de: "Um den Rabatt zu erhalten, buchen Sie über unsere Website oder telefonisch.",
+          en: "To get the discount, book your procedure via our website or phone.",
+          ru: "Чтобы получить скидку, запишитесь на процедуру через наш сайт или по телефону.",
+        },
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Лазерна епіляція дозволяє швидко видаляти небажане волосся, забезпечуючи гладку шкіру.",
+          de: "Die Laser-Haarentfernung entfernt unerwünschte Haare schnell und sorgt für glatte Haut.",
+          en: "Laser hair removal quickly removes unwanted hair, leaving smooth skin.",
+          ru: "Лазерная эпиляция позволяет быстро удалять нежелательные волосы, обеспечивая гладкую кожу.",
+        },
+      },
+      {
+        type: "image",
+        content: {
+          uk: "https://www.health.com/thmb/7o5Q_4BNlWP8LEV4o3_DLSZ5cBg=/2121x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1409466138-f80dbd560dd64c2cb5357ae5f043586c.jpg",
+          de: "https://www.health.com/thmb/7o5Q_4BNlWP8LEV4o3_DLSZ5cBg=/2121x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1409466138-f80dbd560dd64c2cb5357ae5f043586c.jpg",
+          en: "https://www.health.com/thmb/7o5Q_4BNlWP8LEV4o3_DLSZ5cBg=/2121x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1409466138-f80dbd560dd64c2cb5357ae5f043586c.jpg",
+          ru: "https://www.health.com/thmb/7o5Q_4BNlWP8LEV4o3_DLSZ5cBg=/2121x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1409466138-f80dbd560dd64c2cb5357ae5f043586c.jpg",
+        },
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Після процедури шкіра стає гладкою та м’якою на дотик.",
+          de: "Nach der Behandlung ist die Haut glatt und weich.",
+          en: "After the procedure, skin is smooth and soft.",
+          ru: "После процедуры кожа становится гладкой и мягкой.",
+        },
       },
     ],
     slug: "laser-epilation",
-    mainImage: "https://cambridgelaserclinic.com/wp-content/uploads/laser-hair-removal-1-scaled.jpg",
-    images: ["/images/epilation1.jpg", "/images/epilation2.jpg"],
+    mainImage:
+        "https://cambridgelaserclinic.com/wp-content/uploads/laser-hair-removal-1-scaled.jpg",
   },
 
   {
     id: "2",
-    title: { uk: "Безкоштовна консультація", de: "Kostenlose Beratung", en: "Free Consultation", ru: "Бесплатная консультация" },
-    subtitle: { uk: "Для нових клієнтів", de: "Für Neukunden", en: "For new clients", ru: "Для новых клиентов" },
-    headerTitle: { uk: "Перша консультація безкоштовна", de: "Erste Beratung kostenlos", en: "First consultation free", ru: "Первая консультация бесплатна" },
+    title: {
+      uk: "Безкоштовна консультація",
+      de: "Kostenlose Beratung",
+      en: "Free Consultation",
+      ru: "Первая консультация бесплатна",
+    },
+    subtitle: {
+      uk: "Для нових клієнтів",
+      de: "Für Neukunden",
+      en: "For new clients",
+      ru: "Для новых клиентов",
+    },
+    headerTitle: {
+      uk: "Перша консультація безкоштовна",
+      de: "Erste Beratung kostenlos",
+      en: "First consultation free",
+      ru: "Первая консультация бесплатна",
+    },
     content: [
-      { id: "2-1", type: "text", content: { uk: "Запишіться на консультацію онлайн або по телефону, щоб отримати персональні рекомендації.", de: "Buchen Sie die Beratung online oder telefonisch, um persönliche Empfehlungen zu erhalten.", en: "Book your consultation online or by phone to receive personalized advice.", ru: "Запишитесь на консультацию онлайн или по телефону, чтобы получить персональные рекомендации." } },
-      { id: "2-2", type: "text", content: { uk: "Спеціаліст проаналізує стан вашої шкіри та підбере оптимальні процедури.", de: "Der Spezialist analysiert Ihren Hautzustand und wählt die optimalen Behandlungen aus.", en: "The specialist will analyze your skin and select the optimal treatments.", ru: "Специалист проанализирует состояние вашей кожи и подберет оптимальные процедуры." } },
-      { id: "2-3", type: "image", image: "https://media.istockphoto.com/id/1404962365/photo/female-doctor-examining-a-patient-at-her-office.jpg?s=612x612&w=0&k=20&c=ASz3AWonL9oBb4qI-aKi69wZmZro1JXJVhS9zK4Lv00=" },
-      { id: "2-4", type: "text", content: { uk: "Ви отримаєте поради щодо домашнього догляду та способів підтримки результатів процедур.", de: "Sie erhalten Tipps zur Heimpflege und zur Aufrechterhaltung der Behandlungsergebnisse.", en: "You will receive tips for home care and maintaining treatment results.", ru: "Вы получите советы по домашнему уходу и поддержанию результатов процедур." } },
-      { id: "2-5", type: "text", content: { uk: "Консультація включає відповіді на всі ваші запитання та рекомендації спеціаліста.", de: "Die Beratung beantwortet alle Ihre Fragen und gibt Empfehlungen.", en: "The consultation answers all your questions and provides specialist recommendations.", ru: "Консультация отвечает на все ваши вопросы и дает рекомендации специалиста." } },
       {
-        id: "2-6",
-        type: "faq",
-        FAQs: faqs.filter(faq => ["faq3", "faq4"].includes(faq.id))
+        type: "paragraph",
+        content: {
+          uk: "Запишіться на консультацію онлайн або по телефону, щоб отримати персональні рекомендації.",
+          de: "Buchen Sie die Beratung online oder telefonisch, um persönliche Empfehlungen zu erhalten.",
+          en: "Book your consultation online or by phone to receive personalized advice.",
+          ru: "Запишитесь на консультацию онлайн или по телефону, чтобы получить персональные рекомендации.",
+        },
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Спеціаліст проаналізує стан вашої шкіри та підбере оптимальні процедури.",
+          de: "Der Spezialist analysiert Ihren Hautzustand und wählt die optimalen Behandlungen aus.",
+          en: "The specialist will analyze your skin and select the optimal treatments.",
+          ru: "Специалист проанализирует состояние вашей кожи и подберет оптимальные процедуры.",
+        },
+      },
+      {
+        type: "image",
+        content: {
+          uk: "https://media.istockphoto.com/id/1404962365/photo/female-doctor-examining-a-patient-at-her-office.jpg?s=612x612",
+          de: "https://media.istockphoto.com/id/1404962365/photo/female-doctor-examining-a-patient-at-her-office.jpg?s=612x612",
+          en: "https://media.istockphoto.com/id/1404962365/photo/female-doctor-examining-a-patient-at-her-office.jpg?s=612x612",
+          ru: "https://media.istockphoto.com/id/1404962365/photo/female-doctor-examining-a-patient-at-her-office.jpg?s=612x612",
+        },
       },
     ],
     slug: "free-consultation",
     mainImage: "https://dcimedicine.com/wp-content/uploads/2024/09/5-1024x1024.png",
-    images: [],
   },
 
   {
     id: "3",
-    title: { uk: "Пілінг обличчя -20%", de: "Gesichtspeeling -20%", en: "Facial Peeling -20%", ru: "Пилинг лица -20%" },
-    subtitle: { uk: "Свіжа шкіра за вигідною ціною", de: "Frische Haut zum Vorteilspreis", en: "Fresh skin at a great price", ru: "Свежая кожа по выгодной цене" },
-    headerTitle: { uk: "Акція на пілінг", de: "Aktion für Peeling", en: "Facial Peeling Promotion", ru: "Акция на пилинг" },
+    title: {
+      uk: "Пілінг обличчя -20%",
+      de: "Gesichtspeeling -20%",
+      en: "Facial Peeling -20%",
+      ru: "Пилинг лица -20%",
+    },
+    subtitle: {
+      uk: "Свіжа шкіра за вигідною ціною",
+      de: "Frische Haut zum Vorteilspreis",
+      en: "Fresh skin at a great price",
+      ru: "Свежая кожа по выгодной цене",
+    },
+    headerTitle: {
+      uk: "Акція на пілінг",
+      de: "Aktion für Peeling",
+      en: "Facial Peeling Promotion",
+      ru: "Акция на пилинг",
+    },
     content: [
-      { id: "3-1", type: "text", content: { uk: "Пілінг допомагає видалити відмерлі клітини та стимулює регенерацію шкіри.", de: "Das Peeling entfernt abgestorbene Zellen und stimuliert die Hautregeneration.", en: "Peeling helps remove dead cells and stimulates skin regeneration.", ru: "Пилинг помогает удалить омертвевшие клетки и стимулирует регенерацию кожи." } },
-      { id: "3-2", type: "image", image: "https://www.lincolndentalcenter.ca/wp-content/uploads/2025/03/10-Reasons-Why-You-Should-Consider-Botox-Cosmetic-Treatment.jpg" },
-      { id: "3-3", type: "text", content: { uk: "Процедура робить шкіру свіжою, гладкою та сяючою.", de: "Die Behandlung macht die Haut frisch, glatt und strahlend.", en: "The treatment makes skin fresh, smooth and glowing.", ru: "Процедура делает кожу свежей, гладкой и сияющей." } },
-      { id: "3-4", type: "text", content: { uk: "Рекомендується дотримуватись домашнього догляду після сеансу для тривалого ефекту.", de: "Empfohlen wird, die Heimpflege nach der Behandlung fortzusetzen.", en: "It is recommended to follow home care after the session for lasting results.", ru: "Рекомендуется соблюдать домашний уход после сеанса для долгого эффекта." } },
       {
-        id: "2-6",
-        type: "faq",
-        FAQs: faqs.filter(faq => ["faq3", "faq4"].includes(faq.id))
+        type: "paragraph",
+        content: {
+          uk: "Пілінг допомагає видалити відмерлі клітини та стимулює регенерацію шкіри.",
+          de: "Das Peeling entfernt abgestorbene Zellen und stimuliert die Hautregeneration.",
+          en: "Peeling helps remove dead cells and stimulates skin regeneration.",
+          ru: "Пилинг помогает удалить омертвевшие клетки и стимулирует регенерацию кожи.",
+        },
+      },
+      {
+        type: "image",
+        content: {
+          uk: "https://int.filorga.com/wp-content/uploads/sites/2/2025/03/Une-femme-qui-re%CC%81alise-un-peeling-visage-1620x1080.jpg",
+          de: "https://int.filorga.com/wp-content/uploads/sites/2/2025/03/Une-femme-qui-re%CC%81alise-un-peeling-visage-1620x1080.jpg",
+          en: "https://int.filorga.com/wp-content/uploads/sites/2/2025/03/Une-femme-qui-re%CC%81alise-un-peeling-visage-1620x1080.jpg",
+          ru: "https://int.filorga.com/wp-content/uploads/sites/2/2025/03/Une-femme-qui-re%CC%81alise-un-peeling-visage-1620x1080.jpg",
+        },
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Процедура робить шкіру свіжою та сяючою.",
+          de: "Die Behandlung macht die Haut frisch und strahlend.",
+          en: "The treatment makes skin fresh and glowing.",
+          ru: "Процедура делает кожу свежей и сияющей.",
+        },
       },
     ],
     slug: "facial-peeling",
-    mainImage: "https://int.filorga.com/wp-content/uploads/sites/2/2025/03/Une-femme-qui-re%CC%81alise-un-peeling-visage-1620x1080.jpg",
-    images: [],
+    mainImage:
+        "https://www.lincolndentalcenter.ca/wp-content/uploads/2025/03/10-Reasons-Why-You-Should-Consider-Botox-Cosmetic-Treatment.jpg",
   },
 
   {
     id: "4",
-    title: { uk: "Масаж спини -15%", de: "Rückenmassage -15%", en: "Back Massage -15%", ru: "Массаж спины -15%" },
-    subtitle: { uk: "Розслаблення та турбота про здоров'я", de: "Entspannung und Gesundheitspflege", en: "Relaxation and wellness", ru: "Расслабление и забота о здоровье" },
-    headerTitle: { uk: "Акція на масаж спини", de: "Aktion für Rückenmassage", en: "Back Massage Promotion", ru: "Акция на массаж спины" },
+    title: {
+      uk: "Масаж спини -15%",
+      de: "Rückenmassage -15%",
+      en: "Back Massage -15%",
+      ru: "Массаж спины -15%",
+    },
+    subtitle: {
+      uk: "Розслаблення та турбота про здоров'я",
+      de: "Entspannung und Gesundheitspflege",
+      en: "Relaxation and wellness",
+      ru: "Расслабление и забота о здоровье",
+    },
+    headerTitle: {
+      uk: "Акція на масаж спини",
+      de: "Aktion für Rückenmassage",
+      en: "Back Massage Promotion",
+      ru: "Акция на массаж спины",
+    },
     content: [
-      { id: "4-1", type: "text", content: { uk: "Масаж допомагає зняти напругу та покращити кровообіг.", de: "Massage hilft, Verspannungen zu lösen und die Durchblutung zu verbessern.", en: "Massage helps relieve tension and improve circulation.", ru: "Массаж помогает снять напряжение и улучшить кровообращение." } },
-      { id: "4-2", type: "image", image: "https://bellevie-cln.ru/wp-content/uploads/2024/09/kr6a1780-scaled-1.webp" },
-      { id: "4-3", type: "text", content: { uk: "Результат: менше стресу, більше комфорту та відчуття розслаблення.", de: "Ergebnis: weniger Stress, mehr Komfort und Entspannung.", en: "Result: less stress, more comfort, and feeling relaxed.", ru: "Результат: меньше стресса, больше комфорта и ощущение расслабления." } },
-      { id: "3-4", type: "text", content: { uk: "Рекомендується дотримуватись домашнього догляду після сеансу для тривалого ефекту.", de: "Empfohlen wird, die Heimpflege nach der Behandlung fortzusetzen.", en: "It is recommended to follow home care after the session for lasting results.", ru: "Рекомендуется соблюдать домашний уход после сеанса для долгого эффекта." } },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Масаж допомагає зняти напругу та покращити кровообіг.",
+          de: "Massage hilft, Verspannungen zu lösen und die Durchblutung zu verbessern.",
+          en: "Massage helps relieve tension and improve circulation.",
+          ru: "Массаж помогает снять напряжение и улучшить кровообращение.",
+        },
+      },
+      {
+        type: "image",
+        content: { image: "https://www.allaboutbeauty-schwabach.de/wp-content/uploads/2022/07/rueckenmassage.jpg" },
+        sideText: {
+          uk: "Масаж допомагає відновити баланс тіла та розуму",
+          ru: "Массаж помогает восстановить баланс тела и разума",
+          en: "Massage helps restore balance to body and mind",
+          de: "Massage hilft, das Gleichgewicht von Körper und Geist wiederherzustellen"
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Результат: менше стресу та більше розслаблення.",
+          de: "Ergebnis: weniger Stress und mehr Entspannung.",
+          en: "Result: less stress and more relaxation.",
+          ru: "Результат: меньше стресса и больше расслабления.",
+        },
+      },
     ],
     slug: "back-massage",
     mainImage: "https://www.allaboutbeauty-schwabach.de/wp-content/uploads/2022/07/rueckenmassage.jpg",
-    images: [],
   },
-]
+];
+
 
 export const prices: PriceModel[] = [
   {
@@ -10447,70 +11420,672 @@ export const prices: PriceModel[] = [
   }
 ];
 
-
 export const photos: Photo[] = [
   {
-    id: "1",
-    mainImage: "https://plus.unsplash.com/premium_photo-1661603790515-33c1cd3d89f0?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    id: "photo1",
+    serviceId: "service1",
+    subserviceId: "subservice2",
+    title: {
+      uk: "До та після видалення родимки",
+      ru: "До и после удаления родинки",
+      en: "Before and After Mole Removal",
+      de: "Vorher-Nachher Muttermalentfernung"
+    },
+    description: {
+      uk: "Результат після безболісного видалення новоутворення на обличчі за допомогою сучасних лазерних технологій.",
+      ru: "Результат после безболезненного удаления новообразования на лице с помощью современных лазерных технологий.",
+      en: "The result after painless removal of a facial growth using modern laser technologies.",
+      de: "Das Ergebnis nach der schmerzlosen Entfernung einer Wucherung im Gesicht mit moderner Lasertechnologie."
+    },
+    mainImage: "https://calm.ua/wp-content/uploads/2022/08/doposle1.jpg",
     imgArr: [
-      { src: "https://images.unsplash.com/photo-1745327883508-b6cd32e5dde5?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-      { src: "https://images.unsplash.com/photo-1700522924565-9fad1c05469e?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
-    ],
-    title: { en: "Relaxing massage", ru: "Расслабляющий массаж", uk: "Розслабляючий масаж", de: "Entspannende Massage" },
-    description: { en: "Deep relaxation and stress relief", ru: "Глубокое расслабление и снятие стресса", uk: "Глибоке розслаблення і зняття стресу", de: "Tiefe Entspannung und Stressabbau" },
-    serviceId: "service2",
-    subserviceId: "sub1",
+      {
+        src: "https://euroderm.kharkov.ua/wp-content/uploads/2020/11/radiovolnami-rodinok-udalenie-e1605888621632.jpg",
+        title: {
+          uk: "Загоєння після процедури",
+          ru: "Заживление после процедуры",
+          en: "Healing after the procedure",
+          de: "Heilung nach dem Eingriff"
+        },
+        description: {
+          uk: "Фото демонструє процес загоєння через кілька тижнів після видалення.",
+          ru: "Фото демонстрирует процесс заживления спустя несколько недель после удаления.",
+          en: "The photo shows the healing process a few weeks after removal.",
+          de: "Das Foto zeigt den Heilungsprozess einige Wochen nach der Entfernung."
+        }
+      },
+      {
+        src: "https://calm.ua/wp-content/uploads/2022/08/doposle3.jpg",
+        title: {
+          uk: "Кінцевий результат",
+          ru: "Конечный результат",
+          en: "Final result",
+          de: "Endergebnis"
+        },
+        description: {
+          uk: "Остаточний вигляд шкіри без сліду від новоутворення.",
+          ru: "Окончательный вид кожи без следа от новообразования.",
+          en: "The final appearance of the skin with no trace of the growth.",
+          de: "Das endgültige Erscheinungsbild der Haut ohne jegliche Spuren der Wucherung."
+        }
+      }
+    ]
   },
+  // Service 2: Gesichts- und Körperkosmetologie (ID: service2) -> Subservice 6: Gesichtsreinigung
   {
-    id: "2",
-    mainImage: "https://plus.unsplash.com/premium_photo-1732576711193-bc2b59d5fd2c?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    imgArr: [
-      { src: "https://plus.unsplash.com/premium_photo-1661645623435-41d9869758d9?q=80&w=2056&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-      { src: "https://plus.unsplash.com/premium_photo-1661645601775-7ea2247c2ec0?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-      { src: "https://plus.unsplash.com/premium_photo-1716626436810-2f3ffeea98fb?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
-    ],
-    title: { en: "Facial peeling", ru: "Пилинг лица", uk: "Пілінг обличчя", de: "Gesichtspeeling" },
-    description: { en: "Cleansing and renewal of the skin", ru: "Очищение и обновление кожи", uk: "Очищення та оновлення шкіри", de: "Reinigung und Hauterneuerung" },
+    id: "photo2",
     serviceId: "service2",
-    subserviceId: "sub6",
-  },
-  {
-    id: "3",
-    mainImage: "https://plus.unsplash.com/premium_photo-1661295770914-090b07d3e92d?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    subserviceId: "subservice6",
+    title: {
+      uk: "Результат ультразвукової чистки обличчя",
+      ru: "Результат ультразвуковой чистки лица",
+      en: "Result of Ultrasonic Facial Cleansing",
+      de: "Ergebnis der Ultraschall-Gesichtsreinigung"
+    },
+    description: {
+      uk: "Глибоке очищення та освітлення шкіри після першої процедури, яке повертає шкірі здорове сяйво.",
+      ru: "Глубокая очистка и осветление кожи после первой процедуры, которая возвращает коже здоровое сияние.",
+      en: "Deep cleansing and brightening of the skin after the first procedure, restoring a healthy glow.",
+      de: "Tiefenreinigung und Aufhellung der Haut nach der ersten Behandlung, die der Haut ein gesundes Strahlen zurückgibt."
+    },
+    mainImage: "https://detali.com/wp-content/uploads/2023/10/uz-chistka-lica-1.jpg",
     imgArr: [
-      { src: "https://plus.unsplash.com/premium_photo-1743025737228-d68d2352dc5b?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-      { src: "https://images.unsplash.com/photo-1670201203150-bf8771401590?q=80&w=860&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-      { src: "https://images.unsplash.com/photo-1590718313039-da29f5ef56d5?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
-    ],
-    title: { en: "Lip augmentation", ru: "Увеличение губ", uk: "Збільшення губ", de: "Lippenvergrößerung" },
-    description: { en: "Correction of lip shape and volume", ru: "Коррекция формы и объема губ", uk: "Корекція форми та об’єму губ", de: "Korrektur von Lippenform und -volumen" },
+      {
+        src: "https://kavcosmo.ru/images/uzpiling.png",
+        title: {
+          uk: "Покращення еластичності",
+          ru: "Улучшение эластичности",
+          en: "Improved Elasticity",
+          de: "Verbesserte Elastizität"
+        },
+        description: {
+          uk: "Фото демонструє підвищення пружності шкіри та розгладження дрібних зморшок.",
+          ru: "Фото демонстрирует повышение упругости кожи и разглаживание мелких морщин.",
+          en: "The photo shows increased skin firmness and the smoothing of fine wrinkles.",
+          de: "Das Foto zeigt eine erhöhte Hautfestigkeit und die Glättung feiner Falten."
+        }
+      }
+    ]
+  },
+  // Service 2: Gesichts- und Körperkosmetologie (ID: service2) -> Subservice 7: Chemisches Peeling
+  {
+    id: "photo3",
+    serviceId: "service2",
+    subserviceId: "subservice7",
+    title: {
+      uk: "До та після хімічного пілінгу",
+      ru: "До и после химического пилинга",
+      en: "Before and After Chemical Peel",
+      de: "Vorher-Nachher Chemisches Peeling"
+    },
+    description: {
+      uk: "Ефективне зменшення пігментації та зморшок, оновлення шкіри.",
+      ru: "Эффективное уменьшение пигментации и морщин, обновление кожи.",
+      en: "Effective reduction of pigmentation and wrinkles, skin renewal.",
+      de: "Effektive Reduzierung von Pigmentierung und Falten, Hauterneuerung."
+    },
+    mainImage: "https://www.ayna-spb.ru/netcat_files/userfiles/derma-peeling.jpg",
+    imgArr: [
+      {
+        src: "https://altero-med.ru/assets/images/12-01-2024/kdoh7v-img-2016.jpeg",
+        title: {
+          uk: "Видалення пігментних плям",
+          ru: "Удаление пигментных пятен",
+          en: "Pigment Spot Removal",
+          de: "Entfernung von Pigmentflecken"
+        },
+        description: {
+          uk: "Фото демонструє помітне освітлення та вирівнювання тону шкіри.",
+          ru: "Фото демонстрирует заметное осветление и выравнивание тона кожи.",
+          en: "The photo shows a noticeable lightening and evening out of skin tone.",
+          de: "Das Foto zeigt eine spürbare Aufhellung und Gleichmäßigkeit des Hauttons."
+        }
+      }
+    ]
+  },
+  // Service 3: Massage (ID: service3) -> Subservice 12: Lymphdrainage-Massage
+  {
+    id: "photo4",
     serviceId: "service3",
-    subserviceId: "sub4",
-  },
-  {
-    id: "4",
-    mainImage: "https://plus.unsplash.com/premium_photo-1661386084694-0523d8d1fc9e?q=80&w=1738&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    subserviceId: "subservice12",
+    title: {
+      uk: "До та після лімфодренажного масажу",
+      ru: "До и после лимфодренажного массажа",
+      en: "Before and After Lymphatic Drainage Massage",
+      de: "Vorher-Nachher Lymphdrainage-Massage"
+    },
+    description: {
+      uk: "Зменшення набряків та об'ємів, покращення мікроциркуляції та загального самопочуття.",
+      ru: "Уменьшение отеков и объемов, улучшение микроциркуляции и общего самочувствия.",
+      en: "Reduction of swelling and volume, improvement of microcirculation and overall well-being.",
+      de: "Reduzierung von Schwellungen und Umfängen, Verbesserung der Mikrozirkulation und des allgemeinen Wohlbefindens."
+    },
+    mainImage: "https://altero-med.ru/assets/images/12-01-2024/rxws20-img-2177.jpg",
     imgArr: [
-      { src: "https://images.unsplash.com/photo-1700760933574-9f0f4ea9aa3b?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-      { src: "https://images.unsplash.com/photo-1700760934166-4c766d708139?q=80&w=928&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-      { src: "https://plus.unsplash.com/premium_photo-1661726996340-8398be0d48ae?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
-    ],
-    title: { en: "Laser hair removal", ru: "Лазерная эпиляция", uk: "Лазерна епіляція", de: "Laser-Haarentfernung" },
-    description: { en: "Safe and effective hair removal", ru: "Безопасное и эффективное удаление волос", uk: "Безпечне та ефективне видалення волосся", de: "Sichere und effektive Haarentfernung" },
+      {
+        src: "https://l-beauty.ru/wp-content/uploads/2018/01/21984495_152623421993938_869212556491751424_n.jpg",
+        title: {
+          uk: "Покращення рельєфу тіла",
+          ru: "Улучшение рельефа тела",
+          en: "Improved Body Contours",
+          de: "Verbesserte Körperkonturen"
+        },
+        description: {
+          uk: "Зменшення целюліту та підтягнутість шкіри після курсу масажу.",
+          ru: "Уменьшение целлюлита и подтянутость кожи после курса массажа.",
+          en: "Reduction of cellulite and tighter skin after a course of massage.",
+          de: "Reduzierung von Cellulite und straffere Haut nach einer Massagekur."
+        }
+      }
+    ]
+  },
+  // Service 4: Konturplastik (ID: service4) -> Subservice 15: Lippenvergrößerung
+  {
+    id: "photo5",
     serviceId: "service4",
-    subserviceId: "sub5",
-  },
-  {
-    id: "5",
-    mainImage: "https://plus.unsplash.com/premium_photo-1745168404740-98c70a68c4b5?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    subserviceId: "subservice15",
+    title: {
+      uk: "До та після збільшення губ",
+      ru: "До и после увеличения губ",
+      en: "Before and After Lip Augmentation",
+      de: "Vorher-Nachher Lippenvergrößerung"
+    },
+    description: {
+      uk: "Надання губам природного об'єму та симетрії за допомогою гіалуронової кислоти.",
+      ru: "Придание губам естественного объема и симметрии с помощью гиалуроновой кислоты.",
+      en: "Giving the lips natural volume and symmetry using hyaluronic acid.",
+      de: "Den Lippen mit Hyaluronsäure natürliches Volumen und Symmetrie verleihen."
+    },
+    mainImage: "https://beauty-medicine.ru/wp-content/uploads/2024/01/img-before-after-ratn-uvel-gub-2024-01-001.jpg",
     imgArr: [
-      { src: "https://plus.unsplash.com/premium_photo-1745168450664-402507bfffdd?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-      { src: "https://plus.unsplash.com/premium_photo-1745168450685-20c69bb58d82?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
-      { src: "https://images.unsplash.com/photo-1713085085470-fba013d67e65?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" }
-    ],
-    title: { en: "Mesotherapy", ru: "Мезотерапия", uk: "Мезотерапія", de: "Mesotherapie" },
-    description: { en: "Nutrient injection for skin rejuvenation", ru: "Введение полезных веществ для омоложения кожи", uk: "Введення корисних речовин для омолодження шкіри", de: "Injektion von Nährstoffen zur Hautverjüngung" },
-    serviceId: "service6",
-    subserviceId: "sub7",
+      {
+        src: "https://jollyclinic.ru/wp-content/uploads/guby_1.webp",
+        title: {
+          uk: "Зволоження та розгладження",
+          ru: "Увлажнение и разглаживание",
+          en: "Hydration and Smoothing",
+          de: "Feuchtigkeitsversorgung und Glättung"
+        },
+        description: {
+          uk: "Крім об'єму, губи стають більш зволоженими та зникають дрібні зморшки.",
+          ru: "Помимо объема, губы становятся более увлажненными и исчезают мелкие морщинки.",
+          en: "In addition to volume, the lips become more hydrated and fine wrinkles disappear.",
+          de: "Neben dem Volumen werden die Lippen mit Feuchtigkeit versorgt und feine Falten verschwinden."
+        }
+      }
+    ]
   },
+  // Service 5: IPL Shiny (ID: service5) -> Subservice 19: Behandlung von Couperose
+  {
+    id: "photo6",
+    serviceId: "service5",
+    subserviceId: "subservice19",
+    title: {
+      uk: "До та після лікування куперозу",
+      ru: "До и после лечения купероза",
+      en: "Before and After Couperose Treatment",
+      de: "Vorher-Nachher Behandlung von Couperose"
+    },
+    description: {
+      uk: "Ефективне видалення судинних зірочок та почервонінь на шкірі обличчя.",
+      ru: "Эффективное удаление сосудистых звездочек и покраснений на коже лица.",
+      en: "Effective removal of spider veins and redness on the facial skin.",
+      de: "Effektive Entfernung von Besenreisern und Rötungen auf der Gesichtshaut."
+    },
+    mainImage: "https://www.telosbeauty.ru/files/30/16/before_after_kuperoz_2_2.png",
+    imgArr: [
+      {
+        src: "https://pkclinic.ru/userfiles/info_block_items/431.jpeg?v=20",
+        title: {
+          uk: "Чиста шкіра",
+          ru: "Чистая кожа",
+          en: "Clear Skin",
+          de: "Klare Haut"
+        },
+        description: {
+          uk: "Кінцевий результат після повного курсу: рівномірний тон шкіри без видимих судин.",
+          ru: "Конечный результат после полного курса: равномерный тон кожи без видимых сосудов.",
+          en: "The final result after a full course: an even skin tone without visible vessels.",
+          de: "Das Endergebnis nach einem vollständigen Kurs: ein ebenmäßiger Hautton ohne sichtbare Gefäße."
+        }
+      }
+    ]
+  },
+  // Service 6: Botulinumtoxin-Therapie (ID: service6) -> Subservice 23: Korrektur von Mimikfalten
+  {
+    id: "photo7",
+    serviceId: "service6",
+    subserviceId: "subservice23",
+    title: {
+      uk: "До та після корекції мімічних зморшок",
+      ru: "До и после коррекции мимических морщин",
+      en: "Before and After Wrinkle Correction",
+      de: "Vorher-Nachher Korrektur von Mimikfalten"
+    },
+    description: {
+      uk: "Розгладження зморшок на лобі та міжбрів'ї за допомогою ботулінотерапії.",
+      ru: "Разглаживание морщин на лбу и межбровье с помощью ботулинотерапии.",
+      en: "Smoothing wrinkles on the forehead and between the eyebrows with botulinum therapy.",
+      de: "Glättung von Falten auf der Stirn und zwischen den Augenbrauen mit Botulinumtherapie."
+    },
+    mainImage: "https://static.tildacdn.com/tild3138-3837-4861-a366-376532323332/b7b4d434-fa52-41df-9.jpg",
+    imgArr: [
+      {
+        src: "https://altos-klinika.cz/wp-content/uploads/2021/11/26yp2HQaqpg.jpeg",
+        title: {
+          uk: "Природний вигляд",
+          ru: "Естественный вид",
+          en: "Natural Look",
+          de: "Natürliches Aussehen"
+        },
+        description: {
+          uk: "Ефект омолодження без втрати природної міміки.",
+          ru: "Эффект омоложения без потери естественной мимики.",
+          en: "Rejuvenating effect without losing natural facial expressions.",
+          de: "Verjüngungseffekt ohne Verlust der natürlichen Mimik."
+        }
+      }
+    ]
+  },
+  // Service 7: Trichologie (ID: service7) -> Subservice 29: Behandlung von Haarausfall
+  {
+    id: "photo8",
+    serviceId: "service7",
+    subserviceId: "subservice29",
+    title: {
+      uk: "До та після лікування алопеції",
+      ru: "До и после лечения алопеции",
+      en: "Before and After Alopecia Treatment",
+      de: "Vorher-Nachher Alopezie-Behandlung"
+    },
+    description: {
+      uk: "Зупинка випадіння волосся та стимуляція його росту після курсу лікування.",
+      ru: "Остановка выпадения волос и стимуляция их роста после курса лечения.",
+      en: "Stopping hair loss and stimulating its growth after a course of treatment.",
+      de: "Stoppen des Haarausfalls und Stimulierung des Haarwuchses nach einer Behandlungskur."
+    },
+    mainImage: "https://static.tildacdn.com/tild3437-3538-4333-a164-653430363466/sq4NkoaxJG4.jpg",
+    imgArr: [
+      {
+        src: "https://cidk.ru/wp-content/uploads/2021/08/fullsizerender-18.jpg",
+        title: {
+          uk: "Покращення густоти",
+          ru: "Улучшение густоты",
+          en: "Improved Density",
+          de: "Verbesserte Haardichte"
+        },
+        description: {
+          uk: "Фото показує збільшення густоти волосся на проблемних ділянках.",
+          ru: "Фото показывает увеличение густоты волос на проблемных участках.",
+          en: "The photo shows an increase in hair density in problem areas.",
+          de: "Das Foto zeigt eine Zunahme der Haardichte in Problembereichen."
+        }
+      }
+    ]
+  },
+  // Service 8: Mesotherapie (ID: service8) -> Subservice 31: Gesichtsmesotherapie
+  {
+    id: "photo9",
+    serviceId: "service8",
+    subserviceId: "subservice31",
+    title: {
+      uk: "До та після мезотерапії обличчя",
+      ru: "До и после мезотерапии лица",
+      en: "Before and After Facial Mesotherapy",
+      de: "Vorher-Nachher Gesichtsmesotherapie"
+    },
+    description: {
+      uk: "Результат мезотерапії для покращення тонусу шкіри, зволоження та зменшення дрібних зморшок.",
+      ru: "Результат мезотерапии для улучшения тонуса кожи, увлажнения и уменьшения мелких морщин.",
+      en: "The result of mesotherapy for improving skin tone, hydration, and reducing fine wrinkles.",
+      de: "Das Ergebnis der Mesotherapie zur Verbesserung des Hauttons, der Feuchtigkeit und zur Reduzierung feiner Falten."
+    },
+    mainImage: "https://www.floris-sumy.com.ua/userfiles/image/MIzo.jpg",
+    imgArr: [
+      {
+        src: "https://janvi.com.ua/wp-content/uploads/2019/12/1.1.1-999x1024.jpg",
+        title: {
+          uk: "Свіжий та сяючий вигляд",
+          ru: "Свежий и сияющий вид",
+          en: "Fresh and Radiant Look",
+          de: "Frisches und strahlendes Aussehen"
+        },
+        description: {
+          uk: "Шкіра виглядає відпочилою та здоровою.",
+          ru: "Кожа выглядит отдохнувшей и здоровой.",
+          en: "The skin looks rested and healthy.",
+          de: "Die Haut sieht erholt und gesund aus."
+        }
+      }
+    ]
+  },
+  // Service 9: Biorevitalisierung (ID: service9) -> Subservice 35: Gesichtsbiorevitalisierung
+  {
+    id: "photo10",
+    serviceId: "service9",
+    subserviceId: "subservice35",
+    title: {
+      uk: "До та після біоревіталізації",
+      ru: "До и после биоревитализации",
+      en: "Before and After Biorevitalization",
+      de: "Vorher-Nachher Biorevitalisierung"
+    },
+    description: {
+      uk: "Глибоке зволоження шкіри, повернення пружності та еластичності.",
+      ru: "Глубокое увлажнение кожи, возвращение упругости и эластичности.",
+      en: "Deep hydration of the skin, restoring firmness and elasticity.",
+      de: "Tiefe Feuchtigkeitsversorgung der Haut, Wiederherstellung der Festigkeit und Elastizität."
+    },
+    mainImage: "https://age-clinic.ru/wp-content/uploads/2020/01/8ad42b7992b87a3920dd5c03ff475b73.jpg",
+    imgArr: [
+      {
+        src: "https://medestetic.moscow/upload/resize_cache/webp/iblock/377/500_400_2/377324e9a0dc4ca57cd8fffcef11db24.webp",
+        title: {
+          uk: "Зменшення дрібних зморшок",
+          ru: "Уменьшение мелких морщин",
+          en: "Reduction of Fine Wrinkles",
+          de: "Reduzierung feiner Falten"
+        },
+        description: {
+          uk: "Фото демонструє розгладження поверхневих зморшок.",
+          ru: "Фото демонстрирует разглаживание поверхностных морщин.",
+          en: "The photo shows the smoothing of superficial wrinkles.",
+          de: "Das Foto zeigt die Glättung oberflächlicher Falten."
+        }
+      }
+    ]
+  },
+  // Service 10: Laser-Haarentfernung (ID: service10) -> Subservice 42: Laser-Haarentfernung für den Bikinibereich
+
+  // Service 11: Laserentfernung von Dehnungsstreifen & Narben (ID: service11) -> Subservice 45: Entfernung von Dehnungsstreifen nach der Schwangerschaft
+  {
+    id: "photo12",
+    serviceId: "service11",
+    subserviceId: "subservice45",
+    title: {
+      uk: "До та після видалення розтяжок",
+      ru: "До и после удаления растяжек",
+      en: "Before and After Stretch Mark Removal",
+      de: "Vorher-Nachher Entfernung von Dehnungsstreifen"
+    },
+    description: {
+      uk: "Значне зменшення видимості розтяжок після вагітності.",
+      ru: "Значительное уменьшение видимости растяжек после беременности.",
+      en: "Significant reduction in the visibility of stretch marks after pregnancy.",
+      de: "Deutliche Reduzierung der Sichtbarkeit von Dehnungsstreifen nach der Schwangerschaft."
+    },
+    mainImage: "https://absolutmed.ru/wp-content/uploads/2023/05/12c03a2a488347b151757f708f37a217.webp",
+    imgArr: [
+      {
+        src: "https://www.moscow-beauty.com/upload/iblock/925/925a2e91f65fdd5dc554a505d92a8382.JPG",
+        title: {
+          uk: "Покращення текстури шкіри",
+          ru: "Улучшение текстуры кожи",
+          en: "Improved Skin Texture",
+          de: "Verbesserte Hauttextur"
+        },
+        description: {
+          uk: "Шкіра стає більш гладкою та однорідною.",
+          ru: "Кожа становится более гладкой и однородной.",
+          en: "The skin becomes smoother and more even.",
+          de: "Die Haut wird glatter und gleichmäßiger."
+        }
+      }
+    ]
+  },
+  // Service 12: Fraktionierte Verjüngung RESUR-FX (ID: service12) -> Subservice 47: Gesichtsverjüngung
+  {
+    id: "photo13",
+    serviceId: "service12",
+    subserviceId: "subservice47",
+    title: {
+      uk: "До та після фракційного омолодження",
+      ru: "До и после фракционного омоложения",
+      en: "Before and After Fractional Rejuvenation",
+      de: "Vorher-Nachher Fraktionierte Verjüngung"
+    },
+    description: {
+      uk: "Глибоке омолодження шкіри, що забезпечує ліфтинг та зменшення зморшок.",
+      ru: "Глубокое омоложение кожи, обеспечивающее лифтинг и уменьшение морщин.",
+      en: "Deep skin rejuvenation that provides lifting and wrinkle reduction.",
+      de: "Tiefe Hautverjüngung, die Lifting und Faltenreduzierung bewirkt."
+    },
+    mainImage: "https://harmony-health.com.ua/wp-content/uploads/2021/11/624f0f607ace6963c8970dee6f2b7ace-e1638194719214.jpg",
+    imgArr: [
+      {
+        src: "https://deva-clinique.com/wp-content/uploads/2021/07/deva-clinique-plastic-surgery-24-800x342.png",
+        title: {
+          uk: "Покращення тонусу",
+          ru: "Улучшение тонуса",
+          en: "Improved Skin Tone",
+          de: "Verbesserter Hautton"
+        },
+        description: {
+          uk: "Фото демонструє помітне підвищення пружності шкіри.",
+          ru: "Фото демонстрирует заметное повышение упругости кожи.",
+          en: "The photo shows a noticeable increase in skin firmness.",
+          de: "Das Foto zeigt eine spürbare Zunahme der Hautfestigkeit."
+        }
+      }
+    ]
+  },
+  // Service 13: Intime Kosmetik (ID: service13) -> Subservice 51: Intimes Peeling
+
+  // Service 14: Plasmalifting (PRP-Therapie) (ID: service14) -> Subservice 57: Gesichts-Plasmalifting
+  {
+    id: "photo15",
+    serviceId: "service14",
+    subserviceId: "subservice57",
+    title: {
+      uk: "До та після плазмоліфтингу обличчя",
+      ru: "До и после плазмолифтинга лица",
+      en: "Before and After Facial Plasmalifting",
+      de: "Vorher-Nachher Gesichts-Plasmalifting"
+    },
+    description: {
+      uk: "Загальне омолодження шкіри, поліпшення її регенерації та пружності.",
+      ru: "Общее омоложение кожи, улучшение ее регенерации и упругости.",
+      en: "Overall skin rejuvenation, improving its regeneration and firmness.",
+      de: "Allgemeine Hautverjüngung, Verbesserung der Regeneration und Festigkeit."
+    },
+    mainImage: "https://brennerclinic.com.ua/images/other/plazma2.jpg",
+    imgArr: [
+      {
+        src: "https://lh3.googleusercontent.com/proxy/yyoJ_phJNd-o3WoIU22OSe-_SdxpZBIoOTg_QswCQacm3c4Dr8iAi0Mu-mVAhK6EWUCCLABrtzmY86RSUeK1R-LgA7I",
+        title: {
+          uk: "Сяючий вигляд",
+          ru: "Сияющий вид",
+          en: "Radiant Look",
+          de: "Strahlendes Aussehen"
+        },
+        description: {
+          uk: "Шкіра стає більш свіжою та сяючою завдяки активації клітин.",
+          ru: "Кожа становится более свежей и сияющей благодаря активации клеток.",
+          en: "The skin becomes fresher and more radiant due to cell activation.",
+          de: "Die Haut wird durch Zellaktivierung frischer und strahlender."
+        }
+      }
+    ]
+  },
+  // Service 15: Sklerotherapie (ID: service15) -> Subservice 61: Sklerotherapie für Besenreiser
+  {
+    id: "photo16",
+    serviceId: "service15",
+    subserviceId: "subservice61",
+    title: {
+      uk: "До та після склеротерапії",
+      ru: "До и после склеротерапии",
+      en: "Before and After Sclerotherapy",
+      de: "Vorher-Nachher Sklerotherapie"
+    },
+    description: {
+      uk: "Видалення судинних зірочок на ногах, повернення естетичного вигляду.",
+      ru: "Удаление сосудистых звездочек на ногах, возвращение эстетического вида.",
+      en: "Removal of spider veins on the legs, restoring an aesthetic appearance.",
+      de: "Entfernung von Besenreisern an den Beinen, Wiederherstellung eines ästhetischen Erscheinungsbildes."
+    },
+    mainImage: "https://dobrota.ua/wp-content/uploads/st-4.jpeg",
+    imgArr: [
+      {
+        src: "https://lh5.googleusercontent.com/proxy/Kb_z4SzWbU2ITvJ-Q8x2CQ_OD0g2VV3lWXp5zmJJgXLbI_K3BzOq0Eot91nHFqWOpHf-NZRU9MNGJk7IoSsjBlB2FkD_sU-8ZHeLLO40gly5-8waEy6koIgJnKAo",
+        title: {
+          uk: "Чисті ноги",
+          ru: "Чистые ноги",
+          en: "Clear Legs",
+          de: "Klare Beine"
+        },
+        description: {
+          uk: "Фото після повного курсу, демонструє значне зменшення судинних сіток.",
+          ru: "Фото после полного курса, демонстрирует значительное уменьшение сосудистых сеток.",
+          en: "Photo after a full course, showing a significant reduction in spider veins.",
+          de: "Foto nach einem vollständigen Kurs, das eine deutliche Reduzierung der Besenreiser zeigt."
+        }
+      }
+    ]
+  },
+  // Добавьте еще 4 элемента, чтобы было 20
+  // Service 1: Entfernung von Hautwucherungen (ID: service1) -> Subservice 1: Warzenentfernung
+  {
+    id: "photo17",
+    serviceId: "service1",
+    subserviceId: "subservice1",
+    title: {
+      uk: "До та після видалення бородавки",
+      ru: "До и после удаления бородавки",
+      en: "Before and After Wart Removal",
+      de: "Vorher-Nachher Warzenentfernung"
+    },
+    description: {
+      uk: "Безболісне та ефективне видалення бородавки за допомогою лазерних технологій.",
+      ru: "Безболезненное и эффективное удаление бородавки с помощью лазерных технологий.",
+      en: "Painless and effective removal of a wart using laser technologies.",
+      de: "Schmerzfreie und effektive Entfernung einer Warze mit Lasertechnologie."
+    },
+    mainImage: "https://likari.info/uploads/posts/2022-07/lazerne-vydalenya-borodavok.jpg",
+    imgArr: [
+      {
+        src: "https://oksalmed.com/content/servicessub/127/udalenie-borodavki.webp",
+        title: {
+          uk: "Кінцевий результат без шрамів",
+          ru: "Конечный результат без шрамов",
+          en: "Final Result without Scars",
+          de: "Endergebnis ohne Narben"
+        },
+        description: {
+          uk: "Фото після загоєння, шкіра виглядає чистою та гладкою, без рубців.",
+          ru: "Фото после заживления, кожа выглядит чистой и гладкой, без рубцов.",
+          en: "Photo after healing, the skin looks clean and smooth, without scars.",
+          de: "Foto nach der Heilung, die Haut sieht sauber und glatt aus, ohne Narben."
+        }
+      }
+    ]
+  },
+  // Service 4: Konturplastik (ID: service4) -> Subservice 16: Wangenknochen-Konturkorrektur
+  {
+    id: "photo18",
+    serviceId: "service4",
+    subserviceId: "subservice16",
+    title: {
+      uk: "До та після корекції скул",
+      ru: "До и после коррекции скул",
+      en: "Before and After Cheekbone Contouring",
+      de: "Vorher-Nachher Korrektur der Wangenknochen"
+    },
+    description: {
+      uk: "Підкреслення природної краси обличчя, надання чіткості скулам за допомогою філерів.",
+      ru: "Подчеркивание естественной красоты лица, придание четкости скулам с помощью филлеров.",
+      en: "Highlighting the natural beauty of the face, giving definition to the cheekbones with fillers.",
+      de: "Betonung der natürlichen Schönheit des Gesichts, Definition der Wangenknochen mit Fillern."
+    },
+    mainImage: "https://age-clinic.ru/wp-content/uploads/2020/08/102560476_999644190450299_8550134024117397471_n.jpg",
+    imgArr: [
+      {
+        src: "https://renessanssamara.ru/wp-content/uploads/2019/12/korrekcziya-srednej-treti-licza.webp",
+        title: {
+          uk: "Гармонія пропорцій",
+          ru: "Гармония пропорций",
+          en: "Harmony of Proportions",
+          de: "Harmonie der Proportionen"
+        },
+        description: {
+          uk: "Фото демонструє, як процедура надає обличчю більш гармонійний та молодий вигляд.",
+          ru: "Фото демонстрирует, как процедура придает лицу более гармоничный и молодой вид.",
+          en: "The photo shows how the procedure gives the face a more harmonious and youthful look.",
+          de: "Das Foto zeigt, wie der Eingriff dem Gesicht ein harmonischeres und jüngeres Aussehen verleiht."
+        }
+      }
+    ]
+  },
+  // Service 5: IPL Shiny (ID: service5) -> Subservice 21: Akne-Therapie
+  {
+    id: "photo19",
+    serviceId: "service5",
+    subserviceId: "subservice21",
+    title: {
+      uk: "До та після терапії акне",
+      ru: "До и после терапии акне",
+      en: "Before and After Acne Therapy",
+      de: "Vorher-Nachher Akne-Therapie"
+    },
+    description: {
+      uk: "Зменшення запалень, почервонінь та висипань, запобігання появі нових елементів.",
+      ru: "Уменьшение воспалений, покраснений и высыпаний, предотвращение появления новых элементов.",
+      en: "Reduction of inflammation, redness, and breakouts, preventing the appearance of new elements.",
+      de: "Reduzierung von Entzündungen, Rötungen und Hautunreinheiten, Verhinderung des Auftretens neuer Elemente."
+    },
+    mainImage: "https://vidnova.ua/wp-content/uploads/2023/10/Maket_01-4-scaled.jpg",
+    imgArr: [
+      {
+        src: "https://slim.ua/images/lechenie-ugrevoj-bolezni-v-sliv.jpg",
+        title: {
+          uk: "Чиста та здорова шкіра",
+          ru: "Чистая и здоровая кожа",
+          en: "Clear and Healthy Skin",
+          de: "Klare und gesunde Haut"
+        },
+        description: {
+          uk: "Фото після курсу терапії, демонструє значне поліпшення стану шкіри.",
+          ru: "Фото после курса терапии, демонстрирует значительное улучшение состояния кожи.",
+          en: "Photo after a course of therapy, showing a significant improvement in the skin's condition.",
+          de: "Foto nach einer Therapie, das eine deutliche Verbesserung des Hautzustands zeigt."
+        }
+      }
+    ]
+  },
+  // Service 11: Laserentfernung von Dehnungsstreifen & Narben (ID: service11) -> Subservice 43: Entfernung von Post-Akne-Narben
+  {
+    id: "photo20",
+    serviceId: "service11",
+    subserviceId: "subservice43",
+    title: {
+      uk: "До та після видалення постакне",
+      ru: "До и после удаления постакне",
+      en: "Before and After Post-Acne Scar Removal",
+      de: "Vorher-Nachher Entfernung von Post-Akne-Narben"
+    },
+    description: {
+      uk: "Лазерне шліфування шкіри, що допомагає вирівняти рельєф та зменшити видимість рубців після акне.",
+      ru: "Лазерная шлифовка кожи, которая помогает выровнять рельеф и уменьшить видимость рубцов после акне.",
+      en: "Laser skin resurfacing that helps to even out the texture and reduce the visibility of post-acne scars.",
+      de: "Laser-Hautstraffung, die hilft, die Textur auszugleichen und die Sichtbarkeit von Post-Akne-Narben zu reduzieren."
+    },
+    mainImage: "https://coolaser.clinic/wp-content/uploads/2019/11/000-86.jpg",
+    imgArr: [
+      {
+        src: "https://picosure.com.ua/media/posts/5/ba-picosure-acne-scar-2.webp",
+        title: {
+          uk: "Гладка шкіра",
+          ru: "Гладкая кожа",
+          en: "Smooth Skin",
+          de: "Glatte Haut"
+        },
+        description: {
+          uk: "Фото після кількох сеансів, демонструє значне згладжування рубців.",
+          ru: "Фото после нескольких сеансов, демонстрирует значительное сглаживание рубцов.",
+          en: "Photo after several sessions, showing significant smoothing of the scars.",
+          de: "Foto nach mehreren Sitzungen, das eine deutliche Glättung der Narben zeigt."
+        }
+      }
+    ]
+  }
 ];

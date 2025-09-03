@@ -8,6 +8,7 @@ import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "yet-another-react-lightbox/plugins/captions.css";
+import {Link} from "react-router-dom";
 
 type PhotoListProps = {
   photos: any[]; // список фото с service, subservice, doctor
@@ -40,6 +41,7 @@ export default function PhotoList({ photos }: PhotoListProps) {
     }));
   }, [activePhoto, lang]);
 
+
   return (
       <div className="flex flex-wrap gap-8 justify-center">
         {photos.map((photo, photoIndex) => (
@@ -57,22 +59,42 @@ export default function PhotoList({ photos }: PhotoListProps) {
                 <b>{(photo.imgArr?.length ?? 0) + 1}</b> {t("gallery.photos")}
               </p>
 
-              <div className="p-4">
-                {photo.title && <h2 className="text-[1.25rem] px-[1rem] text-foreground font-extrabold mb-[1rem]">{photo.title[lang]}</h2>}
-                {photo.description && <p className="text-[1rem] text-foreground font-light mb-[1rem] pl-[2rem]">{photo.description[lang]}</p>}
+              <div className="p-4 ">
+                {photo.title && <h2 className="text-[1.25rem] px-[1rem] text-foreground font-extrabold mb-[1rem]  duration-500">{photo.title[lang]}</h2>}
+                {photo.description && <p className="text-[1rem] text-foreground font-light mb-[1rem] pl-[2rem]  duration-500">{photo.description[lang]}</p>}
 
                 {/* Категория, подуслуга, врач */}
 
-                <div className="desc text-sm text-foreground space-y-[0.5rem] pb-[1rem] px-[1rem] ">
-                  {photo.service && <p className="font-semibold text-[1rem]">{t("gallery.category")}: <a href={`../${lang}/services/${photo.service.slug}`} target="_blank" rel="noopener noreferrer" className="hover:underline text-[1.25rem]">{photo.service.title[lang]}</a></p>}
-                  {photo.subservice && <p className="text-[1rem]">{t("gallery.procedure")}: <a href={photo.subservice.slug} target="_blank" rel="noopener noreferrer" className="hover:underline text-[1.25rem]">{photo.subservice.title[lang]}</a></p>}
-                  {photo.doctor && (
-                      <div className="doctor flex items-center gap-3">
-                        <p className="font-semibold text-[1rem]">{t("gallery.doctor")}: <a href={photo.doctor.slug} target="_blank" rel="noopener noreferrer" className="font-semibold hover:underline text-[1.25rem]">{photo.doctor.fullName[lang]}</a></p>
-                        {photo.doctor.photo && <img src={photo.doctor.photo} alt={photo.doctor.fullName[lang]} className="w-12 h-12 rounded-full border" />}
-                      </div>
+                <div className="desc text-sm text-foreground space-y-[0.5rem] pb-[1rem] px-[1rem] duration-500">
+                  {photo.service && (
+                      <p className="font-semibold text-[1rem]">
+                        {t("gallery.category")}:{" "}
+                        <Link
+                            to={`../services/${photo.service.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:underline text-[1.25rem]"
+                        >
+                          {photo.service.title[lang]}
+                        </Link>
+                      </p>
+                  )}
+
+                  {photo.subservice && (
+                      <p className="text-[1rem]">
+                        {t("gallery.procedure")}:{" "}
+                        <Link
+                            to={`../services/${photo.subservice.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:underline text-[1.25rem]"
+                        >
+                          {photo.subservice.title[lang]}
+                        </Link>
+                      </p>
                   )}
                 </div>
+
               </div>
             </div>
         ))}

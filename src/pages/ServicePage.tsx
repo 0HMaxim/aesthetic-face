@@ -9,6 +9,7 @@ import {ContentBlockRenderer} from "../components/ContentBlockRenderer.tsx";
 import PriceTable from "../components/PriceTable.tsx";
 import {Breadcrumbs} from "../components/Breadcrumbs.tsx";
 import {TopImage} from "../components/TopImage.tsx";
+import {Button} from "@heroui/react";
 
 export default function ServicePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -30,11 +31,9 @@ export default function ServicePage() {
   const parentService = service || services.find(s => s.id === subservice?.serviceId);
 
   // Получаем список подуслуг для родительской услуги, если она найдена
-  const relatedSubservices = parentService && parentService.subservices?.length
-      ? parentService.subservices
-      .map(subId => subservices.find(ss => ss.id === subId))
-      .filter(Boolean)
-      : [];
+  const relatedSubservices = parentService?.subservices?.map(subId => subservices.find(ss => ss.id === subId))
+  .filter((sub): sub is typeof subservices[0] => !!sub) || [];
+
 
   // Фото для текущей сущности
   const currentPhotos = photos
@@ -48,13 +47,55 @@ export default function ServicePage() {
 
 
   const relatedFaqs = faqs.filter(faq => {
-    if (subservice) return faq.subserviceId === subservice.id || faq.serviceId === subservice.serviceId;
-    if (service) return faq.serviceId === service.id || (faq.subserviceId && service.subservices?.includes(faq.subserviceId));
+    if (subservice) {
+      // Если у FAQ есть serviceId и subserviceId — показываем
+      if (faq.subserviceId === subservice.id && faq.serviceId === subservice.serviceId) {
+        return true;
+      }
+      // Если только subserviceId — показываем только на подуслуге
+      if (faq.subserviceId === subservice.id && !faq.serviceId) {
+        return true;
+      }
+      return false;
+    }
+
+    if (service) {
+      // Если у FAQ есть serviceId и subserviceId — показываем
+      if (faq.serviceId === service.id && faq.subserviceId && service.subservices?.includes(faq.subserviceId)) {
+        return true;
+      }
+      // Если только serviceId — показываем только на услуге
+      if (faq.serviceId === service.id && !faq.subserviceId) {
+        return true;
+      }
+      return false;
+    }
+
     return false;
   });
 
-  console.log("currentItem.doctors:", currentItem.doctors);
-  console.log("Filtered doctors:", doctors.filter(d => currentItem.doctors?.includes(d.id)));
+
+  const logServicesAndSubservices = () => {
+    console.log("Категории:");
+    services.forEach(service => {
+      // Выводим основную услугу (категорию)
+      console.log(`- ${service.title[lang]} (ID: ${service.id})`);
+
+      // Находим все подуслуги, которые относятся к этой категории
+      const relatedSubservices = subservices.filter(sub => sub.serviceId === service.id);
+
+      // Если у категории есть подуслуги, выводим их
+      if (relatedSubservices.length > 0) {
+        console.log("  Подкатегории:");
+        relatedSubservices.forEach(sub => {
+          console.log(`    - ${sub.title[lang]} (ID: ${sub.id})`);
+        });
+      }
+    });
+  };
+
+  // Вызовите эту функцию в начале вашего компонента
+  logServicesAndSubservices();
 
   return (
       <div className="w-full items-center justify-center ">
@@ -89,7 +130,6 @@ export default function ServicePage() {
             </div>
 
             <div className="">
-              {/* Подуслуги */}
               {relatedSubservices.length > 0 && (
                   <>
                   <div className="py-8">
@@ -159,24 +199,41 @@ export default function ServicePage() {
                   </div>
 
                   <div className="mt-10">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="flex flex-wrap justify-evenly">
                       {doctors
                       .filter(d => currentItem.doctors?.includes(d.id))
                       .map(doc => (
-                          <div key={doc.id} className="p-4 rounded-xl shadow flex gap-4 items-center">
-                            <img
-                                src={doc.photo}
-                                className="w-24 h-24 object-cover rounded-full"
-                            />
-                            <div>
-                              <h3 className="text-lg font-bold">
-                                {doc.fullName[lang]}
-                              </h3>
-                              <p className="text-sm text-gray-600">
-                                {doc.position[lang]}
-                              </p>
+                          <Link
+                              key={doc.id}
+                              to={`/${lang}/doctors/${doc.slug}`}
+                              className="group rounded-[7rem] shadow-md overflow-hidden w-[25rem] mb-[1.5rem] mr-[2.5rem] flex flex-col hover:shadow-xl hover:bg-[var(--primary)] transition duration-500"
+                          >
+                            {/* Фото сверху */}
+                            {doc.photo && (
+                                <div className="w-full h-5/6 overflow-hidden">
+                                  <img
+                                      src={doc.photo}
+                                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                  />
+                                </div>
+                            )}
+
+                            {/* Информация о докторе */}
+                            <div className="p-6 flex flex-col items-center text-center bg-background">
+                              <h2 className="text-[1.25rem] font-extrabold mb-2">{doc.fullName[lang]}</h2>
+                              <p className="text-[1rem] font-light mb-4">{doc.position[lang]}</p>
+
+                              {/* Кнопка записаться */}
+                              <Button
+                                  as={Link}
+                                  to={`/${lang}/doctors/${doc.slug}`}
+                                  className="px-6 py-3 rounded-full bg-black text-white font-semibold hover:bg-[var(--primary)] transition duration-500"
+                              >
+                                {t("doctors.bookAppointment", { name: doc.shortName[lang] })}
+                              </Button>
                             </div>
-                          </div>
+                          </Link>
+
                       ))}
                     </div>
                   </div>

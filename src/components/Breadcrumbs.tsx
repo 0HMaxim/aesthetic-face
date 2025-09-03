@@ -1,15 +1,16 @@
-// components/Breadcrumbs.tsx
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { services, subservices } from "../data/services";
+import { services, subservices, doctors, specials } from "../data/services";
 
 interface BreadcrumbsProps {
   serviceId?: string;
   subserviceId?: string;
+  doctorSlug?: string;
+  specialSlug?: string;
 }
 
-const tabs = [
+const staticTabs = [
   { title: "header.about", link: "/about" },
   { title: "header.specials", link: "/specials" },
   { title: "header.services", link: "/services" },
@@ -21,56 +22,85 @@ const tabs = [
   { title: "header.contact", link: "/contact" },
 ];
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ serviceId, subserviceId }) => {
+// Функция безопасного получения строки из LocalizedText
+function getLocalizedString(value: string | string[] | undefined) {
+  if (!value) return "";
+  return Array.isArray(value) ? value.join(", ") : value;
+}
+
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ serviceId, subserviceId, doctorSlug, specialSlug }) => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
   const location = useLocation();
-
-  // ищем услугу и подуслугу
-  const service = serviceId ? services.find((s) => s.id === serviceId) : undefined;
-  const subservice = subserviceId ? subservices.find((ss) => ss.id === subserviceId) : undefined;
 
   const items: { label: string; href: string }[] = [
     { label: t("header.home"), href: `/${lang}` },
   ];
 
-  // если это просто страница услуг
-  if (location.pathname.startsWith(`/${lang}/services`) && !service && !subservice) {
-    items.push({ label: t("header.services"), href: `/${lang}/services` });
-  }
-  else if (service || subservice) {
-    // общий раздел "Услуги"
+  // ---------------------- SERVICES / SUBSERVICES ----------------------
+  if (location.pathname.includes("/services")) {
     items.push({ label: t("header.services"), href: `/${lang}/services` });
 
-    if (service && !subservice) {
-      // только услуга
-      items.push({
-        label: service.title[lang],
-        href: `/${lang}/services/${service.slug}`,
-      });
-    }
-
-    if (subservice) {
-      // родительская услуга для подуслуги
-      const parent = services.find((s) => s.id === subservice.serviceId);
-      if (parent) {
+    if (subserviceId) {
+      const subservice = subservices.find((ss) => ss.id === subserviceId);
+      if (subservice) {
+        const parent = services.find((s) => s.id === subservice.serviceId);
+        if (parent) {
+          items.push({
+            label: getLocalizedString(parent.title[lang]),
+            href: `/${lang}/services/${parent.slug}`,
+          });
+        }
         items.push({
-          label: parent.title[lang],
-          href: `/${lang}/services/${parent.slug}`,
+          label: getLocalizedString(subservice.title[lang]),
+          href: `/${lang}/services/${subservice.slug}`,
         });
       }
-
-      // сама подуслуга
-      items.push({
-        label: subservice.title[lang],
-        href: `/${lang}/services/${subservice.slug}`,
-      });
+    } else if (serviceId) {
+      const service = services.find((s) => s.id === serviceId);
+      if (service) {
+        items.push({
+          label: getLocalizedString(service.title[lang]),
+          href: `/${lang}/services/${service.slug}`,
+        });
+      }
     }
   }
+
+  // ---------------------- DOCTORS ----------------------
+  else if (location.pathname.includes("/doctors")) {
+    items.push({ label: t("header.doctors"), href: `/${lang}/doctors` });
+
+    if (doctorSlug) {
+      const doctor = doctors.find((d) => d.slug === doctorSlug);
+      if (doctor) {
+        items.push({
+          label: getLocalizedString(doctor.fullName[lang]),
+          href: `/${lang}/doctors/${doctor.slug}`,
+        });
+      }
+    }
+  }
+
+  // ---------------------- SPECIALS ----------------------
+  else if (location.pathname.includes("/specials")) {
+    items.push({ label: t("header.specials"), href: `/${lang}/specials` });
+
+    if (specialSlug) {
+      const special = specials.find((s) => s.slug === specialSlug);
+      if (special) {
+        items.push({
+          label: getLocalizedString(special.headerTitle[lang]),
+          href: `/${lang}/specials/${special.slug}`,
+        });
+      }
+    }
+  }
+
+  // ---------------------- STATIC PAGES ----------------------
   else {
-    // если это не услуги, а, например, "about" или "faq"
     const currentPath = location.pathname.replace(`/${lang}`, "");
-    const matchedTab = tabs.find((tab) => currentPath.startsWith(tab.link));
+    const matchedTab = staticTabs.find((tab) => currentPath.startsWith(tab.link));
     if (matchedTab) {
       items.push({
         label: t(matchedTab.title),
@@ -88,9 +118,9 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ serviceId, subserviceI
                 <li key={item.href} className="flex items-center">
                   {index > 0 && <span className="mx-2">/</span>}
                   {isCurrent ? (
-                      <span className="text-foreground font-semibold">{item.label}</span>
+                      <span className="text-foreground font-semibold duration-500">{item.label}</span>
                   ) : (
-                      <Link to={item.href} className="hover:text-primary duration-300">
+                      <Link to={item.href} className="hover:text-primary duration-500">
                         {item.label}
                       </Link>
                   )}

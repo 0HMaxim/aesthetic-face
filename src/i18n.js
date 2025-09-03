@@ -22,7 +22,6 @@ for (const path in rawTranslations) {
   resources[lang].translation[filename] = translationObject;
 }
 
-const defaultLang = import.meta.env.VITE_APP_LOCALE || 'en';
 const fallbackLang = import.meta.env.VITE_APP_FALLBACK_LOCALE || 'en';
 
 i18n
@@ -30,14 +29,13 @@ i18n
 .use(initReactI18next)
 .init({
   resources,
-  lng: defaultLang,
   fallbackLng: fallbackLang,
-  interpolation: {
-    escapeValue: false,
-  },
+  interpolation: { escapeValue: false },
   detection: {
     order: ['path', 'localStorage', 'navigator'],
+    lookupFromPathIndex: 1,
   },
 });
+
 
 export default i18n;

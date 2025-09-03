@@ -8,7 +8,6 @@ export interface Service {
   slug: string;
   mainImage?: string;
   content?: ContentBlock[];
-  faqs?: string[];
   doctors?: string[];
   subservices?: string[];
 }

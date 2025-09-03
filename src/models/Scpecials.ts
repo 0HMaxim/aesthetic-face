@@ -16,7 +16,6 @@ export interface Scpecials {
   content: ContentBlock[];
   slug: string;
 
-  mainImage: string;
-  images: string[];
+  mainImage?: string;
   prices?: string[];
 }

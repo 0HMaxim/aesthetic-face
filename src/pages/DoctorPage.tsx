@@ -30,7 +30,9 @@ export default function DoctorPage() {
 
         <div className="w-full px-4 md:px-[10rem]">
 
-          <Breadcrumbs />
+
+        <Breadcrumbs doctorSlug={doctor.slug} />
+
 
         <h1 className="text-3xl md:text-5xl mb-[2.5rem] font-[700] md:text-center text-foreground">
           {doctor.fullName[lang]}
@@ -54,7 +56,7 @@ export default function DoctorPage() {
             </div>
 
 
-              <p className="text-xl md:text-[1.5rem] pl-[1.5rem] text-foreground mb-[3.5rem] ">{doctor.position[lang]}</p>
+              <p className="text-xl md:text-[1.5rem] pl-[1.5rem] text-foreground pb-[3.5rem]  ">{doctor.position[lang]}</p>
 
 
               <Button

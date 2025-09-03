@@ -65,7 +65,6 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
                     {imageSrc && (
                         <img
                             src={imageSrc}
-                            alt={sideText || "content image"}
                             className="w-full md:w-fit h-[28rem] object-cover rounded-[0.5rem]"
                         />
                     )}

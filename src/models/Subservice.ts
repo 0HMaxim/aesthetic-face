@@ -10,6 +10,5 @@ export interface Subservice {
   mainImage: string;
   content?: ContentBlock[];
   prices?: string[];
-  faqs?: string[];
   doctors?: string[];
 }

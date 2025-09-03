@@ -4,8 +4,7 @@ import {TopImage} from "../components/TopImage.tsx";
 
 export default function Services() {
 
-  const { i18n, t } = useTranslation();
-  const lang = i18n.language as "uk" | "ru" | "en" | "de";
+  const {  t } = useTranslation();
 
   const imagee = "https://nextmedasia.com/wp-content/uploads/2022/11/lede.jpg";
 
