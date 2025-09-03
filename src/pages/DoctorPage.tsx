@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import type { LocalizedText } from "../models/LocalizedText";
 import {Button} from "@heroui/react";
 import SolarUnreadOutline from '~icons/solar/unread-outline'
+import {TopImage} from "../components/TopImage.tsx";
+import {Breadcrumbs} from "../components/Breadcrumbs.tsx";
 
 export default function DoctorPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -23,47 +25,27 @@ export default function DoctorPage() {
       <div className="w-full items-center justify-center ">
 
         {imagee && (
-            <div className="overflow-hidden w-full h-[15rem] relative p-0 blur-[0.5rem] mb-[3.5rem]"
-            >
-              <img
-                  src={imagee}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
+            <TopImage source={imagee}/>
         )}
-
-
 
         <div className="w-full px-4 md:px-[10rem]">
 
-
-          {/*<div className="py-8 mb-[3.5rem]">*/}
-          {/*  <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">*/}
-          {/*    {t("doctors.title")}*/}
-          {/*  </h2>*/}
-          {/*  <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">*/}
-          {/*      </span>*/}
-          {/*  <p className="text-base lg:text-2xl font-normal text-foreground duration-500">*/}
-          {/*    {t("doctors.experience")}*/}
-          {/*  </p>*/}
-          {/*</div>*/}
+          <Breadcrumbs />
 
         <h1 className="text-3xl md:text-5xl mb-[2.5rem] font-[700] md:text-center text-foreground">
           {doctor.fullName[lang]}
         </h1>
 
 
-
-
-        <div className="mt-10 flex flex-col md:flex-row gap-[5.5rem] rounded-[10rem] shadow-md  transition overflow-hidden    duration-500
+        <div className="mt-10 pb-20 flex flex-col md:flex-row gap-[5.5rem] rounded-[10rem] shadow-md  transition overflow-hidden   duration-500 p-[1.5rem]
                     hover:shadow-xl">
           {/* ЛЕВАЯ КОЛОНКА */}
 
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start md:w-[40rem] w-full ">
               {doctor.photo && (
                   <img
                       src={doctor.photo}
-                      className="w-full object-cover rounded-xl shadow-lg md:w-[40rem] md:h-[43rem] mb-[1.5rem]"
+                      className="w-full object-cover rounded-xl shadow-lg  md:h-[43rem] mb-[1.5rem]"
                   />
               )}
 
@@ -72,16 +54,28 @@ export default function DoctorPage() {
             </div>
 
 
-              <p className="text-xl md:text-[1.5rem] text-foreground mb-[1.5rem] ">{doctor.position[lang]}</p>
+              <p className="text-xl md:text-[1.5rem] pl-[1.5rem] text-foreground mb-[3.5rem] ">{doctor.position[lang]}</p>
+
+
               <Button
                   as={Link}
-                  to={`/${lang}/`}
-                  className="w-full md:w-[33rem] p-[1.5rem] rounded-2xl text-center  hover:bg-sky-600 duration-300 bg-black text-white mt-auto"
+                  to={`/${lang}/doctors/${doctor.slug}`}
+                  className=" md:w-fit py-[1.25rem]  px-[3.5rem] rounded-[2.5rem]
+                          flex items-center justify-center
+                          text-white
+                          text-[1.25rem]
+                          font-semibold
+                          bg-black
+                          object-cover
+                          hover:bg-[var(--primary)] duration-500  w-fit
+                         "
               >
                 {t("doctors.bookAppointment", {
                   name: doctor.shortName[lang],
                 })}
               </Button>
+
+
             </div>
 
           {/* ПРАВАЯ КОЛОНКА */}

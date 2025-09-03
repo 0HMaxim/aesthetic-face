@@ -25,8 +25,6 @@ const App: React.FC = () => {
             path="/"
             element={<Navigate to={`/${import.meta.env.VITE_APP_LOCALE || 'en'}`} replace />}
         />
-
-
         <Route path=":lang/*" element={<AppLayout />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />

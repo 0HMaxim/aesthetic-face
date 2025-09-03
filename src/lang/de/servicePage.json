@@ -1,7 +1,8 @@
 {
-  "title": "Наши услуги",
-  "description": "Мы предлагаем широкий спектр медицинских услуг",
-  "subservices": "Подуслуги",
-  "doctors": "Наши специалисты",
-  "faq": "Часті запитання"
+  "procedureCost": "Kosten der Prozedur",
+  "doctors": "Ärzte, die das Verfahren durchführen",
+  "gallery": "Galerie der Arbeiten",
+  "about": "über",
+  "reviews": "Bewertungen unserer Kunden",
+  "otherServices": "Andere Dienstleistungen in dieser Kategorie"
 }

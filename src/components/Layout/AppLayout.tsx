@@ -26,7 +26,6 @@ export default function AppLayout() {
         ">
           <Header />
           <main className="w-full bg-background">
-
             <AnimatePresence mode="wait">
               <motion.div
                   key={location.pathname} // ключ заставляет React "перезапустить" анимацию при смене пути
@@ -36,6 +35,8 @@ export default function AppLayout() {
                   transition={{ duration: 0.4 }}
               >
                 <Outlet />
+
+
               </motion.div>
             </AnimatePresence>
 
