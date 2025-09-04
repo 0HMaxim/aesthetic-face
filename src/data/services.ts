@@ -9,7 +9,6 @@ import type {Photo} from "../models/Photo.ts";
 
 
 export const services: Service[] = [
-
   {
     id: "service1",
     title: {
@@ -9234,6 +9233,7 @@ export const faqs: FAQ[] = [
   },
   {
     id: "faq9",
+    serviceId: "service2",
     subserviceId: "subservice6",
     question: {
       uk: "Чим відрізняється ультразвукова чистка від механічної?",

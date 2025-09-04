@@ -9,5 +9,6 @@ export default defineConfig({
       compiler: 'jsx',
     }),
   ],
+
   base: "/aesthetic-face/",
 });

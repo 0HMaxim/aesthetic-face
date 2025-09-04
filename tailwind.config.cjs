@@ -1,4 +1,4 @@
-// tailwind.config.js
+// tailwind.config.cjs
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -10,13 +10,14 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        background: "var(--background)",   // теперь есть bg-background
-        primary: "var(--primary)",         // bg-primary
+        background: "var(--background)",
+        primary: "var(--primary)",
       },
       colors: {
-        foreground: "var(--foreground)",   // text-foreground
-        secondary: "var(--secondary)",     // text-secondary / bg-secondary
-        muted: "var(--muted)",     // text-secondary / bg-secondary
+        foreground: "var(--foreground)",
+        secondary: "var(--secondary)",
+        muted: "var(--muted)",
+        primary: "var(--primary)",
       },
     },
   },

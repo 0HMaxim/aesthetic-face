@@ -8,25 +8,20 @@ export default function LanguageSwitcher() {
   const navigate = useNavigate();
 
   const changeLanguage = (newLang: string) => {
-    const base = import.meta.env.BASE_URL;
-    const currentPath = window.location.pathname.replace(base, "");
+    // Получаем текущий путь после #
+    const currentHash = window.location.hash.replace("#", ""); // "/de/price"
+    const parts = currentHash.split("/").filter(Boolean); // ["de", "price"]
 
-    console.log("BASE:", base);
-    console.log("window.location.pathname:", window.location.pathname);
-    console.log("currentPath:", currentPath);
-
-    const parts = currentPath.split("/");
-    console.log("parts before:", parts);
-
+    // Меняем первый сегмент на новый язык
     parts[0] = newLang;
-    const newPath = "/" + parts.join("/");
 
-    console.log("newPath:", newPath);
+    const newPath = "/" + parts.join("/"); // "/en/price"
 
     i18n.changeLanguage(newLang);
+
+    // Навигация через HashRouter
     navigate(newPath);
   };
-
 
   return (
       <div className="relative inline-block group">
@@ -54,7 +49,7 @@ export default function LanguageSwitcher() {
                   className={`
                 px-4 py-1 cursor-pointer uppercase hover:underline
                 opacity-0 translate-y-1
-                transition-all duration-300 ease-in-out
+                transition-all duration-500 ease-in-out
                 group-hover:opacity-100 group-hover:translate-y-0
               `}
                   style={{ transitionDelay: `${index * 100}ms` }}

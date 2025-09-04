@@ -11,10 +11,22 @@ import {Breadcrumbs} from "../components/Breadcrumbs.tsx";
 import {TopImage} from "../components/TopImage.tsx";
 import {Button} from "@heroui/react";
 
+import { useState } from "react";
+
+// внутри компонента ServicePage
+
+
 export default function ServicePage() {
   const { slug } = useParams<{ slug: string }>();
   const { i18n, t } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
+
+
+  const [faqPage, setFaqPage] = useState(0);
+  const [photoPage, setPhotoPage] = useState(0);
+  const pageSize = 10; // если хочешь задавать отдельно
+
+
 
   // Ищем сначала услугу, потом подуслугу
   const service = services.find(s => s.slug === slug);
@@ -198,8 +210,7 @@ export default function ServicePage() {
 
                   </div>
 
-                  <div className="mt-10">
-                    <div className="flex flex-wrap justify-evenly">
+                    <div className="flex flex-wrap justify-evenly mt-10">
                       {doctors
                       .filter(d => currentItem.doctors?.includes(d.id))
                       .map(doc => (
@@ -236,7 +247,6 @@ export default function ServicePage() {
 
                       ))}
                     </div>
-                  </div>
                   </>
               )}
 
@@ -247,11 +257,13 @@ export default function ServicePage() {
                       <h2 className="text-3xl lg:text-5xl font-[800] mb-[2rem]">
                         {t("servicePage.gallery")}
                       </h2>
-
-                      <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
-                      </p>
                     </div>
-                    <PhotoList photos={currentPhotos} />
+                    <PhotoList
+                        photos={currentPhotos}
+                        currentPage={photoPage}
+                        setCurrentPage={setPhotoPage}
+                        itemsPerPage={pageSize}
+                    />
                   </>
               )}
 
@@ -261,14 +273,18 @@ export default function ServicePage() {
                   <>
                     <div className="py-8 mb-[2.5rem] mt-[2.5rem]">
                       <h2 className="text-3xl lg:text-5xl font-[800] mb-[2.5rem]">
-                        {t("FAQList.title")}
+                        {t("FAQ.title")}
                       </h2>
-
                       <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
                         {t("servicePage.about")} <span className="font-[600] text-[2rem] pl-2">{currentItem.title[lang]}</span>
                       </p>
                     </div>
-                    <FAQList faqs={relatedFaqs} serviceId={service?.id} subserviceId={subservice?.id} />
+                    <FAQList
+                        faqs={relatedFaqs}
+                        currentPage={faqPage}
+                        setCurrentPage={setFaqPage}
+                        itemsPerPage={pageSize}
+                    />
                   </>
               )}
 

@@ -42,22 +42,14 @@ export default function Services() {
           </div>
 
 
-          <div className="flex justify-center items-center flex-wrap">
-
-
+          <div className="flex flex-wrap justify-center gap-8">
             {services.map((service) => (
-
                 <Link
                     key={service.id}
                     to={`/${lang}/services/${service.slug}`}
-                    className="group rounded-[10rem] shadow-md transition overflow-hidden
-                     h-[23rem]
-                     w-[32rem]
-                     mr-[2rem]
-                     mb-[4rem]
-                     hover:bg-[var(--primary)]
-                     duration-500
-                     hover:shadow-xl relative"
+                    className="group rounded-[10rem] shadow-md overflow-hidden
+                 h-[23rem] min-w-[30rem] max-w-[32rem] flex-1
+                 hover:bg-[var(--primary)] transition duration-500 hover:shadow-xl relative"
                 >
                   {service.mainImage && (
                       <img
@@ -66,17 +58,15 @@ export default function Services() {
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                   )}
-
-
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full  bg-black/30 text-white p-4 text-center">
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
                     <p className="text-base md:text-[1.5rem] font-normal p-[1.5rem]">
                       {service.title[lang]}
                     </p>
                   </div>
                 </Link>
-
             ))}
           </div>
+
         </div>
       </div>
 

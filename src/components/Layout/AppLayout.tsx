@@ -1,14 +1,15 @@
 // AppLayout.tsx
 import Header from "./Header.tsx";
 import Footer from "./Footer.tsx";
-import { Outlet, useParams } from 'react-router-dom';
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
+import { Outlet, useParams, useLocation } from 'react-router-dom';
 
 export default function AppLayout() {
   const { lang } = useParams<{ lang: string }>();
   const { i18n } = useTranslation();
+  const location = useLocation(); // ← вот это
 
   useEffect(() => {
     if (lang && i18n.language !== lang) {
@@ -25,7 +26,7 @@ export default function AppLayout() {
         <div className="grid min-h-screen w-full grid-rows-[auto_1fr_auto] text-foreground  duration-500 relative
         ">
           <Header />
-          <main className="w-full bg-background">
+          <main className="w-full">
             <AnimatePresence mode="wait">
               <motion.div
                   key={location.pathname} // ключ заставляет React "перезапустить" анимацию при смене пути
@@ -35,7 +36,6 @@ export default function AppLayout() {
                   transition={{ duration: 0.4 }}
               >
                 <Outlet />
-
 
               </motion.div>
             </AnimatePresence>

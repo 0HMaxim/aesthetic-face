@@ -26,7 +26,7 @@ export default function Services() {
 
           <div className="py-8 mb-[3.5rem]">
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
-              {t("home.title")}
+              {t("header.home")}
             </h2>
 
             {/*{t("services.subtitle")}*/}

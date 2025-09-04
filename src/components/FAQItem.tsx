@@ -4,37 +4,30 @@ import { useTranslation } from "react-i18next";
 
 interface FAQItemProps {
   faq: FAQ;
+  index: number; // новый пропс
 }
 
-export default function FAQItem({ faq }: FAQItemProps) {
+export default function FAQItem({ faq, index }: FAQItemProps) {
   const [open, setOpen] = useState(true);
-
   const { i18n } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
-
   return (
       <div className="border-b border-muted py-4 ">
-        {/* Вопрос */}
-        <button
+        <div
             onClick={() => setOpen(!open)}
-            className="w-full flex justify-between items-center text-left"
+            className="w-full flex justify-between items-center text-left cursor-pointer select-text"
         >
-        <span className="md:text-[2rem] text-[1.5rem] font-[700] text-foreground duration-500">
-          {faq.question[lang]}
-        </span>
+          <span className="md:text-[2rem] mr-[2.5rem] text-[1.5rem] font-[700] text-foreground duration-500">
+            {faq.question[lang]}
+          </span>
 
-          {/* Иконка с анимацией поворота */}
-          <span
-              className={`text-[2rem] transform transition-transform duration-300 ${
-                  open ? "rotate-180" : "rotate-0"
-              }`}
-          >
-          {"+"}
-        </span>
-        </button>
+           <span className="text-[2rem] font-bold text-foreground duration-500">
+              #{index}
+            </span>
+        </div>
 
-        {/* Ответ с анимацией выезда */}
+
         <div
             className={`overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${
                 open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 duration-0"

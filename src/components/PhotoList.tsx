@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import type { ImageItem } from "../models/Photo";
 
@@ -8,23 +8,45 @@ import Captions from "yet-another-react-lightbox/plugins/captions";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "yet-another-react-lightbox/plugins/captions.css";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type PhotoListProps = {
-  photos: any[]; // список фото с service, subservice, doctor
+  photos: any[];
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+  itemsPerPage?: number;
 };
 
-export default function PhotoList({ photos }: PhotoListProps) {
+export default function PhotoList({ photos, currentPage, setCurrentPage, itemsPerPage = 9 }: PhotoListProps) {
   const { i18n, t } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
   const [activeIndex, setActiveIndex] = useState(-1);
 
+  // скролл вверх при смене страницы
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
+  // сброс lightbox при изменении фильтра
+  useEffect(() => setActiveIndex(-1), [photos]);
+
+  // ✅ сброс страницы при изменении фильтра
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [photos, setCurrentPage]);
+
+  const paginatedPhotos = useMemo(() => {
+    const start = currentPage * itemsPerPage;
+    return photos.slice(start, start + itemsPerPage);
+  }, [photos, currentPage, itemsPerPage]);
+
+  const totalPages = Math.ceil(photos.length / itemsPerPage);
+
   const activePhoto = useMemo(() => {
     if (activeIndex === -1) return null;
-    const photoIdToFind = photos[activeIndex]?.id;
-    return photos.find(p => p.id === photoIdToFind);
-  }, [activeIndex, photos]);
+    return paginatedPhotos[activeIndex] || photos[activeIndex];
+  }, [activeIndex, paginatedPhotos, photos]);
 
   const slides = useMemo(() => {
     if (!activePhoto) return [];
@@ -34,79 +56,105 @@ export default function PhotoList({ photos }: PhotoListProps) {
       description: activePhoto.description,
     };
     const allImages = [mainImageSlide, ...(activePhoto.imgArr || [])];
-    return allImages.map(img => ({
+    return allImages.map((img) => ({
       src: img.src,
       title: img.title?.[lang],
       description: img.description?.[lang],
     }));
   }, [activePhoto, lang]);
 
-
   return (
-      <div className="flex flex-wrap gap-8 justify-center">
-        {photos.map((photo, photoIndex) => (
-            <div key={photo.id} className="relative w-[28rem] shadow-md overflow-hidden rounded-[4rem] border-2 border-muted group">
-              <img
-                  src={photo.mainImage}
-                  alt={photo.title?.[lang] || "photo"}
-                  className="w-full h-[28rem] object-cover cursor-pointer group-hover:scale-105 transition"
-                  onClick={() => setActiveIndex(photoIndex)}
-              />
-
-              <p className="absolute top-[1vw] right-[1vw] bg-black text-white px-[1vw] py-[0.5vw] text-[1.25rem] rounded-[2rem] opacity-80 hover:scale-125 duration-500"
-                 onClick={() => setActiveIndex(photoIndex)}
+      <>
+        <div className="flex flex-wrap gap-8 justify-center">
+          {paginatedPhotos.map((photo, photoIndex) => (
+              <div
+                  key={photo.id}
+                  className="relative w-[28rem] shadow-md overflow-hidden rounded-[4rem] border-2 border-muted group"
               >
-                <b>{(photo.imgArr?.length ?? 0) + 1}</b> {t("gallery.photos")}
-              </p>
+                <img
+                    src={photo.mainImage}
+                    alt={photo.title?.[lang] || "photo"}
+                    className="w-full h-[28rem] object-cover cursor-pointer group-hover:scale-105 transition"
+                    onClick={() => setActiveIndex(photoIndex)}
+                />
 
-              <div className="p-4 ">
-                {photo.title && <h2 className="text-[1.25rem] px-[1rem] text-foreground font-extrabold mb-[1rem]  duration-500">{photo.title[lang]}</h2>}
-                {photo.description && <p className="text-[1rem] text-foreground font-light mb-[1rem] pl-[2rem]  duration-500">{photo.description[lang]}</p>}
+                <p
+                    className="absolute top-[1vw] right-[1vw] bg-black text-white px-[1vw] py-[0.5vw] text-[1.25rem] rounded-[2rem] opacity-80 hover:scale-125 duration-500"
+                    onClick={() => setActiveIndex(photoIndex)}
+                >
+                  <b>{(photo.imgArr?.length ?? 0) + 1}</b> {t("gallery.photos")}
+                </p>
 
-                {/* Категория, подуслуга, врач */}
-
-                <div className="desc text-sm text-foreground space-y-[0.5rem] pb-[1rem] px-[1rem] duration-500">
-                  {photo.service && (
-                      <p className="font-semibold text-[1rem]">
-                        {t("gallery.category")}:{" "}
-                        <Link
-                            to={`../services/${photo.service.slug}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:underline text-[1.25rem]"
-                        >
-                          {photo.service.title[lang]}
-                        </Link>
+                <div className="p-4 ">
+                  {photo.title && (
+                      <h2 className="text-[1.25rem] px-[1rem] text-foreground font-extrabold mb-[1rem] duration-500">
+                        {photo.title[lang]}
+                      </h2>
+                  )}
+                  {photo.description && (
+                      <p className="text-[1rem] text-foreground font-light mb-[1rem] pl-[2rem] duration-500">
+                        {photo.description[lang]}
                       </p>
                   )}
 
-                  {photo.subservice && (
-                      <p className="text-[1rem]">
-                        {t("gallery.procedure")}:{" "}
-                        <Link
-                            to={`../services/${photo.subservice.slug}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="hover:underline text-[1.25rem]"
-                        >
-                          {photo.subservice.title[lang]}
-                        </Link>
-                      </p>
-                  )}
+                  <div className="desc text-sm text-foreground space-y-[0.5rem] pb-[1rem] px-[1rem] duration-500">
+                    {photo.service && (
+                        <p className="font-semibold text-[1rem]">
+                          {t("gallery.category")}:{" "}
+                          <Link
+                              to={`../services/${photo.service.slug}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="hover:underline text-[1.25rem]"
+                          >
+                            {photo.service.title[lang]}
+                          </Link>
+                        </p>
+                    )}
+
+                    {photo.subservice && (
+                        <p className="text-[1rem]">
+                          {t("gallery.procedure")}:{" "}
+                          <Link
+                              to={`../services/${photo.subservice.slug}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="hover:underline text-[1.25rem]"
+                          >
+                            {photo.subservice.title[lang]}
+                          </Link>
+                        </p>
+                    )}
+                  </div>
                 </div>
-
               </div>
-            </div>
-        ))}
+          ))}
 
-        <Lightbox
-            open={activeIndex > -1}
-            close={() => setActiveIndex(-1)}
-            slides={slides}
-            plugins={[Thumbnails, Captions]}
-            styles={{ container: { backgroundColor: "rgba(0, 0, 0, 0.2)" } }}
-            captions={{ showToggle: true, descriptionTextAlign: "center" }}
-        />
-      </div>
+          <Lightbox
+              open={activeIndex > -1}
+              close={() => setActiveIndex(-1)}
+              slides={slides}
+              plugins={[Thumbnails, Captions]}
+              styles={{ container: { backgroundColor: "rgba(0, 0, 0, 0.2)" } }}
+              captions={{ showToggle: true, descriptionTextAlign: "center" }}
+          />
+        </div>
+
+        {totalPages > 1 && (
+            <div className="flex justify-center gap-2 mt-6">
+              {Array.from({ length: totalPages }, (_, i) => (
+                  <button
+                      key={i}
+                      className={`px-4 py-2 rounded-lg ${
+                          currentPage === i ? "bg-primary text-white" : "bg-muted text-foreground"
+                      }`}
+                      onClick={() => setCurrentPage(i)}
+                  >
+                    {i + 1}
+                  </button>
+              ))}
+            </div>
+        )}
+      </>
   );
 }

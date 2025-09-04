@@ -3,12 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body {
   font-family: 'Montserrat', sans-serif;
 }
-
-
-
 
 :root {
   --background: background: -webkit-linear-gradient(90deg, #d0bdb7,#d1c4c0,#d0bdb7);background: linear-gradient(90deg, #d0bdb7,#d1c4c0,#d0bdb7);
