@@ -32,13 +32,13 @@ export default function FAQList({ faqs, currentPage, setCurrentPage, itemsPerPag
 
   return (
       <div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[6rem] mb-[1.5rem] mt-[2.5rem]">
-          <div className="flex flex-col gap-[4rem]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-[6rem] mb-6 mt-10">
+          <div className="flex flex-col gap-8">
             {leftFaqs.map((faq, i) => (
                 <FAQItem key={faq.id} faq={faq} index={i * 2 + 1} />
             ))}
           </div>
-          <div className="flex flex-col gap-[4rem]">
+          <div className="flex flex-col gap-8">
             {rightFaqs.map((faq, i) => (
                 <FAQItem key={faq.id} faq={faq} index={i * 2 + 2} />
             ))}
@@ -46,7 +46,7 @@ export default function FAQList({ faqs, currentPage, setCurrentPage, itemsPerPag
         </div>
 
         {pageCount > 1 && (
-            <div className="flex justify-center mt-8 gap-2">
+            <div className="flex flex-wrap justify-center mt-8 gap-2 max-w-full overflow-hidden">
               {buttons.map((b, idx) =>
                       b === "dots" ? (
                           <span key={idx} className="px-3 text-foreground">

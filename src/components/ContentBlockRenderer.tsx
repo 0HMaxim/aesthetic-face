@@ -65,7 +65,7 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
                     {imageSrc && (
                         <img
                             src={imageSrc}
-                            className="w-full md:w-fit h-[28rem] object-cover rounded-[0.5rem]"
+                            className="max-w-full md:max-w-[40rem] h-[28rem] object-cover rounded-[0.5rem]"
                         />
                     )}
                     {sideText && (

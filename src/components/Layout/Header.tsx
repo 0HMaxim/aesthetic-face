@@ -29,7 +29,7 @@ export default function Header() {
   return (
       <>
         <header
-            className="w-full flex items-center justify-between p-[3rem] fixed
+            className="w-full flex items-center justify-between md:p-[3rem] p-[1rem] fixed
                  backdrop-blur-[10rem] rounded-[5rem] text-foreground z-20"
         >
           {/* Навигация для больших экранов */}
@@ -59,7 +59,7 @@ export default function Header() {
           </div>
 
           {/* Переключатели справа (для больших экранов) */}
-          <div className="flex gap-2 ml-4 dark:text-black text-white">
+          <div className="flex gap-2 items-center dark:text-black text-white">
             <LanguageSwitcher />
             <ThemeSwitcher />
           </div>
@@ -85,9 +85,9 @@ export default function Header() {
             <button onClick={() => setMenuOpen(false)} className="p-2">
               <IconXMark className="w-8 h-8 text-foreground" />
             </button>
-            <div className="flex gap-2 text-white">
-              <LanguageSwitcher />
-              <ThemeSwitcher />
+            <div className="flex gap-2 items-center text-foreground">
+              <div className="flex items-center h-full"><LanguageSwitcher /></div>
+              <div className="flex items-center h-full"><ThemeSwitcher /></div>
             </div>
           </div>
           {tabs.map((tab, index) => (

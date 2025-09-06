@@ -53,17 +53,23 @@ export default function FAQ() {
         <div className="w-full px-4 md:px-[10rem]">
           <Breadcrumbs />
 
-          <div className="flex gap-4 mb-8 justify-between items-center">
-            <div className="py-8 mb-[3.5rem]">
-              <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">{t("FAQ.title")}</h2>
-              <p className="text-base lg:text-2xl font-normal text-foreground duration-500">{t("FAQ.subtitle")}</p>
-            </div>
+          <div className="py-8 mb-[3.5rem] w-full">
+            {/* Заголовок и подзаголовок */}
+            <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">{t("FAQ.title")}</h2>
 
+            <div className="md:flex justify-between block">
+
+            <p className="text-base lg:text-2xl font-normal text-foreground duration-500 mb-4">{t("FAQ.subtitle")}</p>
             <div>
-              <span className="text-foreground text-[1.5rem] font-[600] mr-[1rem]">{t("FAQ.direction")}</span>
+
+
+
+            {/* Фильтры */}
+            <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">
+              <span className="text-foreground text-[1.5rem] font-[600]">{t("FAQ.direction")}</span>
 
               <select
-                  className="border rounded-lg mr-[1rem] py-2 text-black"
+                  className="border rounded-lg py-2 px-3 text-black w-full md:w-auto"
                   value={selectedService}
                   onChange={e => {
                     setSelectedService(e.target.value);
@@ -76,7 +82,7 @@ export default function FAQ() {
               </select>
 
               <select
-                  className="border rounded-lg py-2 text-black"
+                  className="border rounded-lg py-2 px-3 text-black w-full md:w-auto"
                   value={selectedSubservice}
                   onChange={e => setSelectedSubservice(e.target.value)}
                   disabled={selectedService === "all"}
@@ -85,6 +91,8 @@ export default function FAQ() {
                     <option key={ss.id} value={ss.id}>{ss.title}</option>
                 ))}
               </select>
+            </div>
+          </div>
             </div>
           </div>
 

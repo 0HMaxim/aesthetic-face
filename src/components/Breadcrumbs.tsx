@@ -110,7 +110,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ serviceId, subserviceI
   }
 
   return (
-      <nav aria-label="breadcrumb" className="mb-6 text-sm md:text-base mt-[3rem]">
+      <nav aria-label="breadcrumb" className="mb-6  text-[1rem] mt-[3rem]">
         <ol className="flex items-center space-x-2 text-muted">
           {items.map((item, index) => {
             const isCurrent = index === items.length - 1;

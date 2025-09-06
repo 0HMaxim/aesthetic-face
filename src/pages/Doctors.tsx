@@ -51,6 +51,11 @@ export default function Doctors() {
                       key={item.id}
                       to={`/${lang}/doctors/${item.slug}`}
                       className="group rounded-[10rem] shadow-md  transition overflow-hidden
+
+                      sm:min-h-[40rem]
+                      sm:min-w-[40rem]
+                      sm:max-h-[40rem]
+                      sm:max-w-[40rem]
                     min-h-[40rem]
                     w-[51rem]
                     mr-[2rem]

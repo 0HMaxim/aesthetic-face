@@ -40,7 +40,7 @@ export const services: Service[] = [
       },
       {
         type: "image",
-        content: { image: "https://themedermatology.com/wp-content/uploads/2024/04/tu.png" },
+        content: { image: "https://aquaminskclinic.by/upload/iblock/36b/36b0a7699905ec6acb582ef7b89c3a6a.png" },
         sideText: {
           uk: "Ми використовуємо передові методи діагностики, включаючи цифрову дерматоскопію, для точного визначення характеру кожного новоутворення перед видаленням.",
           ru: "Мы используем передовые методы диагностики, включая цифровую дерматоскопию, для точного определения характера каждого новообразования перед удалением.",

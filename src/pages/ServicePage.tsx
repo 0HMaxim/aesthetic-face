@@ -110,7 +110,7 @@ export default function ServicePage() {
   logServicesAndSubservices();
 
   return (
-      <div className="w-full items-center justify-center ">
+      <div className="w-full items-center justify-center  ">
 
         {imagee && (
             <TopImage source={imagee}/>
@@ -157,28 +157,29 @@ export default function ServicePage() {
 
                   </div>
 
-                  <div className="flex flex-wrap my-10">
-                    {relatedSubservices.map(sub => (
+                    <div className="flex flex-wrap gap-x-[2rem] gap-y-[4rem] my-10">
+                      {relatedSubservices.map(sub => (
+                          <Link
+                              key={sub.id}
+                              to={`/${lang}/services/${sub.slug}`}
+                              className="group rounded-[10rem] shadow-md transition overflow-hidden h-[12rem] w-[15rem]
+                         hover:bg-[var(--primary)] duration-500 hover:shadow-xl relative"
+                          >
+                            {sub.mainImage && (
+                                <img
+                                    src={sub.mainImage}
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
+                            )}
+                            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
+                              <p className="text-base md:text-[1rem] font-normal p-[1.5rem]">
+                                {sub.title[lang]}
+                              </p>
+                            </div>
+                          </Link>
+                      ))}
+                    </div>
 
-                        <Link
-                            key={sub.id}
-                            to={`/${lang}/services/${sub.slug}`}
-                            className="group rounded-[10rem] shadow-md transition overflow-hidden h-[12rem] w-[15rem] mr-[2rem] mb-[4rem] hover:bg-[var(--primary)] duration-500 hover:shadow-xl relative"
-                        >
-                          {sub.mainImage && (
-                              <img
-                                  src={sub.mainImage}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                              />
-                          )}
-                          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
-                            <p className="text-base md:text-[1rem] font-normal p-[1.5rem]">
-                              {sub.title[lang]}
-                            </p>
-                          </div>
-                        </Link>
-                    ))}
-                  </div>
                   </>
 
               )}
@@ -210,14 +211,14 @@ export default function ServicePage() {
 
                   </div>
 
-                    <div className="flex flex-wrap justify-evenly mt-10">
+                  <div className="flex flex-wrap justify-evenly mt-10 gap-x-[2.5rem]">
                       {doctors
                       .filter(d => currentItem.doctors?.includes(d.id))
                       .map(doc => (
                           <Link
                               key={doc.id}
                               to={`/${lang}/doctors/${doc.slug}`}
-                              className="group rounded-[7rem] shadow-md overflow-hidden w-[25rem] mb-[1.5rem] mr-[2.5rem] flex flex-col hover:shadow-xl hover:bg-[var(--primary)] transition duration-500"
+                              className="group rounded-[7rem] shadow-md overflow-hidden w-full sm:w-[25rem] mb-[1.5rem] flex flex-col hover:shadow-xl hover:bg-[var(--primary)] transition duration-500"
                           >
                             {/* Фото сверху */}
                             {doc.photo && (
@@ -253,7 +254,7 @@ export default function ServicePage() {
 
               {currentPhotos.length > 0 && (
                   <>
-                    <div className="py-8 mb-[2.5rem] mt-[3rem]">
+                    <div className="pt-8 mt-[3rem]">
                       <h2 className="text-3xl lg:text-5xl font-[800] mb-[2rem]">
                         {t("servicePage.gallery")}
                       </h2>
@@ -271,11 +272,11 @@ export default function ServicePage() {
               {/* FAQ */}
               {relatedFaqs.length > 0 && (
                   <>
-                    <div className="py-8 mb-[2.5rem] mt-[2.5rem]">
+                    <div className="pt-8 mt-[2.5rem]">
                       <h2 className="text-3xl lg:text-5xl font-[800] mb-[2.5rem]">
                         {t("FAQ.title")}
                       </h2>
-                      <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
+                      <p className="text-[2rem] font-normal text-foreground duration-500">
                         {t("servicePage.about")} <span className="font-[600] text-[2rem] pl-2">{currentItem.title[lang]}</span>
                       </p>
                     </div>

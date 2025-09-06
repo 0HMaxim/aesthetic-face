@@ -69,7 +69,7 @@ export default function PhotoList({ photos, currentPage, setCurrentPage, itemsPe
           {paginatedPhotos.map((photo, photoIndex) => (
               <div
                   key={photo.id}
-                  className="relative w-[28rem] shadow-md overflow-hidden rounded-[4rem] border-2 border-muted group"
+                  className="relative w-full max-w-[28rem] shadow-md overflow-hidden rounded-[4rem] border-2 border-muted group"
               >
                 <img
                     src={photo.mainImage}
