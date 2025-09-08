@@ -144,26 +144,25 @@ export default function ServicePage() {
             <div className="">
               {relatedSubservices.length > 0 && (
                   <>
-                  <div className="py-8">
+                    <div className="py-8">
+                      <h2 className="text-3xl lg:text-5xl font-[800] my-[1.5rem]">
+                        {t("servicePage.otherServices")}
+                      </h2>
+                      <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]"></span>
+                      <p className="text-base lg:text-2xl font-normal text-foreground duration-500"></p>
+                    </div>
 
-                    <h2 className="text-3xl lg:text-5xl font-[800] my-[1.5rem]">
-                      {t("servicePage.otherServices")}
-                    </h2>
-                    <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">
-                      </span>
-
-                    <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
-                    </p>
-
-                  </div>
-
-                    <div className="flex flex-wrap gap-x-[2rem] gap-y-[4rem] my-10">
+                    <div className="flex flex-wrap justify-center gap-x-[2rem] gap-y-[2rem] my-10">
                       {relatedSubservices.map(sub => (
                           <Link
                               key={sub.id}
                               to={`/${lang}/services/${sub.slug}`}
-                              className="group rounded-[10rem] shadow-md transition overflow-hidden h-[12rem] w-[15rem]
-                         hover:bg-[var(--primary)] duration-500 hover:shadow-xl relative"
+                              className="group relative overflow-hidden
+                             basis-[45%] h-[9rem]
+                             md:basis-auto md:w-[15rem] md:h-[12rem]
+                             rounded-[10rem] shadow-md
+                             hover:bg-[var(--primary)] hover:shadow-xl
+                             transition duration-500"
                           >
                             {sub.mainImage && (
                                 <img
@@ -172,24 +171,21 @@ export default function ServicePage() {
                                 />
                             )}
                             <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
-                              <p className="text-base md:text-[1rem] font-normal p-[1.5rem]">
+                              <p className="text-[0.9rem] md:text-[1rem] font-normal">
                                 {sub.title[lang]}
                               </p>
                             </div>
                           </Link>
                       ))}
                     </div>
-
                   </>
-
               )}
 
               {/* PriceTable для услуги или подуслуги */}
               {currentItem && (
                   <div className="mb-[2rem] duration-500">
                     <PriceTable
-                        serviceId={parentService?.id}  // родительская услуга
-                        defaultOpen={true}
+                        serviceId={parentService?.id}
                     />
                   </div>
               )}
@@ -197,55 +193,59 @@ export default function ServicePage() {
 
               {/* Врачи */}
               {currentItem.doctors && currentItem.doctors.length > 0 && (
+                  <>
+                    <div className="py-8">
+                      <h2 className="text-3xl lg:text-5xl font-[800] mt-[2rem]">
+                        {t("servicePage.doctors")}
+                      </h2>
+                      <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]"></span>
+                      <p className="text-base lg:text-2xl font-normal text-foreground duration-500"></p>
+                    </div>
 
-                <>
-                  <div className="py-8">
-                    <h2 className="text-3xl lg:text-5xl font-[800] mt-[2rem]">
-                      {t("servicePage.doctors")}
-                    </h2>
-                    <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">
-                      </span>
-
-                    <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
-                    </p>
-
-                  </div>
-
-                  <div className="flex flex-wrap justify-evenly mt-10 gap-x-[2.5rem]">
+                    <div className="flex flex-wrap justify-center gap-[1.5rem] mt-10">
                       {doctors
                       .filter(d => currentItem.doctors?.includes(d.id))
                       .map(doc => (
                           <Link
                               key={doc.id}
                               to={`/${lang}/doctors/${doc.slug}`}
-                              className="group rounded-[7rem] shadow-md overflow-hidden w-full sm:w-[25rem] mb-[1.5rem] flex flex-col hover:shadow-xl hover:bg-[var(--primary)] transition duration-500"
+                              className={`
+                                  group flex flex-col
+                                  w-full sm:w-[25rem] md:w-[22rem] lg:w-[25rem] 
+                                  rounded-[7rem]
+                                  shadow-md overflow-hidden mb-[1.5rem]
+                                  hover:shadow-xl hover:bg-[var(--primary)]
+                                  transition duration-500
+                                `}
                           >
-                            {/* Фото сверху */}
+                            {/* Фото */}
                             {doc.photo && (
-                                <div className="w-full h-5/6 overflow-hidden">
+                                <div className="w-full h-[26rem] sm:h-[28rem] md:h-[30rem] lg:h-[32rem] overflow-hidden">
                                   <img
                                       src={doc.photo}
-                                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                                   />
                                 </div>
                             )}
 
-                            {/* Информация о докторе */}
-                            <div className="p-6 flex flex-col items-center text-center bg-background">
-                              <h2 className="text-[1.25rem] font-extrabold mb-2">{doc.fullName[lang]}</h2>
-                              <p className="text-[1rem] font-light mb-4">{doc.position[lang]}</p>
+                            {/* Информация */}
+                            <div className="p-4 md:p-6 flex flex-col items-center text-center bg-primary">
+                              <h2 className="text-[1rem] sm:text-[1.25rem] md:text-[1.1rem] font-extrabold mb-1 md:mb-2">
+                                {doc.fullName[lang]}
+                              </h2>
+                              <p className="text-[0.9rem] sm:text-[1rem] md:text-[0.95rem] font-light mb-2 md:mb-4">
+                                {doc.position[lang]}
+                              </p>
 
-                              {/* Кнопка записаться */}
                               <Button
                                   as={Link}
                                   to={`/${lang}/doctors/${doc.slug}`}
-                                  className="px-6 py-3 rounded-full bg-black text-white font-semibold hover:bg-[var(--primary)] transition duration-500"
+                                  className="px-4 py-2 md:px-6 md:py-3 rounded-full bg-black text-white text-[0.85rem] sm:text-[1rem] font-semibold hover:bg-[var(--primary)]"
                               >
                                 {t("doctors.bookAppointment", { name: doc.shortName[lang] })}
                               </Button>
                             </div>
                           </Link>
-
                       ))}
                     </div>
                   </>

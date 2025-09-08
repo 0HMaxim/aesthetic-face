@@ -9,7 +9,7 @@ type Props = {
   defaultOpen?: boolean;
 };
 
-const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, defaultOpen = false }) => {
+const PriceTable: React.FC<Props> = ({ serviceId, subserviceId }) => {
   const { i18n } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
@@ -22,16 +22,15 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, defaultOpen = fa
 
   // Состояния
   const [openSections, setOpenSections] = useState<boolean[]>(() =>
-      filteredPrices.map(() => defaultOpen)
+      filteredPrices.map((_, i) => i === 0) // только первая true
   );
   const [activeItems, setActiveItems] = useState<{ [key: string]: boolean }>({});
 
   // Сброс состояния при смене сервиса/подуслуги
   useEffect(() => {
-    setOpenSections(filteredPrices.map(() => defaultOpen));
+    setOpenSections(filteredPrices.map((_, i) => i === 0));
     setActiveItems({});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [serviceId, subserviceId]); // <-- зависим только от id, не от массива
+  }, [serviceId, subserviceId]);
 
   const toggleSection = (index: number) => {
     setOpenSections(prev =>
@@ -52,16 +51,16 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, defaultOpen = fa
                   onClick={() => toggleSection(idx)}
                   className="w-full text-left flex justify-between items-center relative"
               >
-                <h2 className="font-[800] text-[2rem] py-[1.5rem]">
+                <h2 className="font-[800] text-[1.2rem] lg:text-[2rem] py-[0.8rem] lg:py-[1.5rem]">
                   {data.category[lang]}
                 </h2>
                 <span
-                    className={`text-[2rem] transform transition-transform duration-500 absolute right-[2.5rem] ${
+                    className={`text-[1.2rem] lg:text-[2rem] transform transition-transform duration-500 absolute right-[1rem] lg:right-[2.5rem] ${
                         openSections[idx] ? "rotate-180" : "rotate-0"
                     }`}
                 >
-              +
-            </span>
+                +
+              </span>
               </button>
 
               <div
@@ -69,34 +68,36 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, defaultOpen = fa
                       openSections[idx] ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0 duration-0"
                   }`}
               >
-                <table className="w-full text-left border-collapse table-fixed">
+                <table className="w-full text-left border-collapse table-auto">
                   <colgroup>
-                    <col className="w-[10%]" />
-                    <col className="w-[70%]" />
-                    <col className="w-[20%]" />
+                    <col className="w-auto" /> {/* ширина по содержимому */}
+                    <col className="w-[9999px]" /> {/* занимает всё остальное */}
+                    <col className="w-[1%]" /> {/* компактная, под цену */}
                   </colgroup>
 
                   <thead>
-                  <tr className="border-b-2 border-muted text-[1.5rem]">
-                    <th className="px-[3rem] py-[1.5rem] font-[700]">
+                  <tr className="border-b-2 border-muted text-[0.9rem] lg:text-[1.5rem]">
+                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700] whitespace-nowrap">
                       {data.columns.duration[lang]}
                     </th>
-                    <th className="px-[3rem] py-[1.5rem] font-[700]">
+                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700]">
                       {data.columns.procedure[lang]}
                     </th>
-                    <th className="px-[3rem] py-[1.5rem] font-[700]">
+                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700] text-right">
                       {data.columns.price[lang]}
                     </th>
                   </tr>
                   </thead>
 
-                  <tbody className="text-[1.25rem]">
+
+
+                  <tbody className="text-[0.875rem] md:text-[1.25rem]">
                   {data.sections.map((section, sIndex) => (
                       <React.Fragment key={sIndex}>
                         <tr>
                           <td
                               colSpan={3}
-                              className="uppercase font-bold px-[3rem] py-[1.5rem] border-b border-muted"
+                              className="uppercase font-bold px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-b border-muted"
                           >
                             {section.subtitle[lang]}
                           </td>
@@ -108,24 +109,23 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, defaultOpen = fa
                           return (
                               <tr
                                   key={iIndex}
-                                  className={`border-b border-muted duration-300 text-foreground ${
-                                      active ? "bg-[var(--primary)]" : ""
+                                  className={`border-b border-muted duration-500 text-foreground ${
+                                      active ? "bg-primary" : ""
                                   }`}
-                                  style={{ height: "50px" }}
                               >
-                                <td className="px-[3rem] py-[1.5rem] border-r border-muted">
+                                <td className="pl-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-r border-muted">
                                   {item.duration}
                                 </td>
-                                <td className="px-[3rem] py-[1.5rem]">
+                                <td className="px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem]">
                                   {item.procedure[lang]}
                                 </td>
-                                <td className="px-[3rem] py-[1.5rem] border-l border-muted flex items-center justify-between">
-                                  {item.price}
+                                <td className="px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-l border-muted flex flex-col md:flex-row items-start md:items-center justify-between">
+                                  <span>{item.price}</span>
                                   <button
                                       onClick={() => toggleItem(idx, sIndex, iIndex)}
-                                      className="ml-2"
+                                      className="mt-1 md:mt-0 md:ml-2"
                                   >
-                                    <SolarPowerBold className="size-[1.5rem]" />
+                                    <SolarPowerBold className="size-[1rem] md:size-[1.5rem]" />
                                   </button>
                                 </td>
                               </tr>

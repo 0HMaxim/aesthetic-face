@@ -70,7 +70,7 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
                     )}
                     {sideText && (
                         <p
-                            className="text-base md:text-xl text-foreground"
+                            className="text-base md:text-xl text-foreground  duration-500"
                             style={{ whiteSpace: "pre-line" }}
                         >
                           {sideText}
@@ -95,7 +95,7 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
               return (
                   <ul
                       key={`list-${index}`}
-                      className="list-disc list-inside mb-6 space-y-2 text-base md:text-xl text-foreground"
+                      className="list-disc list-inside mb-6 space-y-2 text-base md:text-xl text-foreground  duration-500"
                   >
                     {items.map((item, idx) => (
                         <li key={idx}>{item}</li>

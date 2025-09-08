@@ -32,7 +32,7 @@ export default function FAQItem({ faq, index }: FAQItemProps) {
                 open ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 duration-0"
             }`}
         >
-          <div className="pt-4 pr-0 md:pr-4 text-[1rem] md:text-[1.5rem] pb-2 pl-0 md:pl-4 mb-4 text-foreground break-words w-full">
+          <div className="pt-4 pr-0 md:pr-4 text-[1rem] md:text-[1.5rem] pb-2 pl-0 md:pl-4 mb-4 text-foreground break-words w-full  duration-500">
             {faq.answer[lang]}
           </div>
         </div>

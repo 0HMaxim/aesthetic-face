@@ -59,7 +59,7 @@ export default function Header() {
           </div>
 
           {/* Переключатели справа (для больших экранов) */}
-          <div className="flex gap-2 items-center dark:text-black text-white">
+          <div className="flex gap-2 items-center ">
             <LanguageSwitcher />
             <ThemeSwitcher />
           </div>

@@ -9,13 +9,13 @@ export interface ImageItem {
 
 export interface Photo {
   id: string;
-  serviceId?: string;       // привязка к услуге
-  subserviceId?: string;    // привязка к подуслуге
-  doctorId?: string;        // привязка к врачу
+  serviceId?: string;
+  subserviceId?: string;
+  doctorId?: string;
 
   title?: LocalizedText;
   description?: LocalizedText;
 
   mainImage: string;
-  imgArr?: ImageItem[];     // дополнительные фото для лайтбокса
+  imgArr?: ImageItem[];
 }

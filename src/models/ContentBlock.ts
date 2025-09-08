@@ -6,5 +6,5 @@ export type ContentBlockType = "paragraph" | "image" | "heading" | "list";
 export interface ContentBlock {
   type: ContentBlockType;
   content?: LocalizedText;
-  sideText?: LocalizedText; // Для картинки — текст рядом
+  sideText?: LocalizedText;
 }

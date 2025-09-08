@@ -27,7 +27,6 @@ export default function Price() {
               {t("price.title")}
             </h2>
 
-            {/*{t("services.subtitle")}*/}
             <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">
               </span>
 
@@ -37,7 +36,7 @@ export default function Price() {
           </div>
 
 
-          <PriceTable defaultOpen={true} />
+          <PriceTable />
 
         </div>
 

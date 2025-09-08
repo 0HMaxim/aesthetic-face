@@ -65,72 +65,75 @@ export default function PhotoList({ photos, currentPage, setCurrentPage, itemsPe
 
   return (
       <>
-        <div className="flex flex-wrap gap-8 justify-center">
-          {paginatedPhotos.map((photo, photoIndex) => (
-              <div
-                  key={photo.id}
-                  className="relative w-full max-w-[28rem] shadow-md overflow-hidden rounded-[4rem] border-2 border-muted group"
+      <div className="flex flex-wrap justify-center gap-4">
+        {paginatedPhotos.map((photo, photoIndex) => (
+            <div
+                key={photo.id}
+                className="relative w-full sm:w-[26rem] md:w-[24rem] lg:w-[26rem]
+                 shadow-md overflow-hidden rounded-[5rem] border-2 border-muted group pb-4"
+            >
+              <img
+                  src={photo.mainImage}
+                  alt={photo.title?.[lang] || "photo"}
+                  className="w-full h-[18rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem] object-cover cursor-pointer group-hover:scale-105 transition"
+                  onClick={() => setActiveIndex(photoIndex)}
+              />
+
+              <p
+                  className="absolute top-5 right-7 bg-black text-white p-3 md:text-[1.2rem] text-[1rem] rounded-[5rem] opacity-80 hover:scale-110 duration-500"
+                  onClick={() => setActiveIndex(photoIndex)}
               >
-                <img
-                    src={photo.mainImage}
-                    alt={photo.title?.[lang] || "photo"}
-                    className="w-full h-[28rem] object-cover cursor-pointer group-hover:scale-105 transition"
-                    onClick={() => setActiveIndex(photoIndex)}
-                />
+                <b>{(photo.imgArr?.length ?? 0) + 1}</b> {t("gallery.photos")}
+              </p>
 
-                <p
-                    className="absolute top-[1vw] right-[1vw] bg-black text-white px-[1vw] py-[0.5vw] text-[1.25rem] rounded-[2rem] opacity-80 hover:scale-125 duration-500"
-                    onClick={() => setActiveIndex(photoIndex)}
-                >
-                  <b>{(photo.imgArr?.length ?? 0) + 1}</b> {t("gallery.photos")}
-                </p>
+              <div className="p-2 sm:p-4">
+                {photo.title && (
+                    <h2 className="text-[1.2rem] md:text-[1.25rem] font-extrabold mb-2">
+                      {photo.title[lang]}
+                    </h2>
+                )}
+                {photo.description && (
+                    <p className="pl-4 pt-2 text-[0.8rem] sm:text-[1rem] font-light mb-2">
+                      {photo.description[lang]}
+                    </p>
+                )}
 
-                <div className="p-4 ">
-                  {photo.title && (
-                      <h2 className="text-[1.25rem] px-[1rem] text-foreground font-extrabold mb-[1rem] duration-500">
-                        {photo.title[lang]}
-                      </h2>
-                  )}
-                  {photo.description && (
-                      <p className="text-[1rem] text-foreground font-light mb-[1rem] pl-[2rem] duration-500">
-                        {photo.description[lang]}
+                <div className="pl-4 text-xs sm:text-sm text-foreground space-y-1">
+                  {photo.service && (
+                      <p className="font-semibold">
+                        {t("gallery.category")}:{" "}
+                        <Link
+                            to={`../services/${photo.service.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:underline"
+                        >
+                          <span className="md:text-[1.2rem] text-[1rem]">{photo.service.title[lang]}</span>
+
+                        </Link>
                       </p>
                   )}
 
-                  <div className="desc text-sm text-foreground space-y-[0.5rem] pb-[1rem] px-[1rem] duration-500">
-                    {photo.service && (
-                        <p className="font-semibold text-[1rem]">
-                          {t("gallery.category")}:{" "}
-                          <Link
-                              to={`../services/${photo.service.slug}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="hover:underline text-[1.25rem]"
-                          >
-                            {photo.service.title[lang]}
-                          </Link>
-                        </p>
-                    )}
-
-                    {photo.subservice && (
-                        <p className="text-[1rem]">
-                          {t("gallery.procedure")}:{" "}
-                          <Link
-                              to={`../services/${photo.subservice.slug}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="hover:underline text-[1.25rem]"
-                          >
-                            {photo.subservice.title[lang]}
-                          </Link>
-                        </p>
-                    )}
-                  </div>
+                  {photo.subservice && (
+                      <p>
+                        {t("gallery.procedure")}:{" "}
+                        <Link
+                            to={`../services/${photo.subservice.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:underline"
+                        >
+                          <span className="md:text-[1.2rem] text-[1rem]">{photo.subservice.title[lang]}</span>
+                        </Link>
+                      </p>
+                  )}
                 </div>
               </div>
-          ))}
+            </div>
+        ))}
 
-          <Lightbox
+
+      <Lightbox
               open={activeIndex > -1}
               close={() => setActiveIndex(-1)}
               slides={slides}
