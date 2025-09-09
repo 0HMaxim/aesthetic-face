@@ -75,7 +75,7 @@ export default function PhotoList({ photos, currentPage, setCurrentPage, itemsPe
               <img
                   src={photo.mainImage}
                   alt={photo.title?.[lang] || "photo"}
-                  className="w-full h-[18rem] sm:h-[22rem] md:h-[26rem] lg:h-[30rem] object-cover cursor-pointer group-hover:scale-105 transition"
+                  className="w-full h-[24rem] md:h-[26rem] object-cover cursor-pointer group-hover:scale-105 transition"
                   onClick={() => setActiveIndex(photoIndex)}
               />
 

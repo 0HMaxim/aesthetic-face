@@ -23,7 +23,7 @@ export default function AppLayout() {
 
 
     return (
-        <div className="grid min-h-screen w-full grid-rows-[auto_1fr_auto] text-foreground  duration-500 relative bg-background
+        <div className="grid min-h-screen w-full grid-rows-[auto_1fr_auto] text-foreground  duration-500 relative
         ">
           <Header />
           <main className="w-full">

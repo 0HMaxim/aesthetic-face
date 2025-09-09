@@ -77,13 +77,13 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId }) => {
 
                   <thead>
                   <tr className="border-b-2 border-muted text-[0.9rem] lg:text-[1.5rem]">
-                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700] whitespace-nowrap">
+                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] text-[0.875rem] md:text-[1.25rem] font-[700] whitespace-nowrap">
                       {data.columns.duration[lang]}
                     </th>
-                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700]">
+                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] text-[0.875rem] md:text-[1.25rem] font-[700]">
                       {data.columns.procedure[lang]}
                     </th>
-                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700] text-right">
+                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] text-[0.875rem] md:text-[1.25rem] font-[700] text-right">
                       {data.columns.price[lang]}
                     </th>
                   </tr>
@@ -120,7 +120,7 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId }) => {
                                   {item.procedure[lang]}
                                 </td>
                                 <td className="px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-l border-muted flex flex-col md:flex-row items-start md:items-center justify-between">
-                                  <span>{item.price}</span>
+                                  <span className="text-nowrap">{item.price}</span>
                                   <button
                                       onClick={() => toggleItem(idx, sIndex, iIndex)}
                                       className="mt-1 md:mt-0 md:ml-2"

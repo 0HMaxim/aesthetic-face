@@ -17,100 +17,99 @@ export default function Doctors() {
   const minExperience = 7; // динамически укажешь сам
 
 
-    return (
-        <div className="w-full items-center justify-center ">
+  return (
+      <div className="w-full items-center justify-center ">
 
 
-          {imagee && (
-              <TopImage source={imagee}/>
-          )}
+        {imagee && (
+            <TopImage source={imagee}/>
+        )}
 
 
 
-          <div className="w-full px-4 md:px-[10rem]">
+        <div className="w-full px-4 md:px-[5rem]">
 
-            <Breadcrumbs />
+          <Breadcrumbs />
 
-            <div className="py-8 mb-[3.5rem]">
-              <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
-                {t("doctors.title")}
-              </h2>
-              <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">
+          <div className="py-8 mb-[3.5rem]">
+            <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
+              {t("doctors.title")}
+            </h2>
+            <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">
                    {t("doctors.subtitle", { years: minExperience })}
                 </span>
-              <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
-                {t("doctors.experience")}
-              </p>
-            </div>
+            <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
+              {t("doctors.experience")}
+            </p>
+          </div>
 
 
-            <div className="flex justify-center items-center flex-wrap">
-
-              {doctors.map((item: Doctor) => (
-                  <Link
-                      key={item.id}
-                      to={`/${lang}/doctors/${item.slug}`}
-                      className="group rounded-[10rem] shadow-md  transition overflow-hidden
-
-                      sm:min-h-[40rem]
-                      sm:min-w-[40rem]
-                      sm:max-h-[40rem]
-                      sm:max-w-[40rem]
-                    min-h-[40rem]
-                    w-[51rem]
-                    mr-[2rem]
-                    justify-between
-                    hover:bg-[var(--primary)] duration-500
-                    hover:shadow-xl
-                    flex relative
-                    mb-[6rem]"
-                  >
-
-                    <div className="pl-[3.5rem] pt-[3.5rem] text-foreground duration-500 w-fit">
-                      <h2 className="text-[2rem] font-extrabold mb-[1.5rem]">{item.fullName[lang]}</h2>
-
-                      <p className="text-[1.2rem] font-light mb-[2.5rem] pb-[4.5rem] pl-[2rem] duration-500">{item.position[lang]}</p>
+          <div className="flex flex-wrap gap-8 justify-center w-full">
+            {doctors.map((item: Doctor) => (
+                <Link
+                    key={item.id}
+                    to={`/${lang}/doctors/${item.slug}`}
+                    className="group rounded-[10rem] shadow-md transition overflow-hidden
+                           flex relative
+                           w-full
+                           md:w-[48%]
+                           xl:max-w-[48%]
+                           min-[1440px]:max-w-[32%]
+                           max-[1440px]:min-w-[48%]
+                           max-h-[35rem]
+                           max-[768px]:min-w-full
 
 
+                           bg-primary duration-500
+                           hover:shadow-xl"
+                    >
+                  <div className="pl-[3.5rem] pt-[3.5rem] text-foreground duration-500 w-fit">
+                    <h2 className="md:text-[1.6rem] text-[1.5rem]  font-extrabold mb-[2.5rem]">
+                      {item.fullName[lang]}
+                    </h2>
+
+                    <p className="md:text-[1.2rem] text-[1rem] font-light mb-[3.5rem] pb-[4.5rem] pl-[2rem] duration-500">
+                      {item.position[lang]}
+                    </p>
+
+                    <Button
+                        as={Link}
+                        to={`/${lang}/doctors/${item.slug}`}
+                        className="md:w-fit p-[1rem] rounded-[3.5rem]
+                        flex items-center justify-center
+                        text-white font-semibold text-[0.85rem]
+                        xl:text-[1.1rem]
+                        md:text-[0.9rem]
+                        bg-black hover:bg-[var(--primary)]
+                        duration-500 w-fit
+                        bottom-0 absolute mb-[3.5rem]"
+                    >
+                      {t("doctors.bookAppointment", {
+                        name: item.shortName[lang],
+                      })}
+                    </Button>
+                  </div>
+
+                  {item.photo && (
                       <Button
                           as={Link}
                           to={`/${lang}/doctors/${item.slug}`}
-                          className=" md:w-fit p-[1rem] rounded-[3.5rem]
-                          flex items-center justify-center
-                          text-white
-                          font-semibold
-                          bg-black
-                          object-cover
-                          hover:bg-[var(--primary)] duration-500 w-fit
-                          bottom-0 absolute mb-[3.5rem] "
+                          className="overflow-hidden w-4/6 min-h-full block p-0"
                       >
-                        {t("doctors.bookAppointment", {
-                          name: item.shortName[lang],
-                        })}
+                        <img
+                            src={item.photo}
+                            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        />
                       </Button>
-                    </div>
-
-
-                    {item.photo && (
-                        <Button as={Link}
-                                to={`/${lang}/doctors/${item.slug}`}
-                                className="overflow-hidden w-4/6 min-h-full block p-0"
-                        >
-                          <img
-                              src={item.photo}
-                              className="w-full  h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </Button>
-                    )}
-
-                  </Link>
-              ))}
-            </div>
-
-
+                  )}
+                </Link>
+            ))}
           </div>
 
+
         </div>
+
+      </div>
 
 
   );

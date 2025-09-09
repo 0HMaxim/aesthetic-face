@@ -23,9 +23,7 @@ export default function Specials() {
             <TopImage source={imagee}/>
         )}
 
-
-
-        <div className="w-full px-4 md:px-[10rem]">
+        <div className="w-full px-4 md:px-[5rem]">
 
           <Breadcrumbs />
 

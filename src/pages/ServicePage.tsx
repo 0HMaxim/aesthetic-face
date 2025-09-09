@@ -116,7 +116,7 @@ export default function ServicePage() {
             <TopImage source={imagee}/>
         )}
 
-        <div className="w-full px-4 md:px-[10rem]">
+        <div className="w-full px-4 md:px-[5rem]">
 
           <Breadcrumbs
               serviceId={parentService?.id}
@@ -152,14 +152,16 @@ export default function ServicePage() {
                       <p className="text-base lg:text-2xl font-normal text-foreground duration-500"></p>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-x-[2rem] gap-y-[2rem] my-10">
+                    <div className="flex flex-wrap justify-center md:gap-x-[2rem] md:gap-y-[2rem] gap-x-[1rem] gap-y-[1rem] my-10">
                       {relatedSubservices.map(sub => (
                           <Link
                               key={sub.id}
                               to={`/${lang}/services/${sub.slug}`}
                               className="group relative overflow-hidden
-                             basis-[45%] h-[9rem]
-                             md:basis-auto md:w-[15rem] md:h-[12rem]
+                             h-[9rem]
+                             w-[11rem]
+                             md:w-[15rem]
+                             md:h-[12rem]
                              rounded-[10rem] shadow-md
                              hover:bg-[var(--primary)] hover:shadow-xl
                              transition duration-500"

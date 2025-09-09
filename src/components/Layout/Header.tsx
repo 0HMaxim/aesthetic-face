@@ -33,7 +33,7 @@ export default function Header() {
                  backdrop-blur-[10rem] rounded-[5rem] text-foreground z-20"
         >
           {/* Навигация для больших экранов */}
-          <nav className="hidden md:flex gap-4 flex-wrap w-full">
+          <nav className="hidden lg:flex gap-4 flex-wrap w-full">
             {tabs.map((tab) => (
                 <Link
                     key={tab.link}
@@ -48,7 +48,7 @@ export default function Header() {
           </nav>
 
           {/* Мобильное меню (кнопка открытия) */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 z-50">
               {menuOpen ? (
                   <IconXMark className="w-8 h-8 text-foreground" />

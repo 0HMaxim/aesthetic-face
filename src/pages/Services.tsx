@@ -21,8 +21,7 @@ export default function Services() {
             <TopImage source={imagee}/>
         )}
 
-
-        <div className="w-full px-4 lg:px-[10rem]">
+        <div className="w-full px-4 md:px-[5rem]">
 
           <Breadcrumbs />
 
@@ -47,8 +46,13 @@ export default function Services() {
                     key={service.id}
                     to={`/${lang}/services/${service.slug}`}
                     className="group rounded-[10rem] shadow-md overflow-hidden
-                 basis-full md:basis-[30rem] h-[23rem]
-                 hover:bg-[var(--primary)] transition duration-500 hover:shadow-xl relative"
+                      lg:max-w-[30rem]
+                      md:max-h-[23rem]
+                      md:max-w-[25rem]
+                      max-[1024px]:min-w-[48%]
+                      h-[20rem]
+                      w-[24rem]
+                      hover:bg-[var(--primary)] transition duration-500 hover:shadow-xl relative"
                 >
                   {service.mainImage && (
                       <img
