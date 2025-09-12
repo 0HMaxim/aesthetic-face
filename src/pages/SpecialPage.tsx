@@ -56,54 +56,59 @@ export default function SpecialPage() {
           <div>
           <div className="py-8 mb-[2.5rem] mt-[3rem]">
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[2rem]">
-              Також може буде цікаво
+              {t("specialPage.mayAlsoInterestYou")}
             </h2>
 
             <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
             </p>
           </div>
 
-            <div className="flex flex-wrap justify-center items-center  pt-[2.5rem]">
-
+            <div className="flex flex-wrap justify-center items-center gap-6 pt-[2.5rem]">
               {specials
               .filter((item: Scpecials) => item.slug !== special.slug)
               .map((item: Scpecials) => (
                   <Link
                       key={item.id}
                       to={`/${lang}/specials/${item.slug}`}
-                      className="group rounded-2xl shadow-md  transition overflow-hidden
-                    h-[24rem] w-fit mr-[1rem] justify-between flex relative mb-[6rem]
-                    hover:shadow-xl
-                    hover:bg-[var(--primary)] duration-500
+                      className="
+                      group rounded-2xl shadow-md transition overflow-hidden
+                      w-full sm:w-[32rem] md:w-[45rem] h-auto
+                      flex flex-col md:flex-row md:gap-[2rem]
+                      justify-between relative
+                      bg-primary
+                      mb-[6rem]
+                      hover:shadow-xl
+                      duration-500
                     "
                   >
-                    <div className="p-[2.5rem] text-foreground w-2/6 duration-500">
-                      <h2 className="text-[2rem] font-extrabold mb-[1.5rem]">{item.title[lang]}</h2>
-                      <p className="text-[1.2rem] font-light mb-[2.5rem] pl-[2rem] duration-300">{item.subtitle[lang]}</p>
+                    {/* Текст */}
+                    <div className="p-[2rem] text-foreground w-full md:w-2/6 flex flex-col">
+                      <h2 className="text-[1.8rem] font-extrabold mb-[1rem]">{item.title[lang]}</h2>
+                      <p className="text-[1.2rem] pl-[1.5rem] font-light mb-[1.5rem]">{item.subtitle[lang]}</p>
 
                       <Button
                           as={Link}
                           to={`/${lang}/specials/${item.slug}`}
-                          className="w-full md:w-fit p-[1rem] rounded-[3.5rem] mb-[3.5rem]
+                          className="
+                          w-full md:w-auto px-[1.5rem] py-[0.75rem] rounded-[3.5rem]
                           flex items-center justify-center
-                          text-white
-                          font-semibold
+                          text-white font-semibold
                           bg-black
-                          object-cover
-                          absolute
-                          hover:bg-[var(--primary)] duration-500
-                          bottom-0"
+                          hover:bg-primary
+                          transition-colors duration-500
+                          mt-auto
+                        "
                       >
                         {t("specials.learnMore")}
                       </Button>
                     </div>
 
+                    {/* Картинка */}
                     {item.mainImage && (
                         <Button
                             as={Link}
                             to={`/${lang}/specials/${item.slug}`}
-                            className="overflow-hidden w-4/6 h-full block p-0
-                            "
+                            className="overflow-hidden w-full md:w-4/6 block p-0 mt-4 md:mt-0"
                         >
                           <img
                               src={item.mainImage}
@@ -114,6 +119,7 @@ export default function SpecialPage() {
                   </Link>
               ))}
             </div>
+
           </div>
 
         </div>

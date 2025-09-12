@@ -70,6 +70,7 @@ export default function PhotoList({ photos, currentPage, setCurrentPage, itemsPe
             <div
                 key={photo.id}
                 className="relative w-full sm:w-[26rem] md:w-[24rem] lg:w-[26rem]
+
                  shadow-md overflow-hidden rounded-[5rem] border-2 border-muted group pb-4"
             >
               <img

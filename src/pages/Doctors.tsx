@@ -64,13 +64,14 @@ export default function Doctors() {
                            hover:shadow-xl"
                     >
                   <div className="pl-[3.5rem] pt-[3.5rem] text-foreground duration-500 w-fit">
-                    <h2 className="md:text-[1.6rem] text-[1.5rem]  font-extrabold mb-[2.5rem]">
+                    <h2 className="md:text-[1.6rem] text-[1.5rem] font-extrabold mb-[1rem]">
                       {item.fullName[lang]}
                     </h2>
 
-                    <p className="md:text-[1.2rem] text-[1rem] font-light mb-[3.5rem] pb-[4.5rem] pl-[2rem] duration-500">
+                    <p className="md:text-[1.2rem] text-[1rem] font-light mb-[3.5rem] pb-[4.5rem] pl-[0.5rem] duration-500">
                       {item.position[lang]}
                     </p>
+
 
                     <Button
                         as={Link}

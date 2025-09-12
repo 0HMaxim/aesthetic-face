@@ -13,7 +13,7 @@ body {
   --foreground: #1a1a1f;
   --background: linear-gradient(90deg, #0179d5,#8adaea,#f4f5f5);
   --secondary: linear-gradient(90deg, #1abc9c,#1f2c51);
-  --primary: linear-gradient(90deg, #8c11fa,#009ca0);
+  --primary: linear-gradient(50deg, #ffffff,#9fdef9,#087efd);
 
   --muted: #4A4A4A;
 }
@@ -29,8 +29,6 @@ body {
 }
 
 
-
-  /* Выравнивание заголовка в галерее по центру */
 .yarl__slide_title {
   text-align: center !important;
 }

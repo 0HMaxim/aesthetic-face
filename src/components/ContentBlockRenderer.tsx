@@ -60,23 +60,34 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
               return (
                   <div
                       key={`image-${index}`}
-                      className="my-6 flex flex-col md:flex-row items-start gap-4"
+                      className="my-6 flex flex-col lg:flex-row items-stretch gap-4"
                   >
                     {imageSrc && (
                         <img
                             src={imageSrc}
-                            className="max-w-full md:max-w-[40rem] h-[28rem] object-cover rounded-[0.5rem]"
+                            className="
+                            w-full max-w-full lg:max-w-[40rem]
+                            h-auto lg:h-[32rem]
+                            object-cover
+                            rounded-[0.5rem]"
                         />
                     )}
+
                     {sideText && (
-                        <p
-                            className="text-base md:text-xl text-foreground  duration-500"
-                            style={{ whiteSpace: "pre-line" }}
-                        >
-                          {sideText}
-                        </p>
+                        <div className="w-full lg:flex-1 flex justify-center items-center">
+                          <p
+                              className="text-base md:text-xl text-foreground duration-500"
+                              style={{ whiteSpace: 'pre-line' }}
+                          >
+                            {sideText}
+                          </p>
+                        </div>
                     )}
                   </div>
+
+
+
+
               );
             }
 

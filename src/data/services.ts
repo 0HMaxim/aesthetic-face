@@ -3137,7 +3137,7 @@ export const subservices: Subservice[] = [
       },
       {
         type: "image",
-        content: { image: "https://belecia.ru/wp-content/uploads/2023/05/piling-lica-doma_610d448cbb285.jpg" },
+        content: { image: "https://ice-face.ru/wp-content/uploads/2023/07/himicheskij-piling-1.jpg" },
         sideText: {
           uk: "Наш косметолог індивідуально підбирає тип пілінгу та концентрацію кислот, виходячи зі стану вашої шкіри та бажаного результату.",
           ru: "Наш косметолог индивидуально подбирает тип пилинга и концентрацию кислот, исходя из состояния вашей кожи и желаемого результата.",
