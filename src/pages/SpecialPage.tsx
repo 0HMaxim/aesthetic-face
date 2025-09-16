@@ -78,8 +78,7 @@ export default function SpecialPage() {
                       bg-primary
                       mb-[6rem]
                       hover:shadow-xl
-                      duration-500
-                    "
+                      duration-500"
                   >
                     {/* Текст */}
                     <div className="p-[2rem] text-foreground w-full md:w-2/6 flex flex-col">

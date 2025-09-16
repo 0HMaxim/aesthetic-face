@@ -6,6 +6,7 @@ import type {FAQ} from "../models/FAQ.ts";
 import type {Scpecials} from "../models/Scpecials.ts";
 import type {PriceModel} from "../models/Price";
 import type {Photo} from "../models/Photo.ts";
+import type {GeneralInfo} from "../models/GeneralInfo.ts";
 
 
 export const services: Service[] = [
@@ -8443,7 +8444,7 @@ export const subservices: Subservice[] = [
       de: "Sklerotherapie für Krampfadern"
     },
     slug: "skleroterapiya-varykoznykh-ven",
-    mainImage: "https://medifrancesolution.com/image/cache/data/blog/varices22/varices43-500x0s.jpg",
+    mainImage: "https://www.mlilukliinik.ee/storage/_core/skleroterapiya.jpeg",
     content: [
       {
         type: "heading",
@@ -11759,6 +11760,44 @@ export const photos: Photo[] = [
       }
     ]
   },
+
+  {
+    id: "photo00",
+    serviceId: "service8",
+    subserviceId: "subservice31",
+    title: {
+      uk: "До та після мезотерапії обличчя",
+      ru: "До и после мезотерапии лица",
+      en: "Before and After Facial Mesotherapy",
+      de: "Vorher-Nachher Gesichtsmesotherapie"
+    },
+    description: {
+      uk: "Результат мезотерапії для покращення тонусу шкіри, зволоження та зменшення дрібних зморшок.",
+      ru: "Результат мезотерапии для улучшения тонуса кожи, увлажнения и уменьшения мелких морщин.",
+      en: "The result of mesotherapy for improving skin tone, hydration, and reducing fine wrinkles.",
+      de: "Das Ergebnis der Mesotherapie zur Verbesserung des Hauttons, der Feuchtigkeit und zur Reduzierung feiner Falten."
+    },
+    mainImage: "https://savanna.in.ua/wp-content/uploads/2019/03/injekciji-mezoterapija-oblychchya-pigmentaciya-salon-krasy-savanna.jpg",
+    imgArr: [
+      {
+        src: "https://janvi.com.ua/wp-content/uploads/2019/12/1.1.1-999x1024.jpg",
+        title: {
+          uk: "Свіжий та сяючий вигляд",
+          ru: "Свежий и сияющий вид",
+          en: "Fresh and Radiant Look",
+          de: "Frisches und strahlendes Aussehen"
+        },
+        description: {
+          uk: "Шкіра виглядає відпочилою та здоровою.",
+          ru: "Кожа выглядит отдохнувшей и здоровой.",
+          en: "The skin looks rested and healthy.",
+          de: "Die Haut sieht erholt und gesund aus."
+        }
+      }
+    ]
+  },
+
+
   // Service 9: Biorevitalisierung (ID: service9) -> Subservice 35: Gesichtsbiorevitalisierung
   {
     id: "photo10",
@@ -12052,7 +12091,7 @@ export const photos: Photo[] = [
       }
     ]
   },
-  // Service 11: Laserentfernung von Dehnungsstreifen & Narben (ID: service11) -> Subservice 43: Entfernung von Post-Akne-Narben
+
   {
     id: "photo20",
     serviceId: "service11",
@@ -12089,3 +12128,49 @@ export const photos: Photo[] = [
     ]
   }
 ];
+
+export const generalInfo: GeneralInfo = {
+  address: {
+    uk: "Софіївська Борщагівка, вул. Академіка Шалімова 67В",
+    ru: "Софиевская Борщаговка, ул. Академика Шалимова 67В",
+    en: "Sofiivska Borshchahivka, Akademika Shalimova 67V",
+    de: "Sofiivska Borshchahivka, Akademika Shalimova 67V"
+  },
+  phone: {
+    uk: "+38(098)-622-35-05",
+    ru: "+38(098)-622-35-05",
+    en: "+38(098)-622-35-05",
+    de: "+38(098)-622-35-05"
+  },
+  working_hours: [
+    {
+      days: [
+        { uk: "Пн-Сб",
+          ru: "Пн-Сб",
+          en: "Mon-Sat",
+          de: "Mo-Sa" }
+      ],
+      hours: "10:00 - 20:00"
+    },
+    /*{
+      days: {
+        uk: "Нд",
+        ru: "Вс",
+        en: "Sun",
+        de: "So"
+      },
+      hours: "10:00 - 18:00"
+    }*/
+  ],
+  email: "beseda.aesthetic.clinic@ukr.net",
+  messengers: {
+    telegram: "https://t.me/besedaclinic",
+    viber: "viber://chat?number=%2B380986223505",
+    whatsapp: "https://wa.me/380986223505"
+  },
+  socials: {
+    instagram: "https://www.instagram.com/beseda_aesthetic_clinic",
+    facebook: "#"
+  },
+  map: "<iframe src=\"https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9307.558190835218!2d10.137663!3d54.323584!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b257006749bc5f%3A0x8f1b9e3b04ce89ed!2sAesthetic%20Face%20Beauty%20Salon!5e0!3m2!1sru!2sde!4v1758060486545!5m2!1sru!2sde\" class=\"w-full h-full min-h-[400px]\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
+};
