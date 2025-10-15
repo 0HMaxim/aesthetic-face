@@ -10,11 +10,12 @@ import Services from './pages/Services';
 import Price from './pages/Price';
 import FAQ from './pages/FAQ';
 import Contact from './pages/Contact';
-import Blog from './pages/Blog';
+import Blogs from './pages/Blogs.tsx';
 import Gallery from './pages/Gallery';
 import ServicePage from './pages/ServicePage';
 import DoctorPage from "./pages/DoctorPage.tsx";
 import SpecialPage from "./pages/SpecialPage.tsx";
+import BlogPage from "./pages/BlogPage.tsx";
 
 
 const App: React.FC = () => {
@@ -37,7 +38,8 @@ const App: React.FC = () => {
           <Route path="price" element={<Price />} />
           <Route path="faq" element={<FAQ />} />
           <Route path="gallery" element={<Gallery />} />
-          <Route path="blog" element={<Blog />} />
+          <Route path="blog" element={<Blogs />} />
+          <Route path="blogs/:slug" element={<BlogPage />} />
           <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>

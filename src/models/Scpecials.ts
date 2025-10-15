@@ -7,7 +7,8 @@ export interface Scpecials {
   id: string;
   title: LocalizedText
   subtitle: LocalizedText
-  headerTitle: LocalizedText
+
+  headerTitle?: LocalizedText
 
 
   service?: Service;

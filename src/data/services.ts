@@ -12174,3 +12174,61 @@ export const generalInfo: GeneralInfo = {
   },
   map: "<iframe src=\"https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9307.558190835218!2d10.137663!3d54.323584!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b257006749bc5f%3A0x8f1b9e3b04ce89ed!2sAesthetic%20Face%20Beauty%20Salon!5e0!3m2!1sru!2sde!4v1758060486545!5m2!1sru!2sde\" class=\"w-full h-full min-h-[400px]\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>"
 };
+
+
+
+import type { Blog } from "../models/Blog";
+
+
+
+export const blogs: Blog[] = [
+  {
+    id: "blog1",
+    title: {
+      uk: "Фракційне омолодження RESUR-FX",
+      ru: "Фракционное омоложение RESUR-FX",
+      en: "Fractional Rejuvenation RESUR-FX",
+      de: "Fraktionierte Verjüngung RESUR-FX"
+    },
+    headerTitle: {
+      uk: "Омолодження ResurFX",
+      ru: "Омоложение ResurFX",
+      en: "ResurFX Rejuvenation",
+      de: "ResurFX-Verjüngung"
+    },
+    subtitle: {
+      uk: "Максимальний результат з мінімальною реабілітацією",
+      ru: "Максимальный результат с минимальной реабилитацией",
+      en: "Maximum results with minimal downtime",
+      de: "Maximale Ergebnisse bei minimaler Ausfallzeit"
+    },
+    slug: "fractional-rejuvenation-resurfx",
+    mainImage: "https://www.datocms-assets.com/44663/1616253758-resurfx-video.png",
+    content: [/* ... */],
+    serviceId: ["service12"],
+    subservices: ["subservice47", "subservice48"],
+    specials: ["special1"]
+  },
+  {
+    id: "blog2",
+    title: {
+      uk: "Лазерна епіляція LightSheer Desire",
+      ru: "Лазерная эпиляция LightSheer Desire",
+      en: "Laser Hair Removal LightSheer Desire",
+      de: "Laser-Haarentfernung LightSheer Desire"
+    },
+    // headerTitle отсутствует — возьмётся title
+    subtitle: {
+      uk: "Сучасна технологія безболісного видалення волосся",
+      ru: "Современная технология безболезненного удаления волос",
+      en: "Modern painless hair removal technology",
+      de: "Moderne schmerzfreie Haarentfernungstechnologie"
+    },
+    slug: "laser-epilation-lightsheer-desire",
+    mainImage: "https://www.lumenis.com/wp-content/uploads/2021/02/lightsheer-desire.jpg",
+    content: [/* ... */],
+    serviceId: ["service9"],
+    subservices: ["subservice22", "subservice23"]
+  }
+];
+

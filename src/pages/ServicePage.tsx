@@ -152,19 +152,23 @@ export default function ServicePage() {
                       <p className="text-base lg:text-2xl font-normal text-foreground duration-500"></p>
                     </div>
 
-                    <div className="flex flex-wrap justify-center md:gap-x-[2rem] md:gap-y-[2rem] gap-x-[1rem] gap-y-[1rem] my-10">
-                      {relatedSubservices.map(sub => (
+                    <div
+                        className="flex flex-wrap justify-center gap-x-[1rem] gap-y-[1rem] md:gap-x-[2rem] md:gap-y-[2rem] my-10"
+                    >
+                      {relatedSubservices.map((sub) => (
                           <Link
                               key={sub.id}
                               to={`/${lang}/services/${sub.slug}`}
-                              className="group relative overflow-hidden
-                             h-[9rem]
-                             w-[11rem]
-                             md:w-[15rem]
-                             md:h-[12rem]
-                             rounded-[10rem] shadow-md
-                             hover:bg-[var(--primary)] hover:shadow-xl
-                             transition duration-500"
+                              className="
+                                group relative overflow-hidden
+                                max-w-[47%]
+                                w-1/2 sm:w-1/2 md:w-[15rem] lg:w-[18rem]
+                                h-[9rem] md:h-[12rem]
+                                rounded-[10rem] shadow-md
+                                hover:bg-[var(--primary)] hover:shadow-xl
+                                transition duration-500
+                                flex-shrink-0
+                              "
                           >
                             {sub.mainImage && (
                                 <img

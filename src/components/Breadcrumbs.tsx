@@ -1,13 +1,14 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { services, subservices, doctors, specials } from "../data/services";
+import { services, subservices, doctors, specials, blogs } from "../data/services"; // добавляем blogs
 
 interface BreadcrumbsProps {
   serviceId?: string;
   subserviceId?: string;
   doctorSlug?: string;
   specialSlug?: string;
+  blogSlug?: string; // добавляем сюда
 }
 
 const staticTabs = [
@@ -28,7 +29,13 @@ function getLocalizedString(value: string | string[] | undefined) {
   return Array.isArray(value) ? value.join(", ") : value;
 }
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ serviceId, subserviceId, doctorSlug, specialSlug }) => {
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
+                                                          serviceId,
+                                                          subserviceId,
+                                                          doctorSlug,
+                                                          specialSlug,
+                                                          blogSlug,
+                                                        }) => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
   const location = useLocation();
@@ -90,8 +97,23 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ serviceId, subserviceI
       const special = specials.find((s) => s.slug === specialSlug);
       if (special) {
         items.push({
-          label: getLocalizedString(special.headerTitle[lang]),
+          label: getLocalizedString(special.headerTitle?.[lang]),
           href: `/${lang}/specials/${special.slug}`,
+        });
+      }
+    }
+  }
+
+  // ---------------------- BLOG ----------------------
+  else if (location.pathname.includes("/blog")) {
+    items.push({ label: t("header.blog"), href: `/${lang}/blog` });
+
+    if (blogSlug) {
+      const blog = blogs.find((b) => b.slug === blogSlug);
+      if (blog) {
+        items.push({
+          label: getLocalizedString(blog.title[lang]),
+          href: `/${lang}/blog/${blog.slug}`,
         });
       }
     }
@@ -110,7 +132,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ serviceId, subserviceI
   }
 
   return (
-      <nav aria-label="breadcrumb" className="mb-6  text-[1rem] mt-[3rem]">
+      <nav aria-label="breadcrumb" className="mb-6 text-[1rem] mt-[3rem]">
         <ol className="flex flex-wrap items-center space-x-2 text-muted">
           {items.map((item, index) => {
             const isCurrent = index === items.length - 1;
@@ -118,7 +140,9 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ serviceId, subserviceI
                 <li key={item.href} className="flex items-center">
                   {index > 0 && <span className="mx-2">/</span>}
                   {isCurrent ? (
-                      <span className="text-foreground font-semibold duration-500">{item.label}</span>
+                      <span className="text-foreground font-semibold duration-500">
+                  {item.label}
+                </span>
                   ) : (
                       <Link to={item.href} className="hover:text-primary duration-500">
                         {item.label}

@@ -34,7 +34,7 @@ export default function SpecialPage() {
           <div className="py-8 mb-[3.5rem]">
 
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
-              {special.headerTitle[lang]}
+              {special.title[lang]}
             </h2>
 
             <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem] duration-500">
