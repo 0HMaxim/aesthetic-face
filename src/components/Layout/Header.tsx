@@ -22,7 +22,7 @@ export default function Header() {
     { title: "header.price", link: "/price" },
     { title: "header.faq", link: "/faq" },
     { title: "header.gallery", link: "/gallery" },
-    { title: "header.blog", link: "/blog" },
+    { title: "header.blog", link: "/blogs" },
     { title: "header.contact", link: "/contact" },
   ];
 

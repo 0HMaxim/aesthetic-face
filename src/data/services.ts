@@ -10598,7 +10598,7 @@ export const faqs: FAQ[] = [
 
 export const specials: Scpecials[] = [
   {
-    id: "1",
+    id: "special1",
     title: {
       uk: "Лазерна епіляція -30%",
       de: "Laser-Haarentfernung -30%",
@@ -10661,7 +10661,7 @@ export const specials: Scpecials[] = [
   },
 
   {
-    id: "2",
+    id: "special2",
     title: {
       uk: "Безкоштовна консультація",
       de: "Kostenlose Beratung",
@@ -10714,7 +10714,7 @@ export const specials: Scpecials[] = [
   },
 
   {
-    id: "3",
+    id: "special3",
     title: {
       uk: "Пілінг обличчя -20%",
       de: "Gesichtspeeling -20%",
@@ -10768,7 +10768,7 @@ export const specials: Scpecials[] = [
   },
 
   {
-    id: "4",
+    id: "special4",
     title: {
       uk: "Масаж спини -15%",
       de: "Rückenmassage -15%",
@@ -12179,56 +12179,516 @@ export const generalInfo: GeneralInfo = {
 
 import type { Blog } from "../models/Blog";
 
-
-
 export const blogs: Blog[] = [
+
   {
     id: "blog1",
+    slug: "udalenie-novoobrazovaniy",
     title: {
-      uk: "Фракційне омолодження RESUR-FX",
-      ru: "Фракционное омоложение RESUR-FX",
-      en: "Fractional Rejuvenation RESUR-FX",
-      de: "Fraktionierte Verjüngung RESUR-FX"
+      uk: "Все про видалення новоутворень",
+      ru: "Всё про удаление новообразований",
+      en: "All About Removal of Skin Growths",
+      de: "Alles über die Entfernung von Hautwucherungen"
+    },
+    subtitle: {
+      uk: "Безпечно, ефективно і сучасно",
+      ru: "Безопасно, эффективно и современно",
+      en: "Safe, Effective and Modern",
+      de: "Sicher, Effektiv und Modern"
     },
     headerTitle: {
-      uk: "Омолодження ResurFX",
-      ru: "Омоложение ResurFX",
-      en: "ResurFX Rejuvenation",
-      de: "ResurFX-Verjüngung"
+      uk: "Як позбутися бородавок, папілом і родимок",
+      ru: "Как избавиться от бородавок, папиллом и родинок",
+      en: "How to Remove Warts, Papillomas, and Moles",
+      de: "Wie man Warzen, Papillome und Muttermale entfernt"
     },
-    subtitle: {
-      uk: "Максимальний результат з мінімальною реабілітацією",
-      ru: "Максимальный результат с минимальной реабилитацией",
-      en: "Maximum results with minimal downtime",
-      de: "Maximale Ergebnisse bei minimaler Ausfallzeit"
-    },
-    slug: "fractional-rejuvenation-resurfx",
-    mainImage: "https://www.datocms-assets.com/44663/1616253758-resurfx-video.png",
-    content: [/* ... */],
-    serviceId: ["service12"],
-    subservices: ["subservice47", "subservice48"],
-    specials: ["special1"]
+    mainImage: "https://seredenko-center.ru/wp-content/uploads/elementor/thumbs/udalenie-papillom-qglpp4dv7uqid1hhmz7ghmb39nut7c1bhni6x53dfc.jpg",
+    content: [
+      {
+        type: "heading",
+        content: {
+          uk: "Що таке новоутворення?",
+          ru: "Что такое новообразования?",
+          en: "What Are Skin Growths?",
+          de: "Was sind Hautwucherungen?"
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Новоутворення на шкірі — це будь-які зміни, що з’являються на епідермісі. Вони можуть бути доброякісними, але іноді потребують видалення з естетичних або медичних причин.",
+          ru: "Новообразования на коже — это любые изменения на эпидермисе. Они могут быть доброкачественными, но иногда требуют удаления по эстетическим или медицинским причинам.",
+          en: "Skin growths are any changes on the epidermis. They can be benign, but sometimes require removal for aesthetic or medical reasons.",
+          de: "Hautwucherungen sind Veränderungen auf der Epidermis. Sie können gutartig sein, aber manchmal ist eine Entfernung aus ästhetischen oder medizinischen Gründen erforderlich."
+        }
+      },
+      {
+        type: "list",
+        content: {
+          uk: [
+            "Бородавки",
+            "Папіломи",
+            "Родимки (невуси)",
+            "Кератоми та кондиломи"
+          ],
+          ru: [
+            "Бородавки",
+            "Папилломы",
+            "Родинки (невусы)",
+            "Кератомы и кондиломы"
+          ],
+          en: [
+            "Warts",
+            "Papillomas",
+            "Moles (Nevi)",
+            "Keratoses and Condylomas"
+          ],
+          de: [
+            "Warzen",
+            "Papillome",
+            "Muttermale (Nevi)",
+            "Keratome und Kondylome"
+          ]
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Сучасні методи видалення — лазер, радіохвилі або кріодеструкція — дозволяють безболісно та швидко позбутися небажаних утворень.",
+          ru: "Современные методы удаления — лазер, радиоволны или криодеструкция — позволяют безболезненно и быстро избавиться от нежелательных образований.",
+          en: "Modern removal methods — laser, radio waves, or cryodestruction — allow painless and fast elimination of unwanted growths.",
+          de: "Moderne Entfernungsmethoden – Laser, Radiowellen oder Kryodestruktion – ermöglichen eine schmerzfreie und schnelle Entfernung unerwünschter Wucherungen."
+        }
+      },
+      {
+        type: "image",
+        content: {
+          image: "https://lazersvit.com/storage/cache/files/2023/09/26/surgical-removal-mole-main-min.webp",
+        },
+        sideText: {
+          uk: "Безпечне видалення родимок сучасними методами",
+          ru: "Безопасное удаление родинок современными методами",
+          en: "Safe removal of moles with modern methods",
+          de: "Sichere Entfernung von Muttermalen mit modernen Methoden"
+        }
+      },
+      {
+        type: "heading",
+        content: {
+          uk: "Переваги процедур",
+          ru: "Преимущества процедур",
+          en: "Advantages of Procedures",
+          de: "Vorteile der Verfahren"
+        }
+      },
+      {
+        type: "list",
+        content: {
+          uk: [
+            "Мінімальний ризик рубців",
+            "Швидке відновлення",
+            "Естетичний результат",
+            "Можливість видаляти різні типи утворень"
+          ],
+          ru: [
+            "Минимальный риск рубцов",
+            "Быстрое восстановление",
+            "Эстетический результат",
+            "Возможность удаления разных типов образований"
+          ],
+          en: [
+            "Minimal risk of scarring",
+            "Fast recovery",
+            "Aesthetic result",
+            "Ability to remove various types of growths"
+          ],
+          de: [
+            "Minimales Narbenrisiko",
+            "Schnelle Erholung",
+            "Ästhetisches Ergebnis",
+            "Möglichkeit, verschiedene Arten von Wucherungen zu entfernen"
+          ]
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Перед процедурою проводиться консультація, діагностика та визначається оптимальний метод видалення.",
+          ru: "Перед процедурой проводится консультация, диагностика и определяется оптимальный метод удаления.",
+          en: "Before the procedure, a consultation, diagnostics, and the optimal removal method are determined.",
+          de: "Vor dem Eingriff erfolgt eine Beratung, Diagnostik und die Bestimmung der optimalen Entfernungsmethode."
+        }
+      }
+    ],
+    serviceId: ["service1", "service2"], // Удаление новообразований
+    subservices: ["subservice1", "subservice2", "subservice3"],
+    specials: ["special1","special2","special3"]
   },
+
   {
     id: "blog2",
+    slug: "kosmetologiya-lica-i-tela",
     title: {
-      uk: "Лазерна епіляція LightSheer Desire",
-      ru: "Лазерная эпиляция LightSheer Desire",
-      en: "Laser Hair Removal LightSheer Desire",
-      de: "Laser-Haarentfernung LightSheer Desire"
+      uk: "Косметологія обличчя та тіла: сучасні методи догляду",
+      ru: "Косметология лица и тела: современные методы ухода",
+      en: "Face and Body Cosmetology: Modern Care Methods",
+      de: "Gesichts- und Körperkosmetologie: Moderne Pflegemethoden"
     },
-    // headerTitle отсутствует — возьмётся title
     subtitle: {
-      uk: "Сучасна технологія безболісного видалення волосся",
-      ru: "Современная технология безболезненного удаления волос",
-      en: "Modern painless hair removal technology",
-      de: "Moderne schmerzfreie Haarentfernungstechnologie"
+      uk: "Здоров’я та краса шкіри",
+      ru: "Здоровье и красота кожи",
+      en: "Skin Health and Beauty",
+      de: "Hautgesundheit und Schönheit"
     },
-    slug: "laser-epilation-lightsheer-desire",
-    mainImage: "https://www.lumenis.com/wp-content/uploads/2021/02/lightsheer-desire.jpg",
-    content: [/* ... */],
-    serviceId: ["service9"],
-    subservices: ["subservice22", "subservice23"]
+    headerTitle: {
+      uk: "Як зберегти шкіру здоровою та сяючою",
+      ru: "Как сохранить кожу здоровой и сияющей",
+      en: "How to Keep Your Skin Healthy and Radiant",
+      de: "Wie man die Haut gesund und strahlend hält"
+    },
+    mainImage: "https://i.pinimg.com/736x/71/2e/01/712e0127f565401688875099f4f0c598.jpg",
+    content: [
+      {
+        type: "heading",
+        content: {
+          uk: "Популярні косметологічні процедури",
+          ru: "Попуулярные косметологические процедуры",
+          en: "Popular Cosmetology Procedures",
+          de: "Beliebte kosmetologische Verfahren"
+        }
+      },
+      {
+        type: "list",
+        content: {
+          uk: [
+            "Чистка обличчя (ультразвукова, механічна)",
+            "Хімічний пілінг",
+            "Карбоксітерапія",
+            "Уходові процедури для тіла",
+            "Ліфтинг-термопроцедури"
+          ],
+          ru: [
+            "Чистка лица (ультразвуковая, механическая)",
+            "Химический пилинг",
+            "Карбокситерапия",
+            "Уходовые процедуры для тела",
+            "Лифтинг-термопроцедуры"
+          ],
+          en: [
+            "Facial cleaning (ultrasound, mechanical)",
+            "Chemical peeling",
+            "Carboxytherapy",
+            "Body care procedures",
+            "Lifting thermal procedures"
+          ],
+          de: [
+            "Gesichtsreinigung (Ultraschall, mechanisch)",
+            "Chemisches Peeling",
+            "Carboxytherapie",
+            "Körperpflegeverfahren",
+            "Lifting-Thermobehandlungen"
+          ]
+        }
+      },
+
+      {
+        type: "paragraph",
+        content: {
+          uk: "Сучасні косметологічні процедури поєднують ефективність і комфорт для пацієнта.",
+          ru: "Современные косметологические процедуры сочетают эффективность и комфорт для пациента.",
+          en: "Modern cosmetology procedures combine effectiveness and comfort for the client.",
+          de: "Moderne kosmetologische Verfahren verbinden Effektivität und Komfort für den Patienten."
+        }
+      },
+
+        {
+        type: "image",
+            content: { image: "https://i.pinimg.com/1200x/59/f0/97/59f0976f7534b3e16b7c1536faa898ba.jpg" },
+        sideText: {
+          uk: "Сучасні методи догляду за шкірою",
+              ru: "Современные методы ухода за кожей",
+              en: "Modern skin care methods",
+              de: "Moderne Hautpflegemethoden"
+        }
+        },
+      {
+        type: "heading",
+        content: {
+          uk: "Поради для догляду вдома",
+          ru: "Советы по уходу дома",
+          en: "At-Home Care Tips",
+          de: "Tipps für die Pflege zu Hause"
+        }
+      },
+      {
+        type: "list",
+        content: {
+          uk: [
+            "Очищення шкіри двічі на день",
+            "Регулярне зволоження",
+            "Використання сонцезахисних засобів",
+            "Маски та сироватки для харчування шкіри"
+          ],
+          ru: [
+            "Очищение кожи дважды в день",
+            "Регулярное увлажнение",
+            "Использование солнцезащитных средств",
+            "Маски и сыворотки для питания кожи"
+          ],
+          en: [
+            "Cleanse skin twice a day",
+            "Moisturize regularly",
+            "Use sunscreen products",
+            "Masks and serums for skin nutrition"
+          ],
+          de: [
+            "Reinigen Sie die Haut zweimal täglich",
+            "Regelmäßig befeuchten",
+            "Verwenden Sie Sonnenschutzmittel",
+            "Masken und Seren zur Hautpflege"
+          ]
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Комплексний догляд у салоні та вдома допомагає зберегти шкіру здоровою та сяючою.",
+          ru: "Комплексный уход в салоне и дома помогает сохранить кожу здоровой и сияющей.",
+          en: "Comprehensive care at the salon and home helps keep skin healthy and radiant.",
+          de: "Umfassende Pflege im Salon und zu Hause hilft, die Haut gesund und strahlend zu halten."
+        }
+      }
+    ],
+    serviceId: ["service2"],
+    subservices: ["subservice4", "subservice5"],
+    specials: []
+  },
+
+
+
+
+  {
+    id: "blog3",
+    slug: "zdorovye-volos-i-trikhologiya",
+    title: {
+      uk: "Здоров’я волосся та трихологія",
+      ru: "Здоровье волос и трихология",
+      en: "Hair Health and Trichology",
+      de: "Haargesundheit und Trichologie"
+    },
+    subtitle: {
+      uk: "Все про догляд за волоссям та профілактику випадіння",
+      ru: "Всё про уход за волосами и профилактику выпадения",
+      en: "All about hair care and preventing hair loss",
+      de: "Alles über Haarpflege und Vorbeugung von Haarausfall"
+    },
+    headerTitle: {
+      uk: "Трихологія: здорові волосся",
+      ru: "Трихология: здоровые волосы",
+      en: "Trichology: Healthy Hair",
+      de: "Trichologie: Gesundes Haar"
+    },
+    mainImage: "https://www.evolution-clinic.com/wp-content/uploads/2025/03/image-trh-002.jpg",
+    content: [
+      {
+        type: "heading",
+        content: {
+          uk: "Що таке трихологія?",
+          ru: "Что такое трихология?",
+          en: "What is Trichology?",
+          de: "Was ist Trichologie?"
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Трихологія — це наука про волосся та шкіру голови. Вона допомагає визначити причини випадіння волосся, лупи, себореї та інших проблем.",
+          ru: "Трихология — это наука о волосах и коже головы. Она помогает определить причины выпадения волос, перхоти, себореи и других проблем.",
+          en: "Trichology is the science of hair and scalp. It helps identify causes of hair loss, dandruff, seborrhea, and other issues.",
+          de: "Trichologie ist die Wissenschaft von Haaren und Kopfhaut. Sie hilft, Ursachen für Haarausfall, Schuppen, Seborrhoe und andere Probleme zu erkennen."
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Регулярна діагностика у трихолога дозволяє вчасно виявляти проблеми та проводити профілактичні процедури.",
+          ru: "Регулярная диагностика у трихолога позволяет вовремя выявлять проблемы и проводить профилактические процедуры.",
+          en: "Regular diagnostics with a trichologist allow timely detection of problems and preventive treatments.",
+          de: "Regelmäßige Diagnostik beim Trichologen ermöglicht eine rechtzeitige Erkennung von Problemen und vorbeugende Behandlungen."
+        }
+      },
+      {
+        type: "list",
+        content: {
+          uk: [
+            "Випадіння волосся",
+            "Себорея та лупа",
+            "Ослаблене та ламке волосся",
+            "Проблеми росту волосся"
+          ],
+          ru: [
+            "Выпадение волос",
+            "Себорея и перхоть",
+            "Слабые и ломкие волосы",
+            "Проблемы роста волос"
+          ],
+          en: [
+            "Hair loss",
+            "Seborrhea and dandruff",
+            "Weak and brittle hair",
+            "Hair growth problems"
+          ],
+          de: [
+            "Haarausfall",
+            "Seborrhoe und Schuppen",
+            "Schwaches und brüchiges Haar",
+            "Probleme mit Haarwachstum"
+          ]
+        }
+      },
+      {
+        type: "heading",
+        content: {
+          uk: "Методи догляду",
+          ru: "Методы ухода",
+          en: "Care Methods",
+          de: "Pflegemethoden"
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Догляд за волоссям включає правильне харчування, використання спеціальних шампунів, кондиціонерів та масок.",
+          ru: "Уход за волосами включает правильное питание, использование специальных шампуней, кондиционеров и масок.",
+          en: "Hair care includes proper nutrition, using special shampoos, conditioners, and masks.",
+          de: "Haarpflege umfasst richtige Ernährung, die Verwendung spezieller Shampoos, Conditioner und Masken."
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Мезотерапія та інші ін’єкційні процедури стимулюють ріст волосся та покращують кровообіг шкіри голови.",
+          ru: "Мезотерапия и другие инъекционные процедуры стимулируют рост волос и улучшают кровообращение кожи головы.",
+          en: "Mesotherapy and other injection procedures stimulate hair growth and improve scalp circulation.",
+          de: "Mesotherapie und andere Injektionsverfahren fördern das Haarwachstum und verbessern die Durchblutung der Kopfhaut."
+        }
+      },
+      {
+        type: "image",
+        content: {
+          image: "https://www.evolution-clinic.com/wp-content/uploads/2025/03/image-trh-001.jpg",
+        },
+        sideText: {
+          uk: "Сучасні методи трихології",
+          ru: "Современные методы трихологии",
+          en: "Modern trichology methods",
+          de: "Moderne Trichologiemethoden"
+        }
+      },
+      {
+        type: "heading",
+        content: {
+          uk: "Поради для здорового волосся",
+          ru: "Советы для здоровых волос",
+          en: "Tips for Healthy Hair",
+          de: "Tipps für gesundes Haar"
+        }
+      },
+      {
+        type: "list",
+        content: {
+          uk: [
+            "Регулярно мийте голову спеціальними шампунями",
+            "Уникайте агресивних термічних процедур",
+            "Дотримуйтесь збалансованого харчування",
+            "Використовуйте маски та кондиціонери для волосся"
+          ],
+          ru: [
+            "Регулярно мойте голову специальными шампунями",
+            "Избегайте агрессивных термических процедур",
+            "Соблюдайте сбалансированное питание",
+            "Используйте маски и кондиционеры для волос"
+          ],
+          en: [
+            "Wash hair regularly with special shampoos",
+            "Avoid aggressive heat treatments",
+            "Follow a balanced diet",
+            "Use hair masks and conditioners"
+          ],
+          de: [
+            "Waschen Sie das Haar regelmäßig mit speziellen Shampoos",
+            "Vermeiden Sie aggressive Hitzebehandlungen",
+            "Halten Sie eine ausgewogene Ernährung ein",
+            "Verwenden Sie Haarmasken und Conditioner"
+          ]
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Своєчасне лікування проблем волосся допомагає уникнути випадіння та покращує їх зовнішній вигляд.",
+          ru: "Своевременное лечение проблем волос помогает избежать выпадения и улучшает их внешний вид.",
+          en: "Timely treatment of hair issues prevents hair loss and improves appearance.",
+          de: "Rechtzeitige Behandlung von Haarproblemen verhindert Haarausfall und verbessert das Aussehen."
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Пам’ятайте: здорове волосся — це ознака загального здоров’я організму.",
+          ru: "Помните: здоровые волосы — это признак общего здоровья организма.",
+          en: "Remember: healthy hair is a sign of overall health.",
+          de: "Denken Sie daran: gesundes Haar ist ein Zeichen für die allgemeine Gesundheit."
+        }
+      },
+      {
+        type: "heading",
+        content: {
+          uk: "Кому підходить трихологія?",
+          ru: "Кому подходит трихология?",
+          en: "Who Benefits from Trichology?",
+          de: "Für wen ist Trichologie geeignet?"
+        }
+      },
+      {
+        type: "list",
+        content: {
+          uk: [
+            "Люди з випадінням волосся",
+            "Ті, хто має ламке та слабке волосся",
+            "Клієнти з себореєю та лупою",
+            "Всі, хто хоче покращити стан волосся"
+          ],
+          ru: [
+            "Люди с выпадением волос",
+            "Те, у кого ломкие и слабые волосы",
+            "Клиенты с себореей и перхотью",
+            "Все, кто хочет улучшить состояние волос"
+          ],
+          en: [
+            "People with hair loss",
+            "Those with weak and brittle hair",
+            "Clients with seborrhea and dandruff",
+            "Anyone wanting to improve hair condition"
+          ],
+          de: [
+            "Menschen mit Haarausfall",
+            "Personen mit schwachem und brüchigem Haar",
+            "Kunden mit Seborrhoe und Schuppen",
+            "Alle, die ihren Haarzustand verbessern möchten"
+          ]
+        }
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Консультація трихолога дозволяє підібрати індивідуальний догляд та лікування.",
+          ru: "Консультация трихолога позволяет подобрать индивидуальный уход и лечение.",
+          en: "A trichologist consultation allows tailored care and treatment.",
+          de: "Eine Trichologenberatung ermöglicht individuelle Pflege und Behandlung."
+        }
+      }
+    ]
   }
-];
+]
 

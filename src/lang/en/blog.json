@@ -1,6 +1,10 @@
 {
-  "title": "Для вас працюють косметологи",
-  "subtitle": "з досвідом від {{years}} років",
-  "experience": "До Ваших послуг фахівці з досвідом від закордонних та вітчизняних клінік",
-  "bookAppointment": "Записатися до {{name}}"
+  "title": "Blog",
+  "subtitle": "Sharing useful articles in cosmetology and more",
+  "learnMore": "Learn more",
+  "relatedServices": "Procedures mentioned in this article",
+  "relatedSubservices": "Related procedures",
+  "relatedSpecials": "Special offers",
+  "otherBlogs":  "Other blogs"
+
 }

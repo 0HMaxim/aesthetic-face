@@ -60,7 +60,7 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
               return (
                   <div
                       key={`image-${index}`}
-                      className="my-6 flex flex-col lg:flex-row items-stretch gap-4"
+                      className="my-6 flex flex-col lg:flex-row items-stretch w-full gap-4"
                   >
                     {imageSrc && (
                         <img

@@ -104,16 +104,16 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     }
   }
 
-  // ---------------------- BLOG ----------------------
-  else if (location.pathname.includes("/blog")) {
-    items.push({ label: t("header.blog"), href: `/${lang}/blog` });
+// ---------------------- BLOG ----------------------
+  else if (location.pathname.includes("/blogs")) { // <- plural!
+    items.push({ label: t("header.blog"), href: `/${lang}/blogs` });
 
     if (blogSlug) {
       const blog = blogs.find((b) => b.slug === blogSlug);
       if (blog) {
         items.push({
           label: getLocalizedString(blog.title[lang]),
-          href: `/${lang}/blog/${blog.slug}`,
+          href: `/${lang}/blogs/${blog.slug}`,
         });
       }
     }

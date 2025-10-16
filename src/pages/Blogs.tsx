@@ -4,15 +4,11 @@ import { useTranslation } from "react-i18next";
 import {TopImage} from "../components/TopImage.tsx";
 import {Breadcrumbs} from "../components/Breadcrumbs.tsx";
 
-export default function Doctors() {
+export default function Blogs() {
   const { i18n, t } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
-
   const imagee = "https://www.aestheticclinicmalaysia.com/wp-content/uploads/2023/10/Aesthetic-Clinic-Malaysia.jpg";
-
-
-  const minExperience = 7; // динамически укажешь сам
 
 
   return (
@@ -24,20 +20,18 @@ export default function Doctors() {
         )}
 
 
-
         <div className="w-full px-4 md:px-[5rem]">
 
           <Breadcrumbs />
 
           <div className="py-8 mb-[3.5rem]">
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
-              {t("doctors.title")}
+              {t("blog.title")}
             </h2>
             <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">
-                   {t("doctors.subtitle", { years: minExperience })}
+                   {t("blog.subtitle")}
                 </span>
             <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
-              {t("doctors.experience")}
             </p>
           </div>
 
@@ -100,7 +94,6 @@ export default function Doctors() {
         </div>
 
       </div>
-
 
   );
 }

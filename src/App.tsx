@@ -38,7 +38,7 @@ const App: React.FC = () => {
           <Route path="price" element={<Price />} />
           <Route path="faq" element={<FAQ />} />
           <Route path="gallery" element={<Gallery />} />
-          <Route path="blog" element={<Blogs />} />
+          <Route path="blogs" element={<Blogs />} />
           <Route path="blogs/:slug" element={<BlogPage />} />
           <Route path="contact" element={<Contact />} />
         </Route>
