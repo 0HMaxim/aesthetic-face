@@ -83,28 +83,30 @@ export default function BlogPage() {
           {/* --- Блок связанных категорий и акций --- */}
           <div className="">
             {relatedServices.length > 0 && (
-                <div className="mt-16 border-t pt-10 space-y-10">
-                  <h3 className="text-2xl font-bold mb-6">
-                    {t("blog.relatedServices") || "Связанные услуги"}
-                  </h3>
-                  <div className="flex flex-wrap gap-6 ">
+                <div className="mt-16 border-t pt-10">
+                  <div className="py-8">
+                    <h2 className="text-3xl lg:text-5xl font-[800] my-[1.5rem]">
+                      {t("blog.relatedServices")}
+                    </h2>
+                    <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]"></span>
+                    <p className="text-base lg:text-2xl font-normal text-foreground duration-500"></p>
+                  </div>
+
+                  <div className="flex flex-wrap justify-center gap-x-[1rem] gap-y-[1rem] md:gap-x-[2rem] md:gap-y-[2rem] my-10">
                     {relatedServices.map((service) => (
                         <Link
                             key={service!.id}
                             to={`/${lang}/services/${service!.slug}`}
-                            className="group rounded-[10rem] shadow-md overflow-hidden
-                      lg:max-w-[15rem]
-                      md:max-h-[12rem]
-                      md:max-w-[25rem]
-
-
-                      h-[20rem]
-                      max-w-[47%]
-                      max-h-[14rem]
-
-                      w-[12rem]
-
-                      hover:bg-[var(--primary)] transition duration-500 hover:shadow-xl relative"
+                            className="
+              group relative overflow-hidden
+              max-w-[47%]
+              w-1/2 sm:w-1/2 md:w-[15rem] lg:w-[18rem]
+              h-[9rem] md:h-[12rem]
+              rounded-[10rem] shadow-md
+              hover:bg-[var(--primary)] hover:shadow-xl
+              transition duration-500
+              flex-shrink-0
+            "
                         >
                           {service!.mainImage && (
                               <img
@@ -112,8 +114,8 @@ export default function BlogPage() {
                                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                               />
                           )}
-                          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 p-[1.5rem] w-full bg-black/40 text-white  text-center">
-                            <p className="text-[0.9rem] md:text-[1rem] font-medium">
+                          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
+                            <p className="text-[0.9rem] md:text-[1rem] font-normal">
                               {service!.title[lang]}
                             </p>
                           </div>
@@ -125,24 +127,27 @@ export default function BlogPage() {
 
             {relatedSubservices.length > 0 && (
                 <div className="mt-16 border-t pt-10">
-                <h3 className="text-2xl font-bold mb-6">
-                    {t("blog.relatedSubservices") || "Подуслуги"}
-                  </h3>
-                  <div className="flex flex-wrap gap-6 ">
+                  <div className="py-8">
+                    <h2 className="text-3xl lg:text-5xl font-[800] my-[1.5rem]">
+                      {t("blog.relatedSubservices")}
+                    </h2>
+                  </div>
+
+                  <div className="flex flex-wrap justify-center gap-x-[1rem] gap-y-[1rem] md:gap-x-[2rem] md:gap-y-[2rem] my-10">
                     {relatedSubservices.map((sub) => (
                         <Link
                             key={sub.id}
                             to={`/${lang}/services/${sub.slug}`}
                             className="
-                                group relative overflow-hidden
-                                max-w-[47%]
-                                w-1/2 sm:w-1/2 md:w-[8rem] lg:w-[9rem]
-                                h-[9rem] md:h-[7rem]
-                                rounded-[10rem] shadow-md
-                                hover:bg-[var(--primary)] hover:shadow-xl
-                                transition duration-500
-                                flex-shrink-0
-                              "
+              group relative overflow-hidden
+              max-w-[47%]
+              w-1/2 sm:w-1/2 md:w-[15rem] lg:w-[18rem]
+              h-[9rem] md:h-[12rem]
+              rounded-[10rem] shadow-md
+              hover:bg-[var(--primary)] hover:shadow-xl
+              transition duration-500
+              flex-shrink-0
+            "
                         >
                           {sub.mainImage && (
                               <img
@@ -160,53 +165,20 @@ export default function BlogPage() {
                   </div>
                 </div>
             )}
-
-            {relatedSpecials.length > 0 && (
-                <div className="mt-16 border-t pt-10">
-                  <h3 className="text-2xl font-bold mb-6">
-                    {t("blog.relatedSpecials") || "Акции"}
-                  </h3>
-                  <div className="flex flex-wrap gap-6 justify-center">
-                    {relatedSpecials.map((special) => (
-                        <Link
-                            key={special!.id}
-                            to={`/${lang}/specials/${special!.slug}`}
-                            className="
-              group relative overflow-hidden
-              max-w-[47%]
-              w-1/2 sm:w-1/2 md:w-[15rem] lg:w-[18rem]
-              h-[9rem] md:h-[12rem]
-              rounded-[2rem] shadow-md
-              hover:shadow-xl hover:scale-[1.02]
-              transition duration-500 flex-shrink-0
-            "
-                        >
-                          {special!.mainImage && (
-                              <img
-                                  src={special!.mainImage}
-                                  alt={special!.title[lang]}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                              />
-                          )}
-                          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/40 text-white p-4 text-center">
-                            <p className="text-[0.9rem] md:text-[1rem] font-medium">
-                              {special!.title[lang]}
-                            </p>
-                          </div>
-                        </Link>
-                    ))}
-                  </div>
-                </div>
-            )}
           </div>
 
 
 
           {otherBlogs.length > 0 && (
               <div className="mt-16 border-t pt-10">
-                <h3 className="text-2xl font-bold mb-6">
-                  {t("blog.otherBlogs") || "Другие блоги"}
-                </h3>
+
+                <div className="pt-8 mt-[3rem]">
+                  <h2 className="text-3xl lg:text-4xl font-[800] mb-[2.5rem]">
+                    {t("blog.otherBlogs")}
+                  </h2>
+                </div>
+
+
                 <div className="flex flex-wrap gap-6 justify-center">
                   {otherBlogs.map((b) => (
                       <div

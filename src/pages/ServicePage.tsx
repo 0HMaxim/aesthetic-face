@@ -1,7 +1,5 @@
 import {Link, useParams} from "react-router-dom";
-import {photos, services, subservices} from "../data/services";
-import { doctors } from "../data/services";
-import { faqs } from "../data/services";
+import {photos, services, subservices, blogs, specials, doctors, faqs } from "../data/services";
 import FAQList from "../components/FAQList";
 import { useTranslation } from "react-i18next";
 import PhotoList from "../components/PhotoList.tsx";
@@ -45,6 +43,21 @@ export default function ServicePage() {
   // Получаем список подуслуг для родительской услуги, если она найдена
   const relatedSubservices = parentService?.subservices?.map(subId => subservices.find(ss => ss.id === subId))
   .filter((sub): sub is typeof subservices[0] => !!sub) || [];
+
+  // Блоги, связанные с этой услугой
+  const relatedBlogs = blogs.filter(
+      (blog) =>
+          blog.serviceId?.includes(currentItem.id) ||
+          (parentService && blog.serviceId?.includes(parentService.id))
+  );
+
+// Акции, связанные с этой услугой
+  const relatedSpecials = specials.filter(
+      (special) =>
+          special.serviceId?.includes(currentItem.id) ||
+          (parentService && special.serviceId?.includes(parentService.id))
+  );
+
 
 
   // Фото для текущей сущности
@@ -292,6 +305,101 @@ export default function ServicePage() {
                         setCurrentPage={setFaqPage}
                         itemsPerPage={pageSize}
                     />
+                  </>
+              )}
+
+
+
+              {relatedSpecials.length > 0 && (
+                  <>
+                    <div className="pt-8 mt-[3rem]">
+                      <h2 className="text-3xl lg:text-5xl font-[800] mb-[2.5rem]">
+                        {t("blog.relatedSpecials")}
+                      </h2>
+                    </div>
+
+                    <div className="flex flex-wrap justify-center gap-8">
+                      {relatedSpecials.map((item) => (
+                          <Link
+                              key={item.id}
+                              to={`/${lang}/specials/${item.slug}`}
+                              className="group relative w-[22rem] bg-primary rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-500"
+                          >
+                            {item.mainImage && (
+                                <img
+                                    src={item.mainImage}
+                                    className="w-full h-[15rem] object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
+                            )}
+                            <div className="p-4">
+                              <h3 className="text-[1.5rem] font-semibold mb-2">
+                                {item.title[lang]}
+                              </h3>
+                              <p className="text-gray-600 text-[1rem] line-clamp-3">
+                                {item.subtitle[lang]}
+                              </p>
+                            </div>
+                          </Link>
+                      ))}
+                    </div>
+                  </>
+              )}
+
+              {/* --- Related Blogs --- */}
+              {relatedBlogs.length > 0 && (
+                  <>
+                    <div className="pt-8 mt-[3rem]">
+                      <h2 className="text-3xl lg:text-5xl font-[800] mb-[2.5rem]">
+                        {t("servicePage.relatedBlogs")}
+                      </h2>
+                    </div>
+
+                    <div className="flex flex-wrap justify-center gap-8">
+                      {relatedBlogs.map((item) => (
+                          <div
+                              key={item.id}
+                              className="post_item w-[22rem] bg-primary rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-500"
+                          >
+                            <Link
+                                to={`/${lang}/blogs/${item.slug}`}
+                                className="relative block overflow-hidden group"
+                            >
+                              {item.mainImage && (
+                                  <span
+                                      className="block w-full h-[15rem] bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                                      style={{
+                                        backgroundImage: `url(${item.mainImage})`,
+                                      }}
+                                  ></span>
+                              )}
+                              <p className="date absolute bottom-[1rem] left-[1rem] flex gap-1 text-white bg-black/50 px-3 py-1 rounded-md">
+                                <b>03</b>
+                                <span>Січень</span>
+                                <span>2024</span>
+                              </p>
+                            </Link>
+
+                            <Link
+                                to={`/${lang}/blogs/${item.slug}`}
+                                className="block text-[1.3rem] font-semibold mt-4 px-4 hover:text-primary transition"
+                            >
+                              {item.title[lang]}
+                            </Link>
+
+                            <p className="excerpt text-[1rem] text-gray-600 mt-2 px-4 line-clamp-3">
+                              {item.content?.find((block) => block.type === "paragraph")?.content?.[lang] ||
+                                  "Опис відсутній"}
+                            </p>
+
+                            <Link
+                                to={`/${lang}/blogs/${item.slug}`}
+                                className="block text-[1rem] font-semibold text-primary mt-4 mb-4 px-4 hover:underline"
+                            >
+                              {t("specials.learnMore")}
+                            </Link>
+                          </div>
+                      ))}
+                    </div>
                   </>
               )}
 

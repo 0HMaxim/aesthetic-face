@@ -11,8 +11,8 @@ export interface Scpecials {
   headerTitle?: LocalizedText
 
 
-  service?: Service;
-  subservice?: Service;
+  serviceId?: string[];
+  subserviceId?: string[];
 
   content: ContentBlock[];
   slug: string;

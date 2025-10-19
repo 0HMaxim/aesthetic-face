@@ -7,4 +7,6 @@ export interface ContentBlock {
   type: ContentBlockType;
   content?: LocalizedText;
   sideText?: LocalizedText;
+  children?: ContentBlock[];
+  align?: "left" | "center" | "right"; // 👈 новое свойство для выравнивания
 }

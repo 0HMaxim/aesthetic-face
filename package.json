@@ -22,6 +22,7 @@
     "react-dom": "^18.3.1",
     "react-i18next": "^15.6.1",
     "react-router-dom": "^7.8.0",
+    "swiper": "^12.0.2",
     "yet-another-react-lightbox": "^3.25.0",
     "ziggy-js": "^2.5.3"
   },
@@ -32,7 +33,7 @@
     "@iconify-json/fa6-solid": "^1.2.4",
     "@iconify-json/ic": "^1.2.4",
     "@iconify-json/ion": "^1.2.6",
-    "@iconify-json/material-symbols": "^1.2.35",
+    "@iconify-json/material-symbols": "^1.2.42",
     "@iconify-json/mynaui": "^1.2.16",
     "@iconify-json/octicon": "^1.2.14",
     "@iconify-json/simple-icons": "^1.2.52",

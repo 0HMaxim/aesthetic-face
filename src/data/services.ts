@@ -42,40 +42,46 @@ export const services: Service[] = [
       {
         type: "image",
         content: { image: "https://aquaminskclinic.by/upload/iblock/36b/36b0a7699905ec6acb582ef7b89c3a6a.png" },
-        sideText: {
-          uk: "Ми використовуємо передові методи діагностики, включаючи цифрову дерматоскопію, для точного визначення характеру кожного новоутворення перед видаленням.",
-          ru: "Мы используем передовые методы диагностики, включая цифровую дерматоскопию, для точного определения характера каждого новообразования перед удалением.",
-          en: "We use advanced diagnostic methods, including digital dermatoscopy, to accurately determine the nature of each growth before removal.",
-          de: "Wir setzen modernste Diagnosemethoden ein, einschließlich digitaler Dermatoskopie, um die Art jeder Wucherung vor der Entfernung genau zu bestimmen."
-        }
+        children: [
+          {
+            type: "heading", content: {
+              uk: "Ми використовуємо передові методи діагностики, включаючи цифрову дерматоскопію, для точного визначення характеру кожного новоутворення перед видаленням.",
+              ru: "Мы используем передовые методы диагностики, включая цифровую дерматоскопию, для точного определения характера каждого новообразования перед удалением.",
+              en: "We use advanced diagnostic methods, including digital dermatoscopy, to accurately determine the nature of each growth before removal.",
+              de: "Wir setzen modernste Diagnosemethoden ein, einschließlich digitaler Dermatoskopie, um die Art jeder Wucherung vor der Entfernung genau zu bestimmen."
+            }
+          },
+             {
+            type: "heading",
+            content: {
+              uk: "Коли варто звернутися до лікаря?",
+              ru: "Когда следует обратиться к врачу?",
+              en: "When Should You See a Doctor?",
+              de: "Wann sollten Sie einen Arzt aufsuchen?"
+            }
+          },
+          {
+            type: "paragraph",
+            content: {
+              uk: "Негайна консультація дерматолога необхідна, якщо новоутворення:",
+              ru: "Немедленная консультация дерматолога необходима, если новообразование:",
+              en: "Immediate consultation with a dermatologist is necessary if a growth:",
+              de: "Eine sofortige Konsultation mit einem Dermatologen ist erforderlich, wenn eine Wucherung:"
+            }
+          },
+          {
+            type: "list",
+            align: "right",
+            content: {
+              uk: "Швидко збільшується в розмірі\nЗмінило колір або форму\nМає нерівні, асиметричні краї\nКровоточить, свербить або болить\nВикликає будь-який дискомфорт",
+              ru: "Быстро увеличивается в размере\nИзменило цвет или форму\nИмеет неровные, асимметричные края\nКровоточит, чешется или болит\nВызывает любой дискомфорт",
+              en: "Is rapidly increasing in size\nHas changed color or shape\nHas uneven, asymmetrical borders\nBleeds, itches, or hurts\nCauses any discomfort",
+              de: "Schnell an Größe zunimmt\nFarbe oder Form verändert hat\nUngleichmäßige, asymmetrische Ränder aufweist\nBlutet, juckt oder schmerzt\nIrgendwelche Beschwerden verursacht"
+            }
+          },
+        ]
       },
-      {
-        type: "heading",
-        content: {
-          uk: "Коли варто звернутися до лікаря?",
-          ru: "Когда следует обратиться к врачу?",
-          en: "When Should You See a Doctor?",
-          de: "Wann sollten Sie einen Arzt aufsuchen?"
-        }
-      },
-      {
-        type: "paragraph",
-        content: {
-          uk: "Негайна консультація дерматолога необхідна, якщо новоутворення:",
-          ru: "Немедленная консультация дерматолога необходима, если новообразование:",
-          en: "Immediate consultation with a dermatologist is necessary if a growth:",
-          de: "Eine sofortige Konsultation mit einem Dermatologen ist erforderlich, wenn eine Wucherung:"
-        }
-      },
-      {
-        type: "list",
-        content: {
-          uk: "Швидко збільшується в розмірі\nЗмінило колір або форму\nМає нерівні, асиметричні краї\nКровоточить, свербить або болить\nВикликає будь-який дискомфорт",
-          ru: "Быстро увеличивается в размере\nИзменило цвет или форму\nИмеет неровные, асимметричные края\nКровоточит, чешется или болит\nВызывает любой дискомфорт",
-          en: "Is rapidly increasing in size\nHas changed color or shape\nHas uneven, asymmetrical borders\nBleeds, itches, or hurts\nCauses any discomfort",
-          de: "Schnell an Größe zunimmt\nFarbe oder Form verändert hat\nUngleichmäßige, asymmetrische Ränder aufweist\nBlutet, juckt oder schmerzt\nIrgendwelche Beschwerden verursacht"
-        }
-      },
+
       {
         type: "heading",
         content: {
@@ -87,6 +93,7 @@ export const services: Service[] = [
       },
       {
         type: "paragraph",
+        align: "center",
         content: {
           uk: "Наша клініка спеціалізується на видаленні широкого спектру доброякісних новоутворень, зокрема:",
           ru: "Наша клиника специализируется на удалении широкого спектра доброкачественных новообразований, включая:",
@@ -256,15 +263,31 @@ export const services: Service[] = [
           de: "Professionelle Reinigung und Pflege\nIntensive Erneuerung und Peelings\nGerätegestützte Verjüngungsmethoden\nÄsthetische Körperpflege"
         }
       },
+      // --- БЛОК 1 С ИЗОБРАЖЕНИЕМ: Теперь с children для большего текста (заменил sideText) ---
       {
         type: "image",
+        align: "left",
         content: { image: "https://sana.kh.ua/wp-content/uploads/2020/03/sana-diagnostics.jpg" },
-        sideText: {
-          uk: "Кожна програма догляду починається з ретельної діагностики стану шкіри, що дозволяє нам підібрати найефективніші процедури саме для вас.",
-          ru: "Каждая программа ухода начинается с тщательной диагностики состояния кожи, что позволяет нам подобрать самые эффективные процедуры именно для вас.",
-          en: "Every care program begins with a thorough diagnosis of the skin's condition, allowing us to select the most effective procedures specifically for you.",
-          de: "Jedes Pflegeprogramm beginnt mit einer gründlichen Diagnose des Hautzustands, die es uns ermöglicht, die wirksamsten Verfahren speziell für Sie auszuwählen."
-        }
+        children: [
+          {
+            type: "heading",
+            content: {
+              uk: "Персоналізована діагностика — наш перший крок",
+              ru: "Персонализированная диагностика — наш первый шаг",
+              en: "Personalized Diagnosis is Our First Step",
+              de: "Personalisierte Diagnose – unser erster Schritt",
+            },
+          },
+          {
+            type: "paragraph",
+            content: {
+              uk: "Кожна програма догляду в нашій клініці розпочинається з ретельного аналізу стану вашої шкіри за допомогою сучасного обладнання. Такий підхід дозволяє нам не просто лікувати симптоми, а знайти першопричину проблем. Ми оцінюємо рівень гідратації, еластичність, наявність пігментації та інші ключові параметри, щоб підібрати найефективніші та найбезпечніші процедури саме для вас, гарантуючи довготривалий результат.",
+              ru: "Каждая программа ухода в нашей клинике начинается с тщательного анализа состояния вашей кожи с помощью современного оборудования. Такой подход позволяет нам не просто лечить симптомы, а найти первопричину проблем. Мы оцениваем уровень гидратации, эластичность, наличие пигментации и другие ключевые параметры, чтобы подобрать самые эффективные и безопасные процедуры именно для вас, гарантируя долговременный результат.",
+              en: "Every care program at our clinic begins with a thorough analysis of your skin's condition using modern equipment. This approach allows us not just to treat symptoms, but to find the root cause of the problems. We assess hydration level, elasticity, pigmentation presence, and other key parameters to select the most effective and safe procedures specifically for you, ensuring long-lasting results.",
+              de: "Jedes Pflegeprogramm in unserer Klinik beginnt mit einer gründlichen Analyse Ihres Hautzustands mithilfe moderner Geräte. Dieser Ansatz ermöglicht es uns, nicht nur Symptome zu behandeln, sondern die Grundursache der Probleme zu finden. Wir bewerten den Hydratationsgrad, die Elastizität, das Vorhandensein von Pigmentierung und andere Schlüsselparameter, um die effektivsten und sichersten Verfahren speziell für Sie auszuwählen und ein langfristiges Ergebnis zu gewährleisten.",
+            }
+          },
+        ],
       },
       {
         type: "heading",
@@ -304,30 +327,46 @@ export const services: Service[] = [
       },
       {
         type: "image",
+        align: "right",
         content: { image: "https://brando-s.ru/wp-content/uploads/Glavnaya-2-1.jpg" },
-        sideText: {
-          uk: "Сучасні апаратні методики, такі як RF-ліфтинг, дозволяють досягти ефекту підтяжки шкіри без хірургічного втручання.",
-          ru: "Современные аппаратные методики, такие как RF-лифтинг, позволяют достичь эффекта подтяжки кожи без хирургического вмешательства.",
-          en: "Modern hardware techniques, such as RF-lifting, allow for a skin tightening effect without surgical intervention.",
-          de: "Moderne gerätegestützte Techniken wie das RF-Lifting ermöglichen einen Hautstraffungseffekt ohne chirurgischen Eingriff."
-        }
+        children: [
+          {
+            type: "heading",
+            content: {
+              uk: "Інноваційні апаратні методики омолодження",
+              ru: "Инновационные аппаратные методики омоложения",
+              en: "Innovative Apparatus-Based Rejuvenation Methods",
+              de: "Innovative gerätegestützte Verjüngungsmethoden",
+            },
+          },
+          {
+            type: "paragraph",
+            content: {
+              uk: "Для досягнення максимального ліфтинг-ефекту та глибокого відновлення ми використовуємо передові апаратні технології, включаючи радіочастотний ліфтинг та мікрострумову терапію. Ці процедури впливають на шкіру на клітинному рівні, стимулюючи вироблення власного колагену та еластину, забезпечуючи видимий результат без хірургічного втручання. Довірте свій шлях до ідеальної шкіри професіоналам, які застосовують науковий підхід і високоякісне обладнання.",
+              ru: "Для достижения максимального лифтинг-эффекта и глубокого восстановления мы используем передовые аппаратные технологии, включая радиочастотный лифтинг и микротоковую терапию. Эти процедуры воздействуют на кожу на клеточном уровне, стимулируя выработку собственного коллагена и эластина, обеспечивая видимый результат без хирургического вмешательства. Доверьте свой путь к идеальной коже профессионалам, применяющим научный подход и высококачественное оборудование.",
+              en: "To achieve maximum lifting effect and deep regeneration, we use advanced apparatus-based technologies, including radiofrequency lifting and microcurrent therapy. These procedures impact the skin at a cellular level, stimulating the production of native collagen and elastin, providing visible results without surgical intervention. Trust your path to perfect skin to professionals who apply a scientific approach and high-quality equipment.",
+              de: "Um maximale Lifting-Effekte und tiefe Regeneration zu erzielen, setzen wir fortschrittliche Gerätetechnologien ein, darunter Radiofrequenz-Lifting und Mikrostrom-Therapie. Diese Verfahren wirken auf zellulärer Ebene auf die Haut ein, regen die Produktion von körpereigenem Kollagen und Elastin an und sorgen für sichtbare Ergebnisse ohne chirurgischen Eingriff. Vertrauen Sie Ihren Weg zu perfekter Haut Profis an, die einen wissenschaftlichen Ansatz und hochwertige Geräte verwenden.",
+            }
+          },
+        ],
       },
+
       {
         type: "heading",
         content: {
-          uk: "Догляд за тілом",
-          ru: "Уход за телом",
-          en: "Body Care",
-          de: "Körperpflege"
+          uk: "Догляд за тілом: Естетика та релаксація",
+          ru: "Уход за телом: Эстетика и релаксация",
+          en: "Body Care: Aesthetics and Relaxation",
+          de: "Körperpflege: Ästhetik und Entspannung"
         }
       },
       {
         type: "paragraph",
         content: {
-          uk: "Краса не обмежується обличчям. Наші доглядові процедури для тіла, включаючи пілінги та обгортання, спрямовані на покращення текстури шкіри, боротьбу з целюлітом та підвищення пружності. Це чудовий спосіб не тільки покращити зовнішній вигляд, але й розслабитися та приділити час собі.",
-          ru: "Красота не ограничивается лицом. Наши уходовые процедуры для тела, включая пилинги и обертывания, направлены на улучшение текстуры кожи, борьбу с целлюлитом и повышение упругости. Это прекрасный способ не только улучшить внешний вид, но и расслабиться и уделить время себе.",
-          en: "Beauty is not limited to the face. Our body care treatments, including peels and wraps, are aimed at improving skin texture, combating cellulite, and increasing firmness. This is a great way not only to improve your appearance but also to relax and take time for yourself.",
-          de: "Schönheit ist nicht auf das Gesicht beschränkt. Unsere Körperpflegebehandlungen, einschließlich Peelings und Wickel, zielen darauf ab, die Hauttextur zu verbessern, Cellulite zu bekämpfen und die Festigkeit zu erhöhen. Dies ist eine großartige Möglichkeit, nicht nur Ihr Aussehen zu verbessern, sondern auch zu entspannen und sich Zeit für sich selbst zu nehmen."
+          uk: "Краса не обмежується обличчям. Наші доглядові процедури для тіла, включаючи ензимні пілінги, глибоке зволоження та обгортання, спрямовані на покращення текстури шкіри, боротьбу з целюлітом та підвищення пружності. Це чудовий спосіб не тільки покращити зовнішній вигляд, але й розслабитися, зняти стрес та приділити час собі, відновлюючи внутрішню гармонію.",
+          ru: "Красота не ограничивается лицом. Наши уходовые процедуры для тела, включая энзимные пилинги, глубокое увлажнение и обертывания, направлены на улучшение текстуры кожи, борьбу с целлюлитом и повышение упругости. Это прекрасный способ не только улучшить внешний вид, но и расслабиться, снять стресс и уделить время себе, восстанавливая внутреннюю гармонию.",
+          en: "Beauty is not limited to the face. Our body care treatments, including enzyme peels, deep hydration, and wraps, are aimed at improving skin texture, combating cellulite, and increasing firmness. This is a great way not only to improve your appearance but also to relax, relieve stress, and take time for yourself, restoring inner harmony.",
+          de: "Schönheit ist nicht auf das Gesicht beschränkt. Unsere Körperpflegebehandlungen, einschließlich Enzym-Peelings, Tiefenhydratation und Wickel, zielen darauf ab, die Hauttextur zu verbessern, Cellulite zu bekämpfen und die Festigkeit zu erhöhen. Dies ist eine großartige Möglichkeit, nicht nur Ihr Aussehen zu verbessern, sondern auch zu entspannen, Stress abzubauen und sich Zeit für sich selbst zu nehmen, um innere Harmonie wiederherzustellen."
         }
       },
       {
@@ -342,10 +381,10 @@ export const services: Service[] = [
       {
         type: "paragraph",
         content: {
-          uk: "Ми не віримо в універсальні рішення. Кожна шкіра унікальна, і саме тому ми приділяємо максимум уваги персональній консультації. Наші спеціалісти допоможуть вам розібратися у потребах вашої шкіри та складуть ефективну програму процедур.",
-          ru: "Мы не верим в универсальные решения. Каждая кожа уникальна, и именно поэтому мы уделяем максимум внимания персональной консультации. Наши специалисты помогут вам разобраться в потребностях вашей кожи и составят эффективную программу процедур.",
-          en: "We don't believe in one-size-fits-all solutions. Every skin is unique, which is why we pay maximum attention to personal consultation. Our specialists will help you understand your skin's needs and create an effective program of procedures.",
-          de: "Wir glauben nicht an Einheitslösungen. Jede Haut ist einzigartig, weshalb wir der persönlichen Beratung maximale Aufmerksamkeit schenken. Unsere Spezialisten helfen Ihnen, die Bedürfnisse Ihrer Haut zu verstehen und ein effektives Behandlungsprogramм zu erstellen."
+          uk: "Ми не віримо в універсальні рішення. Кожна шкіра унікальна, і саме тому ми приділяємо максимум уваги персональній консультації. Наші спеціалісти допоможуть вам розібратися у потребах вашої шкіри, складуть ефективну програму процедур та підберуть професійний домашній догляд, щоб результат закріпився надовго.",
+          ru: "Мы не верим в универсальные решения. Каждая кожа уникальна, и именно поэтому мы уделяем максимум внимания персональной консультации. Наши специалисты помогут вам разобраться в потребностях вашей кожи, составят эффективную программу процедур и подберут профессиональный домашний уход, чтобы результат закрепился надолго.",
+          en: "We don't believe in one-size-fits-all solutions. Every skin is unique, which is why we pay maximum attention to personal consultation. Our specialists will help you understand your skin's needs, create an effective program of procedures, and select professional home care to ensure the result lasts.",
+          de: "Wir glauben nicht an Einheitslösungen. Jede Haut ist einzigartig, weshalb wir der persönlichen Beratung maximale Aufmerksamkeit schenken. Unsere Spezialisten helfen Ihnen, die Bedürfnisse Ihrer Haut zu verstehen, erstellen ein effektives Behandlungsprogramm und wählen eine professionelle Heimpflege aus, um das Ergebnis langfristig zu sichern."
         }
       }
     ],
@@ -547,59 +586,57 @@ export const services: Service[] = [
         },
         {
           type: "image",
+          align: "right",
           content: { image: "https://ihc-russia.ru/upload/iblock/7ec/tcycrf2oljhzixbxr2wqkdgdey5hyszw.jpg" },
-          sideText: {
-            uk: "Усі процедури проводяться досвідченими лікарями-ін'єкціоністами, які досконало володіють анатомією обличчя та використовують лише сертифіковані препарати.",
-            ru: "Все процедуры проводятся опытными врачами-инъекционистами, которые в совершенстве владеют анатомией лица и используют только сертифицированные препараты.",
-            en: "All procedures are performed by experienced injectionist doctors who have a perfect command of facial anatomy and use only certified products.",
-            de: "Alle Eingriffe werden von erfahrenen Injektionsärzten durchgeführt, die die Gesichtsanatomie perfekt beherrschen und nur zertifizierte Produkte verwenden."
-          }
+          children: [
+            {
+              type: "heading",
+              content: {
+                uk: "Можливості контурної пластики",
+                ru: "Возможности контурной пластики",
+                en: "Possibilities of Contour Plastics",
+                de: "Möglichkeiten der Konturplastik"
+              }
+            },
+            {
+              type: "paragraph",
+              content: {
+                uk: "**Збільшення губ:** Дозволяє надати губам бажаного об'єму та чуттєвості, скоригувати асиметрію та зволожити їх.",
+                ru: "**Увеличение губ:** Позволяет придать губам желаемый объем и чувственность, скорректировать асимметрию и увлажнить их.",
+                en: "**Lip Augmentation:** Allows to give the lips the desired volume and sensuality, correct asymmetry, and moisturize them.",
+                de: "**Lippenvergrößerung:** Ermöglicht es, den Lippen das gewünschte Volumen und die Sinnlichkeit zu verleihen, Asymmetrien zu korrigieren und sie mit Feuchtigkeit zu versorgen."
+              }
+            },
+            {
+              type: "paragraph",
+              content: {
+                uk: "**Корекція вилиць:** Відновлює втрачений об'єм, створює ефект ліфтингу та робить риси обличчя більш виразними.",
+                ru: "**Коррекция скул:** Восстанавливает утраченный объем, создает эффект лифтинга и делает черты лица более выразительными.",
+                en: "**Cheekbone Correction:** Restores lost volume, creates a lifting effect, and makes facial features more expressive.",
+                de: "**Wangenknochenkorrektur:** Stellt verlorenes Volumen wieder her, erzeugt einen Lifting-Effekt und macht die Gesichtszüge ausdrucksvoller."
+              }
+            },
+            {
+              type: "paragraph",
+              content: {
+                uk: "**Моделювання підборіддя:** Гармонізує нижню третину обличчя, робить профіль чіткішим та надає овалу обличчя завершеного вигляду.",
+                ru: "**Моделирование подбородка:** Гармонизирует нижнюю треть лица, делает профиль более четким и придает овалу лица завершенный вид.",
+                en: "**Chin Modeling:** Harmonizes the lower third of the face, makes the profile sharper, and gives the facial oval a finished look.",
+                de: "**Kinnmodellierung:** Harmonisiert das untere Drittel des Gesichts, macht das Profil schärfer und verleiht dem Gesichtsoval ein vollendetes Aussehen."
+              }
+            },
+            {
+              type: "paragraph",
+              content: {
+                uk: "**Корекція носогубних складок:** Заповнює заломи, що йдуть від носа до куточків рота, миттєво роблячи обличчя молодшим та свіжішим.",
+                ru: "**Коррекция носогубных складок:** Заполняет заломы, идущие от носа к уголкам рта, мгновенно делая лицо моложе и свежее.",
+                en: "**Nasolabial Fold Correction:** Fills the creases running from the nose to the corners of the mouth, instantly making the face look younger and fresher.",
+                de: "**Korrektur der Nasolabialfalten:** Füllt die Falten, die von der Nase zu den Mundwinkeln verlaufen, und lässt das Gesicht sofort jünger und frischer aussehen."
+              }
+            }
+            ]
         },
-        {
-          type: "heading",
-          content: {
-            uk: "Можливості контурної пластики",
-            ru: "Возможности контурной пластики",
-            en: "Possibilities of Contour Plastics",
-            de: "Möglichkeiten der Konturplastik"
-          }
-        },
-        {
-          type: "paragraph",
-          content: {
-            uk: "**Збільшення губ:** Дозволяє надати губам бажаного об'єму та чуттєвості, скоригувати асиметрію та зволожити їх.",
-            ru: "**Увеличение губ:** Позволяет придать губам желаемый объем и чувственность, скорректировать асимметрию и увлажнить их.",
-            en: "**Lip Augmentation:** Allows to give the lips the desired volume and sensuality, correct asymmetry, and moisturize them.",
-            de: "**Lippenvergrößerung:** Ermöglicht es, den Lippen das gewünschte Volumen und die Sinnlichkeit zu verleihen, Asymmetrien zu korrigieren und sie mit Feuchtigkeit zu versorgen."
-          }
-        },
-        {
-          type: "paragraph",
-          content: {
-            uk: "**Корекція вилиць:** Відновлює втрачений об'єм, створює ефект ліфтингу та робить риси обличчя більш виразними.",
-            ru: "**Коррекция скул:** Восстанавливает утраченный объем, создает эффект лифтинга и делает черты лица более выразительными.",
-            en: "**Cheekbone Correction:** Restores lost volume, creates a lifting effect, and makes facial features more expressive.",
-            de: "**Wangenknochenkorrektur:** Stellt verlorenes Volumen wieder her, erzeugt einen Lifting-Effekt und macht die Gesichtszüge ausdrucksvoller."
-          }
-        },
-        {
-          type: "paragraph",
-          content: {
-            uk: "**Моделювання підборіддя:** Гармонізує нижню третину обличчя, робить профіль чіткішим та надає овалу обличчя завершеного вигляду.",
-            ru: "**Моделирование подбородка:** Гармонизирует нижнюю треть лица, делает профиль более четким и придает овалу лица завершенный вид.",
-            en: "**Chin Modeling:** Harmonizes the lower third of the face, makes the profile sharper, and gives the facial oval a finished look.",
-            de: "**Kinnmodellierung:** Harmonisiert das untere Drittel des Gesichts, macht das Profil schärfer und verleiht dem Gesichtsoval ein vollendetes Aussehen."
-          }
-        },
-        {
-          type: "paragraph",
-          content: {
-            uk: "**Корекція носогубних складок:** Заповнює заломи, що йдуть від носа до куточків рота, миттєво роблячи обличчя молодшим та свіжішим.",
-            ru: "**Коррекция носогубных складок:** Заполняет заломы, идущие от носа к уголкам рта, мгновенно делая лицо моложе и свежее.",
-            en: "**Nasolabial Fold Correction:** Fills the creases running from the nose to the corners of the mouth, instantly making the face look younger and fresher.",
-            de: "**Korrektur der Nasolabialfalten:** Füllt die Falten, die von der Nase zu den Mundwinkeln verlaufen, und lässt das Gesicht sofort jünger und frischer aussehen."
-          }
-        },
+
         {
           type: "heading",
           content: {
@@ -10715,6 +10752,9 @@ export const specials: Scpecials[] = [
 
   {
     id: "special3",
+
+    serviceId: ["service1", "service2"],
+
     title: {
       uk: "Пілінг обличчя -20%",
       de: "Gesichtspeeling -20%",
@@ -12262,53 +12302,68 @@ export const blogs: Blog[] = [
       },
       {
         type: "image",
+        align: "right",
         content: {
-          image: "https://lazersvit.com/storage/cache/files/2023/09/26/surgical-removal-mole-main-min.webp",
+          image: "https://lazersvit.com/storage/cache/files/2023/09/26/surgical-removal-mole-main-min.webp"
         },
-        sideText: {
-          uk: "Безпечне видалення родимок сучасними методами",
-          ru: "Безопасное удаление родинок современными методами",
-          en: "Safe removal of moles with modern methods",
-          de: "Sichere Entfernung von Muttermalen mit modernen Methoden"
-        }
-      },
-      {
-        type: "heading",
-        content: {
-          uk: "Переваги процедур",
-          ru: "Преимущества процедур",
-          en: "Advantages of Procedures",
-          de: "Vorteile der Verfahren"
-        }
-      },
-      {
-        type: "list",
-        content: {
-          uk: [
-            "Мінімальний ризик рубців",
-            "Швидке відновлення",
-            "Естетичний результат",
-            "Можливість видаляти різні типи утворень"
-          ],
-          ru: [
-            "Минимальный риск рубцов",
-            "Быстрое восстановление",
-            "Эстетический результат",
-            "Возможность удаления разных типов образований"
-          ],
-          en: [
-            "Minimal risk of scarring",
-            "Fast recovery",
-            "Aesthetic result",
-            "Ability to remove various types of growths"
-          ],
-          de: [
-            "Minimales Narbenrisiko",
-            "Schnelle Erholung",
-            "Ästhetisches Ergebnis",
-            "Möglichkeit, verschiedene Arten von Wucherungen zu entfernen"
-          ]
-        }
+        children: [
+          {
+            type: "heading",
+            content: {
+              uk: "Як це працює?",
+              ru: "Как это работает?",
+              en: "How Does It Work?",
+              de: "Wie funktioniert es?",
+            },
+          },
+          {
+            type: "paragraph",
+            content: {
+              uk: "Лазерний промінь м'яко нагріває шкіру, стимулюючи природні процеси регенерації. Це 'контрольоване пошкодження' змушує шкіру оновлюватися, створюючи нові здорові клітини.",
+              ru: "Лазерный луч мягко нагревает кожу, стимулируя естественные процессы регенерации. Это 'контролируемое повреждение' заставляет кожу обновляться, создавая новые здоровые клетки.",
+              en: "The laser beam gently heats the skin, stimulating natural regeneration processes. This 'controlled injury' prompts the skin to renew itself, creating new healthy cells.",
+              de: "Der Laserstrahl erwärmt die Haut sanft und regt natürliche Regenerationsprozesse an. Diese 'kontrollierte Verletzung' bewirkt, dass sich die Haut erneuert und neue, gesunde Zellen bildet.",
+            },
+          },
+          {
+            type: "heading",
+            content: {
+              uk: "Переваги процедур",
+              ru: "Преимущества процедур",
+              en: "Advantages of Procedures",
+              de: "Vorteile der Verfahren"
+            }
+          },
+          {
+            type: "list",
+            content: {
+              uk: [
+                "Мінімальний ризик рубців",
+                "Швидке відновлення",
+                "Естетичний результат",
+                "Можливість видаляти різні типи утворень"
+              ],
+              ru: [
+                "Минимальный риск рубцов",
+                "Быстрое восстановление",
+                "Эстетический результат",
+                "Возможность удаления разных типов образований"
+              ],
+              en: [
+                "Minimal risk of scarring",
+                "Fast recovery",
+                "Aesthetic result",
+                "Ability to remove various types of growths"
+              ],
+              de: [
+                "Minimales Narbenrisiko",
+                "Schnelle Erholung",
+                "Ästhetisches Ergebnis",
+                "Möglichkeit, verschiedene Arten von Wucherungen zu entfernen"
+              ]
+            }
+          },
+        ],
       },
       {
         type: "paragraph",
@@ -12321,7 +12376,7 @@ export const blogs: Blog[] = [
       }
     ],
     serviceId: ["service1", "service2"], // Удаление новообразований
-    subservices: ["subservice1", "subservice2", "subservice3"],
+    subservicesId: ["subservice1", "subservice2", "subservice3"],
     specials: ["special1","special2","special3"]
   },
 
@@ -12459,9 +12514,9 @@ export const blogs: Blog[] = [
         }
       }
     ],
-    serviceId: ["service2"],
-    subservices: ["subservice4", "subservice5"],
-    specials: []
+    serviceId: ["service1", "service2"], // Удаление новообразований
+    subservicesId: ["subservice1", "subservice2", "subservice3"],
+    specials: ["special1","special2","special3"]
   },
 
 
@@ -12578,60 +12633,59 @@ export const blogs: Blog[] = [
         content: {
           image: "https://www.evolution-clinic.com/wp-content/uploads/2025/03/image-trh-001.jpg",
         },
-        sideText: {
-          uk: "Сучасні методи трихології",
-          ru: "Современные методы трихологии",
-          en: "Modern trichology methods",
-          de: "Moderne Trichologiemethoden"
-        }
+        children: [
+
+          {
+            type: "heading",
+            content: {
+              uk: "Поради для здорового волосся",
+              ru: "Советы для здоровых волос",
+              en: "Tips for Healthy Hair",
+              de: "Tipps für gesundes Haar"
+            }
+          },
+          {
+            type: "list",
+            content: {
+              uk: [
+                "Регулярно мийте голову спеціальними шампунями",
+                "Уникайте агресивних термічних процедур",
+                "Дотримуйтесь збалансованого харчування",
+                "Використовуйте маски та кондиціонери для волосся"
+              ],
+              ru: [
+                "Регулярно мойте голову специальными шампунями",
+                "Избегайте агрессивных термических процедур",
+                "Соблюдайте сбалансированное питание",
+                "Используйте маски и кондиционеры для волос"
+              ],
+              en: [
+                "Wash hair regularly with special shampoos",
+                "Avoid aggressive heat treatments",
+                "Follow a balanced diet",
+                "Use hair masks and conditioners"
+              ],
+              de: [
+                "Waschen Sie das Haar regelmäßig mit speziellen Shampoos",
+                "Vermeiden Sie aggressive Hitzebehandlungen",
+                "Halten Sie eine ausgewogene Ernährung ein",
+                "Verwenden Sie Haarmasken und Conditioner"
+              ]
+            }
+          },
+          {
+            type: "paragraph",
+            content: {
+              uk: "Своєчасне лікування проблем волосся допомагає уникнути випадіння та покращує їх зовнішній вигляд.",
+              ru: "Своевременное лечение проблем волос помогает избежать выпадения и улучшает их внешний вид.",
+              en: "Timely treatment of hair issues prevents hair loss and improves appearance.",
+              de: "Rechtzeitige Behandlung von Haarproblemen verhindert Haarausfall und verbessert das Aussehen."
+            }
+          },
+
+        ]
       },
-      {
-        type: "heading",
-        content: {
-          uk: "Поради для здорового волосся",
-          ru: "Советы для здоровых волос",
-          en: "Tips for Healthy Hair",
-          de: "Tipps für gesundes Haar"
-        }
-      },
-      {
-        type: "list",
-        content: {
-          uk: [
-            "Регулярно мийте голову спеціальними шампунями",
-            "Уникайте агресивних термічних процедур",
-            "Дотримуйтесь збалансованого харчування",
-            "Використовуйте маски та кондиціонери для волосся"
-          ],
-          ru: [
-            "Регулярно мойте голову специальными шампунями",
-            "Избегайте агрессивных термических процедур",
-            "Соблюдайте сбалансированное питание",
-            "Используйте маски и кондиционеры для волос"
-          ],
-          en: [
-            "Wash hair regularly with special shampoos",
-            "Avoid aggressive heat treatments",
-            "Follow a balanced diet",
-            "Use hair masks and conditioners"
-          ],
-          de: [
-            "Waschen Sie das Haar regelmäßig mit speziellen Shampoos",
-            "Vermeiden Sie aggressive Hitzebehandlungen",
-            "Halten Sie eine ausgewogene Ernährung ein",
-            "Verwenden Sie Haarmasken und Conditioner"
-          ]
-        }
-      },
-      {
-        type: "paragraph",
-        content: {
-          uk: "Своєчасне лікування проблем волосся допомагає уникнути випадіння та покращує їх зовнішній вигляд.",
-          ru: "Своевременное лечение проблем волос помогает избежать выпадения и улучшает их внешний вид.",
-          en: "Timely treatment of hair issues prevents hair loss and improves appearance.",
-          de: "Rechtzeitige Behandlung von Haarproblemen verhindert Haarausfall und verbessert das Aussehen."
-        }
-      },
+
       {
         type: "paragraph",
         content: {
@@ -12688,7 +12742,175 @@ export const blogs: Blog[] = [
           de: "Eine Trichologenberatung ermöglicht individuelle Pflege und Behandlung."
         }
       }
-    ]
+    ],
+    serviceId: ["service1", "service2", "service3", "service4", "service5", "service6", "service7", "service8", "service9"], // Удаление новообразований
+    subservices: ["subservice1", "subservice3" ,"subservice2"],
+    specials: ["special1","special2","special3"]
+  },
+  {
+    id: "laser-rejuvenation-guide",
+    title: {
+      uk: "Лазерне омолодження: Відкрийте для себе сяйво молодості",
+      ru: "Лазерное омоложение: Откройте для себя сияние молодости",
+      en: "Laser Rejuvenation: Discover the Glow of Youth",
+      de: "Laser-Hautverjüngung: Entdecken Sie den Glanz der Jugend",
+    },
+    subtitle: {
+      uk: "Повний гід по найефективнішій антивіковій процедурі",
+      ru: "Полный гид по самой эффективной антивозрастной процедуре",
+      en: "A Complete Guide to the Most Effective Anti-Aging Procedure",
+      de: "Ein vollständiger Leitfaden zur effektivsten Anti-Aging-Methode",
+    },
+    slug: "laser-rejuvenation-guide",
+    mainImage:
+        "https://images.unsplash.com/photo-1557870912-302396342898?q=80&w=1740",
+
+    content: [
+      // --- Блок 1: Вступление ---
+      {
+        type: "heading",
+        align: "center",
+        content: {
+          uk: "Що таке лазерне омолодження?",
+          ru: "Что такое лазерное омоложение?",
+          en: "What is Laser Rejuvenation?",
+          de: "Was ist Laser-Hautverjüngung?",
+        },
+      },
+      {
+        type: "paragraph",
+        align: "left",
+        content: {
+          uk: "Лазерне омолодження — це неінвазивна процедура, яка використовує сфокусовані світлові промені для поліпшення зовнішнього вигляду шкіри, стимулюючи вироблення колагену і еластину.",
+          ru: "Лазерное омоложение — это неинвазивная процедура, которая использует сфокусированные световые лучи для улучшения внешнего вида кожи, стимулируя выработку коллагена и эластина.",
+          en: "Laser rejuvenation is a non-invasive procedure that uses focused light beams to improve the skin’s appearance by stimulating the production of collagen and elastin.",
+          de: "Die Laser-Hautverjüngung ist ein nicht-invasives Verfahren, das fokussierte Lichtstrahlen zur Verbesserung des Hautbildes nutzt, indem es die Produktion von Kollagen und Elastin anregt.",
+        },
+      },
+
+      // --- Блок 2: Преимущества (Список) ---
+      {
+        type: "heading",
+        align: "left",
+        content: {
+          uk: "Ключові переваги процедури",
+          ru: "Ключевые преимущества процедуры",
+          en: "Key Benefits of the Procedure",
+          de: "Die wichtigsten Vorteile der Behandlung",
+        },
+      },
+      {
+        type: "list",
+        align: "left",
+        content: {
+          uk: "• Розгладження зморшок та тонких ліній\n• Зменшення пігментації та судинних зірочок\n• Покращення тонусу і текстури шкіри\n• Мінімізація пор та лікування рубців постакне",
+          ru: "• Разглаживание морщин и тонких линий\n• Уменьшение пигментации и сосудистых звездочек\n• Улучшение тонуса и текстуры кожи\n• Минимизация пор и лечение рубцов постакне",
+          en: "• Smoothing wrinkles and fine lines\n• Reduction of pigmentation and spider veins\n• Improvement of skin tone and texture\n• Minimizing pores and treating acne scars",
+          de: "• Glättung von Falten und feinen Linien\n• Reduktion von Pigmentierung und Besenreisern\n• Verbesserung von Hautton und -struktur\n• Minimierung von Poren und Behandlung von Aknenarben",
+        },
+      },
+
+      // --- Блок 3: Изображение с процессом ---
+      {
+        type: "image",
+        align: "right",
+        content: {
+          image:
+              "https://odessa.aura-clinic.com/upload/61c2ac2b9cc12.jpg",
+        },
+        children: [
+          {
+            type: "heading",
+            content: {
+              uk: "Як це працює?",
+              ru: "Как это работает?",
+              en: "How Does It Work?",
+              de: "Wie funktioniert es?",
+            },
+          },
+          {
+            type: "paragraph",
+            content: {
+              uk: "Лазерний промінь м'яко нагріває шкіру, стимулюючи природні процеси регенерації. Це 'контрольоване пошкодження' змушує шкіру оновлюватися, створюючи нові здорові клітини.",
+              ru: "Лазерный луч мягко нагревает кожу, стимулируя естественные процессы регенерации. Это 'контролируемое повреждение' заставляет кожу обновляться, создавая новые здоровые клетки.",
+              en: "The laser beam gently heats the skin, stimulating natural regeneration processes. This 'controlled injury' prompts the skin to renew itself, creating new healthy cells.",
+              de: "Der Laserstrahl erwärmt die Haut sanft und regt natürliche Regenerationsprozesse an. Diese 'kontrollierte Verletzung' bewirkt, dass sich die Haut erneuert und neue, gesunde Zellen bildet.",
+            },
+          },
+        ],
+      },
+
+
+
+      // --- Блок 5: Призыв к действию с доктором ---
+      {
+        type: "image",
+        content: {
+          image:
+              "https://chocolife.object.pscloud.io/static/upload/images/deal/for_deal_page/60000/59918/660x305/202509141190168c70ffd87b62.jpg?1757962806", // Изображение лица врача или консультации
+        },
+        children: [
+          {
+            type: "heading",
+            align: "center",
+            content: {
+              uk: "Ваш шлях до ідеальної шкіри",
+              ru: "Ваш путь к идеальной коже",
+              en: "Your Path to Perfect Skin",
+              de: "Ihr Weg zu perfekter Haut",
+            },
+          },
+          {
+            type: "paragraph",
+            align: "center",
+            content: {
+              uk: "Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.",
+              ru: "Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.",
+              en: "Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.",
+              de: "Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.",
+            },
+          },{
+            type: "paragraph",
+            align: "center",
+            content: {
+              uk: "Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.",
+              ru: "Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.",
+              en: "Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.",
+              de: "Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.",
+            },
+          },{
+            type: "paragraph",
+            align: "center",
+            content: {
+              uk: "Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.",
+              ru: "Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.",
+              en: "Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.",
+              de: "Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.",
+            },
+          },{
+            type: "paragraph",
+            align: "center",
+            content: {
+              uk: "Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.",
+              ru: "Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.",
+              en: "Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.",
+              de: "Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.",
+            },
+          },{
+            type: "paragraph",
+            align: "center",
+            content: {
+              uk: "Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.Доктор Коваленко підбере для вас індивідуальну програму лазерного омолодження, що ідеально відповідає потребам вашої шкіри.",
+              ru: "Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.Доктор Коваленко подберет для вас индивидуальную программу лазерного омоложения, идеально соответствующую потребностям вашей кожи.",
+              en: "Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.Dr. Kovalenko will select a personalized laser rejuvenation program for you, perfectly tailored to your skin’s needs.",
+              de: "Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.Dr. Kovalenko wählt ein individuelles Laser-Verjüngungsprogramm für Sie aus, das perfekt auf die Bedürfnisse Ihrer Haut abgestimmt ist.",
+            },
+          },
+        ],
+      },
+    ],
   }
+
+
 ]
 

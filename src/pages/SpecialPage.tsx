@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from "react-router-dom";
-import {specials} from "../data/services";
+import {blogs, specials} from "../data/services";
 import {Button} from "@heroui/react";
 import type {Scpecials} from "../models/Scpecials.ts";
 import {ContentBlockRenderer} from "../components/ContentBlockRenderer.tsx";
@@ -13,6 +13,9 @@ export default function SpecialPage() {
   const { slug } = useParams<{ slug: string }>();
 
   const special = specials.find((spec) => spec.slug === slug);
+
+  const relatedBlogs = blogs ;
+
 
   if (!special) {
     return <div className="w-full text-center py-8">Special not found</div>;
@@ -117,7 +120,67 @@ export default function SpecialPage() {
                     )}
                   </Link>
               ))}
+
             </div>
+
+
+            {relatedBlogs.length > 0 && (
+                <>
+                  <div className="pt-8 mt-[3rem]">
+                    <h2 className="text-3xl lg:text-5xl font-[800] mb-[2.5rem]">
+                      {t("specialPage.interestingArticles")}
+                    </h2>
+                  </div>
+
+                  <div className="flex flex-wrap justify-center gap-8">
+                    {relatedBlogs.map((item) => (
+                        <div
+                            key={item.id}
+                            className="post_item w-[22rem] bg-primary rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-500"
+                        >
+                          <Link
+                              to={`/${lang}/blogs/${item.slug}`}
+                              className="relative block overflow-hidden group"
+                          >
+                            {item.mainImage && (
+                                <span
+                                    className="block w-full h-[15rem] bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
+                                    style={{
+                                      backgroundImage: `url(${item.mainImage})`,
+                                    }}
+                                ></span>
+                            )}
+                            <p className="date absolute bottom-[1rem] left-[1rem] flex gap-1 text-white bg-black/50 px-3 py-1 rounded-md">
+                              <b>03</b>
+                              <span>Січень</span>
+                              <span>2024</span>
+                            </p>
+                          </Link>
+
+                          <Link
+                              to={`/${lang}/blogs/${item.slug}`}
+                              className="block text-[1.3rem] font-semibold mt-4 px-4 hover:text-primary transition"
+                          >
+                            {item.title[lang]}
+                          </Link>
+
+                          <p className="excerpt text-[1rem] text-gray-600 mt-2 px-4 line-clamp-3">
+                            {item.content?.find((block) => block.type === "paragraph")?.content?.[lang] ||
+                                "Опис відсутній"}
+                          </p>
+
+                          <Link
+                              to={`/${lang}/blogs/${item.slug}`}
+                              className="block text-[1rem] font-semibold text-primary mt-4 mb-4 px-4 hover:underline"
+                          >
+                            {t("specials.learnMore")}
+                          </Link>
+                        </div>
+                    ))}
+                  </div>
+                </>
+            )}
+
 
           </div>
 
