@@ -77,7 +77,10 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
       }
 
       case "image": {
-        const imageSrc = block.content?.image;
+        const imageSrc = Array.isArray(block.content?.image)
+            ? block.content?.image[0]
+            : block.content?.image;
+
         const position = block.align ?? "left";
         const widthPercent = block.widthPercent ?? 40;
         const textWidth = 100 - widthPercent;

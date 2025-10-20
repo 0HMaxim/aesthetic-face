@@ -1,20 +1,30 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { specials } from "../data/services";
+import { specials as defaultSpecials } from "../data/services";
 import { Button } from "@heroui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import MaterialSymbolsArrowBackIos from '~icons/material-symbols/arrow-back-ios'
-import MaterialSymbolsArrowForwardIos from '~icons/material-symbols/arrow-forward-ios'
+import type { NavigationOptions } from "swiper/types";
+import type {Scpecials} from "../models/Scpecials.ts";
+
+import MaterialSymbolsArrowBackIos from "~icons/material-symbols/arrow-back-ios";
+import MaterialSymbolsArrowForwardIos from "~icons/material-symbols/arrow-forward-ios";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-export const SpecialsSlider: React.FC = () => {
+interface SpecialsSliderProps {
+  items?: Scpecials[];
+}
+
+export const SpecialsSlider: React.FC<SpecialsSliderProps> = ({ items }) => {
   const { i18n, t } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
+
+  // ✅ если items не передан — используем все акции из data/services
+  const specials = items && items.length > 0 ? items : defaultSpecials;
 
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
@@ -33,10 +43,10 @@ export const SpecialsSlider: React.FC = () => {
               nextEl: nextRef.current,
             }}
             onSwiper={(swiper) => {
-              // Подключаем кнопки после инициализации
-              if (swiper.params.navigation) {
-                swiper.params.navigation.prevEl = prevRef.current;
-                swiper.params.navigation.nextEl = nextRef.current;
+              const navigation = swiper.params.navigation as NavigationOptions;
+              if (navigation) {
+                navigation.prevEl = prevRef.current;
+                navigation.nextEl = nextRef.current;
                 swiper.navigation.init();
                 swiper.navigation.update();
               }
@@ -83,20 +93,23 @@ export const SpecialsSlider: React.FC = () => {
               </SwiperSlide>
           ))}
         </Swiper>
-        {/* Кнопки навигации */}
-        <Link
+
+        {/* ✅ Кнопки навигации */}
+        <button
             ref={prevRef}
-            className="absolute top-1/2 -translate-y-1/2 left-[-2rem] z-50 text-foreground text-3xl"
+            type="button"
+            className="absolute top-1/2 -translate-y-1/2 left-[-2rem] z-50 text-foreground text-3xl bg-transparent border-none cursor-pointer"
         >
           <MaterialSymbolsArrowBackIos />
-        </Link>
+        </button>
 
-        <Link
+        <button
             ref={nextRef}
-            className="absolute top-1/2 -translate-y-1/2 right-[-2rem] z-50 text-foreground text-3xl"
+            type="button"
+            className="absolute top-1/2 -translate-y-1/2 right-[-2rem] z-50 text-foreground text-3xl bg-transparent border-none cursor-pointer"
         >
-          <MaterialSymbolsArrowForwardIos/>
-        </Link>
+          <MaterialSymbolsArrowForwardIos />
+        </button>
       </div>
   );
 };

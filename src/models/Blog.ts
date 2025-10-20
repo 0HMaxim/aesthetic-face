@@ -19,7 +19,7 @@ export interface Blog {
 
 
   serviceId?: string[];
-  subservices?: string[];
+  subservicesId?: string[];
   specials?: string[];
 }
 

@@ -94,8 +94,8 @@ export default function DoctorPage() {
                 <ul className="list-disc list-inside space-y-2 mb-10">
                   {doctor.specializations.map((spec: LocalizedText, index: number) => (
                       <li key={index} className="flex items-center text-foreground">
-                        <SolarUnreadOutline className="mr-3 md:size-[2rem] size-[1rem] text-foreground" /> {/* Icon */}
-                        <span className="text-xl">{spec[lang]}</span> {/* Text */}
+                        <SolarUnreadOutline className="mr-3 md:size-[2rem] size-[1rem] text-foreground" />
+                        <span className="text-xl">{spec[lang]}</span>
                       </li>
                   ))}
                 </ul>
@@ -109,8 +109,8 @@ export default function DoctorPage() {
                 <ul className="list-disc list-inside mb-[2.5rem] text-foreground">
                   {doctor.education.map((edu: LocalizedText, index: number) => (
                       <li key={index} className="flex items-center text-foreground">
-                        <SolarUnreadOutline className="mr-3 md:size-[2rem] size-[1rem] text-foreground" /> {/* Icon */}
-                        <span className="text-xl">{edu[lang]}</span> {/* Text */}
+                        <SolarUnreadOutline className="mr-3 md:size-[2rem] size-[1rem] text-foreground" />
+                        <span className="text-xl">{edu[lang]}</span>
                       </li>
                   ))}
                 </ul>

@@ -12744,7 +12744,7 @@ export const blogs: Blog[] = [
       }
     ],
     serviceId: ["service1", "service2", "service3", "service4", "service5", "service6", "service7", "service8", "service9"], // Удаление новообразований
-    subservices: ["subservice1", "subservice3" ,"subservice2"],
+    subservicesId: ["subservice1", "subservice3" ,"subservice2"],
     specials: ["special1","special2","special3"]
   },
   {

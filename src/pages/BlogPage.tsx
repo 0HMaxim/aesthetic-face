@@ -4,6 +4,7 @@ import { blogs, services, subservices, specials } from "../data/services"; // и
 import { ContentBlockRenderer } from "../components/ContentBlockRenderer";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { TopImage } from "../components/TopImage.tsx";
+import {SpecialsSlider} from "../components/SpecialsSection.tsx";
 
 export default function BlogPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -52,10 +53,15 @@ export default function BlogPage() {
       blog.serviceId?.map((id) => services.find((s) => s.id === id)).filter(Boolean) || [];
 
   const relatedSubservices =
-      blog.subservices?.map((id) => subservices.find((s) => s.id === id)).filter(Boolean) || [];
+      blog.subservicesId
+      ?.map((id) => subservices.find((s) => s.id === id))
+      .filter((s): s is typeof subservices[number] => Boolean(s)) || [];
 
   const relatedSpecials =
-      blog.specials?.map((id) => specials.find((s) => s.id === id)).filter(Boolean) || [];
+      blog.specials
+      ?.map((id) => specials.find((s) => s.id === id))
+      .filter((s): s is typeof specials[number] => Boolean(s)) || [];
+
 
   const otherBlogs = blogs.filter(b => b.slug !== slug);
 
@@ -167,6 +173,19 @@ export default function BlogPage() {
             )}
           </div>
 
+
+          {relatedSpecials.length > 0 && (
+              <div className="mt-16 border-t pt-10">
+
+                <div className="pt-8 mt-[3rem]">
+                  <h2 className="text-3xl lg:text-4xl font-[800] mb-[2.5rem]">
+                    {t("blog.relatedSpecials")}
+                  </h2>
+                </div>
+
+              <SpecialsSlider items={relatedSpecials} />
+              </div>
+          )}
 
 
           {otherBlogs.length > 0 && (

@@ -4,8 +4,7 @@ import { TopImage } from "../components/TopImage";
 import {SpecialsSlider} from "../components/SpecialsSection.tsx";
 
 export default function About() {
-  const { i18n, t } = useTranslation();
-  const lang = i18n.language;
+  const {  t } = useTranslation();
 
   const imagee =
       "https://www.aestheticclinicmalaysia.com/wp-content/uploads/2023/10/Aesthetic-Clinic-Malaysia.jpg";

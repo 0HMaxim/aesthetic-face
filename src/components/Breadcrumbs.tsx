@@ -8,7 +8,7 @@ interface BreadcrumbsProps {
   subserviceId?: string;
   doctorSlug?: string;
   specialSlug?: string;
-  blogSlug?: string; // добавляем сюда
+  blogSlug?: string;
 }
 
 const staticTabs = [
