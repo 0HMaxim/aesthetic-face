@@ -1,5 +1,4 @@
 // models/LocalizedText.ts
-// models/LocalizedText.ts
 export interface LocalizedText {
   uk?: string | string[];
   ru?: string | string[];

@@ -1,7 +1,7 @@
 import type { LocalizedText } from "./LocalizedText";
 
 export interface Doctor {
-  id: string;
+  id?: string;
   fullName: LocalizedText;           // Полное имя на разных языках
   position: LocalizedText;           // Должность
   specializations: LocalizedText[];  // Список специализаций

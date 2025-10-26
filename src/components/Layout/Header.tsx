@@ -32,6 +32,15 @@ export default function Header() {
             className="w-full flex items-center justify-between md:p-[3rem] p-[1rem] fixed
                  backdrop-blur-[10rem] rounded-[5rem] text-foreground z-20"
         >
+
+          <Link
+              to="/admin/blogs"
+              className="p-4 bg-white shadow rounded-lg hover:shadow-lg transition"
+          >
+             Admin
+          </Link>
+
+
           {/* Навигация для больших экранов */}
           <nav className="hidden lg:flex gap-4 flex-wrap w-full">
             {tabs.map((tab) => (

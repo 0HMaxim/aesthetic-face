@@ -3,7 +3,7 @@ import type {ContentBlock} from "./ContentBlock.ts";
 import type {LocalizedText} from "./LocalizedText.ts";
 
 export interface Service {
-  id: string;
+  id?: string;
   title: LocalizedText;
   slug: string;
   mainImage?: string;

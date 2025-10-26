@@ -1,7 +1,7 @@
 import type {LocalizedText} from "./LocalizedText.ts";
 
 export interface FAQ {
-  id: string;
+  id?: string;
   serviceId?: string;
   subserviceId?: string;
   question: LocalizedText;

@@ -8,7 +8,7 @@ export interface ImageItem {
 }
 
 export interface Photo {
-  id: string;
+  id?: string;
   serviceId?: string;
   subserviceId?: string;
   doctorId?: string;

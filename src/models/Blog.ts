@@ -5,19 +5,14 @@ import type {ContentBlock} from "./ContentBlock.ts";
 export type ContentBlockType = "paragraph" | "image" | "heading" | "list";
 
 export interface Blog {
-  id: string;
+  id?: string;
   title: LocalizedText;
-  mainImage?: string;
-
   subtitle: LocalizedText;
   headerTitle?: LocalizedText;
-
   slug: string;
 
-
+  mainImage?: string;
   content?: ContentBlock[];
-
-
   serviceId?: string[];
   subservicesId?: string[];
   specials?: string[];

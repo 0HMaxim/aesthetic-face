@@ -37,7 +37,7 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
                 key={`heading-${index}`}
                 className={`text-2xl md:text-3xl font-bold mb-4 text-foreground duration-500 ${alignClass}`}
             >
-              {currentContent}
+              {Array.isArray(currentContent) ? currentContent.join("\n") : currentContent}
             </h2>
         );
 
@@ -49,7 +49,7 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
                 className={`text-base md:text-xl mb-6 text-foreground duration-500 ${alignClass}`}
                 style={{ whiteSpace: "pre-line" }}
             >
-              {currentContent}
+              {Array.isArray(currentContent) ? currentContent.join("\n") : currentContent}
             </p>
         );
 
@@ -77,16 +77,14 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
       }
 
       case "image": {
-        const imageSrc = Array.isArray(block.content?.image)
-            ? block.content?.image[0]
-            : block.content?.image;
+        const imageSrc = block.media;
+        if (!imageSrc) return null;
 
         const position = block.align ?? "left";
         const widthPercent = block.widthPercent ?? 40;
         const textWidth = 100 - widthPercent;
-        const children = block.children && block.children.length > 0;
-
-        const onlyImage = imageSrc && !children;
+        const hasChildren = block.children && block.children.length > 0;
+        const onlyImage = imageSrc && !hasChildren;
 
         return (
             <div
@@ -99,30 +97,23 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
                             : "md:flex-row"
                 }`}
             >
-              {/* Image */}
-              {imageSrc && (
-                  <div
-                      className={`w-full md:w-[${widthPercent}%] flex justify-center`}
-                  >
-                    <img
-                        src={imageSrc}
-                        alt=""
-                        className={`
-                    w-full rounded-xl shadow-md transition-transform duration-500 hover:scale-[1.03]
-                    ${onlyImage ? "max-h-[60vh] object-contain" : "object-cover"}
-                  `}
-                        style={{
-                          height: onlyImage ? "auto" : "100%",
-                          maxHeight: onlyImage ? "60vh" : "auto",
-                        }}
-                    />
-                  </div>
-              )}
+              <div className={`w-full md:w-[${widthPercent}%] flex justify-center`}>
+                <img
+                    src={imageSrc}
+                    alt=""
+                    className={`w-full rounded-xl shadow-md transition-transform duration-500 hover:scale-[1.03] ${
+                        onlyImage ? "max-h-[60vh] object-contain" : "object-cover"
+                    }`}
+                    style={{
+                      height: onlyImage ? "auto" : "100%",
+                      maxHeight: onlyImage ? "60vh" : "auto",
+                    }}
+                />
+              </div>
 
-              {/* Text / Nested blocks */}
-              {children && (
+              {hasChildren && (
                   <div
-                      className={`w-full md:w-[${textWidth}%] flex flex-col justify-center gap-4 text-base md:text-xl text-foreground ${alignClass}`}
+                      className={`w-full md:w-[${textWidth}%] flex flex-col justify-center gap-4 text-base md:text-xl text-foreground`}
                   >
                     {block.children!.map((child, idx) => (
                         <React.Fragment key={idx}>{renderBlock(child, idx)}</React.Fragment>
