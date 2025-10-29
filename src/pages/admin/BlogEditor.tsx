@@ -5,6 +5,7 @@ import { db } from "../../firebase.ts";
 import type { Blog } from "../../models/Blog.ts";
 import type { ContentBlock } from "../../models/ContentBlock.ts";
 import type { LocalizedText } from "../../models/LocalizedText.ts";
+import ImageInputBlock from "../../components/ImageInputBlock.tsx";
 
 export default function BlogEditor() {
   const { id } = useParams();
@@ -42,21 +43,23 @@ export default function BlogEditor() {
   };
 
   const handleArrayChange = (field: keyof Blog, index: number, value: string) => {
-    const arr = blog[field] || [];
+    const arr = Array.isArray(blog[field]) ? [...(blog[field] as string[])] : [];
     arr[index] = value;
     setBlog({ ...blog, [field]: arr });
   };
 
   const addArrayItem = (field: keyof Blog) => {
-    const arr = blog[field] || [];
-    setBlog({ ...blog, [field]: [...arr, ""] });
+    const arr = Array.isArray(blog[field]) ? [...(blog[field] as string[])] : [];
+    arr.push("");
+    setBlog({ ...blog, [field]: arr });
   };
 
   const removeArrayItem = (field: keyof Blog, index: number) => {
-    const arr = blog[field] || [];
+    const arr = Array.isArray(blog[field]) ? [...(blog[field] as string[])] : [];
     arr.splice(index, 1);
-    setBlog({ ...blog, [field]: [...arr] });
+    setBlog({ ...blog, [field]: arr });
   };
+
 
   const validate = () => {
     const newErrors: { [key in keyof Blog]?: string } = {};
@@ -86,13 +89,37 @@ export default function BlogEditor() {
     navigate("/admin/blogs");
   };
 
+
+  const moveContentBlock = (index: number, direction: "up" | "down", parentIndex?: number) => {
+    const updated = [...(blog.content || [])];
+
+    const swap = (arr: any[], i1: number, i2: number) => {
+      const temp = arr[i1];
+      arr[i1] = arr[i2];
+      arr[i2] = temp;
+    };
+
+    if (typeof parentIndex === "number") {
+      const children = [...(updated[parentIndex].children || [])];
+      if (direction === "up" && index > 0) swap(children, index, index - 1);
+      if (direction === "down" && index < children.length - 1) swap(children, index, index + 1);
+      updated[parentIndex].children = children;
+    } else {
+      if (direction === "up" && index > 0) swap(updated, index, index - 1);
+      if (direction === "down" && index < updated.length - 1) swap(updated, index, index + 1);
+    }
+
+    setBlog({ ...blog, content: updated });
+  };
+
+
+
   // --- Контент-блоки ---
   const addContentBlock = (
       type: "paragraph" | "image" | "heading" | "list",
       parentIndex?: number
   ) => {
     const newBlock: ContentBlock = {
-      id: crypto.randomUUID(),
       type,
       content: {},
       children: [],
@@ -149,7 +176,11 @@ export default function BlogEditor() {
     setBlog({ ...blog, content: updated });
   };
 
-  const handleAlignChange = (index: number, align: string, parentIndex?: number) => {
+  const handleAlignChange = (
+      index: number,
+      align: "left" | "center" | "right",
+      parentIndex?: number
+  ) => {
     const updated = [...(blog.content || [])];
     if (typeof parentIndex === "number") {
       updated[parentIndex].children![index].align = align;
@@ -159,8 +190,12 @@ export default function BlogEditor() {
     setBlog({ ...blog, content: updated });
   };
 
+
   const renderBlockPreview = (block: ContentBlock, index: number) => {
     const textAlign = block.align as "left" | "center" | "right";
+
+
+
 
     return (
         <div key={index} className={`text-${textAlign} my-2`}>
@@ -177,9 +212,9 @@ export default function BlogEditor() {
                           <p>{block.content?.[lang] || ""}</p>
                       ) : block.type === "list" ? (
                           <ul className="list-disc pl-6">
-                            {(block.content?.[lang] || "").split("\n").map((item, idx) => (
-                                <li key={idx}>{item}</li>
-                            ))}
+                            {typeof block.content?.[lang] === "string"
+                                ? block.content?.[lang].split("\n").map((item, idx) => <li key={idx}>{item}</li>)
+                                : null}
                           </ul>
                       ) : null}
                     </div>
@@ -188,140 +223,197 @@ export default function BlogEditor() {
           )}
 
           {/* Дети */}
-          {block.children?.map((child, i) => renderBlockPreview(block.children?.map))}
+          {block.children?.map((child, i) => renderBlockPreview(child, i))}
         </div>
     );
   };
-
-
 
 
 
   const renderBlockEditor = (block: ContentBlock, index: number, parentIndex?: number) => {
+    const blockNumber = parentIndex !== undefined
+        ? `Content Block ${parentIndex + 1} Child ${index + 1}`
+        : `Content Block ${index + 1}`;
+
     return (
+        <div className="w-100 flex" key={`${parentIndex ?? "root"}-${index}`}>
+          <div className="border border-gray-300 rounded-lg p-4 my-3 bg-gray-50 w-full">
+            <div className="flex justify-between items-center mb-2">
+              <strong>
+                {blockNumber} (type: {block.type})
+              </strong>
+              <div className="flex justify-between items-center mb-2">
+                <strong>
+                  {blockNumber} (type: {block.type})
+                </strong>
+                <div className="flex justify-between items-center mb-2">
+                  <strong>
+                    {blockNumber} (type: {block.type})
+                  </strong>
+                  <div className="flex gap-2">
+                    <button
+                        onClick={() => moveContentBlock(index, "up", parentIndex)}
+                        className="bg-gray-200 hover:bg-gray-300 text-black px-2 py-1 rounded"
+                        title="Move up"
+                    >
+                      ⬆️
+                    </button>
+                    <button
+                        onClick={() => moveContentBlock(index, "down", parentIndex)}
+                        className="bg-gray-200 hover:bg-gray-300 text-black px-2 py-1 rounded"
+                        title="Move down"
+                    >
+                      ⬇️
+                    </button>
+                    <button
+                        onClick={() => removeContentBlock(index, parentIndex)}
+                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                    >
+                      Удалить
+                    </button>
+                  </div>
+                </div>
 
-        <div className="w-100 flex">
-        <div key={`${parentIndex ?? "root"}-${index}`} className="border border-gray-300 rounded-lg p-4 my-3 bg-gray-50">
-          <div className="flex justify-between items-center mb-2">
-            <strong>{block.type} {parentIndex !== undefined ? `(Child)` : ""}</strong>
-            <button onClick={() => removeContentBlock(index, parentIndex)}
-                    className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Удалить</button>
-          </div>
-
-          {/* Выравнивание */}
-          <div className="flex gap-2 mb-2">
-            {["left", "center", "right"].map(a => (
-                <button key={a} className={`px-2 py-1 border rounded ${block.align === a ? "bg-blue-600 text-white" : ""}`}
-                        onClick={() => handleAlignChange(index, a, parentIndex)}>{a}</button>
-            ))}
-          </div>
-
-          {block.type === "image" ? (
-              <div className="flex flex-col gap-2">
-                <input type="file" accept="image/*" onChange={(e) => {
-                  const file = e.target.files?.[0]; if (!file) return;
-                  const reader = new FileReader();
-                  reader.onload = (ev) => {
-                    const updated = [...(blog.content || [])];
-                    if (typeof parentIndex === "number") updated[parentIndex].children![index].media = ev.target?.result as string;
-                    else updated[index].media = ev.target?.result as string;
-                    setBlog({ ...blog, content: updated });
-                  };
-                  reader.readAsDataURL(file);
-                }} className="border rounded-lg p-2" />
-                <input type="text" placeholder="URL или CSS фон" value={block.media || ""} onChange={(e) => {
-                  const updated = [...(blog.content || [])];
-                  if (typeof parentIndex === "number") updated[parentIndex].children![index].media = e.target.value;
-                  else updated[index].media = e.target.value;
-                  setBlog({ ...blog, content: updated });
-                }} className="border rounded-lg p-2" />
               </div>
-          ) : (
-              ["uk", "ru", "en", "de"].map(lang => (
-                  <input key={lang} type="text" placeholder={`Content (${lang})`} value={block.content?.[lang] || ""}
-                         onChange={(e) => handleBlockChange(index, lang, e.target.value, parentIndex)}
-                         className="border rounded-lg p-2 mb-2 w-full" />
-              ))
-          )}
+            </div>
 
+            {/* Выравнивание */}
+            <div className="flex gap-2 mb-2">
+              {["left", "center", "right"].map(a => (
+                  <button
+                      key={a}
+                      className={`px-2 py-1 border rounded ${block.align === a ? "bg-blue-600 text-white" : ""}`}
+                      onClick={() => handleAlignChange(index, a as "left" | "center" | "right", parentIndex)}
+                  >
+                    {a}
+                  </button>
+              ))}
+            </div>
 
+            {/* Контент */}
+            {block.type === "image" ? (
+                <div className="flex flex-col gap-2">
+                  <ImageInputBlock
+                      image={block.media || ""}
+                      onChange={(value) => {
+                        const updated = [...(blog.content || [])];
+                        if (typeof parentIndex === "number")
+                          updated[parentIndex].children![index].media = value;
+                        else updated[index].media = value;
+                        setBlog({ ...blog, content: updated });
+                      }}
+                  />
 
-          {block.type === "list" && (
-              <div className="flex flex-col gap-2">
-                {["uk", "ru", "en", "de"].map(lang => (
-                    <div key={lang} className="flex flex-col gap-1">
-                      <label>{lang}</label>
-                      <textarea
-                          value={block.content?.[lang] || ""}
-                          onChange={(e) => handleBlockChange(index, lang, e.target.value, parentIndex)}
-                          className="border rounded-lg p-2 w-full h-24"
-                      />
-                      <button
-                          type="button"
-                          onClick={() => {
-                            const updated = [...(blog.content || [])]; // копируем массив
-                            const target = typeof parentIndex === "number"
-                                ? { ...updated[parentIndex], children: [...(updated[parentIndex].children || [])] }
-                                : updated[index];
-
-                            if (typeof parentIndex === "number") {
-                              target.children![index] = {
-                                ...target.children![index],
-                                content: {
-                                  ...target.children![index].content,
-                                  [lang]: (target.children![index].content?.[lang] || "") + "\n"
-                                }
-                              };
-                              updated[parentIndex] = target;
-                            } else {
-                              updated[index] = {
-                                ...target,
-                                content: { ...target.content, [lang]: (target.content?.[lang] || "") + "\n" }
-                              };
-                            }
-
+                  {/* опционально: ширина картинки */}
+                  <div className="flex items-center gap-2">
+                    <label className="flex items-center gap-1">
+                      <input
+                          type="checkbox"
+                          checked={block.customWidth || false}
+                          onChange={(e) => {
+                            const updated = [...(blog.content || [])];
+                            if (typeof parentIndex === "number")
+                              updated[parentIndex].children![index].customWidth = e.target.checked;
+                            else updated[index].customWidth = e.target.checked;
                             setBlog({ ...blog, content: updated });
                           }}
-                          className="text-blue-600 w-max"
-                      >
-                        + New Item
-                      </button>
+                      />
+                      Custom Width
+                    </label>
+
+                    <input
+                        type="number"
+                        min={10}
+                        max={90}
+                        value={block.widthPercent || 40}
+                        disabled={!block.customWidth}
+                        onChange={(e) => {
+                          const value = parseInt(e.target.value);
+                          const updated = [...(blog.content || [])];
+                          if (typeof parentIndex === "number")
+                            updated[parentIndex].children![index].widthPercent = value;
+                          else updated[index].widthPercent = value;
+                          setBlog({ ...blog, content: updated });
+                        }}
+                        className="border rounded-lg p-2 w-20"
+                    />
+                    <span>%</span>
+                  </div>
+                </div>
+            ) : (
+                ["uk", "ru", "en", "de"].map((lang) => (
+                    <div key={lang} className="mb-3">
+                      <label className="block text-sm font-medium mb-1">
+                        Content ({lang})
+                      </label>
+                      {block.type === "list" ? (
+                          <div className="flex gap-2 items-start">
+          <textarea
+              value={block.content?.[lang] || ""}
+              onChange={(e) =>
+                  handleBlockChange(index, lang, e.target.value, parentIndex)
+              }
+              className="border rounded-lg p-2 w-full h-28 font-mono text-sm"
+              placeholder={`Each line = one list item`}
+              style={{ whiteSpace: "pre" }}
+          />
+                            <button
+                                type="button"
+                                onClick={() => {
+                                  const current = block.content?.[lang] || "";
+                                  handleBlockChange(index, lang, current + "\n", parentIndex);
+                                }}
+                                className="bg-gray-200 hover:bg-gray-300 rounded-lg px-3 py-1 text-sm"
+                                title="Add new list item"
+                            >
+                              ↩️
+                            </button>
+                          </div>
+                      ) : (
+                          <input
+                              type="text"
+                              placeholder={`Content (${lang})`}
+                              value={block.content?.[lang] || ""}
+                              onChange={(e) =>
+                                  handleBlockChange(index, lang, e.target.value, parentIndex)
+                              }
+                              className="border rounded-lg p-2 w-full"
+                          />
+                      )}
                     </div>
-                ))}
+                ))
+            )}
+
+
+
+            {/* Дочерние блоки */}
+            {block.type === "image" && (
+              <div className="flex gap-2 mt-2">
+                <button onClick={() => addContentBlock("heading", index)} className="text-blue-600">+ Heading Child</button>
+                <button onClick={() => addContentBlock("paragraph", index)} className="text-blue-600">+ Paragraph Child</button>
+                <button onClick={() => addContentBlock("image", index)} className="text-blue-600">+ Image Child</button>
+                <button onClick={() => addContentBlock("list", index)} className="text-blue-600">+ List Child</button>
               </div>
-          )}
+            )}
 
-
-          {/* Добавление детей */}
-          <div className="flex gap-2 mt-2">
-            <button onClick={() => addContentBlock("heading", index)} className="text-blue-600">+ Heading Child</button>
-            <button onClick={() => addContentBlock("paragraph", index)} className="text-blue-600">+ Paragraph Child</button>
-            <button onClick={() => addContentBlock("image", index)} className="text-blue-600">+ Image Child</button>
-            <button onClick={() => addContentBlock("list", index)} className="text-blue-600">+ List Child</button>
+            {block.children && block.children.length > 0 && (
+                <div className="ml-6 mt-3 border-l-2 border-gray-200 pl-3">
+                  {block.children.map((child, i) => renderBlockEditor(child, i, index))}
+                </div>
+            )}
           </div>
-
-          {block.children && block.children.length > 0 && (
-              <div className="ml-6 mt-3 border-l-2 border-gray-200 pl-3">
-                {block.children.map((child, i) => renderBlockEditor(child, i, index))}
-              </div>
-          )}
         </div>
-
-
-
-
-      </div>
-
-
     );
   };
+
 
   return (
       <div className="p-6 max-w-6xl mx-auto">
         <h1 className="text-2xl font-semibold mb-4">{id ? "Edit Blog" : "Create New Blog"}</h1>
 
         {/* Title / Subtitle / Header */}
-        {["title", "subtitle", "headerTitle"].map((field: keyof Blog) => (
+
+        {(["title", "subtitle", "headerTitle"] as (keyof Blog)[]).map((field) => (
             <div key={field} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               {["uk", "ru", "en", "de"].map(lang => (
                   <div key={`${field}-${lang}`} className="flex flex-col">
@@ -344,30 +436,69 @@ export default function BlogEditor() {
         </div>
 
         {/* Main image */}
-        <div className="flex flex-col mb-4">
-          <label>Main Image</label>
-          {blog.mainImage && <img src={blog.mainImage} alt="Main" className="mb-2 max-w-xs rounded-lg" />}
-          <input type="file" accept="image/*" onChange={(e) => {
-            const file = e.target.files?.[0];
-            if (file) {
-              const reader = new FileReader();
-              reader.onload = (ev) => setBlog({ ...blog, mainImage: ev.target?.result as string });
-              reader.readAsDataURL(file);
-            }
-          }} className="border rounded-lg p-2" />
+        <div className="flex flex-col mb-4 gap-2">
+          <label className="font-medium">Main Image</label>
+
+          {/* превью картинки */}
+          {blog.mainImage && (
+              <img
+                  src={blog.mainImage}
+                  alt="Main"
+                  className="mb-2 max-w-xs rounded-lg border border-gray-200"
+              />
+          )}
+
+          {/* выбор файла */}
+          <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                  setBlog((prev) => ({
+                    ...prev,
+                    mainImage: ev.target?.result as string,
+                  }));
+                };
+                reader.readAsDataURL(file);
+              }}
+              className="border rounded-lg p-2"
+          />
+
+          {/* альтернатива: вставка URL или CSS background */}
+          <input
+              type="text"
+              placeholder="URL або CSS фон (наприклад, linear-gradient(...))"
+              value={blog.mainImage || ""}
+              onChange={(e) =>
+                  setBlog((prev) => ({
+                    ...prev,
+                    mainImage: e.target.value,
+                  }))
+              }
+              className="border rounded-lg p-2"
+          />
         </div>
 
+
         {/* Arrays: serviceId, subservicesId, specials */}
-        {["serviceId", "subservicesId", "specials"].map((field: keyof Blog) => (
+        {(["serviceId", "subservicesId", "specials"] as (keyof Blog)[]).map((field) => (
             <div key={field} className="mb-4">
               <label className="capitalize">{field}</label>
-              {(blog[field] || []).map((item, idx) => (
-                  <div key={idx} className="flex gap-2 mb-2">
-                    <input type="text" value={item} onChange={(e) => handleArrayChange(field, idx, e.target.value)}
-                           className="border rounded-lg p-2 flex-1" />
-                    <button type="button" onClick={() => removeArrayItem(field, idx)} className="bg-red-500 text-white px-2 rounded">-</button>
-                  </div>
-              ))}
+
+              {Array.isArray(blog[field]) &&
+                (blog[field] || []).map((item, idx) => (
+                    <div key={idx} className="flex gap-2 mb-2">
+                      <input type="text" value={item} onChange={(e) => handleArrayChange(field, idx, e.target.value)}
+                             className="border rounded-lg p-2 flex-1" />
+                      <button type="button" onClick={() => removeArrayItem(field, idx)} className="bg-red-500 text-white px-2 rounded">-</button>
+                    </div>
+                ))
+              }
+
               <button type="button" onClick={() => addArrayItem(field)} className="text-blue-600">+ Add</button>
             </div>
         ))}

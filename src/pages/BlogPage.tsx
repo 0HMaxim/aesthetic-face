@@ -52,13 +52,19 @@ export default function BlogPage() {
   const imagee = blog.mainImage;
 
   const relatedServices =
-      blog.serviceId?.map((id) => services.find((s) => s.id === id)).filter(Boolean) || [];
+      (blog.serviceId
+      ?.map((id) => services.find((s) => s.id === id))
+      .filter((s): s is NonNullable<typeof s> => s !== undefined)) || [];
+
 
   const relatedSubservices =
       blog.subservicesId?.map((id) => subservices.find((s) => s.id === id)).filter(Boolean) || [];
 
   const relatedSpecials =
-      blog.specials?.map((id) => specials.find((s) => s.id === id)).filter(Boolean) || [];
+      (blog.specials
+      ?.map((id) => specials.find((s) => s.id === id))
+      .filter((s): s is NonNullable<typeof s> => s !== undefined)) || [];
+
 
   const otherBlogs = blogs.filter((b) => b.slug !== slug);
 
@@ -104,29 +110,35 @@ export default function BlogPage() {
           )}
 
           {relatedSubservices.length > 0 && (
-              <div className="mt-16 border-t pt-10">
-                <h2 className="text-3xl lg:text-5xl font-[800] my-[1.5rem]">{t("blog.relatedSubservices")}</h2>
-                <div className="flex flex-wrap justify-center gap-x-[1rem] gap-y-[1rem] my-10">
-                  {relatedSubservices.map((sub) => (
-                      <Link
-                          key={sub.id}
-                          to={`/${lang}/services/${sub.slug}`}
-                          className="group relative overflow-hidden max-w-[47%] w-1/2 md:w-[15rem] lg:w-[18rem] h-[9rem] md:h-[12rem] rounded-[10rem] shadow-md hover:bg-[var(--primary)] hover:shadow-xl transition duration-500 flex-shrink-0"
-                      >
-                        {sub.mainImage && (
-                            <img
-                                src={sub.mainImage}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            />
-                        )}
-                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
-                          <p className="text-[0.9rem] md:text-[1rem] font-normal">{sub.title[lang]}</p>
-                        </div>
-                      </Link>
-                  ))}
+                <div className="mt-16 border-t pt-10">
+                  <h2 className="text-3xl lg:text-5xl font-[800] my-[1.5rem]">
+                    {t("blog.relatedSubservices")}
+                  </h2>
+                  <div className="flex flex-wrap justify-center gap-x-[1rem] gap-y-[1rem] my-10">
+                    {relatedSubservices
+                    .filter((sub): sub is NonNullable<typeof sub> => sub !== undefined)
+                    .map((sub) => (
+                        <Link
+                            key={sub.id}
+                            to={`/${lang}/services/${sub.slug}`}
+                            className="group relative overflow-hidden max-w-[47%] w-1/2 md:w-[15rem] lg:w-[18rem] h-[9rem] md:h-[12rem] rounded-[10rem] shadow-md hover:bg-[var(--primary)] hover:shadow-xl transition duration-500 flex-shrink-0"
+                        >
+                          {sub.mainImage && (
+                              <img
+                                  src={sub.mainImage}
+                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              />
+                          )}
+                          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
+                            <p className="text-[0.9rem] md:text-[1rem] font-normal">
+                              {sub.title[lang]}
+                            </p>
+                          </div>
+                        </Link>
+                    ))}
+                  </div>
                 </div>
-              </div>
-          )}
+            )}
 
           {relatedSpecials.length > 0 && (
               <div className="mt-16 border-t pt-10">

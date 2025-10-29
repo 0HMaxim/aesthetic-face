@@ -36,10 +36,18 @@ export default function PriceEditor() {
 
   const handleSave = async () => {
     const newErrors: { [key: string]: string } = {};
-    if (!Object.values(price.category).some((v) => v?.trim())) newErrors.category = "Category required!";
-    if (!Object.values(price.columns.duration).some((v) => v?.trim())) newErrors["columns.duration"] = "Duration column required!";
-    if (!Object.values(price.columns.procedure).some((v) => v?.trim())) newErrors["columns.procedure"] = "Procedure column required!";
-    if (!Object.values(price.columns.price).some((v) => v?.trim())) newErrors["columns.price"] = "Price column required!";
+    if (!Object.values(price.category).some((v) => typeof v === "string" && v.trim()))
+      newErrors.category = "Category required!";
+
+    if (!Object.values(price.columns.duration).some((v) => typeof v === "string" && v.trim()))
+      newErrors["columns.duration"] = "Duration column required!";
+
+    if (!Object.values(price.columns.procedure).some((v) => typeof v === "string" && v.trim()))
+      newErrors["columns.procedure"] = "Procedure column required!";
+
+    if (!Object.values(price.columns.price).some((v) => typeof v === "string" && v.trim()))
+      newErrors["columns.price"] = "Price column required!";
+
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 

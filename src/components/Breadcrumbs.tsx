@@ -1,12 +1,14 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { services, subservices, doctors, specials, blogs } from "../data/services"; // добавляем blogs
+import {db} from "../firebase.ts";
+import {get, ref} from "firebase/database";
+import {specials} from "../data/services.ts";
 
 interface BreadcrumbsProps {
   serviceId?: string;
   subserviceId?: string;
-  doctorSlug?: string;
+  employeeSlug?: string;
   specialSlug?: string;
   blogSlug?: string;
 }
@@ -15,7 +17,7 @@ const staticTabs = [
   { title: "header.about", link: "/about" },
   { title: "header.specials", link: "/specials" },
   { title: "header.services", link: "/services" },
-  { title: "header.doctors", link: "/doctors" },
+  { title: "header.employees", link: "/employees" },
   { title: "header.price", link: "/price" },
   { title: "header.faq", link: "/faq" },
   { title: "header.gallery", link: "/gallery" },
@@ -32,62 +34,66 @@ function getLocalizedString(value: string | string[] | undefined) {
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                                                           serviceId,
                                                           subserviceId,
-                                                          doctorSlug,
+                                                          employeeSlug,
                                                           specialSlug,
                                                           blogSlug,
                                                         }) => {
+
+
+
   const { t, i18n } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
   const location = useLocation();
+
+  const [employeeData, setEmployeeData] = useState<any>(null);
+  const [blogData, setBlogData] = useState<any>(null);
+
+  useEffect(() => {
+    // Загружаем сотрудника, если есть slug
+    if (employeeSlug) {
+      const empRef = ref(db, `employees/${employeeSlug}`);
+      get(empRef).then((snapshot) => {
+        if (snapshot.exists()) setEmployeeData(snapshot.val());
+      });
+    }
+
+    // Загружаем блог, если есть slug
+    if (blogSlug) {
+      const blogRef = ref(db, `blogs/${blogSlug}`);
+      get(blogRef).then((snapshot) => {
+        if (snapshot.exists()) setBlogData(snapshot.val());
+      });
+    }
+  }, [employeeSlug, blogSlug]);
 
   const items: { label: string; href: string }[] = [
     { label: t("header.home"), href: `/${lang}` },
   ];
 
-  // ---------------------- SERVICES / SUBSERVICES ----------------------
-  if (location.pathname.includes("/services")) {
-    items.push({ label: t("header.services"), href: `/${lang}/services` });
+  // ---------------------- employees ----------------------
+  if (location.pathname.includes("/employees")) {
+    items.push({ label: t("header.employees"), href: `/${lang}/employees` });
 
-    if (subserviceId) {
-      const subservice = subservices.find((ss) => ss.id === subserviceId);
-      if (subservice) {
-        const parent = services.find((s) => s.id === subservice.serviceId);
-        if (parent) {
-          items.push({
-            label: getLocalizedString(parent.title[lang]),
-            href: `/${lang}/services/${parent.slug}`,
-          });
-        }
-        items.push({
-          label: getLocalizedString(subservice.title[lang]),
-          href: `/${lang}/services/${subservice.slug}`,
-        });
-      }
-    } else if (serviceId) {
-      const service = services.find((s) => s.id === serviceId);
-      if (service) {
-        items.push({
-          label: getLocalizedString(service.title[lang]),
-          href: `/${lang}/services/${service.slug}`,
-        });
-      }
+    if (employeeData) {
+      items.push({
+        label: getLocalizedString(employeeData.fullName?.[lang]),
+        href: `/${lang}/employees/${employeeData.slug}`,
+      });
     }
   }
 
-  // ---------------------- DOCTORS ----------------------
-  else if (location.pathname.includes("/doctors")) {
-    items.push({ label: t("header.doctors"), href: `/${lang}/doctors` });
+  // ---------------------- blogs ----------------------
+  else if (location.pathname.includes("/blogs")) {
+    items.push({ label: t("header.blog"), href: `/${lang}/blogs` });
 
-    if (doctorSlug) {
-      const doctor = doctors.find((d) => d.slug === doctorSlug);
-      if (doctor) {
-        items.push({
-          label: getLocalizedString(doctor.fullName[lang]),
-          href: `/${lang}/doctors/${doctor.slug}`,
-        });
-      }
+    if (blogData) {
+      items.push({
+        label: getLocalizedString(blogData.title?.[lang]),
+        href: `/${lang}/blogs/${blogData.slug}`,
+      });
     }
   }
+
 
   // ---------------------- SPECIALS ----------------------
   else if (location.pathname.includes("/specials")) {
@@ -104,20 +110,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     }
   }
 
-// ---------------------- BLOG ----------------------
-  else if (location.pathname.includes("/blogs")) { // <- plural!
-    items.push({ label: t("header.blog"), href: `/${lang}/blogs` });
 
-    if (blogSlug) {
-      const blog = blogs.find((b) => b.slug === blogSlug);
-      if (blog) {
-        items.push({
-          label: getLocalizedString(blog.title[lang]),
-          href: `/${lang}/blogs/${blog.slug}`,
-        });
-      }
-    }
-  }
 
   // ---------------------- STATIC PAGES ----------------------
   else {

@@ -97,7 +97,10 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
                             : "md:flex-row"
                 }`}
             >
-              <div className={`w-full md:w-[${widthPercent}%] flex justify-center`}>
+              <div
+                  className="w-full flex justify-center"
+                  style={{ width: `100%`, maxWidth: `${widthPercent}%` }}
+              >
                 <img
                     src={imageSrc}
                     alt=""
@@ -113,7 +116,8 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
 
               {hasChildren && (
                   <div
-                      className={`w-full md:w-[${textWidth}%] flex flex-col justify-center gap-4 text-base md:text-xl text-foreground`}
+                      className="w-full flex flex-col justify-center gap-4 text-base md:text-xl text-foreground"
+                      style={{ maxWidth: `${textWidth}%` }}
                   >
                     {block.children!.map((child, idx) => (
                         <React.Fragment key={idx}>{renderBlock(child, idx)}</React.Fragment>
@@ -123,6 +127,7 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
             </div>
         );
       }
+
 
       default:
         return null;

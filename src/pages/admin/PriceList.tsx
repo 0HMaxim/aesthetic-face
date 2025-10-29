@@ -6,17 +6,18 @@ import {db} from "../../firebase.ts";
 import type {PriceModel} from "../../models/Price.ts";
 
 export default function PriceList() {
-  const [blogs, setBlogs] = useState<Record<string, PriceModel>>({});
+  const [prices, setPrices] = useState<Record<string, PriceModel>>({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    const blogRef = ref(db, "faqs");
-    const unsubscribe = onValue(blogRef, (snapshot) => {
+    const priceRef = ref(db, "prices");
+    const unsubscribe = onValue(priceRef, (snapshot) => {
       const data = snapshot.val();
-      setBlogs(data || {});
+      setPrices(data || {});
     });
     return () => unsubscribe();
   }, []);
+
 
   return (
       <div className="p-6">
@@ -35,7 +36,7 @@ export default function PriceList() {
 
         {/* Список блогов */}
         <div className="space-y-3">
-          {Object.entries(blogs).map(([key, price]) => (
+          {Object.entries(prices).map(([key, price]) => (
               <div
                   key={key}
                   className="p-4 border rounded-xl hover:bg-gray-50 cursor-pointer transition"

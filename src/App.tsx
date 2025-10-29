@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import About from './pages/About';
 import AppLayout from './components/Layout/AppLayout';
 import Specials from './pages/Specials';
-import Doctors from './pages/Doctors';
 import Services from './pages/Services';
 import Price from './pages/Price';
 import FAQ from './pages/FAQ';
@@ -13,13 +12,10 @@ import Contact from './pages/Contact';
 import Blogs from './pages/Blogs.tsx';
 import Gallery from './pages/Gallery';
 import ServicePage from './pages/ServicePage';
-import DoctorPage from "./pages/DoctorPage.tsx";
 import SpecialPage from "./pages/SpecialPage.tsx";
 import BlogPage from "./pages/BlogPage.tsx";
 import AdminPage from "./pages/admin/AdminPage.tsx";
 import BlogEditor from "./pages/admin/BlogEditor.tsx";
-import DoctorList from "./pages/admin/DoctorList.tsx";
-import DoctorEditor from './pages/admin/DoctorEditor.tsx';
 import FAQEditor from "./pages/admin/FAQEditor.tsx";
 import BlogList from "./pages/admin/BlogList.tsx";
 import PriceList from "./pages/admin/PriceList.tsx";
@@ -27,6 +23,12 @@ import FAQListA from "./pages/admin/FAQListA.tsx";
 import PriceEditor from "./pages/admin/PriceEditor.tsx";
 import ServiceList from './pages/admin/ServiceList.tsx';
 import ServiceEditor from "./pages/admin/ServiceEditor.tsx";
+import EmployeeEditor from "./pages/admin/EmployeeEditor.tsx";
+import EmployeeList from "./pages/admin/EmployeeList.tsx";
+import Employees from "./pages/Employees.tsx";
+import EmployeePage from "./pages/EmployeePage.tsx";
+import PhotoList from "./components/PhotoList.tsx";
+import PhotoEditor from "./pages/admin/PhotoEditor.tsx";
 
 
 const App: React.FC = () => {
@@ -45,9 +47,9 @@ const App: React.FC = () => {
           <Route path="blogs/new" element={<BlogEditor />} />
           <Route path="blogs/:id" element={<BlogEditor />} />
 
-          <Route path="doctors" element={<DoctorList />} />
-          <Route path="doctors/new" element={<DoctorEditor />} />
-          <Route path="doctors/:id" element={<DoctorEditor />} />
+          <Route path="employees" element={<EmployeeList />} />
+          <Route path="employees/new" element={<EmployeeEditor />} />
+          <Route path="employees/:id" element={<EmployeeEditor />} />
 
           <Route path="faq" element={<FAQListA />} />
           <Route path="faq/new" element={<FAQEditor />} />
@@ -60,6 +62,10 @@ const App: React.FC = () => {
           <Route path="services" element={<ServiceList />} />
           <Route path="services/new" element={<ServiceEditor />} />
           <Route path="services/:id" element={<ServiceEditor />} />
+
+          <Route path="photos" element={<PhotoList />} />
+          <Route path="photos/new" element={<PhotoEditor />} />
+          <Route path="photos/:id" element={<PhotoEditor />} />
         </Route>
 
         {/* --- Админка с языком --- */}
@@ -68,9 +74,9 @@ const App: React.FC = () => {
           <Route path="blogs/new" element={<BlogEditor />} />
           <Route path="blogs/:id" element={<BlogEditor />} />
 
-          <Route path="doctors" element={<DoctorList />} />
-          <Route path="doctors/new" element={<DoctorEditor />} />
-          <Route path="doctors/:id" element={<DoctorEditor />} />
+          <Route path="employees" element={<EmployeeList />} />
+          <Route path="employees/new" element={<EmployeeEditor />} />
+          <Route path="employees/:id" element={<EmployeeEditor />} />
 
           <Route path="faq" element={<FAQListA />} />
           <Route path="faq/new" element={<FAQEditor />} />
@@ -83,6 +89,10 @@ const App: React.FC = () => {
           <Route path="services" element={<ServiceList />} />
           <Route path="services/new" element={<ServiceEditor />} />
           <Route path="services/:id" element={<ServiceEditor />} />
+
+          <Route path="photos" element={<PhotoList />} />
+          <Route path="photos/new" element={<PhotoEditor />} />
+          <Route path="photos/:id" element={<PhotoEditor />} />
         </Route>
 
         {/* --- Обычные страницы с языком --- */}
@@ -93,8 +103,8 @@ const App: React.FC = () => {
           <Route path="specials/:slug" element={<SpecialPage />} />
           <Route path="services" element={<Services />} />
           <Route path="services/:slug" element={<ServicePage />} />
-          <Route path="doctors" element={<Doctors />} />
-          <Route path="doctors/:slug" element={<DoctorPage />} />
+          <Route path="employees" element={<Employees />} />
+          <Route path="employees/:slug" element={<EmployeePage />} />
           <Route path="price" element={<Price />} />
           <Route path="faq" element={<FAQ />} />
           <Route path="gallery" element={<Gallery />} />

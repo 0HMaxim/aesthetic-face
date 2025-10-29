@@ -9,6 +9,6 @@ export interface ContentBlock {
   content?: LocalizedText;
   sideText?: LocalizedText;
   children?: ContentBlock[];
-  align?: "left" | "center" | "right"; // 👈 новое свойство для выравнивания
-  media?: string; // для image: ссылка/base64/CSS
+  align?: "left" | "center" | "right";
+  media?: string;
 }

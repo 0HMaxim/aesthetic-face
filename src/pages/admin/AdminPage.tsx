@@ -23,7 +23,7 @@ export default function AdminPage() {
           </Link>
 
           <Link
-              to="/admin/doctors"
+              to="/admin/employees"
               className="p-4 bg-white shadow rounded-lg hover:shadow-lg transition"
           >
             👨‍⚕️ Керування докторами
@@ -50,6 +50,15 @@ export default function AdminPage() {
           >
             Сервіси
           </Link>
+
+
+          <Link
+              to="/admin/photos"
+              className="p-4 bg-white shadow rounded-lg hover:shadow-lg transition"
+          >
+             Photos
+          </Link>
+
 
         </div>
 

@@ -65,7 +65,7 @@ export default function Gallery() {
             ...photo,
             service: photo.serviceId ? services.find((s) => s.id === photo.serviceId) : undefined,
             subservice: photo.subserviceId ? subservices.find((ss) => ss.id === photo.subserviceId) : undefined,
-            doctor: photo.doctorId ? doctors.find((d) => d.id === photo.doctorId) : undefined,
+            employee: photo.employeeId ? doctors.find((d) => d.id === photo.employeeId) : undefined,
           })),
       [filteredPhotos]
   );

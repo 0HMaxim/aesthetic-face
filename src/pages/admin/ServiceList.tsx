@@ -6,15 +6,15 @@ import {db} from "../../firebase.ts";
 import type {Service} from "../../models/Service.ts";
 
 
-export default function DoctorList() {
-  const [blogs, setBlogs] = useState<Record<string, Service>>({});
+export default function ServiceList() {
+  const [services, setServices] = useState<Record<string, Service>>({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    const blogRef = ref(db, "service");
-    const unsubscribe = onValue(blogRef, (snapshot) => {
+    const serviceRef = ref(db, "services");
+    const unsubscribe = onValue(serviceRef, (snapshot) => {
       const data = snapshot.val();
-      setBlogs(data || {});
+      setServices(data || {});
     });
     return () => unsubscribe();
   }, []);
@@ -26,7 +26,7 @@ export default function DoctorList() {
           <h1 className="text-xl font-semibold">Services</h1>
 
           <button
-              onClick={() => navigate("/services/new")}
+              onClick={() => navigate("/admin/services/new")}
               className="flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 transition"
           >
             <SolarPowerBold className="size-[1rem] md:size-[1.5rem]" />
@@ -36,11 +36,11 @@ export default function DoctorList() {
 
         {/* Список блогов */}
         <div className="space-y-3">
-          {Object.entries(blogs).map(([key, service]) => (
+          {Object.entries(services).map(([key, service]) => (
               <div
                   key={key}
                   className="p-4 border rounded-xl hover:bg-gray-50 cursor-pointer transition"
-                  onClick={() => navigate(`/services/${key}`)}
+                  onClick={() => navigate(`/admin/services/${key}`)}
               >
                 <p className="text-sm text-gray-600">{service.id || "No slug"} : </p>
                 <h2 className="font-semibold">{service.title?.en || "No title"}</h2>

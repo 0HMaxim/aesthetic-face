@@ -11,7 +11,7 @@ export interface Photo {
   id?: string;
   serviceId?: string;
   subserviceId?: string;
-  doctorId?: string;
+  employeeId?: string;
 
   title?: LocalizedText;
   description?: LocalizedText;

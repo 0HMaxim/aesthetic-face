@@ -18,7 +18,7 @@ export default function Header() {
     { title: "header.about", link: "/about" },
     { title: "header.specials", link: "/specials" },
     { title: "header.services", link: "/services" },
-    { title: "header.doctors", link: "/doctors" },
+    { title: "header.employees", link: "/employees" },
     { title: "header.price", link: "/price" },
     { title: "header.faq", link: "/faq" },
     { title: "header.gallery", link: "/gallery" },

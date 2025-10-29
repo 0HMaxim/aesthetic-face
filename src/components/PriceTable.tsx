@@ -1,47 +1,65 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SolarPowerBold from "~icons/solar/power-bold";
-import { prices } from "../data/services.ts";
+import { ref, onValue } from "firebase/database";
+import { db } from "../firebase";
+import type { PriceModel } from "../models/Price";
 
 type Props = {
   serviceId?: string;
   subserviceId?: string;
-  defaultOpen?: boolean;
 };
 
 const PriceTable: React.FC<Props> = ({ serviceId, subserviceId }) => {
   const { i18n } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
-  // Фильтруем массив цен
-  const filteredPrices = prices.filter(price => {
+  const [prices, setPrices] = useState<PriceModel[]>([]);
+  const [openSections, setOpenSections] = useState<boolean[]>([]);
+  const [activeItems, setActiveItems] = useState<{ [key: string]: boolean }>({});
+  const [loading, setLoading] = useState(true);
+
+  // 🔹 Загружаем данные из Firebase
+  useEffect(() => {
+    const priceRef = ref(db, "prices");
+    const unsubscribe = onValue(priceRef, (snapshot) => {
+      const data = snapshot.val();
+
+      if (data) {
+        const loadedPrices: PriceModel[] = Object.values(data);
+        setPrices(loadedPrices);
+        setOpenSections(loadedPrices.map((_, i) => i === 0));
+      } else {
+        setPrices([]);
+      }
+
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // 🔹 Фильтрация по serviceId / subserviceId
+  const filteredPrices = prices.filter((price) => {
     if (subserviceId) return price.subserviceId === subserviceId;
     if (serviceId) return price.serviceId === serviceId;
     return true;
   });
 
-  // Состояния
-  const [openSections, setOpenSections] = useState<boolean[]>(() =>
-      filteredPrices.map((_, i) => i === 0) // только первая true
-  );
-  const [activeItems, setActiveItems] = useState<{ [key: string]: boolean }>({});
-
-  // Сброс состояния при смене сервиса/подуслуги
-  useEffect(() => {
-    setOpenSections(filteredPrices.map((_, i) => i === 0));
-    setActiveItems({});
-  }, [serviceId, subserviceId]);
-
   const toggleSection = (index: number) => {
-    setOpenSections(prev =>
+    setOpenSections((prev) =>
         prev.map((isOpen, i) => (i === index ? !isOpen : isOpen))
     );
   };
 
   const toggleItem = (sectionIdx: number, subIdx: number, itemIdx: number) => {
     const key = `${sectionIdx}-${subIdx}-${itemIdx}`;
-    setActiveItems(prev => ({ ...prev, [key]: !prev[key] }));
+    setActiveItems((prev) => ({ ...prev, [key]: !prev[key] }));
   };
+
+  if (loading) return <p className="text-center py-8">Loading...</p>;
+  if (filteredPrices.length === 0)
+    return <p className="text-center py-8">No prices found.</p>;
 
   return (
       <div className="w-full">
@@ -51,45 +69,45 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId }) => {
                   onClick={() => toggleSection(idx)}
                   className="w-full text-left flex justify-between items-center relative"
               >
-                <h2 className="font-[800] text-[1.2rem] lg:text-[2rem] py-[0.8rem] lg:py-[1.5rem]">
-                  {data.category[lang]}
+                <h2 className="font-[800] text-[1.2rem] lg:text-[2rem] py-[0.8rem] lg:py-[1.5rem] select-text">
+                  {data.category?.[lang] || "No title"}
                 </h2>
                 <span
                     className={`text-[1.2rem] lg:text-[2rem] transform transition-transform duration-500 absolute right-[1rem] lg:right-[2.5rem] ${
                         openSections[idx] ? "rotate-180" : "rotate-0"
                     }`}
                 >
-                +
-              </span>
+              +
+            </span>
               </button>
 
               <div
                   className={`overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${
-                      openSections[idx] ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0 duration-0"
+                      openSections[idx]
+                          ? "max-h-[2000px] opacity-100"
+                          : "max-h-0 opacity-0 duration-0"
                   }`}
               >
                 <table className="w-full text-left border-collapse table-auto">
                   <colgroup>
-                    <col className="w-auto" /> {/* ширина по содержимому */}
-                    <col className="w-[9999px]" /> {/* занимает всё остальное */}
-                    <col className="w-[1%]" /> {/* компактная, под цену */}
+                    <col className="w-auto" />
+                    <col className="w-[9999px]" />
+                    <col className="w-[1%]" />
                   </colgroup>
 
                   <thead>
                   <tr className="border-b-2 border-muted text-[0.9rem] lg:text-[1.5rem]">
-                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] text-[0.875rem] md:text-[1.25rem] font-[700] whitespace-nowrap">
-                      {data.columns.duration[lang]}
+                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700] whitespace-nowrap">
+                      {data.columns.duration?.[lang]}
                     </th>
-                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] text-[0.875rem] md:text-[1.25rem] font-[700]">
-                      {data.columns.procedure[lang]}
+                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700]">
+                      {data.columns.procedure?.[lang]}
                     </th>
-                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] text-[0.875rem] md:text-[1.25rem] font-[700] text-right">
-                      {data.columns.price[lang]}
+                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700] text-right">
+                      {data.columns.price?.[lang]}
                     </th>
                   </tr>
                   </thead>
-
-
 
                   <tbody className="text-[0.875rem] md:text-[1.25rem]">
                   {data.sections.map((section, sIndex) => (
@@ -99,7 +117,7 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId }) => {
                               colSpan={3}
                               className="uppercase font-bold px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-b border-muted"
                           >
-                            {section.subtitle[lang]}
+                            {section.subtitle?.[lang]}
                           </td>
                         </tr>
                         {section.items.map((item, iIndex) => {
@@ -117,12 +135,14 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId }) => {
                                   {item.duration}
                                 </td>
                                 <td className="px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem]">
-                                  {item.procedure[lang]}
+                                  {item.procedure?.[lang]}
                                 </td>
                                 <td className="px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-l border-muted flex flex-col md:flex-row items-start md:items-center justify-between">
                                   <span className="text-nowrap">{item.price}</span>
                                   <button
-                                      onClick={() => toggleItem(idx, sIndex, iIndex)}
+                                      onClick={() =>
+                                          toggleItem(idx, sIndex, iIndex)
+                                      }
                                       className="mt-1 md:mt-0 md:ml-2"
                                   >
                                     <SolarPowerBold className="size-[1rem] md:size-[1.5rem]" />

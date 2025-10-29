@@ -1,7 +1,6 @@
 // data/service.ts
 import type {Service} from "../models/Service.ts";
 import type {Subservice} from "../models/Subservice.ts";
-import type {Doctor} from "../models/Doctor.ts";
 import type {FAQ} from "../models/FAQ.ts";
 import type {Scpecials} from "../models/Scpecials.ts";
 import type {PriceModel} from "../models/Price";
@@ -8679,7 +8678,7 @@ export const subservices: Subservice[] = [
   },
 ]
 
-export const doctors: Doctor[] = [
+export const doctors: Employee[] = [
   {
     id: "doctor1",
     slug: "semenov-andrii",
@@ -12218,6 +12217,7 @@ export const generalInfo: GeneralInfo = {
 
 
 import type { Blog } from "../models/Blog";
+import type {Employee} from "../models/Employee.ts";
 
 export const blogs: Blog[] = [
 
