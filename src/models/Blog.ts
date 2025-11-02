@@ -13,8 +13,8 @@ export interface Blog {
 
   mainImage?: string;
   content?: ContentBlock[];
-  serviceId?: string[];
-  subservicesId?: string[];
+  serviceIds?: string[];
+  subserviceIds?: string[];
   specials?: string[];
 }
 

@@ -2,7 +2,7 @@
 import type {ContentBlock} from "./ContentBlock.ts";
 import type {LocalizedText} from "./LocalizedText.ts";
 
-export interface Scpecials {
+export interface Special {
   id?: string;
   title: LocalizedText
   subtitle: LocalizedText

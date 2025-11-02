@@ -104,7 +104,6 @@ export default function Employees() {
                       >
                         <img
                             src={item.photo}
-                            alt={item?.fullName?.[lang] || "Employee"}
                             className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
                         />
                       </Button>

@@ -1,14 +1,23 @@
 import { useState, useMemo, useEffect } from "react";
 import FAQList from "../components/FAQList.tsx";
-import { services, subservices } from "../data/services";
 import { useTranslation } from "react-i18next";
 import { TopImage } from "../components/TopImage.tsx";
 import { Breadcrumbs } from "../components/Breadcrumbs.tsx";
 import { db } from "../firebase.ts";
 import { ref, get } from "firebase/database";
-import type {LocalizedText} from "../models/LocalizedText.ts";
+import type { LocalizedText } from "../models/LocalizedText.ts";
 import type { FAQ } from "../models/FAQ";
 
+interface Service {
+  id: string;
+  title: LocalizedText;
+}
+
+interface Subservice {
+  id: string;
+  serviceId: string;
+  title: LocalizedText;
+}
 
 export default function FAQ() {
   const { i18n, t } = useTranslation();
@@ -18,11 +27,14 @@ export default function FAQ() {
   const [faqList, setFaqList] = useState<FAQ[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [services, setServices] = useState<Service[]>([]);
+  const [subservices, setSubservices] = useState<Subservice[]>([]);
+
   const [selectedService, setSelectedService] = useState("all");
   const [selectedSubservice, setSelectedSubservice] = useState("all");
   const [page, setPage] = useState(0);
 
-  // ✅ Загружаем FAQ из Firebase
+  // ---------- Загрузка FAQ ----------
   useEffect(() => {
     async function fetchFaqs() {
       try {
@@ -48,23 +60,37 @@ export default function FAQ() {
     fetchFaqs();
   }, []);
 
+  // ---------- Загрузка сервисов и подсервисов ----------
+  useEffect(() => {
+    async function fetchServices() {
+      try {
+        const servicesSnap = await get(ref(db, "services"));
+        if (servicesSnap.exists()) setServices(Object.values(servicesSnap.val()));
+        const subservicesSnap = await get(ref(db, "subservices"));
+        if (subservicesSnap.exists()) setSubservices(Object.values(subservicesSnap.val()));
+      } catch (err) {
+        console.error("Error loading services/subservices:", err);
+      }
+    }
+    fetchServices();
+  }, []);
+
   const serviceOptions = useMemo(
       () => [
         { id: "all", title: t("FAQ.allServices") },
         ...services.map((s) => ({ id: s.id, title: s.title[lang] })),
       ],
-      [lang, t]
+      [lang, t, services]
   );
 
   const subserviceOptions = useMemo(() => {
-    if (selectedService === "all")
-      return [{ id: "all", title: t("FAQ.allServices") }];
+    if (selectedService === "all") return [{ id: "all", title: t("FAQ.allServices") }];
     const filtered = subservices.filter((ss) => ss.serviceId === selectedService);
     return [
       { id: "all", title: t("FAQ.allServices") },
       ...filtered.map((ss) => ({ id: ss.id, title: ss.title[lang] })),
     ];
-  }, [selectedService, lang, t]);
+  }, [selectedService, lang, t, subservices]);
 
   const filteredFaqs = useMemo(() => {
     return faqList.filter((faq) => {
@@ -79,7 +105,7 @@ export default function FAQ() {
       }
       return true;
     });
-  }, [faqList, selectedService, selectedSubservice]);
+  }, [faqList, selectedService, selectedSubservice, subservices]);
 
   useEffect(() => setPage(0), [selectedService, selectedSubservice]);
 
@@ -90,9 +116,7 @@ export default function FAQ() {
           <Breadcrumbs />
 
           <div className="py-8 mb-[3.5rem] w-full">
-            <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
-              {t("FAQ.title")}
-            </h2>
+            <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">{t("FAQ.title")}</h2>
 
             <div className="md:flex justify-between block">
               <p className="text-base lg:text-2xl font-normal text-foreground duration-500 mb-4">
@@ -100,9 +124,7 @@ export default function FAQ() {
               </p>
               <div>
                 <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">
-                <span className="text-foreground text-[1.5rem] font-[600]">
-                  {t("FAQ.direction")}
-                </span>
+                  <span className="text-foreground text-[1.5rem] font-[600]">{t("FAQ.direction")}</span>
 
                   <select
                       className="border rounded-lg py-2 px-3 text-black w-full md:w-auto"
@@ -136,11 +158,7 @@ export default function FAQ() {
             </div>
           </div>
 
-          {loading ? (
-              <p className="text-center text-lg">{t("FAQ.loading")}</p>
-          ) : (
-              <FAQList faqs={filteredFaqs} currentPage={page} setCurrentPage={setPage} />
-          )}
+          {loading ? <p className="text-center text-lg">{t("FAQ.loading")}</p> : <FAQList faqs={filteredFaqs} currentPage={page} setCurrentPage={setPage} />}
         </div>
       </div>
   );

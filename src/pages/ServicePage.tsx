@@ -10,6 +10,13 @@ import { db } from "../firebase";
 import { ref, get } from "firebase/database";
 import { useEffect, useState } from "react";
 import FAQList from "../components/FAQList.tsx";
+import type {Subservice} from "../models/Subservice.ts";
+import type {Service} from "../models/Service.ts";
+import type {Blog} from "../models/Blog.ts";
+import type {Special} from "../models/Special.ts";
+import type {Employee} from "../models/Employee.ts";
+import type {Photo} from "../models/Photo.ts";
+import type {FAQ} from "../models/FAQ.ts";
 
 export default function ServicePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -17,13 +24,13 @@ export default function ServicePage() {
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
   const [dataLoaded, setDataLoaded] = useState(false);
-  const [services, setServices] = useState<any[]>([]);
-  const [subservices, setSubservices] = useState<any[]>([]);
-  const [blogs, setBlogs] = useState<any[]>([]);
-  const [specials, setSpecials] = useState<any[]>([]);
-  const [doctors, setDoctors] = useState<any[]>([]);
-  const [faqs, setFaqs] = useState<any[]>([]);
-  const [photos, setPhotos] = useState<any[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
+  const [subservices, setSubservices] = useState<Subservice[]>([]);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [specials, setSpecials] = useState<Special[]>([]);
+  const [emloyees, setEmloyees] = useState<Employee[]>([]);
+  const [faqs, setFaqs] = useState<FAQ[]>([]);
+  const [photos, setPhotos] = useState<Photo[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -31,7 +38,7 @@ export default function ServicePage() {
       const snapshotSubservices = await get(ref(db, "subservices"));
       const snapshotBlogs = await get(ref(db, "blogs"));
       const snapshotSpecials = await get(ref(db, "specials"));
-      const snapshotDoctors = await get(ref(db, "doctors"));
+      const snapshotEmloyees = await get(ref(db, "emloyees"));
       const snapshotFaqs = await get(ref(db, "faqs"));
       const snapshotPhotos = await get(ref(db, "photos"));
 
@@ -39,7 +46,7 @@ export default function ServicePage() {
       setSubservices(Object.values(snapshotSubservices.val() || {}));
       setBlogs(Object.values(snapshotBlogs.val() || {}));
       setSpecials(Object.values(snapshotSpecials.val() || {}));
-      setDoctors(Object.values(snapshotDoctors.val() || {}));
+      setEmloyees(Object.values(snapshotEmloyees.val() || {}));
       setFaqs(Object.values(snapshotFaqs.val() || {}));
       setPhotos(Object.values(snapshotPhotos.val() || {}));
 
@@ -65,22 +72,26 @@ export default function ServicePage() {
   const parentService =
       service || services.find((s) => s.id === subservice?.serviceId);
 
-  const relatedSubservices =
-      parentService?.subservices
-      ?.map((subId: string) => subservices.find((ss) => ss.id === subId))
-      .filter((sub: any) => !!sub) || [];
-
-  const relatedBlogs = blogs.filter(
-      (blog) =>
-          blog.serviceId?.includes(currentItem.id) ||
-          (parentService && blog.serviceId?.includes(parentService.id))
+  const relatedSubservices = subservices.filter(
+      (ss) => ss.serviceId === parentService?.id
   );
 
-  const relatedSpecials = specials.filter(
-      (special) =>
-          special.serviceId?.includes(currentItem.id) ||
-          (parentService && special.serviceId?.includes(parentService.id))
-  );
+  const relatedBlogs = blogs.filter((blog) => {
+    const currentId = currentItem.id;
+    const parentId = parentService?.id;
+
+    return (currentId && blog.serviceId?.includes(currentId)) ||
+        (parentId && blog.serviceId?.includes(parentId));
+  });
+
+  const relatedSpecials = specials.filter((special) => {
+    const currentId = currentItem.id;
+    const parentId = parentService?.id;
+
+    return (currentId && special.serviceId?.includes(currentId)) ||
+        (parentId && special.serviceId?.includes(parentId));
+  });
+
 
   const currentPhotos = photos
   .filter(
@@ -96,7 +107,7 @@ export default function ServicePage() {
         ? subservices.find((ss) => ss.id === photo.subserviceId)
         : undefined,
     employee: photo.employeeId
-        ? doctors.find((d) => d.id === photo.employeeId)
+        ? emloyees.find((d) => d.id === photo.employeeId)
         : undefined,
   }));
 
@@ -107,7 +118,7 @@ export default function ServicePage() {
       return false;
     }
     if (service) {
-      if (faq.serviceId === service.id && faq.subserviceId && service.subservices?.includes(faq.subserviceId)) return true;
+      if (faq.serviceId === service.id && faq.subserviceId && service.subservicesId?.includes(faq.subserviceId)) return true;
       if (faq.serviceId === service.id && !faq.subserviceId) return true;
       return false;
     }
@@ -125,9 +136,23 @@ export default function ServicePage() {
 
           <div className="py-8">
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
-              {currentItem.title[lang]}
             </h2>
           </div>
+
+          <div className="py-8 mb-[3.5rem]">
+            <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
+              {currentItem.title[lang]}
+            </h2>
+
+            <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">
+              </span>
+
+            <p className="text-base lg:text-2xl font-normal text-foreground duration-500">
+
+            </p>
+          </div>
+
+
 
           <div className="flex flex-col">
 
@@ -141,7 +166,7 @@ export default function ServicePage() {
                     {t("servicePage.otherServices")}
                   </h2>
                   <div className="flex flex-wrap gap-4">
-                    {relatedSubservices.map((sub) => (
+                    {relatedSubservices.map((sub: any) => (
                         <Link
                             key={sub.id}
                             to={`/${lang}/services/${sub.slug}`}
@@ -178,6 +203,108 @@ export default function ServicePage() {
             {relatedFaqs.length > 0 && (
                 <FAQList faqs={relatedFaqs} currentPage={0} setCurrentPage={() => {}} itemsPerPage={10} />
             )}
+
+
+            {/* Акции */}
+            {relatedSpecials.length > 0 && (
+                <div className="py-12">
+                  <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
+                    {t("servicePage.specialsTitle") || "Special Offers"}
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {relatedSpecials.map((special) => {
+                      // title как строка
+                      const titleText = Array.isArray(special.title?.[lang])
+                          ? special.title[lang][0]
+                          : special.title?.[lang] || "No title";
+
+                      // subtitle как строка, обрезаем до 120 символов
+                      const subtitleText = Array.isArray(special.subtitle?.[lang])
+                          ? special.subtitle[lang][0].slice(0, 120)
+                          : special.subtitle?.[lang]?.slice(0, 120) || "No subtitle";
+
+                      return (
+                          <div
+                              key={special.id}
+                              className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition duration-500 bg-white"
+                          >
+                            {special.mainImage && (
+                                <img
+                                    src={special.mainImage}
+                                    alt={titleText}
+                                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
+                            )}
+                            <div className="p-5">
+                              <h3 className="text-xl font-semibold mb-2">{titleText}</h3>
+                              <p className="text-gray-600 text-sm mb-3">{subtitleText}...</p>
+                              {special.slug && (
+                                  <Link
+                                      to={`/${lang}/specials/${special.slug}`}
+                                      className="text-[var(--primary)] hover:underline font-medium"
+                                  >
+                                    {t("servicePage.readMore") || "Read more"}
+                                  </Link>
+                              )}
+                            </div>
+                          </div>
+                      );
+                    })}
+                  </div>
+                </div>
+            )}
+
+
+            {/* Блоги */}
+            {relatedBlogs.length > 0 && (
+                <div className="py-12">
+                  <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
+                    {t("servicePage.relatedArticles") || "Related Articles"}
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {relatedBlogs.map((blog) => {
+                      // Получаем title как строку
+                      const titleText = Array.isArray(blog.title?.[lang])
+                          ? blog.title[lang][0]
+                          : blog.title?.[lang] || "No title";
+
+                      // Получаем subtitle как строку и обрезаем до 120 символов
+                      const subtitleText = Array.isArray(blog.subtitle?.[lang])
+                          ? blog.subtitle[lang][0].slice(0, 120)
+                          : blog.subtitle?.[lang]?.slice(0, 120) || "No subtitle";
+
+                      return (
+                          <div
+                              key={blog.id}
+                              className="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition duration-500 bg-white"
+                          >
+                            {blog.mainImage && (
+                                <img
+                                    src={blog.mainImage}
+                                    alt={titleText}
+                                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
+                            )}
+                            <div className="p-5">
+                              <h3 className="text-xl font-semibold mb-2">{titleText}</h3>
+                              <p className="text-gray-600 text-sm mb-3">{subtitleText}...</p>
+                              {blog.slug && (
+                                  <Link
+                                      to={`/${lang}/blogs/${blog.slug}`}
+                                      className="text-[var(--primary)] hover:underline font-medium"
+                                  >
+                                    {t("servicePage.readMore") || "Read more"}
+                                  </Link>
+                              )}
+                            </div>
+                          </div>
+                      );
+                    })}
+                  </div>
+                </div>
+            )}
+
+
           </div>
         </div>
       </div>

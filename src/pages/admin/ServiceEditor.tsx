@@ -6,6 +6,8 @@ import type { Service } from "../../models/Service";
 import type { LocalizedText } from "../../models/LocalizedText";
 import type { ContentBlock } from "../../models/ContentBlock";
 import ImageInputBlock from "../../components/ImageInputBlock.tsx";
+import RelationSelect from "../../components/RelationSelect.tsx";
+import {useFetchData} from "../../hooks/useFetchData.ts";
 
 export default function ServiceEditor() {
   const { id } = useParams();
@@ -19,14 +21,18 @@ export default function ServiceEditor() {
     mainImage: "",
     content: [],
     employees: [],
-    subservices: [],
-    serviceId: [],
-    subservicesId: [],
+    subserviceIds: [],
     specials: [],
   };
 
   const [service, setService] = useState<Service>(emptyService);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  const { data, loading } = useFetchData(["services", "subservices", "specials"]);
+  const subservices = data["subservices"] || [];
+  const specials = data["specials"] || [];
+
+
 
   // 🔹 Загрузка сервиса
   useEffect(() => {
@@ -46,34 +52,27 @@ export default function ServiceEditor() {
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-  // 🔹 Обработка массивов
-  const addArrayItem = (field: keyof Service) => {
-    const arr = Array.isArray(service[field]) ? [...(service[field] as string[])] : [];
-    arr.push("");
-    setService({ ...service, [field]: arr });
-  };
-
-  const handleArrayChange = (field: keyof Service, index: number, value: string) => {
-    const arr = Array.isArray(service[field]) ? [...(service[field] as string[])] : [];
-    arr[index] = value;
-    setService({ ...service, [field]: arr });
-  };
-
-  const removeArrayItem = (field: keyof Service, index: number) => {
-    const arr = Array.isArray(service[field]) ? [...(service[field] as string[])] : [];
-    arr.splice(index, 1);
-    setService({ ...service, [field]: arr });
-  };
-
-  // 🔹 Контент-блоки (упрощённо, без изменений)
-  const addContentBlock = (type: "paragraph" | "image" | "heading" | "list") => {
+  // 🔹 Контент-блоки
+  const addContentBlock = (
+      type: "paragraph" | "image" | "heading" | "list",
+      parentIndex?: number
+  ) => {
     const newBlock: ContentBlock = {
       type,
       content: {},
       align: "left",
       ...(type === "image" ? { media: "https://via.placeholder.com/400x200?text=Image" } : {}),
     };
-    setService({ ...service, content: [...(service.content || []), newBlock] });
+
+    if (typeof parentIndex === "number") {
+      const updated = [...(service.content || [])];
+      const parent = updated[parentIndex];
+      parent.children = [...(parent.children || []), newBlock];
+      updated[parentIndex] = parent;
+      setService({ ...service, content: updated });
+    } else {
+      setService({ ...service, content: [...(service.content || []), newBlock] });
+    }
   };
 
   const handleBlockChange = (index: number, lang: string, value: string, parentIndex?: number) => {
@@ -110,33 +109,6 @@ export default function ServiceEditor() {
     setService({ ...service, content: updated });
   };
 
-
-
-
-  // 🔹 Валидация
-  const validate = () => {
-    const newErrors: { [key in keyof Service]?: string } = {};
-    if (!Object.values(service.title || {}).some((v) => v?.trim())) {
-      newErrors.title = "Title хотя бы на одном языке обязателен!";
-    }
-    if (!service.slug?.trim()) newErrors.slug = "Slug обязателен!";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  // 🔹 Сохранение
-  const handleSave = async () => {
-    if (!validate()) return;
-    if (id) {
-      await update(ref(db, `services/${id}`), service);
-    } else {
-      const newRef = push(ref(db, "services"));
-      await set(newRef, { ...service, id: newRef.key });
-    }
-    navigate("/admin/services");
-  };
-
-
   const moveContentBlock = (index: number, direction: "up" | "down", parentIndex?: number) => {
     const updated = [...(service.content || [])];
 
@@ -159,6 +131,17 @@ export default function ServiceEditor() {
     setService({ ...service, content: updated });
   };
 
+  const removeContentBlock = (index: number, parentIndex?: number) => {
+    const updated = [...(service.content || [])];
+
+    if (typeof parentIndex === "number") {
+      updated[parentIndex].children?.splice(index, 1);
+    } else {
+      updated.splice(index, 1);
+    }
+
+    setService({ ...service, content: updated });
+  };
 
   const renderBlockEditor = (block: ContentBlock, index: number, parentIndex?: number) => {
     const blockNumber = parentIndex !== undefined
@@ -172,38 +155,10 @@ export default function ServiceEditor() {
               <strong>
                 {blockNumber} (type: {block.type})
               </strong>
-              <div className="flex justify-between items-center mb-2">
-                <strong>
-                  {blockNumber} (type: {block.type})
-                </strong>
-                <div className="flex justify-between items-center mb-2">
-                  <strong>
-                    {blockNumber} (type: {block.type})
-                  </strong>
-                  <div className="flex gap-2">
-                    <button
-                        onClick={() => moveContentBlock(index, "up", parentIndex)}
-                        className="bg-gray-200 hover:bg-gray-300 text-black px-2 py-1 rounded"
-                        title="Move up"
-                    >
-                      ⬆️
-                    </button>
-                    <button
-                        onClick={() => moveContentBlock(index, "down", parentIndex)}
-                        className="bg-gray-200 hover:bg-gray-300 text-black px-2 py-1 rounded"
-                        title="Move down"
-                    >
-                      ⬇️
-                    </button>
-                    <button
-                        onClick={() => removeContentBlock(index, parentIndex)}
-                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
-                    >
-                      Удалить
-                    </button>
-                  </div>
-                </div>
-
+              <div className="flex gap-2">
+                <button onClick={() => moveContentBlock(index, "up", parentIndex)} className="bg-gray-200 hover:bg-gray-300 text-black px-2 py-1 rounded">⬆️</button>
+                <button onClick={() => moveContentBlock(index, "down", parentIndex)} className="bg-gray-200 hover:bg-gray-300 text-black px-2 py-1 rounded">⬇️</button>
+                <button onClick={() => removeContentBlock(index, parentIndex)} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Удалить</button>
               </div>
             </div>
 
@@ -233,37 +188,20 @@ export default function ServiceEditor() {
                         setService({ ...service, content: updated });
                       }}
                   />
-
-                  {/* опционально: ширина картинки */}
                   <div className="flex items-center gap-2">
-                    <label className="flex items-center gap-1">
-                      <input
-                          type="checkbox"
-                          checked={block.customWidth || false}
-                          onChange={(e) => {
-                            const updated = [...(service.content || [])];
-                            if (typeof parentIndex === "number")
-                              updated[parentIndex].children![index].customWidth = e.target.checked;
-                            else updated[index].customWidth = e.target.checked;
-                            setService({ ...service, content: updated });
-                          }}
-                      />
-                      Custom Width
-                    </label>
-
+                    <label className="text-sm font-medium">Image Width (%)</label>
                     <input
                         type="number"
                         min={10}
-                        max={90}
-                        value={block.widthPercent || 40}
-                        disabled={!block.customWidth}
+                        max={100}
+                        value={block.widthPercent ?? 40}
                         onChange={(e) => {
                           const value = parseInt(e.target.value);
-                          const updated = [...(blog.content || [])];
+                          const updated = [...(service.content || [])];
                           if (typeof parentIndex === "number")
                             updated[parentIndex].children![index].widthPercent = value;
                           else updated[index].widthPercent = value;
-                          setService({ ...blog, content: updated });
+                          setService({ ...service, content: updated });
                         }}
                         className="border rounded-lg p-2 w-20"
                     />
@@ -278,15 +216,15 @@ export default function ServiceEditor() {
                       </label>
                       {block.type === "list" ? (
                           <div className="flex gap-2 items-start">
-          <textarea
-              value={block.content?.[lang] || ""}
-              onChange={(e) =>
-                  handleBlockChange(index, lang, e.target.value, parentIndex)
-              }
-              className="border rounded-lg p-2 w-full h-28 font-mono text-sm"
-              placeholder={`Each line = one list item`}
-              style={{ whiteSpace: "pre" }}
-          />
+                    <textarea
+                        value={block.content?.[lang] || ""}
+                        onChange={(e) =>
+                            handleBlockChange(index, lang, e.target.value, parentIndex)
+                        }
+                        className="border rounded-lg p-2 w-full h-28 font-mono text-sm"
+                        placeholder={`Each line = one list item`}
+                        style={{ whiteSpace: "pre" }}
+                    />
                             <button
                                 type="button"
                                 onClick={() => {
@@ -314,8 +252,6 @@ export default function ServiceEditor() {
                 ))
             )}
 
-
-
             {/* Дочерние блоки */}
             {block.type === "image" && (
                 <div className="flex gap-2 mt-2">
@@ -336,33 +272,71 @@ export default function ServiceEditor() {
     );
   };
 
+  // 🔹 Валидация
+  const validate = () => {
+    const newErrors: { [key: string]: string } = {};
+
+    if (!Object.values(service.title || {}).some((v) => typeof v === "string" && v.trim())) {
+      newErrors.title = "Title хотя бы на одном языке обязателен!";
+    }
+    if (!service.slug?.trim()) newErrors.slug = "Slug обязателен!";
+    if (!service.mainImage?.trim()) newErrors.mainImage = "Main image обязателен!";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // 🔹 Сохранение
+  const handleSave = async () => {
+    if (!validate()) return;
+
+    let serviceId = id;
+
+    if (id) {
+      // 🔹 Существующий сервис — обновляем
+      await update(ref(db, `services/${id}`), service);
+    } else {
+      // 🔹 Новый сервис — создаём
+      const newRef = push(ref(db, "services"));
+      serviceId = newRef.key!;
+      await set(newRef, { ...service, id: serviceId });
+    }
+
+    // 🔹 Обновляем все выбранные Subservices, чтобы указать их parent serviceId
+    if (service.subserviceIds?.length) {
+      const updates: Record<string, any> = {};
+      service.subserviceIds.forEach((subId) => {
+        updates[`subservices/${subId}/serviceId`] = serviceId;
+      });
+      await update(ref(db), updates);
+    }
+
+    navigate("/admin/services");
+  };
+
 
   return (
       <div className="p-6 max-w-6xl mx-auto">
-        <h1 className="text-2xl font-semibold mb-4">
-          {id ? "Edit Service" : "Create New Service"}
-        </h1>
+        <h1 className="text-2xl font-semibold mb-4">{id ? "Edit Service" : "Create New Service"}</h1>
 
-        {/* 🔹 Title / Subtitle / HeaderTitle */}
-        {["title", "subtitle", "headerTitle"].map((field) => (
+        {/* Title / Subtitle / HeaderTitle */}
+        {(["title", "subtitle", "headerTitle"] as (keyof Service)[]).map((field) => (
             <div key={field} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               {["uk", "ru", "en", "de"].map((lang) => (
                   <div key={`${field}-${lang}`} className="flex flex-col">
-                    <label className="capitalize">
-                      {field} ({lang})
-                    </label>
+                    <label className="capitalize">{field} ({lang})</label>
                     <input
-                        type="text"
                         value={(service[field] as LocalizedText)?.[lang] || ""}
-                        onChange={(e) => handleLocalizedChange(field as keyof Service, lang, e.target.value)}
-                        className={`border rounded p-2 ${errors[field] ? "border-red-600" : ""}`}
+                        onChange={(e) => handleLocalizedChange(field, lang, e.target.value)}
+                        className="border rounded p-2"
                     />
+                    {errors[field] && <p className="text-red-600 text-sm mt-1">{errors[field]}</p>}
                   </div>
               ))}
             </div>
         ))}
 
-        {/* 🔹 Slug */}
+        {/* Slug */}
         <div className="flex flex-col mb-4">
           <label>Slug</label>
           <input
@@ -371,98 +345,42 @@ export default function ServiceEditor() {
               onChange={(e) => setService({ ...service, slug: e.target.value })}
               className="border rounded p-2"
           />
+          {errors.slug && <span className="text-red-500 text-sm">{errors.slug}</span>}
         </div>
 
-        {/* 🔹 Main Image */}
+        {/* Main Image */}
         <div className="flex flex-col mb-4 gap-2">
           <label className="font-medium">Main Image</label>
-
-          {/* превью картинки */}
           {service.mainImage && (
-              <img
-                  src={service.mainImage}
-                  alt="Main"
-                  className="mb-2 max-w-xs rounded-lg border border-gray-200"
-              />
+              <img src={service.mainImage} alt="Main" className="mb-2 max-w-xs rounded-lg border border-gray-200" />
           )}
-
-          {/* выбор файла */}
           <input
               type="file"
               accept="image/*"
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (!file) return;
-
                 const reader = new FileReader();
-                reader.onload = (ev) => {
-                  setService((prev) => ({
-                    ...prev,
-                    mainImage: ev.target?.result as string,
-                  }));
-                };
+                reader.onload = (ev) => setService((prev) => ({ ...prev, mainImage: ev.target?.result as string }));
                 reader.readAsDataURL(file);
               }}
               className="border rounded-lg p-2"
           />
-
-          {/* альтернатива: вставка URL или CSS background */}
           <input
               type="text"
-              placeholder="URL або CSS фон (наприклад, linear-gradient(...))"
+              placeholder="URL або CSS фон"
               value={service.mainImage || ""}
-              onChange={(e) =>
-                  setService((prev) => ({
-                    ...prev,
-                    mainImage: e.target.value,
-                  }))
-              }
+              onChange={(e) => setService((prev) => ({ ...prev, mainImage: e.target.value }))}
               className="border rounded-lg p-2"
           />
+          {errors.mainImage && <span className="text-red-500 text-sm">{errors.mainImage}</span>}
         </div>
 
+        {/* 🔹 RelationSelect */}
 
 
-        {/* 🔹 Связи */}
-        <ArrayField
-            title="Subservice IDs"
-            field="subservicesId"
-            data={service}
-            onAdd={addArrayItem}
-            onChange={handleArrayChange}
-            onRemove={removeArrayItem}
-        />
-        <ArrayField
-            title="Specials"
-            field="specials"
-            data={service}
-            onAdd={addArrayItem}
-            onChange={handleArrayChange}
-            onRemove={removeArrayItem}
-        />
 
-        {/* 🔹 Employees */}
-        <ArrayField
-            title="Employees"
-            field="employees"
-            data={service}
-            onAdd={addArrayItem}
-            onChange={handleArrayChange}
-            onRemove={removeArrayItem}
-        />
 
-        <ArrayField
-            title="Blogs"
-            field="blogs"
-            data={service}
-            onAdd={addArrayItem}
-            onChange={handleArrayChange}
-            onRemove={removeArrayItem}
-        />
-
-        Services
-
-        {/* 🔹 Content */}
         {/* Content Blocks */}
         <div className="mb-4">
           <div className="w-full flex">
@@ -475,14 +393,11 @@ export default function ServiceEditor() {
                 <button onClick={() => addContentBlock("image")} className="text-blue-600">+ Image</button>
                 <button onClick={() => addContentBlock("list")} className="text-blue-600">+ List</button>
               </div>
-
             </div>
-
 
             <div className="border border-gray-300 rounded-lg p-4 bg-white overflow-auto w-1/2">
               <h2 className="text-xl font-semibold mb-2">Preview</h2>
               <div className="space-y-4">
-
                 {service.mainImage && <img src={service.mainImage} alt="Main" className="max-w-full rounded-lg" />}
                 {["uk", "ru", "en", "de"].map(lang => (
                     <div key={lang}>
@@ -493,9 +408,7 @@ export default function ServiceEditor() {
                 ))}
               </div>
             </div>
-
           </div>
-
         </div>
 
         <button
@@ -503,48 +416,6 @@ export default function ServiceEditor() {
             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-xl"
         >
           Save
-        </button>
-      </div>
-  );
-}
-
-// 🔹 Вспомогательный компонент для массивов
-function ArrayField({
-                      title,
-                      field,
-                      data,
-                      onAdd,
-                      onChange,
-                      onRemove,
-                    }: {
-  title: string;
-  field: keyof Service;
-  data: Service;
-  onAdd: (f: keyof Service) => void;
-  onChange: (f: keyof Service, i: number, v: string) => void;
-  onRemove: (f: keyof Service, i: number) => void;
-}) {
-  return (
-      <div className="mb-4">
-        <label className="font-semibold">{title}</label>
-        {Array.isArray(data[field]) &&
-            (data[field] as string[]).map((item, idx) => (
-                <div key={idx} className="flex gap-2 mb-2">
-                  <input
-                      value={item}
-                      onChange={(e) => onChange(field, idx, e.target.value)}
-                      className="border rounded p-2 flex-1"
-                  />
-                  <button
-                      onClick={() => onRemove(field, idx)}
-                      className="px-2 py-1 bg-red-500 text-white rounded"
-                  >
-                    -
-                  </button>
-                </div>
-            ))}
-        <button onClick={() => onAdd(field)} className="text-blue-600">
-          + Add {title}
         </button>
       </div>
   );

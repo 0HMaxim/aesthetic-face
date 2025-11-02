@@ -6,7 +6,7 @@ import { Button } from "@heroui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import type { NavigationOptions } from "swiper/types";
-import type {Scpecials} from "../models/Scpecials.ts";
+import type {Special} from "../models/Special.ts";
 
 import MaterialSymbolsArrowBackIos from "~icons/material-symbols/arrow-back-ios";
 import MaterialSymbolsArrowForwardIos from "~icons/material-symbols/arrow-forward-ios";
@@ -16,7 +16,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 interface SpecialsSliderProps {
-  items?: Scpecials[];
+  items?: Special[];
 }
 
 export const SpecialsSlider: React.FC<SpecialsSliderProps> = ({ items }) => {

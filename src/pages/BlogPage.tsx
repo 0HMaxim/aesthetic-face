@@ -8,7 +8,9 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { TopImage } from "../components/TopImage.tsx";
 import { SpecialsSlider } from "../components/SpecialsSection.tsx";
 import type { Blog } from "../models/Blog.ts";
-import { services, subservices, specials } from "../data/services.ts";
+import type { Service } from "../models/Service.ts";
+import type { Subservice } from "../models/Subservice.ts";
+import type { Special } from "../models/Special.ts";
 
 export default function BlogPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -16,18 +18,36 @@ export default function BlogPage() {
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [services, setServices] = useState<Service[]>([]);
+  const [subservices, setSubservices] = useState<Subservice[]>([]);
+  const [specials, setSpecials] = useState<Special[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const blogsRef = ref(db, "blogs");
-    get(blogsRef).then((snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        const blogsArray = Object.keys(data).map((key) => ({ id: key, ...data[key] }));
-        setBlogs(blogsArray);
+    async function fetchData() {
+      try {
+        const [blogsSnap, servicesSnap, subservicesSnap, specialsSnap] = await Promise.all([
+          get(ref(db, "blogs")),
+          get(ref(db, "services")),
+          get(ref(db, "subservices")),
+          get(ref(db, "specials")),
+        ]);
+
+        if (blogsSnap.exists()) {
+          const data = blogsSnap.val();
+          setBlogs(Object.keys(data).map((key) => ({ id: key, ...data[key] })));
+        }
+        if (servicesSnap.exists()) setServices(Object.values(servicesSnap.val()));
+        if (subservicesSnap.exists()) setSubservices(Object.values(subservicesSnap.val()));
+        if (specialsSnap.exists()) setSpecials(Object.values(specialsSnap.val()));
+      } catch (err) {
+        console.error("Error loading blog data:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
-    });
+    }
+
+    fetchData();
   }, []);
 
   if (loading) {
@@ -35,7 +55,6 @@ export default function BlogPage() {
   }
 
   const blog = blogs.find((b) => b.slug === slug);
-
   if (!blog) {
     return (
         <div className="py-10 text-center text-foreground">
@@ -56,15 +75,15 @@ export default function BlogPage() {
       ?.map((id) => services.find((s) => s.id === id))
       .filter((s): s is NonNullable<typeof s> => s !== undefined)) || [];
 
-
   const relatedSubservices =
-      blog.subservicesId?.map((id) => subservices.find((s) => s.id === id)).filter(Boolean) || [];
+      blog.subservicesId
+      ?.map((id) => subservices.find((s) => s.id === id))
+      .filter((s): s is NonNullable<typeof s> => s !== undefined) || [];
 
   const relatedSpecials =
       (blog.specials
       ?.map((id) => specials.find((s) => s.id === id))
       .filter((s): s is NonNullable<typeof s> => s !== undefined)) || [];
-
 
   const otherBlogs = blogs.filter((b) => b.slug !== slug);
 
@@ -83,25 +102,24 @@ export default function BlogPage() {
             <ContentBlockRenderer content={blog.content} />
           </div>
 
-          {/* --- Блок связанных категорий и акций --- */}
           {relatedServices.length > 0 && (
               <div className="mt-16 border-t pt-10">
                 <h2 className="text-3xl lg:text-5xl font-[800] my-[1.5rem]">{t("blog.relatedServices")}</h2>
                 <div className="flex flex-wrap justify-center gap-x-[1rem] gap-y-[1rem] my-10">
                   {relatedServices.map((service) => (
                       <Link
-                          key={service!.id}
-                          to={`/${lang}/services/${service!.slug}`}
+                          key={service.id}
+                          to={`/${lang}/services/${service.slug}`}
                           className="group relative overflow-hidden max-w-[47%] w-1/2 md:w-[15rem] lg:w-[18rem] h-[9rem] md:h-[12rem] rounded-[10rem] shadow-md hover:bg-[var(--primary)] hover:shadow-xl transition duration-500 flex-shrink-0"
                       >
-                        {service!.mainImage && (
+                        {service.mainImage && (
                             <img
-                                src={service!.mainImage}
+                                src={service.mainImage}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             />
                         )}
                         <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
-                          <p className="text-[0.9rem] md:text-[1rem] font-normal">{service!.title[lang]}</p>
+                          <p className="text-[0.9rem] md:text-[1rem] font-normal">{service.title[lang]}</p>
                         </div>
                       </Link>
                   ))}
@@ -110,35 +128,29 @@ export default function BlogPage() {
           )}
 
           {relatedSubservices.length > 0 && (
-                <div className="mt-16 border-t pt-10">
-                  <h2 className="text-3xl lg:text-5xl font-[800] my-[1.5rem]">
-                    {t("blog.relatedSubservices")}
-                  </h2>
-                  <div className="flex flex-wrap justify-center gap-x-[1rem] gap-y-[1rem] my-10">
-                    {relatedSubservices
-                    .filter((sub): sub is NonNullable<typeof sub> => sub !== undefined)
-                    .map((sub) => (
-                        <Link
-                            key={sub.id}
-                            to={`/${lang}/services/${sub.slug}`}
-                            className="group relative overflow-hidden max-w-[47%] w-1/2 md:w-[15rem] lg:w-[18rem] h-[9rem] md:h-[12rem] rounded-[10rem] shadow-md hover:bg-[var(--primary)] hover:shadow-xl transition duration-500 flex-shrink-0"
-                        >
-                          {sub.mainImage && (
-                              <img
-                                  src={sub.mainImage}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                              />
-                          )}
-                          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
-                            <p className="text-[0.9rem] md:text-[1rem] font-normal">
-                              {sub.title[lang]}
-                            </p>
-                          </div>
-                        </Link>
-                    ))}
-                  </div>
+              <div className="mt-16 border-t pt-10">
+                <h2 className="text-3xl lg:text-5xl font-[800] my-[1.5rem]">{t("blog.relatedSubservices")}</h2>
+                <div className="flex flex-wrap justify-center gap-x-[1rem] gap-y-[1rem] my-10">
+                  {relatedSubservices.map((sub) => (
+                      <Link
+                          key={sub.id}
+                          to={`/${lang}/services/${sub.slug}`}
+                          className="group relative overflow-hidden max-w-[47%] w-1/2 md:w-[15rem] lg:w-[18rem] h-[9rem] md:h-[12rem] rounded-[10rem] shadow-md hover:bg-[var(--primary)] hover:shadow-xl transition duration-500 flex-shrink-0"
+                      >
+                        {sub.mainImage && (
+                            <img
+                                src={sub.mainImage}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                        )}
+                        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
+                          <p className="text-[0.9rem] md:text-[1rem] font-normal">{sub.title[lang]}</p>
+                        </div>
+                      </Link>
+                  ))}
                 </div>
-            )}
+              </div>
+          )}
 
           {relatedSpecials.length > 0 && (
               <div className="mt-16 border-t pt-10">
@@ -157,18 +169,10 @@ export default function BlogPage() {
                       className="image bg_img block w-full h-[15rem] bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                       style={{ backgroundImage: `url(${b.mainImage})` }}
                   ></span>
-                        <p className="date absolute bottom-[1rem] left-[1rem] flex gap-1 text-white bg-black/50 px-3 py-1 rounded-md">
-                          <b>03</b>
-                          <span>Січень</span>
-                          <span>2024</span>
-                        </p>
                         <div className="px-4 mt-4">
                           <p className="name fw600 text-[1.3rem] font-semibold hover:text-primary transition">{b.title[lang]}</p>
                           <p className="excerpt text-[1rem] text-gray-600 mt-2 line-clamp-3">
                             {b.content?.find((block) => block.type === "paragraph")?.content?.[lang] || "Опис відсутній"}
-                          </p>
-                          <p className="more fw600 block text-[1rem] font-semibold text-primary mt-4 mb-4 hover:underline">
-                            {t("specials.learnMore")}
                           </p>
                         </div>
                       </Link>

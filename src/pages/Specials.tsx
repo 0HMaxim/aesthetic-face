@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
-import type { Scpecials } from "../models/Scpecials.ts";
 import { specials } from "../data/services.ts";
 import { Button } from "@heroui/react";
 import { Breadcrumbs } from "../components/Breadcrumbs.tsx";
 import { TopImage } from "../components/TopImage.tsx";
+import type {Special} from "../models/Special.ts";
 
 export default function Specials() {
   const { i18n, t } = useTranslation();
@@ -30,7 +30,7 @@ export default function Specials() {
           </div>
 
           <div className="flex justify-center items-center flex-wrap gap-6">
-            {specials.map((item: Scpecials) => (
+            {specials.map((item: Special) => (
                 <Link
                     key={item.id}
                     to={`/${lang}/specials/${item.slug}`}

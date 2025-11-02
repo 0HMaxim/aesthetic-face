@@ -50,10 +50,9 @@ export default function PhotoList() {
                       onClick={() => navigate(`/admin/photos/${key}`)}
                   >
                     <div className="flex flex-col md:flex-row items-center gap-4">
-                      {photo.url ? (
+                      {photo.mainImage ? (
                           <img
-                              src={photo.url}
-                              alt={photo.title?.en || "Photo"}
+                              src={photo.mainImage}
                               className="w-32 h-32 object-cover rounded-lg"
                           />
                       ) : (
@@ -63,9 +62,13 @@ export default function PhotoList() {
                       )}
 
                       <div className="flex-1">
-                        <h2 className="font-semibold text-lg">{photo.title?.en || "No title"}</h2>
+                        <h2 className="font-semibold text-lg">
+                          {typeof photo.title?.en === "string" ? photo.title.en : "No title"}
+                        </h2>
                         <p className="text-sm text-gray-600">
-                          {photo.description || "No description"}
+                          {typeof photo.description === "string"
+                              ? photo.description
+                              : photo.description?.en || "No description"}
                         </p>
                       </div>
                     </div>

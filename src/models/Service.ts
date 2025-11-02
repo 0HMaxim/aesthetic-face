@@ -12,10 +12,11 @@ export interface Service {
 
   // 🔹 Идентификаторы и связи
   slug: string;
-  subservicesId?: string[];
+  subserviceIds?: string[];
   specials?: string[];
   employees?: string[];
   blogs?: string[];
+  prices?: string[];
 
   // 🔹 Контент
   mainImage?: string;

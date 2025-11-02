@@ -1,10 +1,8 @@
-// src/pages/admin/AdminPage.tsx
-import {Link, Outlet} from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 export default function AdminPage() {
   return (
       <div className="min-h-screen bg-gray-50 text-foreground p-8">
-
         <Link
             to="/"
             className="p-4 bg-white shadow rounded-lg hover:shadow-lg transition"
@@ -40,32 +38,35 @@ export default function AdminPage() {
               to="/admin/prices"
               className="p-4 bg-white shadow rounded-lg hover:shadow-lg transition"
           >
-            $ Ціни
+            💲 Ціни
           </Link>
-
 
           <Link
               to="/admin/services"
               className="p-4 bg-white shadow rounded-lg hover:shadow-lg transition"
           >
-            Сервіси
+            ⚙️ Сервіси
           </Link>
 
+          {/* ✅ Нове посилання на сабсервіси */}
+          <Link
+              to="/admin/subservices"
+              className="p-4 bg-white shadow rounded-lg hover:shadow-lg transition"
+          >
+            🧩 Сабсервіси
+          </Link>
 
           <Link
               to="/admin/photos"
               className="p-4 bg-white shadow rounded-lg hover:shadow-lg transition"
           >
-             Photos
+            📸 Photos
           </Link>
-
-
         </div>
 
-        <div className="">
-          <Outlet/>
+        <div className="mt-8">
+          <Outlet />
         </div>
-
       </div>
   );
 }

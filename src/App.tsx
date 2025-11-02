@@ -27,8 +27,9 @@ import EmployeeEditor from "./pages/admin/EmployeeEditor.tsx";
 import EmployeeList from "./pages/admin/EmployeeList.tsx";
 import Employees from "./pages/Employees.tsx";
 import EmployeePage from "./pages/EmployeePage.tsx";
-import PhotoList from "./components/PhotoList.tsx";
 import PhotoEditor from "./pages/admin/PhotoEditor.tsx";
+import SubserviceEditor from "./pages/admin/SubserviceEditor.tsx";
+import SubserviceList from "./pages/admin/SubserviceList.tsx";
 
 
 const App: React.FC = () => {
@@ -63,7 +64,13 @@ const App: React.FC = () => {
           <Route path="services/new" element={<ServiceEditor />} />
           <Route path="services/:id" element={<ServiceEditor />} />
 
-          <Route path="photos" element={<PhotoList />} />
+
+          <Route path="subservices" element={<SubserviceList />} />
+          <Route path="subservices/new" element={<SubserviceEditor />} />
+          <Route path="subservices/:id" element={<SubserviceEditor />} />
+
+
+          <Route path="photos" element={<Gallery />} />
           <Route path="photos/new" element={<PhotoEditor />} />
           <Route path="photos/:id" element={<PhotoEditor />} />
         </Route>
@@ -90,7 +97,12 @@ const App: React.FC = () => {
           <Route path="services/new" element={<ServiceEditor />} />
           <Route path="services/:id" element={<ServiceEditor />} />
 
-          <Route path="photos" element={<PhotoList />} />
+
+          <Route path="subservices" element={<SubserviceList />} />
+          <Route path="subservices/new" element={<SubserviceEditor />} />
+          <Route path="subservices/:id" element={<SubserviceEditor />} />
+
+          <Route path="photos" element={<Gallery />} />
           <Route path="photos/new" element={<PhotoEditor />} />
           <Route path="photos/:id" element={<PhotoEditor />} />
         </Route>

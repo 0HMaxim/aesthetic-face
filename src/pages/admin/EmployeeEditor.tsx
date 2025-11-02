@@ -166,9 +166,21 @@ export default function EmployeeEditor() {
 }
 
 // ---------- Локализованные массивы ----------
-function LocalizedArraySection({ title, field, employee, setEmployee }: any) {
+
+type LocalizedArraySectionProps = {
+  title: string;
+  field: keyof Employee;
+  employee: Employee;
+  setEmployee: (emp: Employee | ((prev: Employee) => Employee)) => void;
+};
+
+function LocalizedArraySection({ title, field, employee, setEmployee }: LocalizedArraySectionProps) {
   const languages = ["uk", "ru", "en", "de"];
-  const arr: Record<string,string>[] = Array.isArray(employee[field]) ? employee[field] : [];
+
+  // Приведение типа: если поле есть и это массив, приводим к массиву Record<string,string>
+  const arr: Record<string, string>[] = Array.isArray(employee[field])
+      ? (employee[field] as Record<string, string>[])
+      : [];
 
   const handleChange = (index: number, lang: string, value: string) => {
     const updated = [...arr];
@@ -177,17 +189,18 @@ function LocalizedArraySection({ title, field, employee, setEmployee }: any) {
   };
 
   const handleAdd = () => {
-    const newItem: Record<string,string> = {};
-    languages.forEach(lang => newItem[lang] = "");
-    setEmployee(prev => ({
-      ...prev,
-      [field]: Array.isArray(prev[field]) ? [...prev[field], newItem] : [newItem],
-    }));
+    const newItem: Record<string, string> = {};
+    languages.forEach(lang => (newItem[lang] = ""));
+    setEmployee(prev => {
+      const currentArray = Array.isArray(prev[field]) ? (prev[field] as Record<string, string>[]) : [];
+      return { ...prev, [field]: [...currentArray, newItem] };
+    });
   };
 
   const handleRemove = (index: number) => {
     setEmployee(prev => {
-      const updated = Array.isArray(prev[field]) ? [...prev[field]] : [];
+      const currentArray = Array.isArray(prev[field]) ? (prev[field] as Record<string, string>[]) : [];
+      const updated = [...currentArray];
       updated.splice(index, 1);
       return { ...prev, [field]: updated };
     });
@@ -209,13 +222,18 @@ function LocalizedArraySection({ title, field, employee, setEmployee }: any) {
                     />
                   </div>
               ))}
-              <button onClick={() => handleRemove(idx)} className="bg-red-500 text-white px-2 rounded">Удалить</button>
+              <button onClick={() => handleRemove(idx)} className="bg-red-500 text-white px-2 rounded">
+                Удалить
+              </button>
             </div>
         ))}
-        <button onClick={handleAdd} className="text-blue-600 mt-1">+ Добавить {title}</button>
+        <button onClick={handleAdd} className="text-blue-600 mt-1">
+          + Добавить {title}
+        </button>
       </div>
   );
 }
+
 
 // ---------- Certificates ----------
 function CertificatesSection({ certificates, setCertificates }: any) {
@@ -230,11 +248,13 @@ function CertificatesSection({ certificates, setCertificates }: any) {
   };
 
   const addCertificate = () => setCertificates([...certificates, ""]);
+
   const removeCertificate = (index: number) => {
     const updated = [...certificates];
     updated.splice(index, 1);
     setCertificates(updated);
   };
+
 
   return (
       <div className="flex flex-col gap-2">

@@ -1,29 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import {db} from "../firebase.ts";
-import {get, ref} from "firebase/database";
-import {specials} from "../data/services.ts";
-
-interface BreadcrumbsProps {
-  serviceId?: string;
-  subserviceId?: string;
-  employeeSlug?: string;
-  specialSlug?: string;
-  blogSlug?: string;
-}
-
-const staticTabs = [
-  { title: "header.about", link: "/about" },
-  { title: "header.specials", link: "/specials" },
-  { title: "header.services", link: "/services" },
-  { title: "header.employees", link: "/employees" },
-  { title: "header.price", link: "/price" },
-  { title: "header.faq", link: "/faq" },
-  { title: "header.gallery", link: "/gallery" },
-  { title: "header.blog", link: "/blog" },
-  { title: "header.contact", link: "/contact" },
-];
+import { db } from "../firebase.ts";
+import { get, ref } from "firebase/database";
+import type { Employee } from "../models/Employee";
+import type { Blog } from "../models/Blog";
+import { specials } from "../data/services.ts";
 
 // Функция безопасного получения строки из LocalizedText
 function getLocalizedString(value: string | string[] | undefined) {
@@ -31,49 +13,58 @@ function getLocalizedString(value: string | string[] | undefined) {
   return Array.isArray(value) ? value.join(", ") : value;
 }
 
+interface BreadcrumbsProps {
+  serviceIds?: string;
+  subserviceIds?: string;
+  employeeSlug?: string;
+  specialSlug?: string;
+  blogSlug?: string;
+}
+
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
-                                                          serviceId,
-                                                          subserviceId,
+                                                          serviceIds,
+                                                          subserviceIds,
                                                           employeeSlug,
                                                           specialSlug,
                                                           blogSlug,
                                                         }) => {
-
-
-
   const { t, i18n } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
   const location = useLocation();
 
-  const [employeeData, setEmployeeData] = useState<any>(null);
-  const [blogData, setBlogData] = useState<any>(null);
+  const [employeeData, setEmployeeData] = useState<Employee | null>(null);
+  const [blogData, setBlogData] = useState<Blog | null>(null);
+  const [serviceData, setServiceData] = useState<any>(null);
+  const [subserviceData, setSubserviceData] = useState<any>(null);
+  const [specialData, setSpecialData] = useState<any>(null);
 
+  // Загружаем данные из Firebase
   useEffect(() => {
-    // Загружаем сотрудника, если есть slug
     if (employeeSlug) {
-      const empRef = ref(db, `employees/${employeeSlug}`);
-      get(empRef).then((snapshot) => {
-        if (snapshot.exists()) setEmployeeData(snapshot.val());
-      });
+      get(ref(db, `employees/${employeeSlug}`)).then((snap) => snap.exists() && setEmployeeData(snap.val()));
     }
-
-    // Загружаем блог, если есть slug
     if (blogSlug) {
-      const blogRef = ref(db, `blogs/${blogSlug}`);
-      get(blogRef).then((snapshot) => {
-        if (snapshot.exists()) setBlogData(snapshot.val());
-      });
+      get(ref(db, `blogs/${blogSlug}`)).then((snap) => snap.exists() && setBlogData(snap.val()));
     }
-  }, [employeeSlug, blogSlug]);
+    if (serviceIds) {
+      get(ref(db, `services/${serviceIds}`)).then((snap) => snap.exists() && setServiceData(snap.val()));
+    }
+    if (subserviceIds) {
+      get(ref(db, `subservices/${subserviceIds}`)).then((snap) => snap.exists() && setSubserviceData(snap.val()));
+    }
+    if (specialSlug) {
+      const special = specials.find((s) => s.slug === specialSlug);
+      if (special) setSpecialData(special);
+    }
+  }, [employeeSlug, blogSlug, serviceIds, subserviceIds, specialSlug]);
 
   const items: { label: string; href: string }[] = [
     { label: t("header.home"), href: `/${lang}` },
   ];
 
-  // ---------------------- employees ----------------------
+  // Сотрудники
   if (location.pathname.includes("/employees")) {
     items.push({ label: t("header.employees"), href: `/${lang}/employees` });
-
     if (employeeData) {
       items.push({
         label: getLocalizedString(employeeData.fullName?.[lang]),
@@ -82,10 +73,9 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     }
   }
 
-  // ---------------------- blogs ----------------------
+  // Блоги
   else if (location.pathname.includes("/blogs")) {
     items.push({ label: t("header.blog"), href: `/${lang}/blogs` });
-
     if (blogData) {
       items.push({
         label: getLocalizedString(blogData.title?.[lang]),
@@ -94,26 +84,43 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     }
   }
 
-
-  // ---------------------- SPECIALS ----------------------
+  // Спецпредложения
   else if (location.pathname.includes("/specials")) {
     items.push({ label: t("header.specials"), href: `/${lang}/specials` });
-
-    if (specialSlug) {
-      const special = specials.find((s) => s.slug === specialSlug);
-      if (special) {
-        items.push({
-          label: getLocalizedString(special.headerTitle?.[lang]),
-          href: `/${lang}/specials/${special.slug}`,
-        });
-      }
+    if (specialData) {
+      items.push({
+        label: getLocalizedString(specialData.headerTitle?.[lang] || specialData.title?.[lang]),
+        href: `/${lang}/specials/${specialData.slug}`,
+      });
     }
   }
 
+  // Сервисы
+  else if (location.pathname.includes("/services")) {
+    items.push({ label: t("header.services"), href: `/${lang}/services` });
+    if (serviceData) {
+      items.push({
+        label: getLocalizedString(serviceData.title?.[lang]),
+        href: `/${lang}/services/${serviceData.slug}`,
+      });
+    }
+    if (subserviceData) {
+      items.push({
+        label: getLocalizedString(subserviceData.title?.[lang]),
+        href: `/${lang}/services/${subserviceData.slug}`,
+      });
+    }
+  }
 
-
-  // ---------------------- STATIC PAGES ----------------------
+  // Статические страницы
   else {
+    const staticTabs = [
+      { title: "header.about", link: "/about" },
+      { title: "header.price", link: "/price" },
+      { title: "header.faq", link: "/faq" },
+      { title: "header.gallery", link: "/gallery" },
+      { title: "header.contact", link: "/contact" },
+    ];
     const currentPath = location.pathname.replace(`/${lang}`, "");
     const matchedTab = staticTabs.find((tab) => currentPath.startsWith(tab.link));
     if (matchedTab) {
@@ -133,9 +140,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                 <li key={item.href} className="flex items-center">
                   {index > 0 && <span className="mx-2">/</span>}
                   {isCurrent ? (
-                      <span className="text-foreground font-semibold duration-500">
-                  {item.label}
-                </span>
+                      <span className="text-foreground font-semibold duration-500">{item.label}</span>
                   ) : (
                       <Link to={item.href} className="hover:text-primary duration-500">
                         {item.label}

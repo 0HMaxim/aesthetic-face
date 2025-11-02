@@ -2,7 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ref, push, set, update, get } from "firebase/database";
 import { db } from "../../firebase.ts";
-import type {PriceModel} from "../../models/Price.ts";
+import type { PriceModel } from "../../models/Price.ts";
+import type { Service } from "../../models/Service.ts";
+import type { Subservice } from "../../models/Subservice.ts";
+import type { Special } from "../../models/Special.ts";
+import RelationSelect from "../../components/RelationSelect.tsx";
+import { useFetchData } from "../../hooks/useFetchData.ts";
 
 export default function PriceEditor() {
   const { id } = useParams();
@@ -17,6 +22,13 @@ export default function PriceEditor() {
   const [price, setPrice] = useState<PriceModel>(emptyPrice);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
+  // 🔹 Загружаем все сущности через хук
+  const { data, loading } = useFetchData(["services", "subservices", "specials", "prices"]);
+  const services: Service[] = data["services"] || [];
+  const subservices: Subservice[] = data["subservices"] || [];
+  const specials: Special[] = data["specials"] || [];
+  const prices: PriceModel[] = data["prices"] || [];
+
   useEffect(() => {
     if (id) {
       get(ref(db, `prices/${id}`)).then((snapshot) => {
@@ -27,7 +39,13 @@ export default function PriceEditor() {
 
   const langs = ["uk", "ru", "en", "de"];
 
-  const handleLocalizedChange = (obj: any, setObj: any, field: keyof any, lang: string, value: string) => {
+  const handleLocalizedChange = (
+      obj: any,
+      setObj: any,
+      field: keyof any,
+      lang: string,
+      value: string
+  ) => {
     setObj({
       ...obj,
       [field]: { ...(obj[field] || {}), [lang]: value },
@@ -36,6 +54,7 @@ export default function PriceEditor() {
 
   const handleSave = async () => {
     const newErrors: { [key: string]: string } = {};
+
     if (!Object.values(price.category).some((v) => typeof v === "string" && v.trim()))
       newErrors.category = "Category required!";
 
@@ -73,15 +92,56 @@ export default function PriceEditor() {
                 <input
                     type="text"
                     value={price.category?.[lang] || ""}
-                    onChange={(e) =>
-                        handleLocalizedChange(price, setPrice, "category", lang, e.target.value)
-                    }
+                    onChange={(e) => handleLocalizedChange(price, setPrice, "category", lang, e.target.value)}
                     className="border rounded-lg p-2"
                 />
               </div>
           ))}
           {errors.category && <p className="text-red-600 col-span-2">{errors.category}</p>}
         </div>
+
+        {/* Services */}
+
+        <RelationSelect
+            label="Services"
+            multiple
+            value={price.serviceIds || []}
+            options={services.filter(ss =>
+                price.serviceIds ? (Array.isArray(price.serviceIds) ? price.serviceIds.includes(ss.serviceIds) : ss.serviceIds === price.serviceIds) : true
+            )}
+            onChange={(v) => setPrice({ ...price, serviceIds: v as string[] })}
+        />
+
+        {/* Subservices */}
+        <RelationSelect
+            label="Subservices"
+            multiple
+            value={price.subserviceIds || []}
+            options={subservices.filter(ss =>
+                price.serviceIds ? (Array.isArray(price.serviceIds) ? price.serviceIds.includes(ss.serviceId) : ss.serviceId === price.serviceIds) : true
+            )}
+            onChange={(v) => setPrice({ ...price, subserviceIds: v as string[] })}
+        />
+
+        {/* Specials */}
+        <RelationSelect
+            label="Specials"
+            multiple
+            value={price.specials || []}
+            options={specials.filter(sp => !price.serviceIds || sp.serviceId?.includes(price.serviceIds))}
+            onChange={async (v) => {
+              setPrice({ ...price, specials: v as string[] });
+
+              // Синхронизируем serviceId для выбранных specials
+              const updates: Record<string, any> = {};
+              (v as string[]).forEach(spId => {
+                updates[`specials/${spId}/serviceId`] = [price.serviceIds];
+              });
+              if (Object.keys(updates).length > 0) await update(ref(db), updates);
+            }}
+        />
+
+
 
         {/* Columns */}
         <div className="space-y-4">
@@ -126,10 +186,7 @@ export default function PriceEditor() {
                             value={section.subtitle?.[lang] || ""}
                             onChange={(e) => {
                               const newSections = [...price.sections];
-                              newSections[sIdx].subtitle = {
-                                ...newSections[sIdx].subtitle,
-                                [lang]: e.target.value,
-                              };
+                              newSections[sIdx].subtitle = { ...newSections[sIdx].subtitle, [lang]: e.target.value };
                               setPrice({ ...price, sections: newSections });
                             }}
                             className="border rounded-lg p-2"

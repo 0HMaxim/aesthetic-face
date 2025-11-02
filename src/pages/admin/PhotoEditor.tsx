@@ -72,13 +72,25 @@ export default function PhotoEditor() {
   // 🔹 Валидация
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
-    if (!Object.values(photo.title || {}).some((v) => v?.trim())) {
+
+    // Проверка title
+    if (
+        !Object.values(photo.title || {}).some((v) => {
+          if (typeof v === "string") return v.trim() !== "";
+          if (Array.isArray(v)) return v.some((s) => s.trim() !== "");
+          return false;
+        })
+    ) {
       newErrors.title = "Title хотя бы на одном языке обязателен!";
     }
+
+    // Проверка mainImage
     if (!photo.mainImage?.trim()) newErrors.mainImage = "Main image обязательна!";
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
 
   // 🔹 Сохранение
   const handleSave = async () => {

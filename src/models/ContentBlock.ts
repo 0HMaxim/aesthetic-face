@@ -11,4 +11,5 @@ export interface ContentBlock {
   children?: ContentBlock[];
   align?: "left" | "center" | "right";
   media?: string;
+  customWidth?: boolean;
 }
