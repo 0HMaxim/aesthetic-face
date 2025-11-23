@@ -11,7 +11,7 @@ import { db } from "../firebase.ts";
 import { ref, get } from "firebase/database";
 import type { LocalizedText } from "../models/LocalizedText.ts";
 import type { Photo } from "../models/Photo";
-import type {Employee} from "../models/Employee.ts";
+import type { Employee } from "../models/Employee.ts";
 
 interface Service {
   id: string;
@@ -22,6 +22,12 @@ interface Subservice {
   id: string;
   serviceId: string;
   title: LocalizedText;
+}
+
+// ⭐️ Новий інтерфейс для опцій працівників (щоб використовувати fullName)
+interface EmployeeOption {
+  id: string;
+  title: string;
 }
 
 export default function Gallery() {
@@ -38,11 +44,13 @@ export default function Gallery() {
 
   const [selectedService, setSelectedService] = useState("all");
   const [selectedSubservice, setSelectedSubservice] = useState("all");
+  // ⭐️ ЗМІНА: Додано стейт для обраного працівника
+  const [selectedEmployee, setSelectedEmployee] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
 
   const [loading, setLoading] = useState(true);
 
-  // ---------- Загрузка данных ----------
+  // ---------- Завантаження даних ----------
   useEffect(() => {
     async function fetchData() {
       try {
@@ -53,10 +61,10 @@ export default function Gallery() {
           get(ref(db, "employees")),
         ]);
 
-        if (servicesSnap.exists()) setServices(Object.values(servicesSnap.val()));
-        if (subservicesSnap.exists()) setSubservices(Object.values(subservicesSnap.val()));
-        if (photosSnap.exists()) setPhotos(Object.values(photosSnap.val()));
-        if (employeesSnap.exists()) setEmployees(Object.values(employeesSnap.val()));
+        if (servicesSnap.exists()) setServices(Object.values(servicesSnap.val()) as Service[]);
+        if (subservicesSnap.exists()) setSubservices(Object.values(subservicesSnap.val()) as Subservice[]);
+        if (photosSnap.exists()) setPhotos(Object.values(photosSnap.val()) as Photo[]);
+        if (employeesSnap.exists()) setEmployees(Object.values(employeesSnap.val()) as Employee[]);
       } catch (err) {
         console.error("Error loading gallery data:", err);
       } finally {
@@ -67,6 +75,7 @@ export default function Gallery() {
     fetchData();
   }, []);
 
+  // ⭐️ ЗМІНА: Опції для Сервісів (без змін)
   const serviceOptions = useMemo(
       () => [
         { id: "all", title: t("FAQ.allServices") },
@@ -75,6 +84,7 @@ export default function Gallery() {
       [services, lang, t]
   );
 
+  // ⭐️ ЗМІНА: Опції для Подуслуг (без змін)
   const subserviceOptions = useMemo(() => {
     if (selectedService === "all") return [{ id: "all", title: t("FAQ.allServices") }];
     const filtered = subservices.filter((ss) => ss.serviceId === selectedService);
@@ -84,22 +94,56 @@ export default function Gallery() {
     ];
   }, [subservices, selectedService, lang, t]);
 
+  // ⭐️ ЗМІНА: Опції для Працівників
+  const employeeOptions: EmployeeOption[] = useMemo(
+      () => [
+        { id: "all", title: t("gallery.allEmployees") || "Усі працівники" },
+        // Припускаємо, що fullName - це LocalizedText, а ми беремо поточну мову
+        ...employees.map((e) => ({ id: e.id, title: (e.fullName as LocalizedText)?.[lang] || e.fullName?.uk || "Unnamed Employee" })),
+      ],
+      [employees, lang, t]
+  );
+
+  // ⭐️ ЗМІНА: ОНОВЛЕНА ЛОГІКА ФІЛЬТРАЦІЇ
   const filteredPhotos = useMemo(() => {
     return photos.filter((photo) => {
-      if (selectedSubservice !== "all") return photo.subserviceId === selectedSubservice;
+      let matchesService = true;
+      let matchesSubservice = true;
+      let matchesEmployee = true; // ⭐️ Новий критерій
 
-      if (selectedService !== "all") {
-        if (photo.serviceId === selectedService) return true;
-        if (photo.subserviceId) {
-          const sub = subservices.find((s) => s.id === photo.subserviceId);
-          return sub?.serviceId === selectedService;
-        }
-        return false;
+      // Фільтрація за Працівником
+      if (selectedEmployee !== "all") {
+        matchesEmployee = photo.employeeId === selectedEmployee;
       }
-      return true;
-    });
-  }, [photos, selectedService, selectedSubservice, subservices]);
 
+      // Фільтрація за Подуслугою
+      if (selectedSubservice !== "all") {
+        matchesSubservice = photo.subserviceId === selectedSubservice;
+      }
+
+      // Фільтрація за Основною Послугою
+      if (selectedService !== "all") {
+        // Якщо фото прямо пов'язане з послугою
+        if (photo.serviceId === selectedService) {
+          matchesService = true;
+        }
+        // АБО, якщо фото пов'язане через подуслугу, яка належить до цієї послуги
+        else if (photo.subserviceId) {
+          const sub = subservices.find((s) => s.id === photo.subserviceId);
+          matchesService = sub?.serviceId === selectedService;
+        }
+        // Інакше, якщо обрано послугу, але фото не має до неї відношення
+        else {
+          matchesService = false;
+        }
+      }
+
+      // Фото повинно відповідати ВСІМ активним фільтрам
+      return matchesEmployee && matchesSubservice && matchesService;
+    });
+  }, [photos, selectedService, selectedSubservice, selectedEmployee, subservices]);
+
+  // ⭐️ ЗМІНА: Enriched Photos (без змін, просто повний код)
   const enrichedPhotos = useMemo(
       () =>
           filteredPhotos.map((photo) => ({
@@ -129,12 +173,14 @@ export default function Gallery() {
               <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">
                 <span className="text-foreground text-[1.5rem] font-[600]">{t("FAQ.direction")}</span>
 
+                {/* Селект для Послуг (без змін) */}
                 <select
                     className="border rounded-lg py-2 px-3 text-black w-full md:w-auto"
                     value={selectedService}
                     onChange={(e) => {
                       setSelectedService(e.target.value);
                       setSelectedSubservice("all");
+                      setSelectedEmployee("all"); // ⭐️ Скидаємо працівника при зміні послуги
                       setCurrentPage(1);
                     }}
                 >
@@ -145,18 +191,36 @@ export default function Gallery() {
                   ))}
                 </select>
 
-                <select
-                    className="border rounded-lg py-2 px-3 text-black w-full md:w-auto"
-                    value={selectedSubservice}
-                    onChange={(e) => {
-                      setSelectedSubservice(e.target.value);
-                      setCurrentPage(1);
-                    }}
-                    disabled={selectedService === "all"}
-                >
+                  {/* Селект для Подуслуг (без змін) */}
+                  <select
+                      className="border rounded-lg py-2 px-3 text-black w-full md:w-auto"
+                      value={selectedSubservice}
+                      onChange={(e) => {
+                        setSelectedSubservice(e.target.value);
+                        setSelectedEmployee("all"); // ⭐️ Скидаємо працівника при зміні подуслуги
+                        setCurrentPage(1);
+                      }}
+                      disabled={selectedService === "all"}
+                  >
                   {subserviceOptions.map((ss) => (
                       <option key={ss.id} value={ss.id}>
                         {ss.title}
+                      </option>
+                  ))}
+                </select>
+
+                {/* ⭐️ ЗМІНА: Селект для Працівників */}
+                <select
+                    className="border rounded-lg py-2 px-3 text-black w-full md:w-auto"
+                    value={selectedEmployee}
+                    onChange={(e) => {
+                      setSelectedEmployee(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                >
+                  {employeeOptions.map((e) => (
+                      <option key={e.id} value={e.id}>
+                        {e.title}
                       </option>
                   ))}
                 </select>

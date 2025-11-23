@@ -70,20 +70,23 @@ export default function BlogPage() {
   const subtitle = blog.subtitle?.[lang];
   const imagee = blog.mainImage;
 
+  // Строка ~75:
   const relatedServices =
-      (blog.serviceId
+      (blog.serviceIds // ⭐️ ИСПРАВЛЕНО: используем serviceIds (как в модели)
       ?.map((id) => services.find((s) => s.id === id))
-      .filter((s): s is NonNullable<typeof s> => s !== undefined)) || [];
+      .filter((s): s is NonNullable<typeof s> => s !== undefined)) || []; // ⭐️ ИСПРАВЛЕНО: добавляем || []
 
+// Строка ~80:
   const relatedSubservices =
-      blog.subservicesId
+      (blog.subserviceIds // ⭐️ ИСПРАВЛЕНО: Убедитесь, что это subserviceIds, а не subservicesId
       ?.map((id) => subservices.find((s) => s.id === id))
-      .filter((s): s is NonNullable<typeof s> => s !== undefined) || [];
+      .filter((s): s is NonNullable<typeof s> => s !== undefined)) || []; // ⭐️ ИСПРАВЛЕНО: добавляем || []
 
+// Строка ~85:
   const relatedSpecials =
       (blog.specials
       ?.map((id) => specials.find((s) => s.id === id))
-      .filter((s): s is NonNullable<typeof s> => s !== undefined)) || [];
+      .filter((s): s is NonNullable<typeof s> => s !== undefined)) || []; // ⭐️ ИСПРАВЛЕНО: добавляем || []
 
   const otherBlogs = blogs.filter((b) => b.slug !== slug);
 

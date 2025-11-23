@@ -57,6 +57,13 @@ export default function AdminPage() {
           </Link>
 
           <Link
+              to="/admin/specials"
+              className="p-4 bg-white shadow rounded-lg hover:shadow-lg transition"
+          >
+            🈹 Акції
+          </Link>
+
+          <Link
               to="/admin/photos"
               className="p-4 bg-white shadow rounded-lg hover:shadow-lg transition"
           >

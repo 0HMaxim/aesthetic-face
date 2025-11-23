@@ -14,7 +14,7 @@ import type { Blog } from "../../models/Blog.ts";
 import type { Special } from "../../models/Special.ts";
 import type {Subservice} from "../../models/Subservice.ts";
 
-export default function ServiceEditor() {
+export default function SpecialEditor() {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -363,59 +363,59 @@ export default function ServiceEditor() {
               onChange={(selected) => setService(prev => ({ ...prev, subserviceIds: selected }))}
           />
 
-            {/* 🔹 Prices (Двустороннее связывание через массив serviceIds) */}
-            <SyncedRelationSelect<PriceModel>
-                label="Prices"
-                value={service.prices || []}
-                options={relatedData.prices || []} // 👈 Исправлено: Опции с || []
-                getLabel={(o) => o.category?.uk || "Untitled Price"} // 👈 Исправлено: getLabel
-                getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
-                firebasePath="prices"
-                parentId={service.id}
-                parentFieldName="serviceIds"
-                syncType="array"
-                onChange={(selected) => setService(prev => ({ ...prev, prices: selected }))}
-            />
+          {/* 🔹 Prices (Двустороннее связывание через массив serviceIds) */}
+          <SyncedRelationSelect<PriceModel>
+              label="Prices"
+              value={service.prices || []}
+              options={relatedData.prices || []} // 👈 Исправлено: Опции с || []
+              getLabel={(o) => o.category?.uk || "Untitled Price"} // 👈 Исправлено: getLabel
+              getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
+              firebasePath="prices"
+              parentId={service.id}
+              parentFieldName="serviceIds"
+              syncType="array"
+              onChange={(selected) => setService(prev => ({ ...prev, prices: selected }))}
+          />
 
-            {/* 🔹 Employees (Одностороннее связывание, только в Service) */}
-            <SyncedRelationSelect<Employee>
-                label="Employees"
-                value={service.employees || []}
-                options={relatedData.employees || []} // 👈 Исправлено: Опции с || []
-                getLabel={(o) => o.fullName?.uk || "Unnamed Employee"} // 👈 Исправлено: getLabel
-                getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
-                firebasePath="employees"
-                parentId={service.id}
-                // parentFieldName и syncType='none' гарантируют, что обратная связь не будет обновлена
-                syncType="none"
-                onChange={(selected) => setService(prev => ({ ...prev, employees: selected }))}
-            />
+          {/* 🔹 Employees (Одностороннее связывание, только в Service) */}
+          <SyncedRelationSelect<Employee>
+              label="Employees"
+              value={service.employees || []}
+              options={relatedData.employees || []} // 👈 Исправлено: Опции с || []
+              getLabel={(o) => o.fullName?.uk || "Unnamed Employee"} // 👈 Исправлено: getLabel
+              getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
+              firebasePath="employees"
+              parentId={service.id}
+              // parentFieldName и syncType='none' гарантируют, что обратная связь не будет обновлена
+              syncType="none"
+              onChange={(selected) => setService(prev => ({ ...prev, employees: selected }))}
+          />
 
-            {/* 🔹 Blogs (Одностороннее связывание, только в Service) */}
-            <SyncedRelationSelect<Blog>
-                label="Blogs"
-                value={service.blogs || []}
-                options={relatedData.blogs || []} // 👈 Исправлено: Опции с || []
-                getLabel={(o) => o.title?.uk || "Untitled Blog"} // 👈 Исправлено: getLabel
-                getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
-                firebasePath="blogs"
-                parentId={service.id}
-                syncType="none"
-                onChange={(selected) => setService(prev => ({ ...prev, blogs: selected }))}
-            />
+          {/* 🔹 Blogs (Одностороннее связывание, только в Service) */}
+          <SyncedRelationSelect<Blog>
+              label="Blogs"
+              value={service.blogs || []}
+              options={relatedData.blogs || []} // 👈 Исправлено: Опции с || []
+              getLabel={(o) => o.title?.uk || "Untitled Blog"} // 👈 Исправлено: getLabel
+              getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
+              firebasePath="blogs"
+              parentId={service.id}
+              syncType="none"
+              onChange={(selected) => setService(prev => ({ ...prev, blogs: selected }))}
+          />
 
-            {/* 🔹 Specials (Акции/Спецпредложения) (Одностороннее связывание, только в Service) */}
-            <SyncedRelationSelect<Special>
-                label="Specials"
-                value={service.specials || []}
-                options={relatedData.specials || []} // 👈 Исправлено: Опции с || []
-                getLabel={(o) => o.title?.uk || "Untitled Special"} // 👈 Исправлено: getLabel
-                getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
-                firebasePath="specials"
-                parentId={service.id}
-                syncType="none"
-                onChange={(selected) => setService(prev => ({ ...prev, specials: selected }))}
-            />
+          {/* 🔹 Specials (Акции/Спецпредложения) (Одностороннее связывание, только в Service) */}
+          <SyncedRelationSelect<Special>
+              label="Specials"
+              value={service.specials || []}
+              options={relatedData.specials || []} // 👈 Исправлено: Опции с || []
+              getLabel={(o) => o.title?.uk || "Untitled Special"} // 👈 Исправлено: getLabel
+              getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
+              firebasePath="specials"
+              parentId={service.id}
+              syncType="none"
+              onChange={(selected) => setService(prev => ({ ...prev, specials: selected }))}
+          />
         </div>
 
         {/* Main Image */}

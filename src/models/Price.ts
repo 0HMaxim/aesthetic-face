@@ -12,8 +12,9 @@ export interface PriceSection {
 }
 
 export interface PriceModel {
-  serviceIds?: string;
-  subserviceIds?: string;
+  id?: string;
+  serviceIds?: string[];
+  subserviceIds?: string[];
   specials?: string;
   category: LocalizedText;
   columns: {

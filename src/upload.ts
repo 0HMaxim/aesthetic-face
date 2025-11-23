@@ -1,6 +1,6 @@
-// import { push, ref, set } from "firebase/database";
-// import { db } from "./firebase"; // путь к твоему файлу firebase.ts
-//
+import { push, ref, set } from "firebase/database";
+import { db } from "./firebase"; // путь к твоему файлу firebase.ts
+
 // // Здесь вставляем наш блог
 //
 // export const blogData = {
@@ -423,157 +423,77 @@
 //   }
 // ];
 //
-// export const priceData =  [
-//   // 1️⃣ Экскурсии по городу
-//   {
-//     serviceId: "cityTours",
-//     category: {
-//       uk: "Екскурсії по місту",
-//       ru: "Экскурсии по городу",
-//       en: "City Tours",
-//       de: "Stadtrundfahrten"
-//     },
-//     columns: {
-//       duration: { uk: "Тривалість", ru: "Длительность", en: "Duration", de: "Dauer" },
-//       procedure: { uk: "Програма", ru: "Программа", en: "Program", de: "Programm" },
-//       price: { uk: "Ціна", ru: "Цена", en: "Price", de: "Preis" }
-//     },
-//     sections: [
-//       {
-//         subtitle: { uk: "Історичний центр", ru: "Исторический центр", en: "Historic Center", de: "Historisches Zentrum" },
-//         items: [
-//           { duration: "2 год", procedure: { uk: "Пішохідна прогулянка", ru: "Пешая прогулка", en: "Walking tour", de: "Stadtrundgang" }, price: "$20" },
-//           { duration: "3 год", procedure: { uk: "Автобусна екскурсія", ru: "Автобусная экскурсия", en: "Bus tour", de: "Bus-Tour" }, price: "$35" },
-//           { duration: "1.5 год", procedure: { uk: "Велосипедна прогулянка", ru: "Велосипедная прогулка", en: "Bike tour", de: "Fahrradtour" }, price: "$15" }
-//         ]
-//       },
-//       {
-//         subtitle: { uk: "Музеї та галереї", ru: "Музеи и галереи", en: "Museums & Galleries", de: "Museen & Galerien" },
-//         items: [
-//           { duration: "2 год", procedure: { uk: "Відвідування музеїв", ru: "Посещение музеев", en: "Museum visit", de: "Museumsbesuch" }, price: "$25" },
-//           { duration: "2.5 год", procedure: { uk: "Мистецька галерея", ru: "Художественная галерея", en: "Art gallery tour", de: "Galeriebesuch" }, price: "$30" },
-//           { duration: "1 год", procedure: { uk: "Виставка історії", ru: "Выставка истории", en: "History exhibition", de: "Historische Ausstellung" }, price: "$12" }
-//         ]
-//       },
-//       {
-//         subtitle: { uk: "Нічні тури", ru: "Ночные туры", en: "Night Tours", de: "Nachtführungen" },
-//         items: [
-//           { duration: "2 год", procedure: { uk: "Прогулянка нічним містом", ru: "Прогулка по ночному городу", en: "Night walking tour", de: "Nachtspaziergang" }, price: "$22" },
-//           { duration: "3 год", procedure: { uk: "Автобусний нічний тур", ru: "Автобусный ночной тур", en: "Night bus tour", de: "Nachtbus-Tour" }, price: "$38" },
-//           { duration: "1 год", procedure: { uk: "Фототур", ru: "Фототур", en: "Photo tour", de: "Fototour" }, price: "$18" }
-//         ]
-//       },
-//       {
-//         subtitle: { uk: "Гастрономічні тури", ru: "Гастрономические туры", en: "Gastronomic Tours", de: "Gastronomische Touren" },
-//         items: [
-//           { duration: "2 год", procedure: { uk: "Дегустація місцевих страв", ru: "Дегустация местных блюд", en: "Local food tasting", de: "Lokale Speisenverkostung" }, price: "$40" },
-//           { duration: "3 год", procedure: { uk: "Кулінарний майстер-клас", ru: "Кулинарный мастер-класс", en: "Cooking class", de: "Kochkurs" }, price: "$55" },
-//           { duration: "1.5 год", procedure: { uk: "Ринок та кафе", ru: "Рынок и кафе", en: "Market & cafe tour", de: "Markt & Café Tour" }, price: "$28" }
-//         ]
-//       }
-//     ]
-//   },
-//
-//   // 2️⃣ Аренда люксовых автомобилей
-//   {
-//     serviceId: "luxCars",
-//     category: {
-//       uk: "Оренда люксових автомобілів",
-//       ru: "Аренда люксовых автомобилей",
-//       en: "Luxury Car Rental",
-//       de: "Luxusautovermietung"
-//     },
-//     columns: {
-//       duration: { uk: "Тривалість", ru: "Длительность", en: "Duration", de: "Dauer" },
-//       procedure: { uk: "Модель авто", ru: "Модель авто", en: "Car Model", de: "Auto Modell" },
-//       price: { uk: "Ціна", ru: "Цена", en: "Price", de: "Preis" }
-//     },
-//     sections: [
-//       {
-//         subtitle: { uk: "Короткострокова оренда", ru: "Краткосрочная аренда", en: "Short-term Rental", de: "Kurzzeitmiete" },
-//         items: [
-//           { duration: "1 день", procedure: { uk: "Mercedes S-Class", ru: "Mercedes S-Class", en: "Mercedes S-Class", de: "Mercedes S-Klasse" }, price: "$300" },
-//           { duration: "1 день", procedure: { uk: "BMW 7 Series", ru: "BMW 7 Series", en: "BMW 7 Series", de: "BMW 7er Reihe" }, price: "$280" },
-//           { duration: "1 день", procedure: { uk: "Audi A8", ru: "Audi A8", en: "Audi A8", de: "Audi A8" }, price: "$270" }
-//         ]
-//       },
-//       {
-//         subtitle: { uk: "Довгострокова оренда", ru: "Долгосрочная аренда", en: "Long-term Rental", de: "Langzeitmiete" },
-//         items: [
-//           { duration: "1 тиждень", procedure: { uk: "Mercedes S-Class", ru: "Mercedes S-Class", en: "Mercedes S-Class", de: "Mercedes S-Klasse" }, price: "$1800" },
-//           { duration: "1 тиждень", procedure: { uk: "BMW 7 Series", ru: "BMW 7 Series", en: "BMW 7 Series", de: "BMW 7er Reihe" }, price: "$1700" },
-//           { duration: "1 тиждень", procedure: { uk: "Audi A8", ru: "Audi A8", en: "Audi A8", de: "Audi A8" }, price: "$1600" }
-//         ]
-//       },
-//       {
-//         subtitle: { uk: "Міні-кари", ru: "Мини-кары", en: "Mini Cars", de: "Mini Cars" },
-//         items: [
-//           { duration: "1 день", procedure: { uk: "Mini Cooper", ru: "Mini Cooper", en: "Mini Cooper", de: "Mini Cooper" }, price: "$120" },
-//           { duration: "1 день", procedure: { uk: "Fiat 500", ru: "Fiat 500", en: "Fiat 500", de: "Fiat 500" }, price: "$100" },
-//           { duration: "1 день", procedure: { uk: "VW Beetle", ru: "VW Beetle", en: "VW Beetle", de: "VW Beetle" }, price: "$110" }
-//         ]
-//       },
-//       {
-//         subtitle: { uk: "Спеціальні пропозиції", ru: "Специальные предложения", en: "Special Offers", de: "Sonderangebote" },
-//         items: [
-//           { duration: "3 дні", procedure: { uk: "Porsche 911", ru: "Porsche 911", en: "Porsche 911", de: "Porsche 911" }, price: "$900" },
-//           { duration: "3 дні", procedure: { uk: "Lamborghini Huracan", ru: "Lamborghini Huracan", en: "Lamborghini Huracan", de: "Lamborghini Huracan" }, price: "$1500" },
-//           { duration: "3 дні", procedure: { uk: "Ferrari Roma", ru: "Ferrari Roma", en: "Ferrari Roma", de: "Ferrari Roma" }, price: "$1600" }
-//         ]
-//       }
-//     ]
-//   },
-//
-//   // 3️⃣ Аренда квартир
-//   {
-//     serviceId: "apartments",
-//     category: {
-//       uk: "Оренда квартир",
-//       ru: "Аренда квартир",
-//       en: "Apartment Rental",
-//       de: "Wohnungsvermietung"
-//     },
-//     columns: {
-//       duration: { uk: "Період", ru: "Период", en: "Period", de: "Zeitraum" },
-//       procedure: { uk: "Тип квартири", ru: "Тип квартиры", en: "Apartment type", de: "Wohnungstyp" },
-//       price: { uk: "Ціна", ru: "Цена", en: "Price", de: "Preis" }
-//     },
-//     sections: [
-//       {
-//         subtitle: { uk: "Студії", ru: "Студии", en: "Studios", de: "Studios" },
-//         items: [
-//           { duration: "1 ніч", procedure: { uk: "Маленька студія", ru: "Маленькая студия", en: "Small studio", de: "Kleines Studio" }, price: "$50" },
-//           { duration: "1 ніч", procedure: { uk: "Середня студія", ru: "Средняя студия", en: "Medium studio", de: "Mittelstudio" }, price: "$70" },
-//           { duration: "1 ніч", procedure: { uk: "Велика студія", ru: "Большая студия", en: "Large studio", de: "Großes Studio" }, price: "$90" }
-//         ]
-//       },
-//       {
-//         subtitle: { uk: "1-кімнатні квартири", ru: "1-комнатные квартиры", en: "1-Bedroom Apartments", de: "1-Zimmer Wohnungen" },
-//         items: [
-//           { duration: "1 ніч", procedure: { uk: "Стандарт", ru: "Стандарт", en: "Standard", de: "Standard" }, price: "$80" },
-//           { duration: "1 ніч", procedure: { uk: "Преміум", ru: "Премиум", en: "Premium", de: "Premium" }, price: "$120" },
-//           { duration: "1 ніч", procedure: { uk: "Люкс", ru: "Люкс", en: "Luxury", de: "Luxus" }, price: "$150" }
-//         ]
-//       },
-//       {
-//         subtitle: { uk: "2-кімнатні квартири", ru: "2-комнатные квартиры", en: "2-Bedroom Apartments", de: "2-Zimmer Wohnungen" },
-//         items: [
-//           { duration: "1 ніч", procedure: { uk: "Стандарт", ru: "Стандарт", en: "Standard", de: "Standard" }, price: "$120" },
-//           { duration: "1 ніч", procedure: { uk: "Преміум", ru: "Премиум", en: "Premium", de: "Premium" }, price: "$170" },
-//           { duration: "1 ніч", procedure: { uk: "Люкс", ru: "Люкс", en: "Luxury", de: "Luxus" }, price: "$200" }
-//         ]
-//       },
-//       {
-//         subtitle: { uk: "Пентхауси", ru: "Пентхаусы", en: "Penthouses", de: "Penthouse" },
-//         items: [
-//           { duration: "1 ніч", procedure: { uk: "Малий пентхаус", ru: "Малый пентхаус", en: "Small penthouse", de: "Kleines Penthouse" }, price: "$250" },
-//           { duration: "1 ніч", procedure: { uk: "Середній пентхаус", ru: "Средний пентхаус", en: "Medium penthouse", de: "Mittleres Penthouse" }, price: "$350" },
-//           { duration: "1 ніч", procedure: { uk: "Великий пентхаус", ru: "Большой пентхаус", en: "Large penthouse", de: "Großes Penthouse" }, price: "$450" }
-//         ]
-//       }
-//     ]
-//   }
-// ];
+export const priceData =  [
+
+{
+  serviceIds: ["luxCars"],
+  category: {
+    uk: "Оренда люксових автомобілів",
+    ru: "Аренда люксовых автомобилей",
+    en: "Luxury Car Rental",
+    de: "Luxusautovermietung"
+  },
+  columns: {
+    duration: { uk: "Тривалість", ru: "Длительность", en: "Duration", de: "Dauer" },
+    procedure: { uk: "Модель авто", ru: "Модель авто", en: "Car Model", de: "Auto Modell" },
+    price: { uk: "Ціна", ru: "Цена", en: "Price", de: "Preis" }
+  },
+  sections: [
+    {
+      subtitle: { uk: "Суперкари", ru: "Суперкары", en: "Supercars", de: "Supersportwagen" },
+      items: [
+        { duration: "1 день", procedure: { uk: "Lamborghini Aventador", ru: "Lamborghini Aventador", en: "Lamborghini Aventador", de: "Lamborghini Aventador" }, price: "$1500" },
+        { duration: "3 дні", procedure: { uk: "Lamborghini Aventador", ru: "Lamborghini Aventador", en: "Lamborghini Aventador", de: "Lamborghini Aventador" }, price: "$4200" },
+        { duration: "7 днів", procedure: { uk: "Ferrari F8 Tributo", ru: "Ferrari F8 Tributo", en: "Ferrari F8 Tributo", de: "Ferrari F8 Tributo" }, price: "$9000" },
+        { duration: "1 місяць", procedure: { uk: "Ferrari Roma", ru: "Ferrari Roma", en: "Ferrari Roma", de: "Ferrari Roma" }, price: "$12000" },
+        { duration: "1 день", procedure: { uk: "McLaren 720S", ru: "McLaren 720S", en: "McLaren 720S", de: "McLaren 720S" }, price: "$1600" },
+        { duration: "5 днів", procedure: { uk: "Porsche 911 Turbo S", ru: "Porsche 911 Turbo S", en: "Porsche 911 Turbo S", de: "Porsche 911 Turbo S" }, price: "$7000" }
+      ]
+    },
+    {
+      subtitle: { uk: "Люксові седани", ru: "Люксовые седаны", en: "Luxury Sedans", de: "Luxus-Limousinen" },
+      items: [
+        { duration: "1 день", procedure: { uk: "Mercedes S-Class", ru: "Mercedes S-Class", en: "Mercedes S-Class", de: "Mercedes S-Klasse" }, price: "$300" },
+        { duration: "3 дні", procedure: { uk: "Mercedes S-Class", ru: "Mercedes S-Class", en: "Mercedes S-Class", de: "Mercedes S-Klasse" }, price: "$850" },
+        { duration: "1 день", procedure: { uk: "BMW 7 Series", ru: "BMW 7 Series", en: "BMW 7 Series", de: "BMW 7er Reihe" }, price: "$280" },
+        { duration: "7 днів", procedure: { uk: "Audi A8", ru: "Audi A8", en: "Audi A8", de: "Audi A8" }, price: "$1600" },
+        { duration: "1 місяць", procedure: { uk: "Genesis G90", ru: "Genesis G90", en: "Genesis G90", de: "Genesis G90" }, price: "$3500" }
+      ]
+    },
+    {
+      subtitle: { uk: "Міні-кари", ru: "Мини-кары", en: "Mini Cars", de: "Mini Cars" },
+      items: [
+        { duration: "1 день", procedure: { uk: "Mini Cooper", ru: "Mini Cooper", en: "Mini Cooper", de: "Mini Cooper" }, price: "$120" },
+        { duration: "3 дні", procedure: { uk: "Fiat 500", ru: "Fiat 500", en: "Fiat 500", de: "Fiat 500" }, price: "$280" },
+        { duration: "7 днів", procedure: { uk: "VW Beetle", ru: "VW Beetle", en: "VW Beetle", de: "VW Beetle" }, price: "$600" },
+        { duration: "1 місяць", procedure: { uk: "Mini Electric", ru: "Mini Electric", en: "Mini Electric", de: "Mini Electric" }, price: "$1500" }
+      ]
+    },
+    {
+      subtitle: { uk: "Внедорожники", ru: "Внедорожники", en: "SUVs", de: "Geländewagen" },
+      items: [
+        { duration: "1 день", procedure: { uk: "Range Rover Autobiography", ru: "Range Rover Autobiography", en: "Range Rover Autobiography", de: "Range Rover Autobiography" }, price: "$500" },
+        { duration: "3 дні", procedure: { uk: "Range Rover Autobiography", ru: "Range Rover Autobiography", en: "Range Rover Autobiography", de: "Range Rover Autobiography" }, price: "$1400" },
+        { duration: "7 днів", procedure: { uk: "Bentley Bentayga", ru: "Bentley Bentayga", en: "Bentley Bentayga", de: "Bentley Bentayga" }, price: "$4000" },
+        { duration: "1 місяць", procedure: { uk: "Lexus LX 600", ru: "Lexus LX 600", en: "Lexus LX 600", de: "Lexus LX 600" }, price: "$10000" }
+      ]
+    },
+    {
+      subtitle: { uk: "Спеціальні пропозиції", ru: "Специальные предложения", en: "Special Offers", de: "Sonderangebote" },
+      items: [
+        { duration: "3 дні", procedure: { uk: "Porsche 911", ru: "Porsche 911", en: "Porsche 911", de: "Porsche 911" }, price: "$900" },
+        { duration: "3 дні", procedure: { uk: "Lamborghini Huracan", ru: "Lamborghini Huracan", en: "Lamborghini Huracan", de: "Lamborghini Huracan" }, price: "$1500" },
+        { duration: "3 дні", procedure: { uk: "Ferrari Roma", ru: "Ferrari Roma", en: "Ferrari Roma", de: "Ferrari Roma" }, price: "$1600" }
+      ]
+    }
+  ]
+}
+
+
+]
+
+
+
 //
 //
 // export const serviceData = [
@@ -682,18 +602,18 @@
 // }
 //
 //
-// export async function uploadPrices() {
-//   try {
-//     for (const price of priceData) {
-//       const newRef = push(ref(db, "prices")); // создаём уникальный ключ в "prices"
-//       await set(newRef, { ...price, id: newRef.key }); // добавляем id
-//       console.log(`✅ Price uploaded: ${price.category.en} (ID: ${newRef.key})`);
-//     }
-//     console.log("🎉 All prices uploaded successfully!");
-//   } catch (err) {
-//     console.error("❌ Error uploading prices:", err);
-//   }
-// }
+export async function uploadPrices() {
+  try {
+    for (const price of priceData) {
+      const newRef = push(ref(db, "prices")); // создаём уникальный ключ в "prices"
+      await set(newRef, { ...price, id: newRef.key }); // добавляем id
+      console.log(`✅ Price uploaded: ${price.category.en} (ID: ${newRef.key})`);
+    }
+    console.log("🎉 All prices uploaded successfully!");
+  } catch (err) {
+    console.error("❌ Error uploading prices:", err);
+  }
+}
 //
 // export async function uploadService() {
 //   try {
@@ -717,5 +637,5 @@
 // //uploadBlog
 // //uploadFaqs();
 // //uploadEmployee();
-// //uploadPrices()
+uploadPrices()
 // //uploadService();

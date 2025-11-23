@@ -4,6 +4,11 @@ import { ref, get, push, set, update } from "firebase/database";
 import { db } from "../../firebase";
 import type { LocalizedText } from "../../models/LocalizedText";
 import type {Photo} from "../../models/Photo.ts";
+import {useFetchData} from "../../hooks/useFetchData.ts";
+import {SyncedRelationSelect} from "../../components/SyncedRelationSelect.tsx";
+import type {Employee} from "../../models/Employee.ts";
+import type {Subservice} from "../../models/Subservice.ts";
+import type {Service} from "../../models/Service.ts";
 
 export default function PhotoEditor() {
   const { id } = useParams();
@@ -14,10 +19,23 @@ export default function PhotoEditor() {
     title: {},
     description: {},
     imgArr: [],
+    serviceId: "", // Ожидаем одну строку ID
+    subserviceId: "", // Ожидаем одну строку ID
+    employeeId: "", // Ожидаем одну строку ID
   };
 
   const [photo, setPhoto] = useState<Photo>(emptyPhoto);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  const { data: relatedData, loading } = useFetchData([
+    "services",
+    "subservices",
+    "employees",
+  ]);
+
+  const services = relatedData.services || [];
+  const subservices = relatedData.subservices || [];
+  const employees = relatedData.employees || [];
 
   // 🔹 Загрузка фото
   useEffect(() => {
@@ -105,6 +123,9 @@ export default function PhotoEditor() {
     navigate("/admin/photos");
   };
 
+
+  if (loading) return <p className="text-center py-10">Загрузка данных...</p>;
+
   return (
       <div className="p-6 max-w-6xl mx-auto">
         <h1 className="text-2xl font-semibold mb-4">
@@ -125,6 +146,54 @@ export default function PhotoEditor() {
             value={photo.description || {}}
             onChange={(lang, val) => handleLocalizedChange("description", lang, val)}
         />
+
+
+        <div className="mt-6 space-y-6 border-t pt-6">
+          <h2 className="text-xl font-semibold">Связанные объекты</h2>
+
+          {/* 🔹 Service (Услуга) - Одноэлементная связь */}
+          <SyncedRelationSelect<Service>
+              label="Услуга"
+              value={photo.serviceId ? [photo.serviceId] : []} // Оборачиваем строку в массив для RelationSelect
+              options={services}
+              getLabel={(o) => o.title?.uk || "Untitled Service"}
+              getValue={(o) => o.id || ""}
+              firebasePath="services"
+              parentId={id}
+              parentFieldName="photos" // Поле в Service, которое хранит массив ID фото
+              syncType="array" // Обновляем массив 'photos' в Service
+              onChange={(v) => setPhoto(prev => ({ ...prev, serviceId: v[0] || "" }))} // Сохраняем обратно как строку
+          />
+
+          {/* 🔹 Subservice (Подуслуга) - Одноэлементная связь */}
+          <SyncedRelationSelect<Subservice>
+              label="Подуслуга"
+              value={photo.subserviceId ? [photo.subserviceId] : []}
+              options={subservices}
+              getLabel={(o) => o.title?.uk || "Untitled Subservice"}
+              getValue={(o) => o.id || ""}
+              firebasePath="subservices"
+              parentId={id}
+              parentFieldName="photos" // Поле в Subservice, которое хранит массив ID фото
+              syncType="array"
+              onChange={(v) => setPhoto(prev => ({ ...prev, subserviceId: v[0] || "" }))}
+          />
+
+          {/* 🔹 Employee (Работник) - Одноэлементная связь */}
+          <SyncedRelationSelect<Employee>
+              label="Работник"
+              value={photo.employeeId ? [photo.employeeId] : []}
+              options={employees}
+              getLabel={(o) => o.fullName?.uk || "Unnamed Employee"}
+              getValue={(o) => o.id || ""}
+              firebasePath="employees"
+              parentId={id}
+              parentFieldName="photos" // Поле в Employee, которое хранит массив ID фото
+              syncType="array"
+              onChange={(v) => setPhoto(prev => ({ ...prev, employeeId: v[0] || "" }))}
+          />
+        </div>
+
 
         {/* 🔹 Main Image */}
         <div className="flex flex-col mb-6 gap-2">

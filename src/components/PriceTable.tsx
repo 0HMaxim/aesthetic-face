@@ -8,42 +8,45 @@ import type { PriceModel } from "../models/Price";
 type Props = {
   serviceId?: string;
   subserviceId?: string;
+  items?: PriceModel[]; // ✅ можно передавать цены извне
 };
 
-const PriceTable: React.FC<Props> = ({ serviceId, subserviceId }) => {
+const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, items }) => {
   const { i18n } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
-  const [prices, setPrices] = useState<PriceModel[]>([]);
+  const [prices, setPrices] = useState<PriceModel[]>(items || []);
+  const [loading, setLoading] = useState(!items); // если items переданы — не грузим Firebase
   const [openSections, setOpenSections] = useState<boolean[]>([]);
   const [activeItems, setActiveItems] = useState<{ [key: string]: boolean }>({});
-  const [loading, setLoading] = useState(true);
 
-  // 🔹 Загружаем данные из Firebase
+  // ✅ Загружаем цены из Firebase только если items НЕ пришли извне
   useEffect(() => {
+    if (items) {
+      setPrices(items);
+      setOpenSections(items.map((_, i) => i === 0));
+      setLoading(false);
+      return;
+    }
+
     const priceRef = ref(db, "prices");
     const unsubscribe = onValue(priceRef, (snapshot) => {
       const data = snapshot.val();
+      const loadedPrices = data ? Object.values(data) : [];
 
-      if (data) {
-        const loadedPrices: PriceModel[] = Object.values(data);
-        setPrices(loadedPrices);
-        setOpenSections(loadedPrices.map((_, i) => i === 0));
-      } else {
-        setPrices([]);
-      }
-
+      setPrices(loadedPrices);
+      setOpenSections(loadedPrices.map((_, i) => i === 0));
       setLoading(false);
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [items]);
 
-  // 🔹 Фильтрация по serviceId / subserviceId
+  // ✅ Фильтрация (как у тебя было)
   const filteredPrices = prices.filter((price) => {
     if (subserviceId) return price.subserviceId === subserviceId;
     if (serviceId) return price.serviceId === serviceId;
-    return true;
+    return true; // ✅ если пропов нет → выводим всё
   });
 
   const toggleSection = (index: number) => {
@@ -58,6 +61,7 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId }) => {
   };
 
   if (loading) return <p className="text-center py-8">Loading...</p>;
+
   if (filteredPrices.length === 0)
     return <p className="text-center py-8">No prices found.</p>;
 
@@ -120,6 +124,7 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId }) => {
                             {section.subtitle?.[lang]}
                           </td>
                         </tr>
+
                         {section.items.map((item, iIndex) => {
                           const key = `${idx}-${sIndex}-${iIndex}`;
                           const active = activeItems[key] || false;
@@ -140,9 +145,7 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId }) => {
                                 <td className="px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-l border-muted flex flex-col md:flex-row items-start md:items-center justify-between">
                                   <span className="text-nowrap">{item.price}</span>
                                   <button
-                                      onClick={() =>
-                                          toggleItem(idx, sIndex, iIndex)
-                                      }
+                                      onClick={() => toggleItem(idx, sIndex, iIndex)}
                                       className="mt-1 md:mt-0 md:ml-2"
                                   >
                                     <SolarPowerBold className="size-[1rem] md:size-[1.5rem]" />

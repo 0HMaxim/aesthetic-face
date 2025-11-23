@@ -1,129 +1,78 @@
-import { ref, update } from "firebase/database";
-import type {Service} from "../models/Service.ts";
-import type {Subservice} from "../models/Subservice.ts";
-import type {Special} from "../models/Special.ts";
-import type {Employee} from "../models/Employee.ts";
-import type {Blog} from "../models/Blog.ts";
-import type {PriceModel} from "../models/Price.ts";
-import {SyncedRelationSelect} from "./SyncedRelationSelect.tsx";
-import {db} from "../firebase.ts";
+import React from "react";
 
-interface Props {
-  service: Service;
-  setService: (s: Service) => void;
-  subservices: Subservice[];
-  specials: Special[];
-  employees: Employee[];
-  blogs: Blog[];
-  prices: PriceModel[];
+interface RelationSelectProps<T> {
+  label: string;
+  value: string[];                     // выбранные ID
+  options: T[];                        // список элементов
+  getLabel?: (o: T) => string;         // текст отображения
+  getValue?: (o: T) => string;         // ID элемента
+  onChange: (v: string[]) => void;     // локальное обновление
+  onSyncChange?: (v: string[]) => void; // синхронизация с Firebase
+  multiple?: boolean;                  // множественный выбор
 }
 
-export default function ServiceRelations({
-                                           service,
-                                           setService,
-                                           subservices,
-                                           specials,
-                                           employees,
-                                           blogs,
-                                           prices,
-                                         }: Props) {
+export default function RelationSelect<T>({
+                                            label,
+                                            value,
+                                            options,
+                                            getLabel = (o) => String(o),
+                                            getValue = (o) => String(o),
+                                            onChange,
+                                            onSyncChange,
+                                            multiple = true,
+                                          }: RelationSelectProps<T>) {
+
+  const handleCheckboxChange = (checkedId: string) => {
+    let newSelected: string[];
+
+    if (multiple) {
+      // ✅ многократный выбор
+      if (value.includes(checkedId)) {
+        newSelected = value.filter((id) => id !== checkedId);
+      } else {
+        newSelected = [...value, checkedId];
+      }
+    } else {
+      // ✅ одиночный выбор — заменяем массив
+      newSelected = [checkedId];
+    }
+
+    if (onSyncChange) {
+      onSyncChange(newSelected);  // Firebase + локальный стейт
+    } else {
+      onChange(newSelected);      // только локально
+    }
+  };
+
+  const selectedValue = value || [];
+
   return (
-      <div className="space-y-4">
+      <div className="flex flex-col gap-2 my-2">
+        <label className="font-medium mb-1">{label}</label>
 
-        {/* 🔹 Subservices */}
-        <SyncedRelationSelect
-            label="Subservices"
-            multiple
-            value={service.subserviceIds || []}
-            options={subservices}
-            getLabel={(o) => o.title?.uk || "Untitled"}
-            getValue={(o) => o.id || ""}
-            onChange={(v) => setService({ ...service, subserviceIds: v as string[] })}
-            onSyncChange={async (selectedIds) => {
-              const prevIds = service.subserviceIds || [];
-              const added = selectedIds.filter((id) => !prevIds.includes(id));
-              const removed = prevIds.filter((id) => !selectedIds.includes(id));
-              const updates: Record<string, any> = {};
-              added.forEach((id) => updates[`subservices/${id}/serviceId`] = service.id || "");
-              removed.forEach((id) => updates[`subservices/${id}/serviceId`] = null);
-              if (Object.keys(updates).length) await update(ref(db), updates);
-            }}
-        />
+        <div className="flex flex-col gap-1 border rounded-lg p-3 bg-white dark:bg-gray-800">
+          {options.map((opt) => {
+            const id = getValue(opt);
+            const labelText = getLabel(opt);
+            const checked = selectedValue.includes(id); // Используем selectedValue
 
-        {/* 🔹 Specials */}
-        <SyncedRelationSelect
-            label="Specials"
-            multiple
-            value={service.specials || []}
-            options={specials}
-            getLabel={(o) => o.title?.uk || "Untitled"}
-            getValue={(o) => o.id || ""}
-            onChange={(v) => setService({ ...service, specials: v as string[] })}
-            onSyncChange={async (selectedIds) => {
-              const prevIds = service.specials || [];
-              const added = selectedIds.filter((id) => !prevIds.includes(id));
-              const removed = prevIds.filter((id) => !selectedIds.includes(id));
-              const updates: Record<string, any> = {};
-              added.forEach((id) => updates[`specials/${id}/serviceId`] = service.id || "");
-              removed.forEach((id) => updates[`specials/${id}/serviceId`] = null);
-              if (Object.keys(updates).length) await update(ref(db), updates);
-            }}
-        />
+            return (
+                <label key={id} className="flex items-center gap-2 cursor-pointer">
+                  <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={() => handleCheckboxChange(id)}
+                      className="w-4 h-4"
+                  />
+                  <span>{labelText}</span>
+                </label>
+            );
+          })}
 
-        {/* 🔹 Employees */}
-        <SyncedRelationSelect
-            label="Employees"
-            multiple
-            value={service.employees || []}
-            options={employees}
-            getLabel={(o) => o.name || "Unnamed"}
-            getValue={(o) => o.id || ""}
-            onChange={(v) => setService({ ...service, employees: v as string[] })}
-            onSyncChange={async (selectedIds) => {
-              // можно добавить логику синхронизации сотрудников с сервисом
-            }}
-        />
-
-        {/* 🔹 Blogs */}
-        <SyncedRelationSelect
-            label="Blogs"
-            multiple
-            value={service.blogs || []}
-            options={blogs}
-            getLabel={(o) => o.title?.uk || "Untitled"}
-            getValue={(o) => o.id || ""}
-            onChange={(v) => setService({ ...service, blogs: v as string[] })}
-            onSyncChange={async (selectedIds) => {
-              const prevIds = service.blogs || [];
-              const added = selectedIds.filter((id) => !prevIds.includes(id));
-              const removed = prevIds.filter((id) => !selectedIds.includes(id));
-              const updates: Record<string, any> = {};
-              added.forEach((id) => updates[`blogs/${id}/serviceId`] = service.id || "");
-              removed.forEach((id) => updates[`blogs/${id}/serviceId`] = null);
-              if (Object.keys(updates).length) await update(ref(db), updates);
-            }}
-        />
-
-        {/* 🔹 Prices */}
-        <SyncedRelationSelect
-            label="Prices"
-            multiple
-            value={service.prices || []}
-            options={prices}
-            getLabel={(o) => o.category?.uk || "Untitled"}
-            getValue={(o) => o.serviceId || ""}
-            onChange={(v) => setService({ ...service, prices: v as string[] })}
-            onSyncChange={async (selectedIds) => {
-              const prevIds = service.prices || [];
-              const added = selectedIds.filter((id) => !prevIds.includes(id));
-              const removed = prevIds.filter((id) => !selectedIds.includes(id));
-              const updates: Record<string, any> = {};
-              added.forEach((id) => updates[`prices/${id}/serviceId`] = service.id || "");
-              removed.forEach((id) => updates[`prices/${id}/serviceId`] = null);
-              if (Object.keys(updates).length) await update(ref(db), updates);
-            }}
-        />
-
+          {options.length === 0 && (
+              <p className="text-gray-400 text-sm italic">No items available</p>
+          )}
+        </div>
       </div>
   );
 }

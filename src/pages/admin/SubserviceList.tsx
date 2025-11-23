@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ref, onValue } from "firebase/database";
 import { db } from "../../firebase";
 import type { Subservice } from "../../models/Subservice";
+import SolarPowerBold from "~icons/solar/power-bold";
 
 export default function SubServiceList() {
   const [subServices, setSubServices] = useState<Record<string, Subservice>>({});
@@ -25,8 +26,9 @@ export default function SubServiceList() {
 
           <button
               onClick={() => navigate("/admin/subservices/new")}
-              className="flex items-center gap-2 rounded-xl bg-green-600 hover:bg-green-700 text-white px-4 py-2 transition"
+              className="flex items-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 transition"
           >
+            <SolarPowerBold className="size-[1rem] md:size-[1.5rem]" />
             <span>New SubService</span>
           </button>
         </div>

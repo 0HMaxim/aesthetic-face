@@ -11,4 +11,6 @@ export interface Subservice {
   content?: ContentBlock[];
   prices?: string[];
   employees?: string[];
+
+  blogs?: string[];
 }

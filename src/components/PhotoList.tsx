@@ -128,6 +128,20 @@ export default function PhotoList({ photos, currentPage, setCurrentPage, itemsPe
                         </Link>
                       </p>
                   )}
+
+                  {photo.employee && (
+                      <p>
+                        {t("gallery.employee") || "Працівник"}:{" "}
+                        <Link
+                            to={`../employees/${photo.employee.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:underline"
+                        >
+                        <span className="md:text-[1.2rem] text-[1rem]"> {photo.employee.fullName[lang] }</span>
+                        </Link>
+                      </p>
+                  )}
                 </div>
               </div>
             </div>

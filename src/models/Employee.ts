@@ -8,7 +8,7 @@ export interface Employee {
   position: LocalizedText;
   specializations: LocalizedText[];
   education: LocalizedText[];
-  certificates: string []; // ✅ исправлено
+  certificates: string [];
   photo?: string;
   slug: string;
 }

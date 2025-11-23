@@ -8,6 +8,10 @@ import type { LocalizedText } from "../../models/LocalizedText.ts";
 import ImageInputBlock from "../../components/ImageInputBlock.tsx";
 import { useFetchData } from "../../hooks/useFetchData.ts";
 import RelationSelect from "../../components/RelationSelect.tsx";
+import {SyncedRelationSelect} from "../../components/SyncedRelationSelect.tsx";
+import type {Service} from "../../models/Service.ts";
+import type {Subservice} from "../../models/Subservice.ts";
+import type {Special} from "../../models/Special.ts";
 
 export default function BlogEditor() {
   const { id } = useParams();
@@ -20,7 +24,7 @@ export default function BlogEditor() {
     slug: "",
     content: [],
     mainImage: "",
-    serviceIds: "",
+    serviceIds: [],
     subserviceIds: [],
     specials: [],
   };
@@ -283,27 +287,51 @@ export default function BlogEditor() {
         </div>
 
         {/* RelationSelect вместо массивов */}
-        <RelationSelect
-            label="Service"
-            value={blog.serviceIds}
-            options={services}
-            onChange={(v) => setBlog({ ...blog, serviceIds: v as string })}
-        />
+        <div className="mt-6 space-y-4">
+          {/* 🔹 Services (Предполагаем, что это связь "многие ко многим" и serviceIds - это массив) */}
+          <SyncedRelationSelect<Service>
+              label="Services"
+              value={blog.serviceIds || []} // ⭐️ ИСПРАВЛЕНИЕ: Безопасное значение по умолчанию
+              options={services || []} // ⭐️ ИСПРАВЛЕНИЕ: Безопасное значение по умолчанию
+              getLabel={(o) => o.title?.uk || "Untitled Service"}
+              getValue={(o) => o.id || ""}
+              firebasePath="services"
+              parentId={blog.id}
+              parentFieldName="blogs" // Blogs связан через массив 'blogs' в Service
+              syncType="none" // Одностороннее связывание (Service не хранит blogIds)
+              onChange={(v) => setBlog({ ...blog, serviceIds: v as string[] })}
+          />
 
-        <RelationSelect
-            label="Subservices"
-            multiple
-            value={blog.subserviceIds}
-            options={subservices}
-            onChange={(v) => setBlog({ ...blog, subserviceIds: v as string[] })}
-        />
-        <RelationSelect
-            label="Specials"
-            multiple
-            value={blog.specials}
-            options={specials}
-            onChange={(v) => setBlog({ ...blog, specials: v as string[] })}
-        />
+          {/* 🔹 Subservices */}
+          <SyncedRelationSelect<Subservice>
+              label="Subservices"
+              multiple
+              value={blog.subserviceIds || []} // ⭐️ ИСПРАВЛЕНИЕ: Безопасное значение по умолчанию
+              options={subservices || []} // ⭐️ ИСПРАВЛЕНИЕ: Безопасное значение по умолчанию
+              getLabel={(o) => o.title?.uk || "Untitled Subservice"}
+              getValue={(o) => o.id || ""}
+              firebasePath="subservices"
+              parentId={blog.id}
+              parentFieldName="blogs" // Blogs связан через массив 'blogs' в Subservice
+              syncType="none" // Одностороннее связывание (Subservice не хранит blogIds)
+              onChange={(v) => setBlog({ ...blog, subserviceIds: v as string[] })}
+          />
+
+          {/* 🔹 Specials */}
+          <SyncedRelationSelect<Special>
+              label="Specials"
+              multiple
+              value={blog.specials || []} // ⭐️ ИСПРАВЛЕНИЕ: Безопасное значение по умолчанию
+              options={specials || []} // ⭐️ ИСПРАВЛЕНИЕ: Безопасное значение по умолчанию
+              getLabel={(o) => o.title?.uk || "Untitled Special"}
+              getValue={(o) => o.id || ""}
+              firebasePath="specials"
+              parentId={blog.id}
+              parentFieldName="blogs" // Blogs связан через массив 'blogs' в Special
+              syncType="none" // Одностороннее связывание (Special не хранит blogIds)
+              onChange={(v) => setBlog({ ...blog, specials: v as string[] })}
+          />
+        </div>
 
         {/* Контент-блоки */}
         <div className="mb-4 flex gap-4">

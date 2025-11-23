@@ -106,22 +106,28 @@ export default function PriceEditor() {
             label="Services"
             multiple
             value={price.serviceIds || []}
-            options={services.filter(ss =>
-                price.serviceIds ? (Array.isArray(price.serviceIds) ? price.serviceIds.includes(ss.serviceIds) : ss.serviceIds === price.serviceIds) : true
-            )}
+            options={services}
+            getLabel={(o) => o.title?.uk || "Unnamed"} // 👈 показываем нормальный текст
+            getValue={(o) => o.id} // 👈 возвращаем ID, чтобы value сравнивался корректно
             onChange={(v) => setPrice({ ...price, serviceIds: v as string[] })}
         />
 
-        {/* Subservices */}
         <RelationSelect
             label="Subservices"
             multiple
             value={price.subserviceIds || []}
             options={subservices.filter(ss =>
-                price.serviceIds ? (Array.isArray(price.serviceIds) ? price.serviceIds.includes(ss.serviceId) : ss.serviceId === price.serviceIds) : true
+                price.serviceIds
+                    ? (Array.isArray(price.serviceIds)
+                        ? price.serviceIds.includes(ss.serviceId)
+                        : ss.serviceId === price.serviceIds)
+                    : true
             )}
+            getLabel={(o) => o.title?.uk || "Unnamed"} // 👈 аналогично
+            getValue={(o) => o.id}
             onChange={(v) => setPrice({ ...price, subserviceIds: v as string[] })}
         />
+
 
         {/* Specials */}
         <RelationSelect
