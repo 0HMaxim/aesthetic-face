@@ -11,8 +11,7 @@ import { SyncedRelationSelect } from "../../components/SyncedRelationSelect.tsx"
 import type { PriceModel } from "../../models/Price.ts";
 import type { Employee } from "../../models/Employee.ts";
 import type { Blog } from "../../models/Blog.ts";
-import type { Special } from "../../models/Special.ts";
-import type {Subservice} from "../../models/Subservice.ts";
+import type {Special} from "../../models/Special.ts";
 
 export default function ServiceEditor() {
   const { id } = useParams();
@@ -26,7 +25,7 @@ export default function ServiceEditor() {
     mainImage: "",
     content: [],
     employees: [],
-    subserviceIds: [],
+    subservices: [],
     specials: [],
     prices: [],
     blogs: [],
@@ -36,12 +35,21 @@ export default function ServiceEditor() {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const { data: relatedData, loading } = useFetchData([
+    "services",
     "prices",
     "blogs",
     "employees",
-    "subservices",
     "specials",
   ]);
+
+
+  const allServices = (relatedData.services || []) as Service[];
+
+  const availableSubservices = (allServices || []).filter(s => {
+    if (s.id === id) return false;
+
+    return true;
+  });
 
   // 🔹 Загрузка сервиса
   useEffect(() => {
@@ -56,19 +64,32 @@ export default function ServiceEditor() {
               : {};
 
           const selectedPriceIds = Object.entries(allPrices)
-          .filter(([_, price]) => price.serviceIds?.includes(id))
+          .filter(([_, price]) => price.serviceIds?.includes(id!))
           .map(([priceId]) => priceId);
+
+          const allServicesSnapshot = await get(ref(db, "services"));
+          const allServicesFromDB: Record<string, Service> = allServicesSnapshot.exists()
+              ? allServicesSnapshot.val()
+              : {};
+
+          const selectedSubserviceIds = Object.entries(allServicesFromDB)
+          .filter(([_, serviceItem]) => {
+            const parentIds = serviceItem.parentServiceIds;
+            return Array.isArray(parentIds) && parentIds.includes(id!);
+          })
+          .map(([serviceId]) => serviceId);
 
           setService({
             ...data,
+            id: id,
             prices: selectedPriceIds,
+            subservices: selectedSubserviceIds,
           });
         }
       });
     }
   }, [id]);
 
-  // 🔹 Локализованные поля
   const handleLocalizedChange = (field: keyof Service, lang: string, value: string) => {
     setService((prev) => ({
       ...prev,
@@ -77,7 +98,7 @@ export default function ServiceEditor() {
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-  // 🔹 Контент-блоки
+
   const addContentBlock = (
       type: "paragraph" | "image" | "heading" | "list",
       parentIndex?: number
@@ -250,7 +271,7 @@ export default function ServiceEditor() {
                 ))
             )}
 
-            {/* Дочерние блоки */}
+
             {block.children && block.children.length > 0 && (
                 <div className="ml-6 mt-3 border-l-2 border-gray-200 pl-3">
                   {block.children.map((child, i) => renderBlockEditor(child, i, index))}
@@ -270,7 +291,7 @@ export default function ServiceEditor() {
     );
   };
 
-  // 🔹 Валидация
+
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
     if (!Object.values(service.title || {}).some((v) => typeof v === "string" && v.trim())) newErrors.title = "Title хотя бы на одном языке обязателен!";
@@ -280,43 +301,81 @@ export default function ServiceEditor() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // 🔹 Сохранение
-  // ServiceEditor.tsx
 
   const handleSave = async () => {
     if (!validate()) return;
 
     let serviceId = id;
-    const serviceDataToSave = { ...service }; // Используем копию
+    const serviceDataToSave: Partial<Service> = { ...service };
+
+    const newSubserviceIds = service.subservices || [];
+
+    const oldSubserviceIds: string[] = [];
+    const PARENT_FIELD = "parentServiceIds";
+
+    if (id) {
+      const servicesSnapshot = await get(ref(db, "services"));
+      const allServicesFromDB: Record<string, Service> = servicesSnapshot.val() || {};
+
+      Object.entries(allServicesFromDB).forEach(([key, serviceItem]) => {
+        const parentIds = (serviceItem as any)[PARENT_FIELD];
+        if (Array.isArray(parentIds) && parentIds.includes(id)) {
+          oldSubserviceIds.push(key);
+        }
+      });
+    }
+
+    delete serviceDataToSave.subservices;
 
     if (!id) {
-      // 1. Создание нового объекта
       const newRef = push(ref(db, "services"));
       serviceId = newRef.key!;
-
-      // Включаем новый ID в объект
       serviceDataToSave.id = serviceId;
-
-      // Используем set для создания нового объекта
       await set(ref(db, `services/${serviceId}`), serviceDataToSave);
-
-      setService(prev => ({ ...prev, id: serviceId })); // Обновляем локальный стейт с новым ID
+      setService(prev => ({ ...prev, id: serviceId }));
 
     } else {
-      // 2. Обновление существующего объекта
-      // Используем update для частичного или полного обновления существующего объекта
       await update(ref(db, `services/${serviceId}`), serviceDataToSave);
     }
 
-    // 3. Навигация
+    const allIdsToUpdate = new Set([...oldSubserviceIds, ...newSubserviceIds]);
+
+    await Promise.all(
+        Array.from(allIdsToUpdate).map(async (subserviceId) => {
+          const isLinking = newSubserviceIds.includes(subserviceId);
+          const subRef = ref(db, `services/${subserviceId}`);
+          const subSnapshot = await get(subRef);
+          const subData = subSnapshot.val() || {};
+
+          let currentParents: string[] = Array.isArray(subData[PARENT_FIELD])
+              ? subData[PARENT_FIELD].filter(Boolean)
+              : [];
+
+          let updatedParents;
+
+          if (isLinking) {
+            updatedParents = Array.from(new Set([...currentParents, serviceId!])).filter(Boolean);
+          } else {
+            updatedParents = currentParents.filter((parentId: string) => parentId !== serviceId);
+          }
+
+          await update(subRef, {
+            [PARENT_FIELD]: updatedParents.length > 0 ? updatedParents : null
+          });
+        })
+    );
+
     navigate("/admin/services");
   };
+
+
+  if (loading) return <p className="text-center py-10">Loading . . .</p>;
+
 
   return (
       <div className="p-6 max-w-6xl mx-auto">
         <h1 className="text-2xl font-semibold mb-4">{id ? "Edit Service" : "Create New Service"}</h1>
 
-        {/* Title / Subtitle / HeaderTitle */}
         {(["title", "subtitle", "headerTitle"] as (keyof Service)[]).map(field => (
             <div key={field} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               {["uk", "ru", "en", "de"].map(lang => (
@@ -349,73 +408,75 @@ export default function ServiceEditor() {
         {/* 🔹 Prices, Employees, Blogs, Specials */}
         <div className="mt-6 space-y-4">
 
-          {/* 🔹 Subservices (Двустороннее связывание через строковое поле serviceId) */}
-          <SyncedRelationSelect<Subservice>
+          <SyncedRelationSelect<Service>
               label="Subservices"
-              value={service.subserviceIds || []}
-              options={relatedData.subservices || []}
-              getLabel={(o) => o.title?.uk || "Untitled Subservice"}
+              multiple
+              value={service.subservices || []}
+              options={availableSubservices}
+              getLabel={(o) => String(o.title?.uk) || "Untitled Service"}
               getValue={(o) => o.id || ""}
-              firebasePath="subservices"
+              onChange={(v) =>
+                  setService({ ...service, subservices: v })
+              }
+              firebasePath="services"
               parentId={service.id}
-              parentFieldName="serviceId" // Поле в Subservice, куда пишется ID услуги
-              syncType="string" // Обновляем как строку
-              onChange={(selected) => setService(prev => ({ ...prev, subserviceIds: selected }))}
+              parentFieldName="parentServiceIds"
+              syncType="array"
           />
 
-            {/* 🔹 Prices (Двустороннее связывание через массив serviceIds) */}
-            <SyncedRelationSelect<PriceModel>
-                label="Prices"
-                value={service.prices || []}
-                options={relatedData.prices || []} // 👈 Исправлено: Опции с || []
-                getLabel={(o) => o.category?.uk || "Untitled Price"} // 👈 Исправлено: getLabel
-                getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
-                firebasePath="prices"
-                parentId={service.id}
-                parentFieldName="serviceIds"
-                syncType="array"
-                onChange={(selected) => setService(prev => ({ ...prev, prices: selected }))}
-            />
+          <SyncedRelationSelect<PriceModel>
+              label="Prices"
+              multiple
+              value={service.prices || []}
+              options={relatedData.prices as PriceModel[] || []}
+              getLabel={(o) => String(o.category?.uk) || "Untitled Price"}
+              getValue={(o) => o.id || ""} // ID PriceModel
+              onChange={(selected) => setService(prev => ({ ...prev, prices: selected }))}
+              firebasePath="prices"
+              parentId={service.id}
+              parentFieldName="serviceIds"
+              syncType="array"
+          />
 
-            {/* 🔹 Employees (Одностороннее связывание, только в Service) */}
-            <SyncedRelationSelect<Employee>
-                label="Employees"
-                value={service.employees || []}
-                options={relatedData.employees || []} // 👈 Исправлено: Опции с || []
-                getLabel={(o) => o.fullName?.uk || "Unnamed Employee"} // 👈 Исправлено: getLabel
-                getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
-                firebasePath="employees"
-                parentId={service.id}
-                // parentFieldName и syncType='none' гарантируют, что обратная связь не будет обновлена
-                syncType="none"
-                onChange={(selected) => setService(prev => ({ ...prev, employees: selected }))}
-            />
+          <SyncedRelationSelect<Employee>
+              label="Employees"
+              multiple
+              value={service.employees || []}
+              options={relatedData.employees as Employee[] || []}
+              getLabel={(o) => String(o.fullName?.uk) || "Unnamed Employee"}
+              getValue={(o) => o.id || ""}
+              onChange={(selected) => setService(prev => ({ ...prev, employees: selected }))}
+              firebasePath="employees"
+              parentId={service.id}
+              syncType="none"
+          />
 
-            {/* 🔹 Blogs (Одностороннее связывание, только в Service) */}
-            <SyncedRelationSelect<Blog>
-                label="Blogs"
-                value={service.blogs || []}
-                options={relatedData.blogs || []} // 👈 Исправлено: Опции с || []
-                getLabel={(o) => o.title?.uk || "Untitled Blog"} // 👈 Исправлено: getLabel
-                getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
-                firebasePath="blogs"
-                parentId={service.id}
-                syncType="none"
-                onChange={(selected) => setService(prev => ({ ...prev, blogs: selected }))}
-            />
+          <SyncedRelationSelect<Blog>
+              label="Blogs"
+              multiple
+              value={service.blogs || []}
+              options={relatedData.blogs as Blog[] || []}
+              getLabel={(o) => String(o.title?.uk) || "Untitled Blog"}
+              getValue={(o) => o.id || ""}
+              onChange={(selected) => setService(prev => ({ ...prev, blogs: selected }))}
+              firebasePath="blogs"
+              parentId={service.id}
+              syncType="none"
+          />
 
-            {/* 🔹 Specials (Акции/Спецпредложения) (Одностороннее связывание, только в Service) */}
-            <SyncedRelationSelect<Special>
-                label="Specials"
-                value={service.specials || []}
-                options={relatedData.specials || []} // 👈 Исправлено: Опции с || []
-                getLabel={(o) => o.title?.uk || "Untitled Special"} // 👈 Исправлено: getLabel
-                getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
-                firebasePath="specials"
-                parentId={service.id}
-                syncType="none"
-                onChange={(selected) => setService(prev => ({ ...prev, specials: selected }))}
-            />
+          <SyncedRelationSelect<Special>
+              label="Specials"
+              multiple
+              value={service.specials || []}
+              options={relatedData.specials as Special[] || []}
+              getLabel={(o) => String(o.title?.uk) || "Untitled Special"}
+              getValue={(o) => o.id || ""}
+              onChange={(selected) => setService(prev => ({ ...prev, specials: selected }))}
+              firebasePath="specials"
+              parentId={service.id}
+              parentFieldName="serviceId"
+              syncType="array"
+          />
         </div>
 
         {/* Main Image */}

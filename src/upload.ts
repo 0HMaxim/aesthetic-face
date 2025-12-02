@@ -1,5 +1,5 @@
 import { push, ref, set } from "firebase/database";
-import { db } from "./firebase"; // путь к твоему файлу firebase.ts
+import { db } from "./firebase";
 
 // // Здесь вставляем наш блог
 //
@@ -488,78 +488,181 @@ export const priceData =  [
     }
   ]
 }
-
-
 ]
 
 
 
-//
-//
-// export const serviceData = [
-//
-//   {
-//     id: "service-004",
-//     slug: "elite-event-planning",
-//     title: {
-//       uk: "Організація елітних заходів",
-//       ru: "Организация элитных мероприятий",
-//       en: "Elite Event Planning",
-//       de: "Elite-Eventplanung"
-//     },
-//     mainImage: "https://example.com/images/elite-event-main.jpg",
-//     content: [
-//       { type: "heading", content: { uk: "Вступ", ru: "Введение", en: "Introduction", de: "Einleitung" }, align: "center" },
-//       { type: "paragraph", content: { uk: "Ми створюємо неповторні події для найвибагливіших клієнтів.", ru: "Мы создаем неповторимые события для самых взыскательных клиентов.", en: "We create unique events for the most discerning clients.", de: "Wir gestalten einzigartige Veranstaltungen für anspruchsvollste Kunden." }, align: "center" },
-//
-//       // Первый блок с изображением и overlay контентом
-//       {
-//         type: "image",
-//         content: { src: "https://example.com/images/event-hall.jpg", alt: "Елітний зал" },
-//         children: [
-//           { type: "heading", content: { uk: "Розкішні локації", ru: "Роскошные локации", en: "Luxury Venues", de: "Luxuslocations" }, align: "center" },
-//           { type: "paragraph", content: { uk: "Вибір залів та майданчиків по всій країні.", ru: "Выбор залов и площадок по всей стране.", en: "Selection of halls and venues nationwide.", de: "Auswahl von Sälen und Locations landesweit." }, align: "center" },
-//         ]
-//       },
-//
-//       { type: "heading", content: { uk: "Наші послуги", ru: "Наши услуги", en: "Our Services", de: "Unsere Dienstleistungen" }, align: "center" },
-//       { type: "paragraph", content: { uk: "Ми надаємо повний спектр послуг для організації заходів:", ru: "Мы предоставляем полный спектр услуг для организации мероприятий:", en: "We provide a full range of services for event planning:", de: "Wir bieten ein komplettes Leistungsspektrum für die Eventplanung:" }, align: "center" },
-//       { type: "list", content: { uk: ["Планування заходу", "Декор та оформлення", "Кейтеринг преміум-класу", "Ведучі та артисти", "Технічне забезпечення"], ru: ["Планирование мероприятия", "Декор и оформление", "Кейтеринг премиум-класса", "Ведущие и артисты", "Техническое обеспечение"], en: ["Event planning", "Decoration and styling", "Premium catering", "Hosts and performers", "Technical support"], de: ["Eventplanung", "Dekor und Gestaltung", "Premium-Catering", "Moderatoren und Künstler", "Technische Ausstattung"] }, align: "center" },
-//
-//       // Второй блок изображения с children
-//       {
-//         type: "image",
-//         content: { src: "https://example.com/images/catering.jpg", alt: "Кейтеринг" },
-//         children: [
-//           { type: "heading", content: { uk: "Преміум кейтеринг", ru: "Премиум кейтеринг", en: "Premium Catering", de: "Premium-Catering" }, align: "center" },
-//           { type: "paragraph", content: { uk: "Вишукані страви та напої від провідних шеф-кухарів.", ru: "Изысканные блюда и напитки от ведущих шеф-поваров.", en: "Exquisite dishes and drinks from top chefs.", de: "Exquisite Gerichte und Getränke von Spitzenköchen." }, align: "center" },
-//         ]
-//       },
-//
-//       { type: "heading", content: { uk: "Тематичні події", ru: "Тематические события", en: "Themed Events", de: "Themenveranstaltungen" }, align: "center" },
-//       { type: "paragraph", content: { uk: "Ми створюємо заходи з унікальною концепцією та дизайном.", ru: "Мы создаем мероприятия с уникальной концепцией и дизайном.", en: "We create events with unique concept and design.", de: "Wir gestalten Veranstaltungen mit einzigartigem Konzept und Design." }, align: "center" },
-//
-//       {
-//         type: "image",
-//         content: { src: "https://example.com/images/theme-event.jpg", alt: "Тематичне оформлення" },
-//         children: [
-//           { type: "heading", content: { uk: "Індивідуальний підхід", ru: "Индивидуальный подход", en: "Individual Approach", de: "Individueller Ansatz" }, align: "center" },
-//           { type: "paragraph", content: { uk: "Кожна подія розробляється під конкретного клієнта.", ru: "Каждое мероприятие разрабатывается под конкретного клиента.", en: "Every event is tailored to the client.", de: "Jede Veranstaltung wird individuell für den Kunden entwickelt." }, align: "center" },
-//         ]
-//       },
-//
-//       { type: "heading", content: { uk: "Команда", ru: "Команда", en: "Team", de: "Team" }, align: "center" },
-//       { type: "paragraph", content: { uk: "Професіонали з багаторічним досвідом в організації VIP заходів.", ru: "Профессионалы с многолетним опытом в организации VIP мероприятий.", en: "Professionals with years of experience in VIP event planning.", de: "Professionals mit jahrelanger Erfahrung in der VIP-Eventplanung." }, align: "center" },
-//
-//       { type: "image", content: { src: "https://example.com/images/team.jpg", alt: "Команда професіоналів" }, align: "center" },
-//
-//       { type: "heading", content: { uk: "Зв'яжіться з нами", ru: "Свяжитесь с нами", en: "Contact Us", de: "Kontaktieren Sie uns" }, align: "center" },
-//       { type: "paragraph", content: { uk: "Забронюйте вашу елітну подію вже сьогодні!", ru: "Забронируйте ваше элитное мероприятие уже сегодня!", en: "Book your elite event today!", de: "Buchen Sie noch heute Ihre Eliteveranstaltung!" }, align: "center" },
-//
-//       { type: "image", content: { src: "https://example.com/images/contact.jpg", alt: "Контакти" }, align: "center" }
-//     ]
-//   }
-//   ];
+
+export const serviceData = [
+
+  // Вставляйте этот объект в массив export const serviceData = [...] в вашем файле upload.ts
+// Вставляйте этот объект в массив export const serviceData = [...] в вашем файле upload.ts
+// Вставляйте этот объект в массив export const serviceData = [...] в вашем файле upload.ts
+
+  {
+    id: "service-009",
+
+    // Поля M:M (по умолчанию пустые)
+    parentServiceIds: [],
+    subservices: [],
+
+    // Основные мета-данные
+    slug: "global-premium-property-selection",
+    title: {
+      uk: "Глобальний Преміум-підбір та Оренда Нерухомості",
+      ru: "Глобальный Премиум-подбор и Аренда Недвижимости",
+      en: "Global Premium Property Selection and Rental",
+      de: "Globale Premium-Immobilienauswahl und Vermietung"
+    },
+    subtitle: {
+      uk: "Ваш приватний доступ до ексклюзивних об'єктів для оренди та покупки по всьому світу.",
+      ru: "Ваш частный доступ к эксклюзивным объектам для аренды и покупки по всему миру.",
+      en: "Your private access to exclusive properties for rent and purchase worldwide.",
+      de: "Ihr privater Zugang zu exklusiven Miet- und Kaufobjekten weltweit."
+    },
+    headerTitle: {
+      uk: "Нерухомість Вашої Мрії Без Кордонів",
+      ru: "Недвижимость Вашей Мечты Без Границ",
+      en: "Your Dream Property Without Borders",
+      de: "Ihre Traumimmobilie ohne Grenzen"
+    },
+    mainImage: "https://example.com/images/global-real-estate-main.jpg",
+
+    // Связи (пустые для новой записи)
+    blogs: [],
+    prices: [],
+    specials: [],
+    employees: [], // ID менеджера по недвижимости
+
+    // Основной контент (ContentBlock[])
+    content: [
+      {
+        type: "heading",
+        content: {
+          uk: "1. Індивідуальний Підхід та Конфіденційність",
+          ru: "1. Индивидуальный Подход и Конфиденциальность",
+          en: "1. Personalized Approach and Confidentiality",
+          de: "1. Individueller Ansatz und Vertraulichkeit"
+        },
+        align: "left"
+      },
+      {
+        type: "paragraph",
+        content: {
+          uk: "Ми розуміємо, що пошук ідеальної нерухомості вимагає часу та довіри. Наші агенти працюють у режимі повного конфіденційності, аналізуючи ваші потреби, від бюджету до необхідного рівня інфраструктури, у будь-якій країні світу.",
+          ru: "Мы понимаем, что поиск идеальной недвижимости требует времени и доверия. Наши агенты работают в режиме полной конфиденциальности, анализируя ваши потребности, от бюджета до необходимого уровня инфраструктуры, в любой стране мира.",
+          en: "We understand that finding the perfect property requires time and trust. Our agents operate with complete confidentiality, analyzing your needs, from budget to the required infrastructure level, in any country worldwide.",
+          de: "Wir verstehen, dass die Suche nach der idealen Immobilie Zeit und Vertrauen erfordert. Unsere Agenten arbeiten mit absoluter Vertraulichkeit und analysieren Ihre Bedürfnisse, vom Budget bis zur benötigten Infrastruktur, in jedem Land der Welt."
+        },
+        align: "left"
+      },
+
+      // Блок с изображением: Аналитика
+      {
+        type: "image",
+        media: "https://example.com/images/property-analytics.jpg",
+        widthPercent: 70,
+        align: "center",
+        children: [
+          {
+            type: "paragraph",
+            content: {
+              uk: "Ви отримуєте доступ до закритої бази об'єктів, які ще не представлені на відкритому ринку.",
+              ru: "Вы получаете доступ к закрытой базе объектов, которые еще не представлены на открытом рынке.",
+              en: "You gain access to a private database of properties not yet available on the open market.",
+              de: "Sie erhalten Zugang zu einer privaten Datenbank von Objekten, die noch nicht auf dem freien Markt verfügbar sind."
+            },
+            align: "center"
+          },
+        ]
+      },
+
+      {
+        type: "heading",
+        content: {
+          uk: "2. Комплексний Супровід Угод",
+          ru: "2. Комплексное Сопровождение Сделок",
+          en: "2. Comprehensive Transaction Support",
+          de: "2. Umfassende Transaktionsunterstützung"
+        },
+        align: "left"
+      },
+      {
+        type: "list",
+        content: {
+          uk: [
+            "Юридична перевірка: Повна перевірка об'єкта та документів у юрисдикції обраної країни.",
+            "Ведення переговорів: Максимально вигідні умови покупки чи оренди.",
+            "Управління: Послуги з управління нерухомістю після покупки (за бажанням).",
+            "Фінанси: Допомога в оформленні іпотеки або інвестиційних угод."
+          ],
+          ru: [
+            "Юридическая проверка: Полная проверка объекта и документов в юрисдикции выбранной страны.",
+            "Ведение переговоров: Максимально выгодные условия покупки или аренды.",
+            "Управление: Услуги по управлению недвижимостью после покупки (по желанию).",
+            "Финансы: Помощь в оформлении ипотеки или инвестиционных сделок."
+          ],
+          en: [
+            "Legal Vetting: Full inspection of the property and documents in the chosen country's jurisdiction.",
+            "Negotiations: Securing the most favorable purchase or rental terms.",
+            "Management: Property management services after purchase (optional).",
+            "Finance: Assistance with mortgage arrangements or investment transactions."
+          ],
+          de: [
+            "Rechtliche Prüfung: Vollständige Überprüfung des Objekts und der Dokumente in der jeweiligen Gerichtsbarkeit.",
+            "Verhandlungen: Sicherung der günstigsten Kauf- oder Mietbedingungen.",
+            "Verwaltung: Immobiliendienstleistungen nach dem Kauf (optional).",
+            "Finanzen: Unterstützung bei der Vermittlung von Hypotheken oder Investitionsgeschäften."
+          ]
+        },
+        align: "left"
+      },
+
+      // Новий блок: Цитата
+      {
+        type: "blockquote",
+        content: {
+          uk: "«Ми не просто знаходимо дім, ми відкриваємо для вас новий спосіб життя.»",
+          ru: "«Мы не просто находим дом, мы открываем для вас новый образ жизни.»",
+          en: "“We don't just find a home, we open up a new way of life for you.”",
+          de: "„Wir finden nicht nur ein Zuhause, wir eröffnen Ihnen eine neue Lebensweise.“"
+        },
+        align: "center"
+      },
+
+      // Блок з зображенням та текстом: Кроки
+      {
+        type: "image",
+        media: "https://example.com/images/luxury-home-view.jpg",
+        align: "left",
+        widthPercent: 50,
+        children: [
+          {
+            type: "heading",
+            content: {
+              uk: "Три Прості Кроки до Вашої Нерухомості",
+              ru: "Три Простых Шага к Вашей Недвижимости",
+              en: "Three Simple Steps to Your Property",
+              de: "Drei einfache Schritte zu Ihrer Immobilie"
+            },
+            align: "left"
+          },
+          {
+            type: "list",
+            content: {
+              uk: ["Консультація та бриф", "Підбір та перегляд", "Угода та завершення"],
+              ru: ["Консультация и бриф", "Подбор и просмотр", "Сделка и завершение"],
+              en: ["Consultation and Briefing", "Selection and Viewing", "Transaction and Closing"],
+              de: ["Beratung und Briefing", "Auswahl und Besichtigung", "Transaktion und Abschluss"]
+            },
+            align: "left"
+          },
+        ]
+      },
+    ]
+  }
+
+];
 //
 //
 // async function uploadBlog() {
@@ -602,25 +705,12 @@ export const priceData =  [
 // }
 //
 //
-export async function uploadPrices() {
-  try {
-    for (const price of priceData) {
-      const newRef = push(ref(db, "prices")); // создаём уникальный ключ в "prices"
-      await set(newRef, { ...price, id: newRef.key }); // добавляем id
-      console.log(`✅ Price uploaded: ${price.category.en} (ID: ${newRef.key})`);
-    }
-    console.log("🎉 All prices uploaded successfully!");
-  } catch (err) {
-    console.error("❌ Error uploading prices:", err);
-  }
-}
-//
-// export async function uploadService() {
+// export async function uploadPrices() {
 //   try {
-//     for (const service of serviceData) {
-//       const newRef = push(ref(db, "services")); // создаём уникальный ключ в "prices"
-//       await set(newRef, { ...service, id: newRef.key }); // добавляем id
-//       console.log(`✅ Price uploaded: ${service.title.en} (ID: ${newRef.key})`);
+//     for (const price of priceData) {
+//       const newRef = push(ref(db, "prices")); // создаём уникальный ключ в "prices"
+//       await set(newRef, { ...price, id: newRef.key }); // добавляем id
+//       console.log(`✅ Price uploaded: ${price.category.en} (ID: ${newRef.key})`);
 //     }
 //     console.log("🎉 All prices uploaded successfully!");
 //   } catch (err) {
@@ -628,14 +718,24 @@ export async function uploadPrices() {
 //   }
 // }
 //
-//
-//
-//
-//
+export async function uploadService() {
+  try {
+    for (const service of serviceData) {
+      const newRef = push(ref(db, "services")); // создаём уникальный ключ в "prices"
+      await set(newRef, {...service, id: newRef.key}); // добавляем id
+      console.log(`✅ Price uploaded: ${service.title.en} (ID: ${newRef.key})`);
+    }
+    console.log("🎉 All prices uploaded successfully!");
+  } catch (err) {
+    console.error("❌ Error uploading prices:", err);
+  }
+}
+
+
 //
 // // Вызов функции
 // //uploadBlog
 // //uploadFaqs();
 // //uploadEmployee();
-uploadPrices()
-// //uploadService();
+// //uploadPrices()
+uploadService();

@@ -32,9 +32,10 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, items }) => {
     const priceRef = ref(db, "prices");
     const unsubscribe = onValue(priceRef, (snapshot) => {
       const data = snapshot.val();
-      const loadedPrices = data ? Object.values(data) : [];
 
+      const loadedPrices: PriceModel[] = data ? Object.values(data) as PriceModel[] : [];
       setPrices(loadedPrices);
+
       setOpenSections(loadedPrices.map((_, i) => i === 0));
       setLoading(false);
     });
@@ -42,11 +43,11 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, items }) => {
     return () => unsubscribe();
   }, [items]);
 
-  // ✅ Фильтрация (как у тебя было)
+
   const filteredPrices = prices.filter((price) => {
-    if (subserviceId) return price.subserviceId === subserviceId;
-    if (serviceId) return price.serviceId === serviceId;
-    return true; // ✅ если пропов нет → выводим всё
+    if (subserviceId) return price.subserviceIds?.includes(subserviceId);
+    if (serviceId) return price.serviceIds?.includes(serviceId);
+    return true;
   });
 
   const toggleSection = (index: number) => {

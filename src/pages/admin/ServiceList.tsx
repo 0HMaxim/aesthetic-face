@@ -19,6 +19,8 @@ export default function ServiceList() {
     return () => unsubscribe();
   }, []);
 
+
+
   return (
       <div className="p-6">
         {/* Заголовок + кнопка */}

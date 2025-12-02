@@ -1,17 +1,14 @@
-import { ref, update } from "firebase/database";
-import type {Service} from "../models/Service.ts";
-import type {Subservice} from "../models/Subservice.ts";
-import type {Special} from "../models/Special.ts";
-import type {Employee} from "../models/Employee.ts";
-import type {Blog} from "../models/Blog.ts";
-import type {PriceModel} from "../models/Price.ts";
-import {SyncedRelationSelect} from "./SyncedRelationSelect.tsx";
-import {db} from "../firebase.ts";
+import type { Service } from "../models/Service.ts";
+import type { Special } from "../models/Special.ts";
+import type { Employee } from "../models/Employee.ts";
+import type { Blog } from "../models/Blog.ts";
+import type { PriceModel } from "../models/Price.ts";
+import { SyncedRelationSelect } from "./SyncedRelationSelect.tsx";
 
 interface Props {
   service: Service;
   setService: (s: Service) => void;
-  subserviceIds: Subservice[];
+  availableSubservices: Service[];
   specials: Special[];
   employees: Employee[];
   blogs: Blog[];
@@ -21,107 +18,84 @@ interface Props {
 export default function ServiceRelations({
                                            service,
                                            setService,
-                                           subserviceIds,
+                                           availableSubservices,
                                            specials,
                                            employees,
                                            blogs,
                                            prices,
                                          }: Props) {
+
+  const currentServiceId = service.id && service.id !== "new" ? service.id : undefined;
+
   return (
       <div className="space-y-4">
 
-        {/* 🔹 Subservices */}
-        <SyncedRelationSelect
+        <SyncedRelationSelect<Service>
             label="Subservices"
             multiple
-            value={service.subserviceIds || []}
-            options={subserviceIds}
-            getLabel={(o) => o.title?.uk || "Untitled"}
+            value={service.subservices || []}
+            options={availableSubservices}
+            getLabel={(o) => String(o.title?.uk) || "Untitled Service"}
             getValue={(o) => o.id || ""}
-            onChange={(v) => setService({ ...service, subserviceIds: v as string[] })}
-            onSyncChange={async (selectedIds) => {
-              const prevIds = service.subserviceIds || [];
-              const added = selectedIds.filter((id) => !prevIds.includes(id));
-              const removed = prevIds.filter((id) => !selectedIds.includes(id));
-              const updates: Record<string, any> = {};
-              added.forEach((id) => updates[`subservices/${id}/serviceId`] = service.id || "");
-              removed.forEach((id) => updates[`subservices/${id}/serviceId`] = null);
-              if (Object.keys(updates).length) await update(ref(db), updates);
-            }}
+            onChange={(v) => setService({ ...service, subservices: v as string[] })}
+            firebasePath="services"
+            parentId={currentServiceId}
+            parentFieldName="serviceId"
+            syncType="string"
         />
 
-        {/* 🔹 Specials */}
-        <SyncedRelationSelect
-            label="Specials"
-            multiple
-            value={service.specials || []}
-            options={specials}
-            getLabel={(o) => o.title?.uk || "Untitled"}
-            getValue={(o) => o.id || ""}
-            onChange={(v) => setService({ ...service, specials: v as string[] })}
-            onSyncChange={async (selectedIds) => {
-              const prevIds = service.specials || [];
-              const added = selectedIds.filter((id) => !prevIds.includes(id));
-              const removed = prevIds.filter((id) => !selectedIds.includes(id));
-              const updates: Record<string, any> = {};
-              added.forEach((id) => updates[`specials/${id}/serviceId`] = service.id || "");
-              removed.forEach((id) => updates[`specials/${id}/serviceId`] = null);
-              if (Object.keys(updates).length) await update(ref(db), updates);
-            }}
-        />
-
-        {/* 🔹 Employees */}
-        <SyncedRelationSelect
-            label="Employees"
-            multiple
-            value={service.employees || []}
-            options={employees}
-            getLabel={(o) => o.name || "Unnamed"}
-            getValue={(o) => o.id || ""}
-            onChange={(v) => setService({ ...service, employees: v as string[] })}
-            onSyncChange={async (selectedIds) => {
-              // можно добавить логику синхронизации сотрудников с сервисом
-            }}
-        />
-
-        {/* 🔹 Blogs */}
-        <SyncedRelationSelect
-            label="Blogs"
-            multiple
-            value={service.blogs || []}
-            options={blogs}
-            getLabel={(o) => o.title?.uk || "Untitled"}
-            getValue={(o) => o.id || ""}
-            onChange={(v) => setService({ ...service, blogs: v as string[] })}
-            onSyncChange={async (selectedIds) => {
-              const prevIds = service.blogs || [];
-              const added = selectedIds.filter((id) => !prevIds.includes(id));
-              const removed = prevIds.filter((id) => !selectedIds.includes(id));
-              const updates: Record<string, any> = {};
-              added.forEach((id) => updates[`blogs/${id}/serviceId`] = service.id || "");
-              removed.forEach((id) => updates[`blogs/${id}/serviceId`] = null);
-              if (Object.keys(updates).length) await update(ref(db), updates);
-            }}
-        />
-
-        {/* 🔹 Prices */}
-        <SyncedRelationSelect
+        <SyncedRelationSelect<PriceModel>
             label="Prices"
             multiple
             value={service.prices || []}
             options={prices}
-            getLabel={(o) => o.category?.uk || "Untitled"}
-            getValue={(o) => o.serviceId || ""}
+            getLabel={(o) => String(o.category?.uk) || "Untitled Price"}
+            getValue={(o) => o.id || ""}
             onChange={(v) => setService({ ...service, prices: v as string[] })}
-            onSyncChange={async (selectedIds) => {
-              const prevIds = service.prices || [];
-              const added = selectedIds.filter((id) => !prevIds.includes(id));
-              const removed = prevIds.filter((id) => !selectedIds.includes(id));
-              const updates: Record<string, any> = {};
-              added.forEach((id) => updates[`prices/${id}/serviceId`] = service.id || "");
-              removed.forEach((id) => updates[`prices/${id}/serviceId`] = null);
-              if (Object.keys(updates).length) await update(ref(db), updates);
-            }}
+            firebasePath="prices"
+            parentId={currentServiceId}
+            parentFieldName="serviceIds"
+            syncType="array"
+        />
+
+        <SyncedRelationSelect<Employee>
+            label="Employees"
+            multiple
+            value={service.employees || []}
+            options={employees}
+            getLabel={(o) => String(o.fullName?.uk) || "Unnamed Employee"}
+            getValue={(o) => o.id || ""}
+            onChange={(v) => setService({ ...service, employees: v as string[] })}
+            firebasePath="employees"
+            parentId={currentServiceId}
+            syncType="none"
+        />
+
+        <SyncedRelationSelect<Blog>
+            label="Blogs"
+            multiple
+            value={service.blogs || []}
+            options={blogs}
+            getLabel={(o) => String(o.title?.uk) || "Untitled Blog"}
+            getValue={(o) => o.id || ""}
+            onChange={(v) => setService({ ...service, blogs: v as string[] })}
+            firebasePath="blogs"
+            parentId={currentServiceId}
+            syncType="none"
+        />
+
+        <SyncedRelationSelect<Special>
+            label="Specials"
+            multiple
+            value={service.specials || []}
+            options={specials}
+            getLabel={(o) => String(o.title?.uk) || "Untitled Special"}
+            getValue={(o) => o.id || ""}
+            onChange={(v) => setService({ ...service, specials: v as string[] })}
+            firebasePath="specials"
+            parentId={currentServiceId}
+            parentFieldName="serviceIds"
+            syncType="array"
         />
 
       </div>

@@ -49,12 +49,6 @@ export default function AdminPage() {
           </Link>
 
           {/* ✅ Нове посилання на сабсервіси */}
-          <Link
-              to="/admin/subservices"
-              className="p-4 bg-white shadow rounded-lg hover:shadow-lg transition"
-          >
-            🧩 Сабсервіси
-          </Link>
 
           <Link
               to="/admin/specials"

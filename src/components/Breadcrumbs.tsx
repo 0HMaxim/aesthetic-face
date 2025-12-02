@@ -15,7 +15,6 @@ function getLocalizedString(value: string | string[] | undefined) {
 
 interface BreadcrumbsProps {
   serviceIds?: string;
-  subserviceIds?: string;
   employeeSlug?: string;
   specialSlug?: string;
   blogSlug?: string;
@@ -23,7 +22,6 @@ interface BreadcrumbsProps {
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                                                           serviceIds,
-                                                          subserviceIds,
                                                           employeeSlug,
                                                           specialSlug,
                                                           blogSlug,
@@ -35,7 +33,6 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   const [employeeData, setEmployeeData] = useState<Employee | null>(null);
   const [blogData, setBlogData] = useState<Blog | null>(null);
   const [serviceData, setServiceData] = useState<any>(null);
-  const [subserviceData, setSubserviceData] = useState<any>(null);
   const [specialData, setSpecialData] = useState<any>(null);
 
   // Загружаем данные из Firebase
@@ -49,14 +46,12 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     if (serviceIds) {
       get(ref(db, `services/${serviceIds}`)).then((snap) => snap.exists() && setServiceData(snap.val()));
     }
-    if (subserviceIds) {
-      get(ref(db, `subservices/${subserviceIds}`)).then((snap) => snap.exists() && setSubserviceData(snap.val()));
-    }
+
     if (specialSlug) {
       const special = specials.find((s) => s.slug === specialSlug);
       if (special) setSpecialData(special);
     }
-  }, [employeeSlug, blogSlug, serviceIds, subserviceIds, specialSlug]);
+  }, [employeeSlug, blogSlug, serviceIds, specialSlug]);
 
   const items: { label: string; href: string }[] = [
     { label: t("header.home"), href: `/${lang}` },

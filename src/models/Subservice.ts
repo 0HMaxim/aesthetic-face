@@ -6,11 +6,14 @@ export interface Subservice {
   id?: string;
   serviceId: string;
   title: LocalizedText;
-  slug: string;
-  mainImage: string;
+  subtitle: LocalizedText;
+  headerTitle?: LocalizedText;
   content?: ContentBlock[];
-  prices?: string[];
-  employees?: string[];
-
+  slug: string;
   blogs?: string[];
+  prices?: string[];
+  specials?: string[];
+  employees?: string[];
+  subservices?: string[];
+  mainImage?: string;
 }

@@ -2,7 +2,6 @@ import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 
-// иконки из icones.js.org (unplugin-icons)
 import IconXMark from "~icons/fa6-solid/xmark";
 import IconThreeBars from "~icons/octicon/three-bars-16";
 

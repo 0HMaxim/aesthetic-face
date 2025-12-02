@@ -2,65 +2,65 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ref, push, set, update, get } from "firebase/database";
 import { db } from "../../firebase";
-import type { Service } from "../../models/Service";
 import type { LocalizedText } from "../../models/LocalizedText";
 import type { ContentBlock } from "../../models/ContentBlock";
 import ImageInputBlock from "../../components/ImageInputBlock.tsx";
 import { useFetchData } from "../../hooks/useFetchData.ts";
 import { SyncedRelationSelect } from "../../components/SyncedRelationSelect.tsx";
 import type { PriceModel } from "../../models/Price.ts";
-import type { Employee } from "../../models/Employee.ts";
-import type { Blog } from "../../models/Blog.ts";
-import type { Special } from "../../models/Special.ts";
-import type {Subservice} from "../../models/Subservice.ts";
+import type { Special } from "../../models/Special.ts"; // 👈
+import type { Service } from "../../models/Service.ts";
+import type {Blog} from "../../models/Blog.ts";
 
 export default function SpecialEditor() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const emptyService: Service = {
+  const emptySpecial: Special = {
     title: {},
     subtitle: {},
-    headerTitle: {},
     slug: "",
     mainImage: "",
     content: [],
-    employees: [],
-    subserviceIds: [],
-    specials: [],
     prices: [],
+    serviceId: [],
     blogs: [],
   };
 
-  const [service, setService] = useState<Service>(emptyService);
+  const [special, setSpecial] = useState<Special>(emptySpecial);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const { data: relatedData, loading } = useFetchData([
+    "services",
+    "subservices",
     "prices",
     "blogs",
-    "employees",
-    "subservices",
-    "specials",
   ]);
 
-  // 🔹 Загрузка сервиса
+  // Удобный алиас для полной коллекции услуг
+  const allServices = (relatedData.services || []) as Service[];
+  const allBlogs = (relatedData.blogs || []) as Blog[];
+
+
+  // Загрузка Акции из /specials/{id}
   useEffect(() => {
     if (id) {
-      get(ref(db, `services/${id}`)).then(async (snapshot) => {
+      get(ref(db, `specials/${id}`)).then(async (snapshot) => {
         if (snapshot.exists()) {
-          const data: Service = snapshot.val();
+          const data: Special = snapshot.val();
+
 
           const pricesSnapshot = await get(ref(db, "prices"));
-          const allPrices: Record<string, PriceModel> = pricesSnapshot.exists()
-              ? pricesSnapshot.val()
-              : {};
+          const allPrices: Record<string, PriceModel> = pricesSnapshot.exists() ? pricesSnapshot.val() : {};
 
           const selectedPriceIds = Object.entries(allPrices)
-          .filter(([_, price]) => price.serviceIds?.includes(id))
+          .filter(([_, price]) => price.specials?.includes(id!))
           .map(([priceId]) => priceId);
 
-          setService({
+          setSpecial({
+            ...emptySpecial,
             ...data,
+            id: id,
             prices: selectedPriceIds,
           });
         }
@@ -68,16 +68,15 @@ export default function SpecialEditor() {
     }
   }, [id]);
 
-  // 🔹 Локализованные поля
-  const handleLocalizedChange = (field: keyof Service, lang: string, value: string) => {
-    setService((prev) => ({
+  //  Локализованные поля (тип поля теперь keyof Special)
+  const handleLocalizedChange = (field: keyof Special, lang: string, value: string) => {
+    setSpecial((prev) => ({
       ...prev,
       [field]: { ...(prev[field] as LocalizedText), [lang]: value },
     }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
-  // 🔹 Контент-блоки
   const addContentBlock = (
       type: "paragraph" | "image" | "heading" | "list",
       parentIndex?: number
@@ -90,18 +89,18 @@ export default function SpecialEditor() {
     };
 
     if (typeof parentIndex === "number") {
-      const updated = [...(service.content || [])];
+      const updated = [...(special.content || [])];
       const parent = updated[parentIndex];
       parent.children = [...(parent.children || []), newBlock];
       updated[parentIndex] = parent;
-      setService({ ...service, content: updated });
+      setSpecial({ ...special, content: updated });
     } else {
-      setService({ ...service, content: [...(service.content || []), newBlock] });
+      setSpecial({ ...special, content: [...(special.content || []), newBlock] });
     }
   };
 
   const handleBlockChange = (index: number, lang: string, value: string, parentIndex?: number) => {
-    const updated = [...(service.content || [])];
+    const updated = [...(special.content || [])];
     if (typeof parentIndex === "number") {
       const parent = updated[parentIndex];
       const children = [...(parent.children || [])];
@@ -117,25 +116,26 @@ export default function SpecialEditor() {
         content: { ...(updated[index].content || {}), [lang]: value },
       };
     }
-    setService({ ...service, content: updated });
+    setSpecial({ ...special, content: updated });
   };
+
 
   const handleAlignChange = (
       index: number,
       align: "left" | "center" | "right",
       parentIndex?: number
   ) => {
-    const updated = [...(service.content || [])];
+    const updated = [...(special.content || [])];
     if (typeof parentIndex === "number") {
       updated[parentIndex].children![index].align = align;
     } else {
       updated[index].align = align;
     }
-    setService({ ...service, content: updated });
+    setSpecial({ ...special, content: updated });
   };
 
   const moveContentBlock = (index: number, direction: "up" | "down", parentIndex?: number) => {
-    const updated = [...(service.content || [])];
+    const updated = [...(special.content || [])];
     const swap = (arr: any[], i1: number, i2: number) => {
       const temp = arr[i1];
       arr[i1] = arr[i2];
@@ -152,19 +152,20 @@ export default function SpecialEditor() {
       if (direction === "down" && index < updated.length - 1) swap(updated, index, index + 1);
     }
 
-    setService({ ...service, content: updated });
+    setSpecial({ ...special, content: updated });
   };
 
   const removeContentBlock = (index: number, parentIndex?: number) => {
-    const updated = [...(service.content || [])];
+    const updated = [...(special.content || [])];
     if (typeof parentIndex === "number") {
       updated[parentIndex].children?.splice(index, 1);
     } else {
       updated.splice(index, 1);
     }
-    setService({ ...service, content: updated });
+    setSpecial({ ...special, content: updated });
   };
 
+  //  renderBlockEditor (использует special.content)
   const renderBlockEditor = (block: ContentBlock, index: number, parentIndex?: number) => {
     const blockNumber = parentIndex !== undefined
         ? `Content Block ${parentIndex + 1} Child ${index + 1}`
@@ -202,10 +203,10 @@ export default function SpecialEditor() {
                   <ImageInputBlock
                       image={typeof block.media === "string" ? block.media : ""}
                       onChange={(value) => {
-                        const updated = [...(service.content || [])];
+                        const updated = [...(special.content || [])];
                         if (typeof parentIndex === "number") updated[parentIndex].children![index].media = value;
                         else updated[index].media = value;
-                        setService({ ...service, content: updated });
+                        setSpecial({ ...special, content: updated });
                       }}
                   />
                   <div className="flex items-center gap-2">
@@ -217,10 +218,10 @@ export default function SpecialEditor() {
                         value={block.widthPercent ?? 40}
                         onChange={(e) => {
                           const value = parseInt(e.target.value);
-                          const updated = [...(service.content || [])];
+                          const updated = [...(special.content || [])];
                           if (typeof parentIndex === "number") updated[parentIndex].children![index].widthPercent = value;
                           else updated[index].widthPercent = value;
-                          setService({ ...service, content: updated });
+                          setSpecial({ ...special, content: updated });
                         }}
                         className="border rounded-lg p-2 w-20"
                     />
@@ -270,60 +271,54 @@ export default function SpecialEditor() {
     );
   };
 
-  // 🔹 Валидация
+  //  Валидация (используем special вместо service)
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
-    if (!Object.values(service.title || {}).some((v) => typeof v === "string" && v.trim())) newErrors.title = "Title хотя бы на одном языке обязателен!";
-    if (!service.slug?.trim()) newErrors.slug = "Slug обязателен!";
-    if (!service.mainImage?.trim()) newErrors.mainImage = "Main image обязателен!";
+    if (!Object.values(special.title || {}).some((v) => typeof v === "string" && v.trim())) newErrors.title = "Title хотя бы на одном языке обязателен!";
+    if (!special.slug?.trim()) newErrors.slug = "Slug обязателен!";
+    if (!special.mainImage?.trim()) newErrors.mainImage = "Main image обязателен!";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // 🔹 Сохранение
-  // ServiceEditor.tsx
-
   const handleSave = async () => {
     if (!validate()) return;
 
-    let serviceId = id;
-    const serviceDataToSave = { ...service }; // Используем копию
+    let specialId = id;
+    const specialDataToSave = { ...special };
+
+    delete specialDataToSave.id;
 
     if (!id) {
-      // 1. Создание нового объекта
-      const newRef = push(ref(db, "services"));
-      serviceId = newRef.key!;
+      const newRef = push(ref(db, "specials"));
+      specialId = newRef.key!;
 
-      // Включаем новый ID в объект
-      serviceDataToSave.id = serviceId;
+      const finalDataToSave = { ...specialDataToSave, id: specialId };
 
-      // Используем set для создания нового объекта
-      await set(ref(db, `services/${serviceId}`), serviceDataToSave);
+      await set(ref(db, `specials/${specialId}`), finalDataToSave);
 
-      setService(prev => ({ ...prev, id: serviceId })); // Обновляем локальный стейт с новым ID
+      setSpecial(prev => ({ ...prev, id: specialId }));
 
     } else {
-      // 2. Обновление существующего объекта
-      // Используем update для частичного или полного обновления существующего объекта
-      await update(ref(db, `services/${serviceId}`), serviceDataToSave);
+      await update(ref(db, `specials/${specialId}`), specialDataToSave);
     }
 
-    // 3. Навигация
-    navigate("/admin/services");
+    navigate("/admin/specials");
   };
+
+  if (loading) return <p className="text-center py-10">Loading . . .</p>;
 
   return (
       <div className="p-6 max-w-6xl mx-auto">
-        <h1 className="text-2xl font-semibold mb-4">{id ? "Edit Service" : "Create New Service"}</h1>
+        <h1 className="text-2xl font-semibold mb-4">{id ? "Edit Special" : "Create New Special"}</h1>
 
-        {/* Title / Subtitle / HeaderTitle */}
-        {(["title", "subtitle", "headerTitle"] as (keyof Service)[]).map(field => (
+        {(["title", "subtitle", "headerTitle"] as (keyof Special)[]).map(field => (
             <div key={field} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               {["uk", "ru", "en", "de"].map(lang => (
                   <div key={`${field}-${lang}`} className="flex flex-col">
                     <label className="capitalize">{field} ({lang})</label>
                     <input
-                        value={(service[field] as LocalizedText)?.[lang] || ""}
+                        value={(special[field] as LocalizedText)?.[lang] || ""}
                         onChange={(e) => handleLocalizedChange(field, lang, e.target.value)}
                         className="border rounded p-2"
                     />
@@ -338,90 +333,68 @@ export default function SpecialEditor() {
           <label>Slug</label>
           <input
               type="text"
-              value={service.slug}
-              onChange={(e) => setService({ ...service, slug: e.target.value })}
+              value={special.slug}
+              onChange={(e) => setSpecial({ ...special, slug: e.target.value })}
               className="border rounded p-2"
           />
           {errors.slug && <span className="text-red-500 text-sm">{errors.slug}</span>}
         </div>
 
 
-        {/* 🔹 Prices, Employees, Blogs, Specials */}
         <div className="mt-6 space-y-4">
 
-          {/* 🔹 Subservices (Двустороннее связывание через строковое поле serviceId) */}
-          <SyncedRelationSelect<Subservice>
-              label="Subservices"
-              value={service.subserviceIds || []}
-              options={relatedData.subservices || []}
-              getLabel={(o) => o.title?.uk || "Untitled Subservice"}
+          <SyncedRelationSelect<Service>
+              label="Related Services"
+              multiple
+              value={special.serviceId || []}
+              options={allServices}
+              getLabel={(o) => o.title?.uk || "Untitled Service"}
               getValue={(o) => o.id || ""}
-              firebasePath="subservices"
-              parentId={service.id}
-              parentFieldName="serviceId" // Поле в Subservice, куда пишется ID услуги
-              syncType="string" // Обновляем как строку
-              onChange={(selected) => setService(prev => ({ ...prev, subserviceIds: selected }))}
+              firebasePath="services"
+              parentId={special.id}
+              parentFieldName="specials"
+              syncType="array"
+              onChange={(selected) => setSpecial(prev => ({ ...prev, serviceId: selected }))}
           />
 
-          {/* 🔹 Prices (Двустороннее связывание через массив serviceIds) */}
           <SyncedRelationSelect<PriceModel>
               label="Prices"
-              value={service.prices || []}
-              options={relatedData.prices || []} // 👈 Исправлено: Опции с || []
-              getLabel={(o) => o.category?.uk || "Untitled Price"} // 👈 Исправлено: getLabel
-              getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
+              multiple
+              value={special.prices || []}
+              options={relatedData.prices || []}
+              getLabel={(o) => o.category?.uk || "Untitled Price"}
+              getValue={(o) => o.id || ""}
               firebasePath="prices"
-              parentId={service.id}
-              parentFieldName="serviceIds"
+              parentId={special.id}
+              parentFieldName="specials"
               syncType="array"
-              onChange={(selected) => setService(prev => ({ ...prev, prices: selected }))}
+              onChange={(selected) => setSpecial(prev => ({ ...prev, prices: selected }))}
           />
 
-          {/* 🔹 Employees (Одностороннее связывание, только в Service) */}
-          <SyncedRelationSelect<Employee>
-              label="Employees"
-              value={service.employees || []}
-              options={relatedData.employees || []} // 👈 Исправлено: Опции с || []
-              getLabel={(o) => o.fullName?.uk || "Unnamed Employee"} // 👈 Исправлено: getLabel
-              getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
-              firebasePath="employees"
-              parentId={service.id}
-              // parentFieldName и syncType='none' гарантируют, что обратная связь не будет обновлена
-              syncType="none"
-              onChange={(selected) => setService(prev => ({ ...prev, employees: selected }))}
-          />
 
-          {/* 🔹 Blogs (Одностороннее связывание, только в Service) */}
           <SyncedRelationSelect<Blog>
-              label="Blogs"
-              value={service.blogs || []}
-              options={relatedData.blogs || []} // 👈 Исправлено: Опции с || []
-              getLabel={(o) => o.title?.uk || "Untitled Blog"} // 👈 Исправлено: getLabel
-              getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
+              label="Related Blogs"
+              multiple
+              value={special.blogs || []}
+              options={allBlogs}
+              getLabel={(o) => o.title?.uk || "Untitled Blog"}
+              getValue={(o) => o.id || ""}
               firebasePath="blogs"
-              parentId={service.id}
-              syncType="none"
-              onChange={(selected) => setService(prev => ({ ...prev, blogs: selected }))}
+              parentId={special.id}
+              parentFieldName="specials"
+              syncType="array"
+              onChange={(selected) => setSpecial(prev => ({ ...prev, blogs: selected }))}
           />
 
-          {/* 🔹 Specials (Акции/Спецпредложения) (Одностороннее связывание, только в Service) */}
-          <SyncedRelationSelect<Special>
-              label="Specials"
-              value={service.specials || []}
-              options={relatedData.specials || []} // 👈 Исправлено: Опции с || []
-              getLabel={(o) => o.title?.uk || "Untitled Special"} // 👈 Исправлено: getLabel
-              getValue={(o) => o.id || ""} // 👈 Исправлено: getValue
-              firebasePath="specials"
-              parentId={service.id}
-              syncType="none"
-              onChange={(selected) => setService(prev => ({ ...prev, specials: selected }))}
-          />
+
+
+
+
         </div>
 
-        {/* Main Image */}
         <div className="flex flex-col mb-4 gap-2">
           <label className="font-medium">Main Image</label>
-          {service.mainImage && <img src={service.mainImage} alt="Main" className="mb-2 max-w-xs rounded-lg border border-gray-200" />}
+          {special.mainImage && <img src={special.mainImage} alt="Main" className="mb-2 max-w-xs rounded-lg border border-gray-200" />}
           <input
               type="file"
               accept="image/*"
@@ -429,7 +402,7 @@ export default function SpecialEditor() {
                 const file = e.target.files?.[0];
                 if (!file) return;
                 const reader = new FileReader();
-                reader.onload = (ev) => setService((prev) => ({ ...prev, mainImage: ev.target?.result as string }));
+                reader.onload = (ev) => setSpecial((prev) => ({ ...prev, mainImage: ev.target?.result as string }));
                 reader.readAsDataURL(file);
               }}
               className="border rounded-lg p-2"
@@ -437,18 +410,17 @@ export default function SpecialEditor() {
           <input
               type="text"
               placeholder="URL або CSS фон"
-              value={service.mainImage || ""}
-              onChange={(e) => setService((prev) => ({ ...prev, mainImage: e.target.value }))}
+              value={special.mainImage || ""}
+              onChange={(e) => setSpecial((prev) => ({ ...prev, mainImage: e.target.value }))}
               className="border rounded-lg p-2"
           />
           {errors.mainImage && <span className="text-red-500 text-sm">{errors.mainImage}</span>}
         </div>
 
-        {/* Content Blocks */}
         <div className="mb-4 flex gap-4">
           <div className="w-1/2">
             <h2 className="text-xl font-semibold mb-2">Content Blocks</h2>
-            {service.content?.map((block, i) => renderBlockEditor(block, i))}
+            {special.content?.map((block, i) => renderBlockEditor(block, i))}
             <div className="flex gap-3 mt-3">
               <button onClick={() => addContentBlock("heading")} className="text-blue-600">+ Heading</button>
               <button onClick={() => addContentBlock("paragraph")} className="text-blue-600">+ Paragraph</button>
@@ -460,12 +432,12 @@ export default function SpecialEditor() {
           <div className="border border-gray-300 rounded-lg p-4 bg-white overflow-auto w-1/2">
             <h2 className="text-xl font-semibold mb-2">Preview</h2>
             <div className="space-y-4">
-              {service.mainImage && <img src={service.mainImage} alt="Main" className="max-w-full rounded-lg" />}
+              {special.mainImage && <img src={special.mainImage} alt="Main" className="max-w-full rounded-lg" />}
               {["uk", "ru", "en", "de"].map(lang => (
                   <div key={lang}>
-                    <h1 className="text-2xl font-bold">{service.title?.[lang] || ""}</h1>
-                    <h2 className="text-xl">{service.subtitle?.[lang] || ""}</h2>
-                    <h3 className="text-lg">{service.headerTitle?.[lang] || ""}</h3>
+                    <h1 className="text-2xl font-bold">{special.title?.[lang] || ""}</h1>
+                    <h2 className="text-xl">{special.subtitle?.[lang] || ""}</h2>
+                    <h3 className="text-lg">{special.headerTitle?.[lang] || ""}</h3>
                   </div>
               ))}
             </div>

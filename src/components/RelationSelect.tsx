@@ -1,77 +1,59 @@
-import React from "react";
-
-interface RelationSelectProps<T> {
+export interface RelationSelectProps<T> {
   label: string;
-  value: string[];                     // выбранные ID
-  options: T[];                        // список элементов
-  getLabel?: (o: T) => string;         // текст отображения
-  getValue?: (o: T) => string;         // ID элемента
-  onChange: (v: string[]) => void;     // локальное обновление
-  onSyncChange?: (v: string[]) => void; // синхронизация с Firebase
-  multiple?: boolean;                  // множественный выбор
+  value: string[];
+  options: T[];
+  getLabel: (o: T) => string;
+  getValue: (o: T) => string;
+
+  multiple?: boolean;
+
+  onChange: (v: string[]) => void;
 }
 
 export default function RelationSelect<T>({
                                             label,
                                             value,
                                             options,
-                                            getLabel = (o) => String(o),
-                                            getValue = (o) => String(o),
+                                            getLabel,
+                                            getValue,
                                             onChange,
-                                            onSyncChange,
-                                            multiple = true,
+                                            multiple = true
                                           }: RelationSelectProps<T>) {
-
-  const handleCheckboxChange = (checkedId: string) => {
-    let newSelected: string[];
+  const handleClick = (id: string) => {
+    let next = value;
 
     if (multiple) {
-      // ✅ многократный выбор
-      if (value.includes(checkedId)) {
-        newSelected = value.filter((id) => id !== checkedId);
-      } else {
-        newSelected = [...value, checkedId];
-      }
+      next = value.includes(id)
+          ? value.filter((v) => v !== id)
+          : [...value, id];
     } else {
-      // ✅ одиночный выбор — заменяем массив
-      newSelected = [checkedId];
+      next = [id];
     }
 
-    if (onSyncChange) {
-      onSyncChange(newSelected);  // Firebase + локальный стейт
-    } else {
-      onChange(newSelected);      // только локально
-    }
+    onChange(next);
   };
-
-  const selectedValue = value || [];
 
   return (
       <div className="flex flex-col gap-2 my-2">
         <label className="font-medium mb-1">{label}</label>
 
-        <div className="flex flex-col gap-1 border rounded-lg p-3 bg-white dark:bg-gray-800">
+        <div className="flex flex-col gap-1 border rounded-lg p-3 bg-white">
           {options.map((opt) => {
             const id = getValue(opt);
-            const labelText = getLabel(opt);
-            const checked = selectedValue.includes(id); // Используем selectedValue
+            const text = getLabel(opt);
+            const checked = value.includes(id);
 
             return (
-                <label key={id} className="flex items-center gap-2 cursor-pointer">
+                <label key={id} className="flex items-center gap-2">
                   <input
                       type="checkbox"
                       checked={checked}
-                      onChange={() => handleCheckboxChange(id)}
-                      className="w-4 h-4"
+                      onChange={() => handleClick(id)}
                   />
-                  <span>{labelText}</span>
+                  {text}
                 </label>
             );
           })}
-
-          {options.length === 0 && (
-              <p className="text-gray-400 text-sm italic">No items available</p>
-          )}
         </div>
       </div>
   );

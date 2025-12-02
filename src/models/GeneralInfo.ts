@@ -5,7 +5,6 @@ export interface WorkingDay {
   hours: string;
 }
 
-
 export interface GeneralInfo {
   address: LocalizedText;
   phone: LocalizedText;

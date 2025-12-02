@@ -9,13 +9,12 @@ export interface Special {
 
   headerTitle?: LocalizedText
 
-
   serviceId?: string[];
-  subserviceId?: string[];
+  prices?: string[];
+  blogs?: string[];
 
   content: ContentBlock[];
   slug: string;
 
   mainImage?: string;
-  prices?: string[];
 }
