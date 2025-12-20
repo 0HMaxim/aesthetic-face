@@ -1,0 +1,80 @@
+/* REPLACE IT WITH THIS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--background);
+}
+
+:root {
+  --foreground: #1a1a1f;
+  --background: linear-gradient(90deg, #0179d5,#8adaea,#f4f5f5);
+  --secondary: linear-gradient(90deg, #1abc9c,#1f2c51);
+  --primary: linear-gradient(50deg, #ffffff,#9fdef9,#087efd);
+
+  --muted: #4A4A4A;
+}
+
+.dark {
+  --foreground: #f4f4f5;
+  --background: linear-gradient(90deg, #15173c,#2375ef);
+  --secondary: linear-gradient(90deg, #1b2c55,#3d85a9,#63cac8,#b8edff);
+
+
+  --primary: linear-gradient(90deg, #06071d,#06071d,#1a1f8d,#5a60e0,#d4d6fa);
+  --muted: #D3D3D3;
+}
+
+
+.yarl__slide_title {
+  text-align: center !important;
+}
+
+.yarl__thumbnails_container, .yarl__carousel {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.yarl__thumbnails_vignette {
+  display: none !important;
+}
+
+.yarl__thumbnails_thumbnail {
+  border-radius: 3rem !important;
+  padding: 0
+}
+
+
+.swiper-button-next,
+.swiper-button-prev {
+  top: 50%;
+  width: 3rem;
+  height: 3rem;
+  margin-top: -1.5rem;
+  color: var(--foreground);
+  z-index: 10;
+}
+
+.swiper-button-next {
+  right: -2rem!important;
+  z-index: 1000 !important;
+}
+
+.swiper-button-prev {
+  left: -2rem!important;
+  z-index: 1000 !important;
+}
+
+.swiper-pagination-bullet {
+  background-color: var(--foreground);
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--foreground);
+  opacity: 1;
+}
+
+
