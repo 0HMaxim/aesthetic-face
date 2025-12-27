@@ -23,7 +23,7 @@ export default function AppLayout() {
 
 
     return (
-        <div className="grid min-h-screen w-full grid-rows-[auto_1fr_auto] text-foreground duration-500 relative overflow-x-hidden">
+        <div className="grid min-h-screen w-full grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr_auto] text-foreground duration-500 relative overflow-x-hidden">
             <Header />
             <main className="w-full flex flex-col items-center"> {/* Центрируем содержимое */}
                 <AnimatePresence mode="wait">

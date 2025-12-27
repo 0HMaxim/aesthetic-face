@@ -69,7 +69,7 @@ export default function SpecialPage() {
       <div className="w-full items-center justify-center ">
         {imagee && <TopImage source={imagee} />}
 
-        <div className="w-full px-4 md:px-10 lg:px-20 max-w-[1440px]">
+        <div className="w-full px-4 md:px-[5rem]">
 
           <Breadcrumbs
               specialSlug={special.slug}
@@ -125,56 +125,63 @@ export default function SpecialPage() {
           )}
 
 
-          <div className="flex flex-wrap justify-center items-center gap-6 pt-[2.5rem]">
-            {otherSpecials.map((item) => (
-                <Link
-                    key={item.id}
-                    to={`/${lang}/specials/${item.slug}`}
-                    className="
-                group rounded-2xl shadow-md transition overflow-hidden
-                w-full sm:w-[32rem] md:w-[45rem] h-auto
-                flex flex-col md:flex-row md:gap-[2rem]
-                justify-between relative
-                bg-primary
-                mb-[6rem]
-                hover:shadow-xl
-                duration-500"
-                >
-                  {/* Текст */}
-                  <div className="p-[2rem] text-foreground w-full md:w-2/6 flex flex-col">
-                    <h2 className="text-[1.8rem] font-extrabold mb-[1rem]">{item.title[lang]}</h2>
-                    <p className="text-[1.2rem] pl-[1.5rem] font-light mb-[1.5rem]">{item.subtitle[lang]}</p>
-                    <Button
-                        as={Link}
-                        to={`/${lang}/specials/${item.slug}`}
-                        className="
-                    w-full md:w-auto px-[1.5rem] py-[0.75rem] rounded-[3.5rem]
-                    flex items-center justify-center
-                    text-white font-semibold
-                    bg-black
-                    hover:bg-primary
-                    transition-colors duration-500
-                    mt-auto"
-                    >
-                      {t("specials.learnMore")}
-                    </Button>
-                  </div>
+          <div className="">
 
-                  {/* Картинка */}
-                  {item.mainImage && (
+            <h2 className="text-3xl lg:text-5xl font-[800] my-[1.5rem]">{t("specialPage.otherSpecials") || "Related Services"}</h2>
+
+
+            <div className="flex flex-wrap justify-center items-center gap-6 pt-[2.5rem]">
+
+              {otherSpecials.map((item) => (
+                  <Link
+                      key={item.id}
+                      to={`/${lang}/specials/${item.slug}`}
+                      className="
+                  group rounded-2xl shadow-md transition overflow-hidden
+                  w-full sm:w-[32rem] md:w-[45rem] h-auto
+                  flex flex-col md:flex-row md:gap-[2rem]
+                  justify-between relative
+                  bg-primary
+                  mb-[6rem]
+                  hover:shadow-xl
+                  duration-500"
+                  >
+                    {/* Текст */}
+                    <div className="p-[2rem] text-foreground w-full md:w-2/6 flex flex-col">
+                      <h2 className="text-[1.8rem] font-extrabold mb-[1rem]">{item.title[lang]}</h2>
+                      <p className="text-[1.2rem] pl-[1.5rem] font-light mb-[1.5rem]">{item.subtitle[lang]}</p>
                       <Button
                           as={Link}
                           to={`/${lang}/specials/${item.slug}`}
-                          className="overflow-hidden w-full md:w-4/6 block p-0 mt-4 md:mt-0"
+                          className="
+                      w-full md:w-auto px-[1.5rem] py-[0.75rem] rounded-[3.5rem]
+                      flex items-center justify-center
+                      text-white font-semibold
+                      bg-black
+                      hover:bg-primary
+                      transition-colors duration-500
+                      mt-auto"
                       >
-                        <img
-                            src={item.mainImage}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
+                        {t("specials.learnMore")}
                       </Button>
-                  )}
-                </Link>
-            ))}
+                    </div>
+
+                    {/* Картинка */}
+                    {item.mainImage && (
+                        <Button
+                            as={Link}
+                            to={`/${lang}/specials/${item.slug}`}
+                            className="overflow-hidden w-full md:w-4/6 block p-0 mt-4 md:mt-0"
+                        >
+                          <img
+                              src={item.mainImage}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </Button>
+                    )}
+                  </Link>
+              ))}
+            </div>
           </div>
 
           {relatedBlogs.length > 0 && (

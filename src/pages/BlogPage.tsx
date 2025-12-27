@@ -52,7 +52,7 @@ export default function BlogPage() {
       <div className="w-full flex flex-col items-center">
         {blog.mainImage && <TopImage source={blog.mainImage} />}
 
-        <div className="w-full px-4 md:px-10 lg:px-20 max-w-[1440px]">
+        <div className="w-full px-4 md:px-[5rem]">
 
           <Breadcrumbs
               blogSlug={blog.slug}

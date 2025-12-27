@@ -58,7 +58,7 @@ export default function EmployeePage() {
       <div className="w-full items-center justify-center">
         {topImage && <TopImage source={topImage} />}
 
-        <div className="w-full px-4 md:px-10 lg:px-20 max-w-[1440px]">
+        <div className="w-full px-4 md:px-[5rem]">
           <Breadcrumbs employeeSlug={employee.slug} />
 
           <h1 className="text-3xl md:text-5xl mb-[2.5rem] font-[700] md:text-center text-foreground">

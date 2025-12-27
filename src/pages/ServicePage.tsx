@@ -15,6 +15,7 @@ import type { Blog } from "../models/Blog.ts";
 import type { Employee } from "../models/Employee.ts";
 import type { Photo } from "../models/Photo.ts";
 import type { ContentBlock } from "../models/ContentBlock.ts";
+import {Breadcrumbs} from "../components/Breadcrumbs.tsx";
 
 export default function ServicePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -98,7 +99,14 @@ export default function ServicePage() {
       <div className="w-full items-center justify-center">
         {imagee && <TopImage source={imagee} />}
 
-        <div className="w-full px-4 md:px-10 lg:px-20 max-w-[1440px]">
+        <div className="w-full px-4 md:px-[5rem]">
+
+
+          <Breadcrumbs
+              blogSlug={currentItem.slug}
+              currentTitle={currentItem.title?.[lang] || currentItem.headerTitle?.[lang]}
+          />
+
           <div className="py-8">
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">{currentItem.title?.[lang]}</h2>
           </div>
