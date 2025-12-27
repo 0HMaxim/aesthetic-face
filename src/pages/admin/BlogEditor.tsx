@@ -126,16 +126,38 @@ export default function BlogEditor() {
             </div>
 
             {block.type === "image" ? (
-                <div className="space-y-3 max-w-sm mx-auto">
-                  <ImageInputBlock
-                      image={block.media || ""}
-                      onChange={(url) => {
-                        const updated = [...(blog.content || [])];
-                        if (typeof parentIndex === "number") updated[parentIndex].children![index].media = url;
-                        else updated[index].media = url;
-                        setBlog({ ...blog, content: updated });
-                      }}
-                  />
+                <div className="space-y-4">
+                  <div className="max-w-sm mx-auto">
+                    <ImageInputBlock
+                        image={block.media || ""}
+                        onChange={(url) => {
+                          const updated = [...(blog.content || [])];
+                          if (typeof parentIndex === "number") updated[parentIndex].children![index].media = url;
+                          else updated[index].media = url;
+                          setBlog({ ...blog, content: updated });
+                        }}
+                    />
+                  </div>
+
+                  {/* Добавляем выбор выравнивания (Left / Center / Right) */}
+                  <div className="flex justify-center gap-4 mt-2">
+                    {(['left', 'center', 'right'] as const).map((pos) => (
+                        <button
+                            key={pos}
+                            onClick={() => {
+                              const updated = [...(blog.content || [])];
+                              if (typeof parentIndex === "number") updated[parentIndex].children![index].align = pos;
+                              else updated[index].align = pos;
+                              setBlog({ ...blog, content: updated });
+                            }}
+                            className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${
+                                block.align === pos ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-400 hover:bg-gray-200"
+                            }`}
+                        >
+                          {pos}
+                        </button>
+                    ))}
+                  </div>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

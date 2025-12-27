@@ -28,8 +28,9 @@ export default function Header() {
   return (
       <>
         <header
-            className="w-full flex items-center justify-between md:p-[3rem] p-[1rem] fixed
-                 backdrop-blur-[10rem] rounded-[5rem] text-foreground z-20"
+            className="fixed top-4 left-4 right-4 flex items-center justify-between
+               md:p-6 p-3 backdrop-blur-md rounded-2xl md:rounded-[5rem]
+               text-foreground z-20 shadow-lg"
         >
 
           <Link

@@ -91,8 +91,11 @@ export default function ServiceEditor() {
     const newBlock: ContentBlock = {
       type,
       content: {},
-      align: "left",
-      ...(type === "image" ? { media: "https://via.placeholder.com/400x200?text=Image", widthPercent: 100 } : {}),
+      align: "left", // По умолчанию слева
+      ...(type === "image" ? {
+        media: "",
+        widthPercent: 45 // Соответствует md:w-[45%] в рендерере
+      } : {}),
     };
 
     const updated = [...(service.content || [])];
@@ -151,16 +154,44 @@ export default function ServiceEditor() {
             </div>
 
             {block.type === "image" ? (
-                <div className="space-y-3">
-                  <ImageInputBlock
-                      image={block.media || ""}
-                      onChange={(url: string) => {
-                        const updated = [...(service.content || [])];
-                        if (typeof parentIndex === "number") updated[parentIndex].children![index].media = url;
-                        else updated[index].media = url;
-                        setService({ ...service, content: updated });
-                      }}
-                  />
+                <div className="space-y-4">
+                  <div className="max-w-sm mx-auto">
+                    <ImageInputBlock
+                        image={block.media || ""}
+                        onChange={(url: string) => {
+                          const updated = [...(service.content || [])];
+                          if (typeof parentIndex === "number") updated[parentIndex].children![index].media = url;
+                          else updated[index].media = url;
+                          setService({ ...service, content: updated });
+                        }}
+                    />
+                  </div>
+
+                  {/* Переключатель выравнивания */}
+                  <div className="flex justify-center items-center gap-2 bg-white p-2 rounded-2xl border border-gray-100 w-fit mx-auto shadow-sm">
+                    {(['left', 'center', 'right'] as const).map((pos) => (
+                        <button
+                            key={pos}
+                            onClick={() => {
+                              const updated = [...(service.content || [])];
+                              if (typeof parentIndex === "number") updated[parentIndex].children![index].align = pos;
+                              else updated[index].align = pos;
+                              setService({ ...service, content: updated });
+                            }}
+                            className={`px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${
+                                (block.align || 'left') === pos
+                                    ? "bg-blue-600 text-white shadow-lg shadow-blue-100"
+                                    : "bg-gray-50 text-gray-400 hover:bg-gray-100"
+                            }`}
+                        >
+                          {pos === 'left' ? '← Left' : pos === 'center' ? '↔ Center' : 'Right →'}
+                        </button>
+                    ))}
+                  </div>
+
+                  <p className="text-[9px] text-gray-400 text-center uppercase tracking-tighter">
+                    {block.align === 'center' ? 'Image will be full width' : 'Image and text will be side-by-side'}
+                  </p>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

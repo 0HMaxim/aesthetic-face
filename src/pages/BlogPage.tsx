@@ -1,70 +1,42 @@
-import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ref, get } from "firebase/database";
-import { db } from "../firebase.ts";
 import { ContentBlockRenderer } from "../components/ContentBlockRenderer";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { TopImage } from "../components/TopImage.tsx";
 import { SpecialsSlider } from "../components/SpecialsSection.tsx";
 
 // Models
+
 import type { Blog } from "../models/Blog.ts";
 import type { Service } from "../models/Service.ts";
 import type { Special } from "../models/Special.ts";
+import {useFetchData} from "../hooks/useFetchData.ts";
 
 export default function BlogPage() {
   const { slug } = useParams<{ slug: string }>();
   const { i18n, t } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
-  const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [services, setServices] = useState<Service[]>([]);
-  const [specials, setSpecials] = useState<Special[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const [blogsSnap, servicesSnap, specialsSnap] = await Promise.all([
-          get(ref(db, "blogs")),
-          get(ref(db, "services")),
-          get(ref(db, "specials")),
-        ]);
-
-        if (blogsSnap.exists()) {
-          const data = blogsSnap.val();
-          setBlogs(Object.keys(data).map((key) => ({ id: key, ...data[key] })));
-        }
-        if (servicesSnap.exists()) {
-          const data = servicesSnap.val();
-          setServices(Object.keys(data).map((key) => ({ id: key, ...data[key] })));
-        }
-        if (specialsSnap.exists()) {
-          const data = specialsSnap.val();
-          setSpecials(Object.keys(data).map((key) => ({ id: key, ...data[key] })));
-        }
-      } catch (err) {
-        console.error("Error loading blog data:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchData();
-  }, []);
+  // Используем ваш новый хук
+  const { data, loading } = useFetchData(["blogs", "services", "specials"]);
 
   if (loading) {
-    return <div className="p-20 text-center animate-pulse font-black text-gray-300 tracking-widest uppercase">{t("blog.loading") || "Loading..."}</div>;
+    return <div className="p-20 text-center animate-pulse font-black text-gray-300 tracking-widest uppercase">{t("blog.loading")}</div>;
   }
 
+  const blogs = (data["blogs"] as Blog[]) || [];
+  const services = (data["services"] as Service[]) || [];
+  const specials = (data["specials"] as Special[]) || [];
+
   const blog = blogs.find((b) => b.slug === slug);
+
   if (!blog) {
     return (
-        <div className="py-20 text-center text-foreground px-4">
-          <p className="text-2xl font-bold">{t("blog.notFound") || "Blog not found"}</p>
+        <div className="py-20 text-center px-4">
+          <Breadcrumbs /> {/* Крошки даже если не найдено */}
+          <p className="text-2xl font-bold mt-10">{t("blog.notFound")}</p>
           <Link to={`/${lang}/blogs`} className="text-primary underline mt-4 inline-block font-semibold">
-            {t("blog.backToList") || "← Back to blog"}
+            {t("blog.backToList")}
           </Link>
         </div>
     );
@@ -72,60 +44,43 @@ export default function BlogPage() {
 
   const title = blog.headerTitle?.[lang] || blog.title?.[lang];
   const subtitle = blog.subtitle?.[lang];
-  const imagee = blog.mainImage;
-
-  const relatedServices: Service[] = (blog.services?.map((id: string) => services.find((s) => s.id === id)).filter((s): s is Service => s !== undefined)) || [];
-  const relatedSpecials: Special[] = (blog.specials?.map((id: string) => specials.find((s) => s.id === id)).filter((s): s is Special => s !== undefined)) || [];
-  const otherBlogs = blogs.filter((b) => b.slug !== slug).slice(0, 3); // Ограничим до 3 для чистоты
+  const relatedServices = blog.services?.map(id => services.find(s => s.id === id)).filter(Boolean) as Service[] || [];
+  const relatedSpecials = blog.specials?.map(id => specials.find(sp => sp.id === id)).filter(Boolean) as Special[] || [];
+  const otherBlogs = blogs.filter((b) => b.slug !== slug).slice(0, 3);
 
   return (
       <div className="w-full flex flex-col items-center">
-        {imagee && <TopImage source={imagee} />}
+        {blog.mainImage && <TopImage source={blog.mainImage} />}
 
-        <div className="w-full px-4 md:px-[5rem] max-w-[1440px]">
-          <Breadcrumbs blogSlug={blog.slug} />
+        <div className="w-full px-4 md:px-10 lg:px-20 max-w-[1440px]">
 
-          {/* Заголовок адаптивный */}
+          <Breadcrumbs
+              blogSlug={blog.slug}
+              currentTitle={blog.title?.[lang] || blog.headerTitle?.[lang]}
+          />
+
           <div className="py-6 md:py-12">
-            <h1 className="text-2xl md:text-4xl lg:text-6xl font-black mb-4 leading-tight">
-              {title}
-            </h1>
-            {subtitle && (
-                <span className="block text-lg md:text-2xl font-medium text-gray-500 italic">
-                    {subtitle}
-                </span>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">{title}</h1>
+            {subtitle && <span className="block text-lg md:text-2xl text-gray-500 italic">{subtitle}</span>}
+          </div>
+
+
+            {blog.content && (
+                <div className="w-full max-w-full px-0">
+                    <ContentBlockRenderer content={blog.content} />
+                </div>
             )}
-          </div>
 
-          {/* Контент блога */}
-          <div className="flex flex-col gap-8 w-full text-base md:text-lg leading-relaxed">
-            <ContentBlockRenderer content={blog.content} />
-          </div>
-
-          {/* Релевантные услуги - Сетка адаптирована */}
+          {/* Секции рекомендаций */}
           {relatedServices.length > 0 && (
-              <div className="mt-20 border-t border-gray-100 pt-16">
-                <h2 className="text-2xl md:text-4xl font-black mb-10 text-center md:text-left">
-                  {t("blog.relatedServices")}
-                </h2>
+              <div className="mt-20 border-t pt-16">
+                <h2 className="text-2xl md:text-4xl font-black mb-10">{t("blog.relatedServices")}</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                  {relatedServices.map((service: Service) => (
-                      <Link
-                          key={service.id}
-                          to={`/${lang}/services/${service.slug}`}
-                          className="group relative overflow-hidden h-[12rem] rounded-[2rem] md:rounded-[10rem] shadow-sm hover:shadow-xl transition-all duration-500"
-                      >
-                        {service.mainImage && (
-                            <img
-                                src={service.mainImage}
-                                alt={String(service.title?.[lang] || "")}
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                            />
-                        )}
-                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-4">
-                          <p className="text-white text-center font-bold text-lg md:text-xl transition-transform duration-500 group-hover:scale-105">
-                            {service.title?.[lang]}
-                          </p>
+                  {relatedServices.map(service => (
+                      <Link key={service.id} to={`/${lang}/services/${service.slug}`} className="group relative h-[12rem] rounded-[2rem] overflow-hidden shadow-md">
+                        <img src={service.mainImage} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="" />
+                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center p-4">
+                          <p className="text-white font-bold text-center">{service.title?.[lang]}</p>
                         </div>
                       </Link>
                   ))}

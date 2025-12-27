@@ -69,9 +69,12 @@ export default function SpecialPage() {
       <div className="w-full items-center justify-center ">
         {imagee && <TopImage source={imagee} />}
 
-        <div className="w-full px-4 md:px-[5rem]">
-          <Breadcrumbs specialSlug={special.slug} />
+        <div className="w-full px-4 md:px-10 lg:px-20 max-w-[1440px]">
 
+          <Breadcrumbs
+              specialSlug={special.slug}
+              currentTitle={special.title?.[lang]}
+          />
           <div className="py-8 mb-[3.5rem]">
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">{special.title[lang]}</h2>
             <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem] duration-500">

@@ -2,202 +2,151 @@ import { push, ref, set } from "firebase/database";
 import { db } from "./firebase";
 
 // // Здесь вставляем наш блог
-//
-// export const blogData = {
-//   slug: "dubai-luxury-real-estate-story",
-//   mainImage: "https://images.unsplash.com/photo-1586105251261-72a756497a12",
-//   title: {
-//     uk: "Дубай: історія народження столиці розкоші",
-//     ru: "Дубай: история рождения столицы роскоши",
-//     en: "Dubai: The Birth of the Capital of Luxury",
-//     de: "Dubai: Die Geburt der Hauptstadt des Luxus",
-//   },
-//   subtitle: {
-//     uk: "Як пустеля перетворилася на світовий центр інновацій, архітектури та розкоші",
-//     ru: "Как пустыня превратилась в мировой центр инноваций, архитектуры и роскоши",
-//     en: "How the desert turned into the world’s center of innovation, architecture, and luxury",
-//     de: "Wie sich die Wüste in das weltweite Zentrum für Innovation, Architektur und Luxus verwandelte",
-//   },
-//   content: [
-//     {
-//       type: "heading",
-//       content: {
-//         uk: "Початок: місто серед пісків",
-//         ru: "Начало: город среди песков",
-//         en: "The Beginning: A City Among the Sands",
-//         de: "Der Anfang: Eine Stadt im Sand",
-//       },
-//     },
-//     {
-//       type: "paragraph",
-//       content: {
-//         uk: "Ще півстоліття тому Дубай був невеликим портовим містом. Але стратегічне бачення шейха Рашида бін Саїда Аль Мактума змінило все.",
-//         ru: "Ещё полвека назад Дубай был маленьким портовым городом. Но стратегическое видение шейха Рашида бин Саида Аль Мактума изменило всё.",
-//         en: "Just half a century ago, Dubai was a small port town. But the strategic vision of Sheikh Rashid bin Saeed Al Maktoum changed everything.",
-//         de: "Noch vor einem halben Jahrhundert war Dubai eine kleine Hafenstadt. Doch die strategische Vision von Scheich Rashid bin Saeed Al Maktoum veränderte alles.",
-//       },
-//     },
-//     {
-//       type: "image",
-//       media: "https://images.unsplash.com/photo-1504274066651-8d31a536b11a",
-//       align: "left",
-//       widthPercent: 50,
-//       children: [
-//         {
-//           type: "heading",
-//           content: {
-//             uk: "Перші проекти",
-//             ru: "Первые проекты",
-//             en: "The First Projects",
-//             de: "Die ersten Projekte",
-//           },
-//         },
-//         {
-//           type: "paragraph",
-//           content: {
-//             uk: "Першими символами майбутнього міста стали порти Джебель-Алі та міжнародний аеропорт Дубая — ворота в майбутнє.",
-//             ru: "Первыми символами будущего города стали порт Джебель-Али и международный аэропорт Дубая — ворота в будущее.",
-//             en: "The first symbols of the city’s future were the Jebel Ali Port and Dubai International Airport — gateways to the world.",
-//             de: "Die ersten Symbole der zukünftigen Stadt waren der Hafen Jebel Ali und der internationale Flughafen von Dubai – Tore zur Zukunft.",
-//           },
-//         },
-//       ],
-//     },
-//     {
-//       type: "heading",
-//       content: {
-//         uk: "Архітектурна революція",
-//         ru: "Архитектурная революция",
-//         en: "The Architectural Revolution",
-//         de: "Die architektonische Revolution",
-//       },
-//     },
-//     {
-//       type: "paragraph",
-//       content: {
-//         uk: "З відкриттям Burj Al Arab у 1999 році Дубай заявив про себе як про місто майбутнього. Його архітектура стала символом статусу та інновацій.",
-//         ru: "С открытием Burj Al Arab в 1999 году Дубай заявил о себе как о городе будущего. Его архитектура стала символом статуса и инноваций.",
-//         en: "With the opening of Burj Al Arab in 1999, Dubai announced itself as the city of the future. Its architecture became a symbol of status and innovation.",
-//         de: "Mit der Eröffnung des Burj Al Arab im Jahr 1999 präsentierte sich Dubai als Stadt der Zukunft. Seine Architektur wurde zum Symbol für Status und Innovation.",
-//       },
-//     },
-//     {
-//       type: "image",
-//       media: "https://images.unsplash.com/photo-1585647347487-7c31c0b7be8f",
-//       align: "right",
-//       widthPercent: 45,
-//       children: [
-//         {
-//           type: "heading",
-//           content: {
-//             uk: "Ікони сучасності",
-//             ru: "Иконы современности",
-//             en: "Icons of Modernity",
-//             de: "Ikonen der Moderne",
-//           },
-//         },
-//         {
-//           type: "list",
-//           content: {
-//             uk: "Burj Khalifa — найвища будівля світу\nPalm Jumeirah — острів у формі пальми\nDubai Marina — серце міського життя",
-//             ru: "Burj Khalifa — самое высокое здание мира\nPalm Jumeirah — остров в форме пальмы\nDubai Marina — сердце городской жизни",
-//             en: "Burj Khalifa — the tallest building in the world\nPalm Jumeirah — an island shaped like a palm tree\nDubai Marina — the heart of urban life",
-//             de: "Burj Khalifa – das höchste Gebäude der Welt\nPalm Jumeirah – eine Insel in Form einer Palme\nDubai Marina – das Herz des Stadtlebens",
-//           },
-//         },
-//       ],
-//     },
-//     {
-//       type: "heading",
-//       content: {
-//         uk: "Розкіш як філософія",
-//         ru: "Роскошь как философия",
-//         en: "Luxury as a Philosophy",
-//         de: "Luxus als Philosophie",
-//       },
-//     },
-//     {
-//       type: "paragraph",
-//       content: {
-//         uk: "Вілли з видом на море, пентхауси з басейнами на даху та автоматизовані системи керування — усе створене, щоб людина відчула абсолютний комфорт.",
-//         ru: "Виллы с видом на море, пентхаусы с бассейнами на крыше и автоматизированные системы управления — всё создано для ощущения абсолютного комфорта.",
-//         en: "Seaside villas, rooftop penthouses with pools, and automated smart home systems — all designed to deliver ultimate comfort.",
-//         de: "Villen mit Meerblick, Penthäuser mit Dachpools und automatisierte Steuerungssysteme – alles geschaffen, um absoluten Komfort zu bieten.",
-//       },
-//     },
-//     {
-//       type: "image",
-//       media: "https://images.unsplash.com/photo-1573455494057-482d249e0413",
-//       align: "center",
-//       widthPercent: 60,
-//       children: [
-//         {
-//           type: "heading",
-//           content: {
-//             uk: "Технології у кожній деталі",
-//             ru: "Технологии в каждой детали",
-//             en: "Technology in Every Detail",
-//             de: "Technologie in jedem Detail",
-//           },
-//         },
-//         {
-//           type: "paragraph",
-//           content: {
-//             uk: "Сучасні житлові комплекси в Дубаї обладнані штучним інтелектом, системами безпеки та енергоефективними рішеннями нового покоління.",
-//             ru: "Современные жилые комплексы в Дубае оснащены искусственным интеллектом, системами безопасности и энергоэффективными решениями нового поколения.",
-//             en: "Modern Dubai residences are equipped with AI systems, smart security, and next-generation energy-efficient solutions.",
-//             de: "Moderne Wohnanlagen in Dubai sind mit KI-Systemen, Sicherheitslösungen und energieeffizienter Technologie der nächsten Generation ausgestattet.",
-//           },
-//         },
-//       ],
-//     },
-//     {
-//       type: "heading",
-//       content: {
-//         uk: "Дубай сьогодні",
-//         ru: "Дубай сегодня",
-//         en: "Dubai Today",
-//         de: "Dubai heute",
-//       },
-//     },
-//     {
-//       type: "paragraph",
-//       content: {
-//         uk: "Дубай — це не лише про розкіш. Це про майбутнє, яке вже настало. Місто стало домом для інновацій, культури та можливостей.",
-//         ru: "Дубай — это не только о роскоши. Это о будущем, которое уже наступило. Город стал домом для инноваций, культуры и возможностей.",
-//         en: "Dubai is not only about luxury. It’s about the future that has already arrived. The city has become a home of innovation, culture, and opportunity.",
-//         de: "Dubai steht nicht nur für Luxus. Es steht für die Zukunft, die bereits begonnen hat. Die Stadt ist zu einer Heimat für Innovation, Kultur und Chancen geworden.",
-//       },
-//     },
-//     {
-//       type: "image",
-//       media: "https://images.unsplash.com/photo-1590490359864-5d9a1ad3c9b2",
-//       align: "right",
-//       widthPercent: 55,
-//       children: [
-//         {
-//           type: "heading",
-//           content: {
-//             uk: "Вид з висоти",
-//             ru: "Вид с высоты",
-//             en: "A View from Above",
-//             de: "Ein Blick von oben",
-//           },
-//         },
-//         {
-//           type: "paragraph",
-//           content: {
-//             uk: "Панорама міста вночі — це мільйони вогнів, що символізують мрії, які стали реальністю.",
-//             ru: "Ночная панорама города — это миллионы огней, символизирующих мечты, ставшие реальностью.",
-//             en: "The city skyline at night — millions of lights symbolizing dreams turned into reality.",
-//             de: "Die nächtliche Skyline der Stadt – Millionen Lichter, die Träume symbolisieren, die wahr geworden sind.",
-//           },
-//         },
-//       ],
-//     },
-//   ],
-// };
-//
+
+export const blogData = {
+  slug: "humanoid-robots-evolution-2025",
+  mainImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2000",
+  title: {
+    ru: "Эра гуманоидов: Как роботы меняют наше представление о быте",
+    uk: "Ера гуманоїдів: Як роботи змінюють наше уявлення про побут",
+    en: "The Era of Humanoids: How Robots are Changing Our Daily Lives"
+  },
+  subtitle: {
+    ru: "Разбираемся, почему роботы наконец-то выходят из цехов Tesla и Boston Dynamics прямо к нам в гостиные.",
+    uk: "Розбираємося, чому роботи нарешті виходять із цехів Tesla та Boston Dynamics прямо до нас у вітальні.",
+    en: "Understanding why robots are finally leaving Tesla and Boston Dynamics factories and heading straight to our living rooms."
+  },
+  content: [
+    {
+      type: "heading",
+      align: "left",
+      content: { ru: "1. Почему именно сейчас?", uk: "1. Чому саме зараз?", en: "1. Why now?" }
+    },
+    {
+      type: "paragraph",
+      content: {
+        ru: "Десятилетиями роботы были привязаны к полу на заводах. Но в 2024-2025 годах произошел прорыв в 'воплощенном интеллекте' (Embodied AI). Это комбинация нейросетей типа LLM и продвинутых сервоприводов.",
+        uk: "Десятиліттями роботи були прив'язані до підлоги на заводах. Але у 2024-2025 роках стався прорив у 'втіленому інтелекті' (Embodied AI). Це комбінація нейромереж типу LLM та просунутих сервоприводів.",
+        en: "For decades, robots were bolted to factory floors. In 2024-2025, a breakthrough in 'Embodied AI' occurred—a combination of LLM-type neural networks and advanced actuators."
+      }
+    },
+    {
+      type: "image",
+      media: "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?q=80&w=1000",
+      align: "left",
+      widthPercent: 40,
+      children: [
+        {
+          type: "heading",
+          content: { ru: "Ключевые игроки рынка", uk: "Ключові гравці ринку", en: "Market Key Players" }
+        },
+        {
+          type: "list",
+          content: {
+            ru: "Tesla Optimus (Gen 2)\nFigure AI (в партнерстве с OpenAI)\nBoston Dynamics Atlas (Electric)\nUnitree H1",
+            uk: "Tesla Optimus (Gen 2)\nFigure AI (у партнерстві з OpenAI)\nBoston Dynamics Atlas (Electric)\nUnitree H1",
+            en: "Tesla Optimus (Gen 2)\nFigure AI (with OpenAI)\nBoston Dynamics Atlas (Electric)\nUnitree H1"
+          }
+        },
+        {
+          type: "paragraph",
+          content: {
+            ru: "Каждый из них использует разные подходы к балансировке, но цель одна — универсальность.",
+            uk: "Кожен із них використовує різні підходи до балансування, але мета одна — універсальність.",
+            en: "Each uses different approaches to balancing, but the goal is the same — versatility."
+          }
+        }
+      ]
+    },
+    {
+      type: "heading",
+      align: "right",
+      content: { ru: "2. Обучение через подражание", uk: "2. Навчання через наслідування", en: "2. Learning through Imitation" }
+    },
+    {
+      type: "paragraph",
+      align: "right",
+      content: {
+        ru: "Современные роботы не программируются кодом 'если стена — поверни'. Они смотрят тысячи видео, как человек моет посуду или складывает одежду, и имитируют эти движения, адаптируясь к физике объекта в реальном времени.",
+        uk: "Сучасні роботи не програмуються кодом 'якщо стіна — поверни'. Вони дивляться тисячі відео, як людина миє посуд або складає одяг, і імітують ці рухи, адаптуючись до фізики об'єкта в реальному часі.",
+        en: "Modern robots aren't programmed with 'if wall, then turn' code. They watch thousands of videos of humans washing dishes or folding clothes and imitate those movements."
+      }
+    },
+    {
+      type: "image",
+      media: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?q=80&w=1000",
+      align: "right",
+      widthPercent: 50,
+      children: [
+        {
+          type: "heading",
+          content: { ru: "Технологический стек", uk: "Технологічний стек", en: "Tech Stack" }
+        },
+        {
+          type: "list",
+          content: {
+            ru: "Лидары высокой точности\nТактильные датчики на кончиках пальцев\nНейронные процессоры (NPU)\nСистемы компьютерного зрения 360°",
+            uk: "Лідари високої точності\nТактильні датчики на кінчиках пальців\nНейронні процесори (NPU)\nСистеми комп'ютерного зору 360°",
+            en: "High-precision lidars\nTactile sensors on fingertips\nNeural Processing Units (NPU)\n360° Computer Vision systems"
+          }
+        }
+      ]
+    },
+    {
+      type: "heading",
+      content: { ru: "3. Проблемы и вызовы", uk: "3. Проблеми та виклики", en: "3. Problems and Challenges" }
+    },
+    {
+      type: "paragraph",
+      content: {
+        ru: "Самая большая проблема — это батарея. Большинство современных гуманоидов могут работать автономно от 2 до 4 часов. Этого достаточно для уборки, но мало для полноценной смены в госпитале или на складе.",
+        uk: "Найбільша проблема — це батарея. Більшість сучасних гуманоїдів можуть працювати автономно від 2 до 4 годин. Цього достатньо для прибирання, але замало для повноцінної зміни в госпіталі або на складі.",
+        en: "The biggest problem is the battery. Most modern humanoids can work autonomously for only 2 to 4 hours."
+      }
+    },
+    {
+      type: "list",
+      align: "center",
+      content: {
+        ru: "Высокая стоимость (от $20,000 до $150,000)\nШум гидравлики и моторов\nВопросы безопасности при работе с детьми\nСложность обслуживания",
+        uk: "Висока вартість (від $20,000 до $150,000)\nШум гідравліки та моторів\nПитання безпеки при роботі з дітьми\nСкладність обслуговування",
+        en: "High cost ($20k to $150k)\nNoise from hydraulics/motors\nSafety concerns with children\nMaintenance complexity"
+      }
+    },
+    {
+      type: "image",
+      media: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000",
+      align: "center",
+      widthPercent: 80,
+      children: [
+        {
+          type: "paragraph",
+          align: "center",
+          content: {
+            ru: "На фото: Тестирование захвата манипулятора в условиях лаборатории робототехники.",
+            uk: "На фото: Тестування захоплення маніпулятора в умовах лабораторії робототехніки.",
+            en: "In photo: Gripper testing in a robotics lab environment."
+          }
+        }
+      ]
+    },
+    {
+      type: "heading",
+      content: { ru: "4. Будущее рядом", uk: "4. Майбутнє поруч", en: "4. Future is Near" }
+    },
+    {
+      type: "paragraph",
+      content: {
+        ru: "К 2030 году эксперты предсказывают, что наличие домашнего ассистента станет такой же нормой, как наличие стиральной машины сегодня. Они будут не просто выполнять задачи, но и распознавать ваши эмоции через микро-выражения лица.",
+        uk: "До 2030 року експерти передбачають, що наявність домашнього асистента стане такою ж нормою, як наявність пральної машини сьогодні. Вони будуть не просто виконувати завдання, а й розпізнавати ваші емоції через мікро-вирази обличчя.",
+        en: "By 2030, experts predict that having a home assistant will be as normal as having a washing machine today."
+      }
+    }
+  ]
+};
+
+
+
 //
 // export const employeeData =
 //     [
@@ -665,15 +614,15 @@ export const serviceData = [
 ];
 //
 //
-// async function uploadBlog() {
-//   try {
-//     const newRef = push(ref(db, "blogs")); // создаём новый ключ в "blogs"
-//     await set(newRef, { ...blogData, id: newRef.key });
-//     console.log("Blog uploaded successfully! ID:", newRef.key);
-//   } catch (err) {
-//     console.error("Error uploading blog:", err);
-//   }
-// }
+async function uploadBlog() {
+  try {
+    const newRef = push(ref(db, "blogs")); // создаём новый ключ в "blogs"
+    await set(newRef, { ...blogData, id: newRef.key });
+    console.log("Blog uploaded successfully! ID:", newRef.key);
+  } catch (err) {
+    console.error("Error uploading blog:", err);
+  }
+}
 //
 //
 // async function uploadFaqs() {
@@ -734,8 +683,8 @@ export async function uploadService() {
 
 //
 // // Вызов функции
-// //uploadBlog
+uploadBlog();
 // //uploadFaqs();
 // //uploadEmployee();
 // //uploadPrices()
-uploadService();
+//();
