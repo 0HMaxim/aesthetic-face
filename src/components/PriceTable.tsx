@@ -1,72 +1,54 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useMemo} from "react";
 import { useTranslation } from "react-i18next";
 import SolarPowerBold from "~icons/solar/power-bold";
-import { ref, onValue } from "firebase/database";
-import { db } from "../firebase";
 import type { PriceModel } from "../models/Price";
+import {useFetchData} from "../hooks/useFetchData";
 
 type Props = {
+  items?: PriceModel[]; // <- можем передать готовые цены
+  businessSlug?: string;
   serviceId?: string;
   subserviceId?: string;
-  items?: PriceModel[]; // ✅ можно передавать цены извне
 };
 
-const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, items }) => {
+export default function PriceTable({ items, businessSlug, serviceId, subserviceId }: Props) {
   const { i18n } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
-  const [prices, setPrices] = useState<PriceModel[]>(items || []);
-  const [loading, setLoading] = useState(!items); // если items переданы — не грузим Firebase
+  // Если items нет — получаем через useFetchData
+  const { data, loading } = useFetchData(["prices"], businessSlug);
+
+
+  const prices: PriceModel[] = items ?? data?.prices ?? [];
+  const isLoading = !items && businessSlug && loading;
+
+  const targetId = subserviceId || serviceId;
+  const filteredPrices = useMemo(() => {
+    return targetId ? prices.filter((p) => p.serviceIds?.includes(targetId)) : prices;
+  }, [prices, targetId]);
+
+
+  const [activeItems, setActiveItems] = useState<Record<string, boolean>>({});
+
   const [openSections, setOpenSections] = useState<boolean[]>([]);
-  const [activeItems, setActiveItems] = useState<{ [key: string]: boolean }>({});
 
-  // ✅ Загружаем цены из Firebase только если items НЕ пришли извне
   useEffect(() => {
-    if (items) {
-      setPrices(items);
-      setOpenSections(items.map((_, i) => i === 0));
-      setLoading(false);
-      return;
-    }
+    setOpenSections(filteredPrices.map((_, i) => i === 0));
+  }, [filteredPrices]);
 
-    const priceRef = ref(db, "prices");
-    const unsubscribe = onValue(priceRef, (snapshot) => {
-      const data = snapshot.val();
-
-      const loadedPrices: PriceModel[] = data ? Object.values(data) as PriceModel[] : [];
-      setPrices(loadedPrices);
-
-      setOpenSections(loadedPrices.map((_, i) => i === 0));
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, [items]);
-
-
-  const filteredPrices = prices.filter((price) => {
-    const targetId = subserviceId || serviceId;
-    if (targetId) {
-      return price.serviceIds?.includes(targetId);
-    }
-    return true;
-  });
 
   const toggleSection = (index: number) => {
     setOpenSections((prev) =>
-        prev.map((isOpen, i) => (i === index ? !isOpen : isOpen))
+        prev.map((open, i) => (i === index ? !open : open))
     );
   };
 
-  const toggleItem = (sectionIdx: number, subIdx: number, itemIdx: number) => {
-    const key = `${sectionIdx}-${subIdx}-${itemIdx}`;
+  const toggleItem = (key: string) => {
     setActiveItems((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  if (loading) return <p className="text-center py-8">Loading...</p>;
-
-  if (filteredPrices.length === 0)
-    return <p className="text-center py-8">No prices found.</p>;
+  if (isLoading) return <p className="text-center py-8">Loading...</p>;
+  if (!filteredPrices.length) return <p className="text-center py-8">No prices found.</p>;
 
   return (
       <div className="w-full">
@@ -105,19 +87,22 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, items }) => {
                   <thead>
                   <tr className="border-b-2 border-muted text-[0.9rem] lg:text-[1.5rem]">
                     <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700] whitespace-nowrap">
-                      {data.columns.duration?.[lang]}
+                      {data.columns?.duration?.[lang] || "—"}
                     </th>
+
                     <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700]">
-                      {data.columns.procedure?.[lang]}
+                      {data.columns?.procedure?.[lang] || "—"}
                     </th>
-                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700] text-right">
-                      {data.columns.price?.[lang]}
+
+                    <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700] text-right whitespace-nowrap">
+                      {data.columns?.price?.[lang] || "—"}
                     </th>
                   </tr>
                   </thead>
 
+
                   <tbody className="text-[0.875rem] md:text-[1.25rem]">
-                  {data.sections.map((section, sIndex) => (
+                  {(data.sections ?? []).map((section, sIndex) => (
                       <React.Fragment key={sIndex}>
                         <tr>
                           <td
@@ -128,7 +113,7 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, items }) => {
                           </td>
                         </tr>
 
-                        {section.items.map((item, iIndex) => {
+                        {(section.items ?? []).map((item = {} as any, iIndex) => {
                           const key = `${idx}-${sIndex}-${iIndex}`;
                           const active = activeItems[key] || false;
 
@@ -140,15 +125,15 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, items }) => {
                                   }`}
                               >
                                 <td className="pl-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-r border-muted">
-                                  {item.duration}
+                                  {item?.duration || "—"}
                                 </td>
                                 <td className="px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem]">
-                                  {item.procedure?.[lang]}
+                                  {item?.procedure?.[lang] || "—"}
                                 </td>
                                 <td className="px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-l border-muted flex flex-col md:flex-row items-start md:items-center justify-between">
-                                  <span className="text-nowrap">{item.price}</span>
+                                  <span className="text-nowrap">{item?.price || "—"}</span>
                                   <button
-                                      onClick={() => toggleItem(idx, sIndex, iIndex)}
+                                      onClick={() => toggleItem(`${idx}-${sIndex}-${iIndex}`)}
                                       className="mt-1 md:mt-0 md:ml-2"
                                   >
                                     <SolarPowerBold className="size-[1rem] md:size-[1.5rem]" />
@@ -166,6 +151,5 @@ const PriceTable: React.FC<Props> = ({ serviceId, subserviceId, items }) => {
         ))}
       </div>
   );
-};
+}
 
-export default PriceTable;

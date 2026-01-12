@@ -1,50 +1,48 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { TopImage } from "../components/TopImage.tsx";
-import {useFetchData} from "../hooks/useFetchData.ts";
+import { useFetchData } from "../hooks/useFetchData.ts";
+import { useBusiness } from "../context/BusinessContext.tsx"; // 1. Импортируем контекст
 
 export default function Services() {
-  const { i18n, t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
+  const { businessSlug } = useParams<{ businessSlug: string }>();
 
+  const { data, loading } = useFetchData(["services"], businessSlug);
+  const services = data.services ?? [];
 
-  const { data: relatedData, loading } = useFetchData([
-    "services",
-    "prices",
-    "blogs",
-    "employees",
-    "specials",
-  ]);
+  const { meta } = useBusiness();
 
-  const mainServices = relatedData.services
+  const headerImage =
+      meta?.servicesHeaderImage ||
+      meta?.galleryHeaderImage ||
+      meta?.logo ||
+      "";
 
-  const imagee = "https://nextmedasia.com/wp-content/uploads/2022/11/lede.jpg";
-
-  if (loading) return <p className="text-center py-10">Loading . . .</p>;
+  if (loading) {
+    return <p className="text-center py-10">{t("loading")}</p>;
+  }
 
   return (
       <div className="w-full items-center justify-center ">
-        {imagee && <TopImage source={imagee} />}
+        <TopImage source={headerImage} />
 
         <div className="w-full px-4 md:px-[5rem]">
-
           <div className="py-8 mb-[3.5rem]">
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
               {t("services.title")}
             </h2>
-
-            <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]"></span>
-
             <p className="md:text-2xl text-[1.25rem] font-normal text-foreground duration-500">
               {t("services.description")}
             </p>
           </div>
 
           <div className="flex flex-wrap justify-center gap-8">
-            {Object.values(mainServices).map((service) => (
+            {Object.values(services).map((service: any) => (
                 <Link
                     key={service.id}
-                    to={`/${lang}/services/${service.slug}`}
+                    to={`/${lang}/${businessSlug}/services/${service.slug}`}
                     className="group rounded-[10rem] shadow-md overflow-hidden
                       lg:max-w-[30rem]
                       md:max-h-[23rem]

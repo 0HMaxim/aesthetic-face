@@ -2,19 +2,28 @@ import {useTranslation} from "react-i18next";
 import PriceTable from "../components/PriceTable.tsx";
 import {TopImage} from "../components/TopImage.tsx";
 import {Breadcrumbs} from "../components/Breadcrumbs.tsx";
+import {useBusiness} from "../context/BusinessContext.tsx";
+import {useParams} from "react-router-dom";
 
 export default function Price() {
 
   const { t } = useTranslation();
 
+  const { meta } = useBusiness();
+  const { businessSlug } = useParams<{ slug: string; businessSlug: string }>();
 
-  const imagee = "s";
+
+  const headerImage =
+      meta?.pricesHeaderImage ||
+      meta?.galleryHeaderImage ||
+      meta?.logo ||
+      "";
 
   return (
       <div className="w-full items-center justify-center ">
 
-        {imagee && (
-            <TopImage source={imagee}/>
+        {headerImage && (
+            <TopImage source={headerImage}/>
         )}
 
         <div className="w-full px-4 md:px-[5rem]">
@@ -35,7 +44,7 @@ export default function Price() {
           </div>
 
 
-          <PriceTable />
+          <PriceTable businessSlug={businessSlug}/>
 
         </div>
 

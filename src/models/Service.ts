@@ -21,4 +21,5 @@ export interface Service  {
   prices?: string[];
   specials?: string[];
   employees?: string[];
+  faqs?: string[];
 }

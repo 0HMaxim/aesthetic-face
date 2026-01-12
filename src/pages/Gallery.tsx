@@ -1,126 +1,77 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 
-import "yet-another-react-lightbox/styles.css";
-import "yet-another-react-lightbox/plugins/thumbnails.css";
-import "yet-another-react-lightbox/plugins/captions.css";
-import PhotoList from "../components/PhotoList.tsx";
 import { TopImage } from "../components/TopImage.tsx";
 import { Breadcrumbs } from "../components/Breadcrumbs.tsx";
-import { db } from "../firebase.ts";
-import { ref, get } from "firebase/database";
-import type { LocalizedText } from "../models/LocalizedText.ts";
-import type { Photo } from "../models/Photo";
-import type { Employee } from "../models/Employee.ts";
-
-interface Service {
-    id: string;
-    title: LocalizedText;
-}
-
-interface EmployeeOption {
-    id: string;
-    title: string;
-}
+import PhotoList from "../components/PhotoList.tsx";
+import { useBusiness } from "../context/BusinessContext.tsx";
+import { useFetchData } from "../hooks/useFetchData.ts";
 
 export default function Gallery() {
-    const { i18n, t } = useTranslation();
-    const lang = i18n.language as keyof LocalizedText;
+    const { t, i18n } = useTranslation();
+    const lang = i18n.language as "uk" | "ru" | "en" | "de";
+    const { businessSlug } = useParams<{ businessSlug: string }>();
 
-    const imagee = "https://www.aestheticclinicmalaysia.com/wp-content/uploads/2023/10/Aesthetic-Clinic-Malaysia.jpg";
+    const { data, loading } = useFetchData(
+        ["services", "photos", "employees"],
+        businessSlug
+    );
 
-    const [services, setServices] = useState<Service[]>([]);
-    const [photos, setPhotos] = useState<Photo[]>([]);
-    const [employees, setEmployees] = useState<Employee[]>([]);
+    const services = data.services ?? [];
+    const photos = data.photos ?? [];
+    const employees = data.employees ?? [];
+
+    const { meta } = useBusiness();
+    const headerImage =
+        meta?.galleryHeaderImage || meta?.logo || "";
 
     const [selectedService, setSelectedService] = useState("all");
     const [selectedEmployee, setSelectedEmployee] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
-    const [loading, setLoading] = useState(true);
 
-    // ---------- Загрузка данных ----------
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const [servicesSnap, photosSnap, employeesSnap] = await Promise.all([
-                    get(ref(db, "services")),
-                    get(ref(db, "photos")),
-                    get(ref(db, "employees")),
-                ]);
-
-                if (servicesSnap.exists()) {
-                    const sData = servicesSnap.val();
-                    setServices(Object.keys(sData).map(key => ({ id: key, ...sData[key] })));
-                }
-                if (photosSnap.exists()) {
-                    const pData = photosSnap.val();
-                    setPhotos(Object.keys(pData).map(key => ({ id: key, ...pData[key] })));
-                }
-                if (employeesSnap.exists()) {
-                    const eData = employeesSnap.val();
-                    setEmployees(Object.keys(eData).map(key => ({ id: key, ...eData[key] })));
-                }
-            } catch (err) {
-                console.error("Error loading gallery data:", err);
-            } finally {
-                setLoading(false);
-            }
-        }
-        fetchData();
-    }, []);
-
-    // Опции для Сервисов
     const serviceOptions = useMemo(
         () => [
             { id: "all", title: t("FAQ.allServices") || "All Services" },
-            ...services.map((s) => ({
-                id: s.id,
-                title: s.title[lang] || "Untitled Service"
-            })),
+            ...services.map((s) => ({ id: s.id, title: s.title?.[lang] || "Untitled Service" })),
         ],
         [services, lang, t]
     );
 
-    // Опции для Сотрудников (Исправленная ошибка TS2322)
-    const employeeOptions: EmployeeOption[] = useMemo(
+    const employeeOptions = useMemo(
         () => [
-            { id: "all", title: t("gallery.allEmployees") || "Усі працівники" },
-            ...employees
-                .filter((e) => e.id !== undefined) // Гарантируем наличие id
-                .map((e) => ({
-                    id: e.id as string,
-                    title: String((e.fullName as LocalizedText)?.[lang] || e.fullName || "Unnamed Employee")
-                })),
+            { id: "all", title: t("gallery.allEmployees") || "All Employees" },
+            ...employees.map((e) => ({ id: e.id!, title: e.fullName?.[lang] || e.fullName || "Unnamed Employee" })),
         ],
         [employees, lang, t]
     );
 
-    // Фильтрация Фото (Без subservices)
-    const filteredPhotos = useMemo(() => {
-        return photos.filter((photo) => {
-            const matchesService = selectedService === "all" || photo.serviceId === selectedService;
-            const matchesEmployee = selectedEmployee === "all" || photo.employeeId === selectedEmployee;
+    // Фильтруем фото
+    const filteredPhotos = useMemo(
+        () =>
+            photos.filter(
+                (p) =>
+                    (selectedService === "all" || p.serviceId === selectedService) &&
+                    (selectedEmployee === "all" || p.employeeId === selectedEmployee)
+            ),
+        [photos, selectedService, selectedEmployee]
+    );
 
-            return matchesService && matchesEmployee;
-        });
-    }, [photos, selectedService, selectedEmployee]);
-
-    // Обогащение данных для списка
     const enrichedPhotos = useMemo(
         () =>
-            filteredPhotos.map((photo) => ({
-                ...photo,
-                service: services.find((s) => s.id === photo.serviceId),
-                employee: employees.find((e) => e.id === photo.employeeId),
+            filteredPhotos.map((p) => ({
+                ...p,
+                service: services.find((s) => s.id === p.serviceId),
+                employee: employees.find((e) => e.id === p.employeeId),
             })),
         [filteredPhotos, services, employees]
     );
 
-    if (loading) return <p className="p-6 text-center">{t("loading")}</p>;
+    if (loading) return <p className="text-center py-10">{t("loading")}</p>;
 
     return (
         <div className="w-full items-center justify-center">
-            {imagee && <TopImage source={imagee} />}
+            {headerImage && <TopImage source={headerImage} />}
 
             <div className="w-full px-4 md:px-[5rem]">
                 <Breadcrumbs />
@@ -136,7 +87,7 @@ export default function Gallery() {
                         <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">
                             <span className="text-foreground text-[1.5rem] font-[600]">{t("FAQ.direction")}</span>
 
-                            {/* Селект для Послуг */}
+                            {/* Селект для сервисов */}
                             <select
                                 className="border rounded-lg py-2 px-3 text-black w-full md:w-auto"
                                 value={selectedService}
@@ -147,13 +98,11 @@ export default function Gallery() {
                                 }}
                             >
                                 {serviceOptions.map((s) => (
-                                    <option key={s.id} value={s.id}>
-                                        {s.title}
-                                    </option>
+                                    <option key={s.id} value={s.id}>{s.title}</option>
                                 ))}
                             </select>
 
-                            {/* Селект для Працівників */}
+                            {/* Селект для сотрудников */}
                             <select
                                 className="border rounded-lg py-2 px-3 text-black w-full md:w-auto"
                                 value={selectedEmployee}
@@ -163,9 +112,7 @@ export default function Gallery() {
                                 }}
                             >
                                 {employeeOptions.map((e) => (
-                                    <option key={e.id} value={e.id}>
-                                        {e.title}
-                                    </option>
+                                    <option key={e.id} value={e.id}>{e.title}</option>
                                 ))}
                             </select>
                         </div>

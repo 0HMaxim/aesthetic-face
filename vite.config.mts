@@ -10,5 +10,5 @@ export default defineConfig({
     }),
   ],
 
-  base: "/aesthetic-face/",
+  base: "/multi-business-site/",
 });

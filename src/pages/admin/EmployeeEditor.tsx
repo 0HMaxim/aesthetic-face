@@ -11,7 +11,8 @@ import type { LocalizedText } from "../../models/LocalizedText";
 import ImageInputBlock from "../../components/ImageInputBlock.tsx";
 
 export default function EmployeeEditor() {
-  const { id } = useParams();
+  // 1. Достаем lang и businessSlug из параметров URL
+  const { id, lang, businessSlug } = useParams<{ id: string; lang: string; businessSlug: string }>();
   const navigate = useNavigate();
 
   const emptyEmployee: Employee = {
@@ -26,8 +27,9 @@ export default function EmployeeEditor() {
   };
 
   const [employee, setEmployee] = useState<Employee>(emptyEmployee);
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [loading, setLoading] = useState(true);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
 
   useEffect(() => {
     if (id && id !== "new") {
@@ -65,41 +67,73 @@ export default function EmployeeEditor() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSave = async () => {
-    if (!validate()) return;
-    try {
-      const empId = id === "new" || !id ? push(ref(db, "employees")).key : id;
-      if (!empId) return;
 
-      await set(ref(db, `employees/${empId}`), { ...employee, id: empId });
-      navigate("/admin/employees");
-    } catch (error) {
-      console.error("Error saving employee:", error);
-    }
-  };
 
-  if (loading) return <div className="p-20 text-center animate-pulse font-black text-gray-300 tracking-widest uppercase">Loading Specialist...</div>;
+    // 2. Исправляем загрузку: добавляем путь бизнеса
+    useEffect(() => {
+      if (id && id !== "new") {
+        const employeeRef = ref(db, `businesses/${businessSlug}/employees/${id}`);
+        get(employeeRef).then((snapshot) => {
+          if (snapshot.exists()) {
+            setEmployee({ ...emptyEmployee, ...snapshot.val(), id });
+          }
+          setLoading(false);
+        });
+      } else {
+        setLoading(false);
+      }
+    }, [id, businessSlug]);
 
-  return (
-      <div className="p-6 max-w-6xl mx-auto bg-white shadow-2xl rounded-[40px] my-10 border border-gray-100">
+    // 3. Исправляем сохранение
+    const handleSave = async () => {
+      if (!validate()) return;
+      try {
+        // Путь к коллекции сотрудников именно этого бизнеса
+        const employeesListRef = ref(db, `businesses/${businessSlug}/employees`);
 
-        {/* Header */}
-        <div className="flex justify-between items-center mb-12 border-b border-gray-50 pb-8">
-          <div>
-            <h1 className="text-4xl font-black text-gray-800 tracking-tighter uppercase">
-              {id && id !== "new" ? "Edit Profile" : "New Specialist"}
-            </h1>
-            <p className="text-gray-400 text-sm font-medium mt-1">Manage specialist's personal brand and credentials</p>
+        const empId = id === "new" || !id
+            ? push(employeesListRef).key
+            : id;
+
+        if (!empId) return;
+
+        // Сохраняем по полному пути
+        await set(ref(db, `businesses/${businessSlug}/employees/${empId}`), {
+          ...employee,
+          id: empId
+        });
+
+        // 4. ВАЖНО: Навигация с учетом языка и слага бизнеса
+        navigate(`/${lang}/admin/${businessSlug}/employees`);
+      } catch (error) {
+        console.error("Error saving employee:", error);
+      }
+    };
+
+    // 5. Не забываем обновить навигацию для кнопок "Cancel" и "Discard"
+    const goBack = () => navigate(`/${lang}/admin/${businessSlug}/employees`);
+
+    if (loading) return <div className="p-20 text-center animate-pulse font-black text-gray-300 tracking-widest uppercase">Loading Specialist...</div>;
+
+    return (
+        <div className="p-6 max-w-6xl mx-auto bg-white shadow-2xl rounded-[40px] my-10 border border-gray-100">
+
+          {/* Header */}
+          <div className="flex justify-between items-center mb-12 border-b border-gray-50 pb-8">
+            <div>
+              <h1 className="text-4xl font-black text-gray-800 tracking-tighter uppercase">
+                {id && id !== "new" ? "Edit Profile" : "New Specialist"}
+              </h1>
+            </div>
+            <div className="flex gap-6">
+              <button onClick={goBack} className="text-gray-400 font-black text-xs uppercase tracking-widest">
+                Discard Changes
+              </button>
+              <button onClick={handleSave} className="bg-blue-600 text-white px-10 py-3 rounded-2xl font-bold">
+                Save Employee
+              </button>
+            </div>
           </div>
-          <div className="border-t border-gray-50 pt-8 flex justify-end items-center gap-6">
-            <button onClick={() => navigate("/admin/employees")} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
-              Discard Changes
-            </button>
-            <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-2xl transition-all font-bold shadow-lg shadow-blue-100 active:scale-95">
-              Save Employee
-            </button>
-          </div>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 

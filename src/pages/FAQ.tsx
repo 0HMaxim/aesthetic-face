@@ -1,93 +1,57 @@
-import { useState, useMemo, useEffect } from "react";
-import FAQList from "../components/FAQList.tsx";
+import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
+
 import { TopImage } from "../components/TopImage.tsx";
 import { Breadcrumbs } from "../components/Breadcrumbs.tsx";
-import { db } from "../firebase.ts";
-import { ref, get } from "firebase/database";
-import type { LocalizedText } from "../models/LocalizedText.ts";
-import type { FAQ as FAQModel } from "../models/FAQ";
-
-interface Service {
-  id: string;
-  title: LocalizedText;
-}
+import FAQList from "../components/FAQList.tsx";
+import { useBusiness } from "../context/BusinessContext.tsx";
+import { useFetchData } from "../hooks/useFetchData.ts";
 
 export default function FAQ() {
-  const { i18n, t } = useTranslation();
-  const lang = i18n.language as keyof LocalizedText;
-  const imagee = "s"; // Замените на реальный путь к картинке
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language as "uk" | "ru" | "en" | "de";
+  const { businessSlug } = useParams<{ businessSlug: string }>();
 
-  const [faqList, setFaqList] = useState<FAQModel[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [services, setServices] = useState<Service[]>([]);
+  const { data, loading } = useFetchData(["faqs", "services"], businessSlug);
+  const faqs = data.faqs ?? [];
+  const services = data.services ?? [];
+
+  const { meta } = useBusiness();
+  const headerImage =
+      meta?.faqsHeaderImage || meta?.logo || "https://nextmedasia.com/wp-content/uploads/2022/11/lede.jpg";
+
   const [selectedService, setSelectedService] = useState("all");
   const [page, setPage] = useState(0);
 
-  // ---------- Загрузка FAQ ----------
-  useEffect(() => {
-    async function fetchFaqs() {
-      try {
-        const faqRef = ref(db, "faqs");
-        const snapshot = await get(faqRef);
-        if (snapshot.exists()) {
-          const data = snapshot.val();
-          const formatted: FAQModel[] = Object.keys(data).map((key) => ({
-            id: key,
-            ...data[key],
-          }));
-          setFaqList(formatted);
-        }
-      } catch (err) {
-        console.error("Error loading FAQs:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchFaqs();
-  }, []);
-
-  // ---------- Загрузка сервисов ----------
-  useEffect(() => {
-    async function fetchServices() {
-      try {
-        const servicesSnap = await get(ref(db, "services"));
-        if (servicesSnap.exists()) {
-          const data = servicesSnap.val();
-          const formatted: Service[] = Object.keys(data).map((key) => ({
-            id: key,
-            title: data[key].title,
-          }));
-          setServices(formatted);
-        }
-      } catch (err) {
-        console.error("Error loading services:", err);
-      }
-    }
-    fetchServices();
-  }, []);
-
-  // Опции для выпадающего списка
   const serviceOptions = useMemo(
       () => [
         { id: "all", title: t("FAQ.allServices") || "Все услуги" },
-        ...services.map((s) => ({ id: s.id, title: s.title[lang] || "Untitled" })),
+        ...services.map((s) => ({ id: s.id, title: s.title?.[lang] || "Untitled" })),
       ],
-      [lang, t, services]
+      [services, lang, t]
   );
 
-  // Фильтрация FAQ (только по serviceId, как в модели)
-  const filteredFaqs = useMemo(() => {
-    if (selectedService === "all") return faqList;
-    return faqList.filter((faq) => faq.serviceId === selectedService);
-  }, [faqList, selectedService]);
+  const filteredFaqs = useMemo(
+      () =>
+          selectedService === "all"
+              ? faqs
+              : faqs.filter((faq) => faq.serviceId === selectedService),
+      [faqs, selectedService]
+  );
 
-  // Сброс страницы при смене фильтра
-  useEffect(() => setPage(0), [selectedService]);
+  const handleServiceChange = (value: string) => {
+    setSelectedService(value);
+    setPage(0);
+  };
+
+  if (loading)
+    return <p className="text-center py-10">{t("FAQ.loading") || "Загрузка..."}</p>;
 
   return (
       <div className="w-full items-center justify-center">
-        {imagee && <TopImage source={imagee} />}
+        {headerImage && <TopImage source={headerImage} />}
+
         <div className="w-full px-4 md:px-[5rem]">
           <Breadcrumbs />
 
@@ -100,37 +64,28 @@ export default function FAQ() {
               <p className="text-base lg:text-2xl font-normal text-foreground duration-500 mb-4">
                 {t("FAQ.subtitle")}
               </p>
-              <div>
-                <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">
-                <span className="text-foreground text-[1.5rem] font-[600]">
-                  {t("FAQ.direction") || "Направление:"}
-                </span>
 
-                  <select
-                      className="border rounded-lg py-2 px-3 text-black w-full md:w-auto outline-none focus:ring-2 focus:ring-primary"
-                      value={selectedService}
-                      onChange={(e) => setSelectedService(e.target.value)}
-                  >
-                    {serviceOptions.map((s) => (
-                        <option key={s.id} value={s.id}>
-                          {s.title}
-                        </option>
-                    ))}
-                  </select>
-                </div>
+              <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">
+              <span className="text-foreground text-[1.5rem] font-[600]">
+                {t("FAQ.direction") || "Направление:"}
+              </span>
+
+                <select
+                    className="border rounded-lg py-2 px-3 text-black w-full md:w-auto outline-none focus:ring-2 focus:ring-primary"
+                    value={selectedService}
+                    onChange={(e) => handleServiceChange(e.target.value)}
+                >
+                  {serviceOptions.map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.title}
+                      </option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>
 
-          {loading ? (
-              <p className="text-center text-lg">{t("FAQ.loading") || "Загрузка..."}</p>
-          ) : (
-              <FAQList
-                  faqs={filteredFaqs}
-                  currentPage={page}
-                  setCurrentPage={setPage}
-              />
-          )}
+          <FAQList faqs={filteredFaqs} currentPage={page} setCurrentPage={setPage} />
         </div>
       </div>
   );

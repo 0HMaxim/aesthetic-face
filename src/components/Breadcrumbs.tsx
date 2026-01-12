@@ -3,8 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { db } from "../firebase.ts";
 import { get, ref } from "firebase/database";
-import type { Employee } from "../models/Employee";
-import type { Blog } from "../models/Blog";
 
 function getLocalizedString(value: string | string[] | undefined) {
   if (!value) return "";
@@ -16,7 +14,7 @@ interface BreadcrumbsProps {
   employeeSlug?: string;
   specialSlug?: string;
   blogSlug?: string;
-  currentTitle?: string; // Прямой заголовок, чтобы не ждать загрузки из БД
+  currentTitle?: string;
 }
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
@@ -33,7 +31,6 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
   const [asyncTitle, setAsyncTitle] = useState<string>("");
 
   useEffect(() => {
-    // Если заголовок уже передан через пропсы, нам не нужно делать запрос к Firebase
     if (currentTitle) return;
 
     async function fetchBreadcrumbData() {

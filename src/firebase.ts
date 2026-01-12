@@ -2,12 +2,14 @@ import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCyoLNFvAcpwKX6ZCDfnuU0hBw00duFhjA",
-  authDomain: "db-multi-filial-projekt.firebaseapp.com",
-  projectId: "db-multi-filial-projekt",
-  storageBucket: "db-multi-filial-projekt.firebasestorage.app",
-  messagingSenderId: "452912643077",
-  appId: "1:452912643077:web:2085bd06d2931483a9b06c"
+  apiKey: "AIzaSyBUVAKEHNI8oO11OSmeFN_tPvrOoseqQCM",
+  authDomain: "multi-filial-projekt-1.firebaseapp.com",
+  databaseURL: "https://multi-filial-projekt-1-default-rtdb.firebaseio.com",
+  projectId: "multi-filial-projekt-1",
+  storageBucket: "multi-filial-projekt-1.firebasestorage.app",
+  messagingSenderId: "88336281846",
+  appId: "1:88336281846:web:514cfd30c707e4a14e7cd7",
+  measurementId: "G-GQRLM49G1Z"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -13,9 +13,14 @@ import type { LocalizedText } from "../../models/LocalizedText.ts";
 import { useFetchData } from "../../hooks/useFetchData.ts";
 import { SyncedRelationSelect } from "../../components/SyncedRelationSelect.tsx";
 import ImageInputBlock from "../../components/ImageInputBlock.tsx";
+import {useTranslation} from "react-i18next";
 
 export default function PhotoEditor() {
-    const { id } = useParams();
+    const { i18n } = useTranslation();
+    const { businessSlug, id } = useParams<{
+        businessSlug: string;
+        id: string;
+    }>();
     const navigate = useNavigate();
 
     const emptyPhoto: Photo = {
@@ -31,17 +36,21 @@ export default function PhotoEditor() {
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
     // Загружаем только сервисы и сотрудников
-    const { data: relatedData, loading } = useFetchData(["services", "employees"]);
+    const { data: relatedData, loading } = useFetchData(
+        ["services", "employees"],
+        businessSlug
+    );
 
     useEffect(() => {
-        if (id && id !== "new") {
-            get(ref(db, `photos/${id}`)).then((snapshot) => {
+        if (!businessSlug || !id || id === "new") return;
+
+        get(ref(db, `businesses/${businessSlug}/photos/${id}`))
+            .then(snapshot => {
                 if (snapshot.exists()) {
                     setPhoto({ ...emptyPhoto, ...snapshot.val(), id });
                 }
             });
-        }
-    }, [id]);
+    }, [id, businessSlug]);
 
     const handleSave = async () => {
         if (!photo.mainImage) {
@@ -49,12 +58,21 @@ export default function PhotoEditor() {
             return;
         }
 
-        const photoId = (id === "new" || !id) ? push(ref(db, "photos")).key : id;
+        const baseRef = ref(db, `businesses/${businessSlug}/photos`);
+
+        const photoId =
+            id === "new" || !id
+                ? push(baseRef).key
+                : id;
+
         if (!photoId) return;
 
-        // Сохраняем данные, гарантируя наличие ID
-        await set(ref(db, `photos/${photoId}`), { ...photo, id: photoId });
-        navigate("/admin/photos");
+        await set(ref(db, `businesses/${businessSlug}/photos/${photoId}`), {
+            ...photo,
+            id: photoId,
+        });
+
+        navigate(`/admin/${businessSlug}/photos`);
     };
 
     if (loading) return (
@@ -74,7 +92,7 @@ export default function PhotoEditor() {
                 </div>
 
                 <div className="border-t border-gray-50 pt-8 flex justify-end items-center gap-6">
-                    <button onClick={() => navigate("/admin/photos")} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
+                    <button onClick={() => navigate(`/admin/${businessSlug}/photos`)} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
                         Discard Changes
                     </button>
                     <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-2xl transition-all font-bold shadow-lg shadow-blue-100 active:scale-95">
@@ -106,10 +124,19 @@ export default function PhotoEditor() {
                             label="Service"
                             value={photo.serviceId ? [photo.serviceId] : []}
                             options={(relatedData.services || []) as Service[]}
-                            getLabel={(o) => String(o.title?.uk || o.title?.ru || "Untitled Service")}
+                            getLabel={(o) => {
+                                const t = o.title?.[i18n.language as keyof typeof o.title]
+                                    || o.title?.uk
+                                    || o.title?.ru
+                                    || o.title?.en
+                                    || o.title?.de
+                                    || "Untitled Service";
+                                return String(t); // гарантированно строка
+                            }}
+
                             getValue={(o) => String(o.id || "")}
                             multiple={false}
-                            firebasePath="services"
+                            firebasePath={`businesses/${businessSlug}/services`}
                             parentId={id === "new" ? undefined : id}
                             parentFieldName="photos"
                             syncType="array"
@@ -121,10 +148,17 @@ export default function PhotoEditor() {
                             label="Specialist"
                             value={photo.employeeId ? [photo.employeeId] : []}
                             options={(relatedData.employees || []) as Employee[]}
-                            getLabel={(o) => String(o.fullName?.uk || o.fullName?.ru || "Unnamed Employee")}
+                            getLabel={(o) => {
+                                const name = o.fullName?.[i18n.language as keyof typeof o.fullName]
+                                    || o.fullName?.uk
+                                    || o.fullName?.ru
+                                    || "Unnamed Employee";
+                                return String(name);
+                            }}
+
                             getValue={(o) => String(o.id || "")}
                             multiple={false}
-                            firebasePath="employees"
+                            firebasePath={`businesses/${businessSlug}/employees`}
                             parentId={id === "new" ? undefined : id}
                             parentFieldName="photos"
                             syncType="array"
@@ -224,7 +258,7 @@ export default function PhotoEditor() {
                 </div>
             </div>
             <div className="border-t border-gray-50 pt-8 flex justify-end items-center gap-6">
-                <button onClick={() => navigate("/admin/photos")} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
+                <button onClick={() => navigate(`/admin/${businessSlug}/photos`)} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
                     Discard Changes
                 </button>
                 <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-2xl transition-all font-bold shadow-lg shadow-blue-100 active:scale-95">

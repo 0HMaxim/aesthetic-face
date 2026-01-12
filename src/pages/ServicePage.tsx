@@ -9,91 +9,56 @@ import PriceTable from "../components/PriceTable.tsx";
 import { Button } from "@heroui/react";
 
 // Types
-import type { FAQ } from "../models/FAQ.ts";
 import type { Special } from "../models/Special.ts";
 import type { Blog } from "../models/Blog.ts";
-import type { Employee } from "../models/Employee.ts";
-import type { Photo } from "../models/Photo.ts";
 import type { ContentBlock } from "../models/ContentBlock.ts";
 import {Breadcrumbs} from "../components/Breadcrumbs.tsx";
 
 export default function ServicePage() {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug, businessSlug } = useParams<{ slug: string; businessSlug: string }>();
   const { i18n, t } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
-  const navigate = useNavigate();
 
-  const { data: relatedData, loading } = useFetchData([
-    "services",
-    "prices",
-    "blogs",
-    "specials",
-    "employees",
-    "faqs",
-    "photos",
-  ]);
-
-  if (loading) return <div className="container mx-auto py-8">Loading...</div>;
-
-  // Явное приведение типов для данных из хука
-  const services = (relatedData.services || []) as any[];
-  const prices = (relatedData.prices || []) as any[];
-  const blogs = (relatedData.blogs || []) as Blog[];
-  const specials = (relatedData.specials || []) as Special[];
-  const employees = (relatedData.employees || []) as Employee[];
-  const faqs = (relatedData.faqs || []) as FAQ[];
-  const photos = (relatedData.photos || []) as Photo[];
-
-  const currentItem = services.find((s) => s.slug === slug);
-  if (!currentItem) return <div className="container mx-auto py-8">Service not found</div>;
-
-  const currentId = currentItem.id;
-
-  const relatedSubservices = services.filter(s => {
-    const parentIds = s.parentServiceIds;
-    return Array.isArray(parentIds) && parentIds.includes(currentId);
-  });
-
-  // Фильтрация цен
-  const relatedPrices = prices.filter((price) => {
-    const priceServiceIds = Array.isArray(price.serviceIds) ? price.serviceIds : [];
-    return priceServiceIds.includes(currentId);
-  });
-
-  const priceItems = relatedPrices.map(price => ({
-    category: price.category,
-    columns: price.columns,
-    sections: price.sections || []
-  }));
-
-  // FAQ
-  const relatedFaqs = faqs.filter((faq) => faq.serviceId === currentId);
-
-  // Фото
-  const currentPhotos = photos
-      .filter((p) => p.serviceId === currentId || p.subserviceId === currentId)
-      .map((photo) => ({
-        ...photo,
-        service: photo.serviceId ? services.find((s) => s.id === photo.serviceId) : undefined,
-        subservice: photo.subserviceId ? services.find((s) => s.id === photo.subserviceId) : undefined,
-        employee: photo.employeeId ? employees.find((d) => d.id === photo.employeeId) : undefined,
-      }));
-
-  // Блоги
-  const serviceBlogIds = (currentItem.blogs || []) as string[];
-  const relatedBlogs = blogs.filter((blog) => blog.id && serviceBlogIds.includes(blog.id));
-
-  // Акции
-  const relatedSpecials = specials.filter((special) => {
-    return Array.isArray(special.serviceId) && special.serviceId.includes(currentId);
-  });
-
-  // Сотрудники
-  const relatedEmployees = employees.filter((emp) =>
-      emp.id && currentItem.employees?.includes(emp.id)
+  // Получаем все данные через хук для конкретного бизнеса
+  const { data, loading } = useFetchData(
+      ["services", "prices", "blogs", "specials", "employees", "faqs", "photos"],
+      businessSlug
   );
 
-  const imagee = currentItem.mainImage;
+  if (loading) return <div className="p-20 text-center font-black text-gray-300 animate-pulse uppercase">Loading...</div>;
+
+  const services = data.services || [];
+  const prices = data.prices || [];
+  const blogs = (data.blogs || []) as Blog[];
+  const specials = data.specials || [];
+  const employees = data.employees || [];
+  const faqs = data.faqs || [];
+  const photos = data.photos || [];
+
+  // Текущая услуга
+  const service = services.find((s: any) => s.slug === slug);
+  if (!service) return <div className="p-20 text-center font-black text-gray-300 uppercase">Service not found</div>;
+
+  const serviceId = service.id;
+
+  // Фильтруем все связанные сущности через id текущей услуги
+  const relatedSubservices = services.filter(s => Array.isArray(s.parentServiceIds) && s.parentServiceIds.includes(serviceId));
+  const relatedPrices = prices.filter(p => Array.isArray(p.serviceIds) && p.serviceIds.includes(serviceId));
+  const relatedFaqs = faqs.filter(faq => faq.serviceId === serviceId);
+  const relatedPhotos = photos
+      .filter(p => p.serviceId === serviceId || p.subserviceId === serviceId)
+      .map(photo => ({
+        ...photo,
+        service: photo.serviceId ? services.find(s => s.id === photo.serviceId) : undefined,
+        subservice: photo.subserviceId ? services.find(s => s.id === photo.subserviceId) : undefined,
+        employee: photo.employeeId ? employees.find(e => e.id === photo.employeeId) : undefined
+      }));
+  const relatedBlogs = blogs.filter(b => Array.isArray(service.blogs) && service.blogs.includes(b.id));
+  const relatedSpecials = specials.filter(sp => Array.isArray(sp.serviceId) && sp.serviceId.includes(serviceId));
+  const relatedEmployees = employees.filter(emp => Array.isArray(service.employees) && service.employees.includes(emp.id));
+
+
+  const imagee = service.mainImage;
 
   return (
       <div className="w-full items-center justify-center">
@@ -103,25 +68,24 @@ export default function ServicePage() {
 
 
           <Breadcrumbs
-              blogSlug={currentItem.slug}
-              currentTitle={currentItem.title?.[lang] || currentItem.headerTitle?.[lang]}
+              blogSlug={service.slug}
+              currentTitle={service.title?.[lang] || service.headerTitle?.[lang]}
           />
 
           <div className="py-8">
-            <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">{currentItem.title?.[lang]}</h2>
+            <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">{service.title?.[lang]}</h2>
           </div>
 
           <div className="flex flex-col gap-8">
-            {currentItem.content && <ContentBlockRenderer content={currentItem.content} />}
+            {service.content && <ContentBlockRenderer content={service.content} />}
 
             {relatedSubservices.length > 0 && (
                 <div className="py-8">
                   <h2 className="text-3xl lg:text-5xl font-[800] my-[1.5rem]">{t("servicePage.otherServices")}</h2>
                   <div className="flex flex-wrap gap-4">
                     {relatedSubservices.map((sub) => (
-                        <div
-                            key={sub.id}
-                            onClick={() => navigate(`/${lang}/services/${sub.slug}`)}
+                        <Link
+                            to={`/${lang}/${businessSlug}/services/${sub.slug}`}
                             className="group relative overflow-hidden w-[15rem] h-[12rem] rounded-[10rem] shadow-md hover:bg-[var(--primary)] hover:shadow-xl transition duration-500 cursor-pointer"
                         >
                           {sub.mainImage && (
@@ -134,13 +98,13 @@ export default function ServicePage() {
                           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
                             <p className="text-[1rem] font-normal">{sub.title?.[lang]}</p>
                           </div>
-                        </div>
+                        </Link>
                     ))}
                   </div>
                 </div>
             )}
 
-            <PriceTable items={priceItems} />
+            {relatedPrices.length > 0 && ( <PriceTable items={relatedPrices} /> )}
 
             {/* Раздел сотрудников */}
             {relatedEmployees.length > 0 && (
@@ -199,8 +163,8 @@ export default function ServicePage() {
                 </div>
             )}
 
-            {currentPhotos.length > 0 && (
-                <PhotoList photos={currentPhotos} currentPage={0} setCurrentPage={() => {}} itemsPerPage={10} />
+            {relatedPhotos.length > 0 && (
+                <PhotoList photos={relatedPhotos} currentPage={0} setCurrentPage={() => {}} itemsPerPage={10} />
             )}
 
             {relatedFaqs.length > 0 && (
@@ -255,19 +219,19 @@ export default function ServicePage() {
                   <div className="flex flex-wrap justify-center gap-8">
                     {relatedBlogs.map((item: Blog) => (
                         <div key={item.id} className="post_item w-[22rem] bg-primary rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition duration-500">
-                          <Link to={`/${lang}/blogs/${item.slug}`} className="image_block relative block overflow-hidden group">
+                          <Link to={`/${lang}/${businessSlug}/blogs/${item.slug}`} className="image_block relative block overflow-hidden group">
                       <span
                           className="image bg_img block w-full h-[15rem] bg-cover bg-center group-hover:scale-105 transition-transform duration-500"
                           style={{ backgroundImage: `url(${item.mainImage})` }}
                       ></span>
                           </Link>
-                          <Link to={`/${lang}/blogs/${item.slug}`} className="name fw600 block text-[1.3rem] font-semibold mt-4 px-4 hover:text-primary transition">
+                          <Link to={`/${lang}/${businessSlug}/blogs/${item.slug}`} className="name fw600 block text-[1.3rem] font-semibold mt-4 px-4 hover:text-primary transition">
                             {item.title?.[lang] || "Без назви"}
                           </Link>
                           <p className="excerpt text-[1rem] text-gray-600 mt-2 px-4 line-clamp-3">
                             {item.content?.find((block: ContentBlock) => block.type === "paragraph")?.content?.[lang] || "Опис відсутній"}
                           </p>
-                          <Link to={`/${lang}/blogs/${item.slug}`} className="more fw600 before block text-[1rem] font-semibold text-primary mt-4 mb-4 px-4 hover:underline">
+                          <Link to={`/${lang}/${businessSlug}/blogs/${item.slug}`} className="more fw600 before block text-[1rem] font-semibold text-primary mt-4 mb-4 px-4 hover:underline">
                             {t("specials.learnMore")}
                           </Link>
                         </div>

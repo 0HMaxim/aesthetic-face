@@ -16,56 +16,80 @@ import type { Employee } from "../../models/Employee.ts";
 import ImageInputBlock from "../../components/ImageInputBlock.tsx";
 import { useFetchData } from "../../hooks/useFetchData.ts";
 import { SyncedRelationSelect } from "../../components/SyncedRelationSelect.tsx";
+import { useBusiness } from "../../context/BusinessContext.tsx";
+
+// Константа инициализации вне компонента, чтобы не пересоздавалась
+const emptyBlog: Blog = {
+  title: { uk: "", ru: "", en: "", de: "" },
+  subtitle: { uk: "", ru: "", en: "", de: "" },
+  headerTitle: { uk: "", ru: "", en: "", de: "" },
+  slug: "",
+  mainImage: "",
+  content: [],
+  services: [],
+  specials: [],
+  prices: [],
+  employees: [],
+};
 
 export default function BlogEditor() {
-  const { id } = useParams();
+  const { id, businessSlug, lang = "en" } = useParams<{
+    id?: string;
+    businessSlug: string;
+    lang?: string;
+  }>();
+
+  const { slug: contextSlug, meta } = useBusiness();
   const navigate = useNavigate();
 
-  const emptyBlog: Blog = {
-    title: {},
-    subtitle: {},
-    headerTitle: {},
-    slug: "",
-    mainImage: "",
-    content: [],
-    services: [],
-    specials: [],
-    prices: [],
-    employees: [],
-  };
-
+  // Состояния
   const [blog, setBlog] = useState<Blog>(emptyBlog);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [dataLoading, setDataLoading] = useState(true);
 
-  const { data: relatedData, loading } = useFetchData([
+  // Загрузка связанных данных (сервисы, цены и т.д.)
+  const { data: relatedData, loading: relatedLoading } = useFetchData([
     "services",
     "prices",
     "employees",
     "specials",
-  ]);
+  ], businessSlug);
 
+  // Загрузка данных конкретного блога
   useEffect(() => {
-    if (id && id !== "new") {
-      get(ref(db, `blogs/${id}`)).then((snapshot) => {
-        if (snapshot.exists()) {
-          setBlog({ ...emptyBlog, ...snapshot.val(), id });
-        }
-      });
+    if (id === "new" || !id) {
+      setBlog(emptyBlog);
+      setDataLoading(false);
+      return;
     }
-  }, [id]);
 
-  const handleLocalizedChange = (field: keyof Blog, lang: string, value: string) => {
+    if (!businessSlug) return;
+
+    setDataLoading(true);
+    get(ref(db, `businesses/${businessSlug}/blogs/${id}`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setBlog({ ...emptyBlog, ...snapshot.val(), id });
+          }
+        })
+        .finally(() => setDataLoading(false));
+  }, [id, businessSlug]);
+
+  const displayName = meta?.name?.en || meta?.shortName?.en || contextSlug;
+
+  // Хендлеры
+  const handleLocalizedChange = (field: keyof Blog, l: string, value: string) => {
     setBlog((prev) => ({
       ...prev,
-      [field]: { ...(prev[field] as LocalizedText), [lang]: value },
+      [field]: { ...(prev[field] as LocalizedText), [l]: value },
     }));
-    setErrors((prev) => ({ ...prev, [field]: "" }));
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
   const addContentBlock = (type: "paragraph" | "image" | "heading" | "list", parentIndex?: number) => {
     const newBlock: ContentBlock = {
       type,
-      content: {},
+      content: { uk: "", ru: "", en: "", de: "" },
       align: "left",
       ...(type === "image" ? { media: "", widthPercent: 100 } : {}),
     };
@@ -79,12 +103,12 @@ export default function BlogEditor() {
     setBlog({ ...blog, content: updated });
   };
 
-  const handleBlockChange = (index: number, lang: string, value: string, parentIndex?: number) => {
+  const handleBlockChange = (index: number, l: string, value: string, parentIndex?: number) => {
     const updated = [...(blog.content || [])];
     if (typeof parentIndex === "number") {
-      updated[parentIndex].children![index].content = { ...updated[parentIndex].children![index].content, [lang]: value };
+      updated[parentIndex].children![index].content = { ...updated[parentIndex].children![index].content, [l]: value };
     } else {
-      updated[index].content = { ...updated[index].content, [lang]: value };
+      updated[index].content = { ...updated[index].content, [l]: value };
     }
     setBlog({ ...blog, content: updated });
   };
@@ -111,6 +135,37 @@ export default function BlogEditor() {
     setBlog({ ...blog, content: updated });
   };
 
+  const validate = () => {
+    const newErrors: { [key: string]: string } = {};
+    const isAnyLanguageFilled = (textObj: any) => {
+      return textObj && Object.values(textObj).some(v => typeof v === 'string' && v.trim().length > 0);
+    };
+
+    if (!isAnyLanguageFilled(blog.title)) newErrors.title = "Title is required";
+    if (!blog.slug?.trim()) newErrors.slug = "Slug is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSave = async () => {
+    if (!validate() || !businessSlug) return;
+
+    const blogsRef = ref(db, `businesses/${businessSlug}/blogs`);
+    const blogId = (id === "new" || !id) ? push(blogsRef).key : id;
+
+    if (!blogId) return;
+
+    await set(ref(db, `businesses/${businessSlug}/blogs/${blogId}`), {
+      ...blog,
+      id: blogId,
+      updatedAt: Date.now(),
+    });
+
+    navigate(`/${lang}/admin/${businessSlug}/blogs`);
+  };
+
+  // Рекурсивный рендер блоков
   const renderBlockEditor = (block: ContentBlock, index: number, parentIndex?: number) => {
     const blockLabel = parentIndex !== undefined ? `Child ${index + 1}` : `Block ${index + 1}`;
     return (
@@ -138,8 +193,6 @@ export default function BlogEditor() {
                         }}
                     />
                   </div>
-
-                  {/* Добавляем выбор выравнивания (Left / Center / Right) */}
                   <div className="flex justify-center gap-4 mt-2">
                     {(['left', 'center', 'right'] as const).map((pos) => (
                         <button
@@ -150,9 +203,7 @@ export default function BlogEditor() {
                               else updated[index].align = pos;
                               setBlog({ ...blog, content: updated });
                             }}
-                            className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${
-                                block.align === pos ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-400 hover:bg-gray-200"
-                            }`}
+                            className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${block.align === pos ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-400 hover:bg-gray-200"}`}
                         >
                           {pos}
                         </button>
@@ -201,46 +252,26 @@ export default function BlogEditor() {
     );
   };
 
-  const validate = () => {
-    const newErrors: { [key: string]: string } = {};
-
-    // Безопасная проверка LocalizedText
-    const isAnyLanguageFilled = (textObj: LocalizedText | undefined) => {
-      if (!textObj) return false;
-      return Object.values(textObj).some(v => {
-        if (typeof v === 'string') return v.trim().length > 0;
-        if (Array.isArray(v)) return v.join('').trim().length > 0;
-        return false;
-      });
-    };
-
-    if (!isAnyLanguageFilled(blog.title)) newErrors.title = "Title is required";
-    if (!blog.slug?.trim()) newErrors.slug = "Slug is required";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSave = async () => {
-    if (!validate()) return;
-    const blogId = id === "new" || !id ? push(ref(db, "blogs")).key : id;
-    if (!blogId) return;
-    await set(ref(db, `blogs/${blogId}`), { ...blog, id: blogId });
-    navigate("/admin/blogs");
-  };
-
-  if (loading) return <div className="p-20 text-center animate-pulse font-black text-gray-300 tracking-widest uppercase">Loading Blog Data...</div>;
+  // Проверка состояния загрузки
+  if (dataLoading || relatedLoading) {
+    return <div className="p-20 text-center animate-pulse font-black text-gray-300 tracking-widest uppercase">Loading Blog Data...</div>;
+  }
 
   return (
       <div className="p-6 max-w-6xl mx-auto bg-white shadow-2xl rounded-[40px] my-10 border border-gray-100">
         {/* Top Action Bar */}
         <div className="flex justify-between items-center mb-12 border-b border-gray-50 pb-8">
           <div>
-            <h1 className="text-4xl font-black text-gray-800 tracking-tighter uppercase">{id === "new" ? "New Blog" : "Edit Blog"}</h1>
+            <h1 className="text-4xl font-black text-gray-800 tracking-tighter uppercase">
+              {displayName} — {id === "new" ? "New Blog" : "Edit Blog"}
+            </h1>
             <p className="text-gray-400 text-sm font-medium tracking-tight mt-1">Design your story and link it with the ecosystem</p>
           </div>
-          <div className="border-t border-gray-50 pt-8 flex justify-end items-center gap-6">
-            <button onClick={() => navigate("/admin/employees")} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
+          <div className="flex justify-end items-center gap-6">
+            <button
+                onClick={() => navigate(`/${lang}/admin/${businessSlug}/blogs`)}
+                className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition"
+            >
               Discard Changes
             </button>
             <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-2xl transition-all font-bold shadow-lg shadow-blue-100 active:scale-95">
@@ -275,13 +306,13 @@ export default function BlogEditor() {
               <div key={field} className="p-8 border border-gray-100 rounded-[32px] bg-white shadow-sm">
                 <label className="block font-black text-gray-400 mb-5 uppercase text-[10px] tracking-[0.3em] ml-1">{field}</label>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  {["uk", "ru", "en", "de"].map(lang => (
-                      <div key={lang}>
-                        <div className="text-[9px] font-black text-gray-300 mb-1 ml-2 uppercase">{lang}</div>
+                  {["uk", "ru", "en", "de"].map(l => (
+                      <div key={l}>
+                        <div className="text-[9px] font-black text-gray-300 mb-1 ml-2 uppercase">{l}</div>
                         <input
                             className={`w-full border rounded-2xl p-4 text-xs font-bold shadow-sm focus:ring-4 focus:ring-blue-50 outline-none transition-all ${errors[field] ? "border-red-200" : "border-gray-50 hover:border-gray-200"}`}
-                            value={(blog[field] as LocalizedText)?.[lang] || ""}
-                            onChange={(e) => handleLocalizedChange(field, lang, e.target.value)}
+                            value={(blog[field] as LocalizedText)?.[l] || ""}
+                            onChange={(e) => handleLocalizedChange(field, l, e.target.value)}
                         />
                       </div>
                   ))}
@@ -302,10 +333,10 @@ export default function BlogEditor() {
                 label="Related Services"
                 value={blog.services || []}
                 options={(relatedData.services || []) as Service[]}
-                getLabel={(o) => String(o.title?.uk || "Untitled Service")}
+                getLabel={(o) => String(o.title?.[lang] || o.title?.uk || "Untitled Service")}
                 getValue={(o) => o.id!}
                 onChange={(v) => setBlog({ ...blog, services: v })}
-                firebasePath="services"
+                firebasePath={`businesses/${businessSlug}/services`}
                 parentId={blog.id}
                 parentFieldName="blogs"
                 syncType="array"
@@ -315,10 +346,10 @@ export default function BlogEditor() {
                   label="Linked Prices"
                   value={blog.prices || []}
                   options={(relatedData.prices || []) as PriceModel[]}
-                  getLabel={(o) => String(o.category?.uk || "Untitled Price")}
+                  getLabel={(o) => String(o.category?.[lang] || o.category?.uk || "Untitled Price")}
                   getValue={(o) => o.id!}
                   onChange={(v) => setBlog({ ...blog, prices: v })}
-                  firebasePath="prices"
+                  firebasePath={`businesses/${businessSlug}/prices`}
                   parentId={blog.id}
                   parentFieldName="blogIds"
                   syncType="array"
@@ -327,10 +358,10 @@ export default function BlogEditor() {
                   label="Current Offers"
                   value={blog.specials || []}
                   options={(relatedData.specials || []) as Special[]}
-                  getLabel={(o) => String(o.title?.uk || "Untitled Special")}
+                  getLabel={(o) => String(o.title?.[lang] || o.title?.uk || "Untitled Special")}
                   getValue={(o) => o.id!}
                   onChange={(v) => setBlog({ ...blog, specials: v })}
-                  firebasePath="specials"
+                  firebasePath={`businesses/${businessSlug}/specials`}
                   parentId={blog.id}
                   parentFieldName="blogIds"
                   syncType="array"
@@ -341,10 +372,10 @@ export default function BlogEditor() {
                 multiple
                 value={blog.employees || []}
                 options={(relatedData.employees || []) as Employee[]}
-                getLabel={(o) => String(o.fullName?.uk || "Unnamed Employee")}
+                getLabel={(o) => String(o.fullName?.[lang] || o.fullName?.uk || "Unnamed Employee")}
                 getValue={(o) => o.id!}
                 onChange={(v) => setBlog({ ...blog, employees: v })}
-                firebasePath="employees"
+                firebasePath={`businesses/${businessSlug}/employees`}
                 parentId={blog.id}
                 syncType="none"
             />
@@ -357,8 +388,7 @@ export default function BlogEditor() {
             <h2 className="text-2xl font-black text-gray-800 uppercase tracking-tighter">Blog Builder</h2>
             <div className="flex gap-2">
               {["heading", "paragraph", "image", "list"].map(type => (
-                  <button key={type} onClick={() => addContentBlock(type as any)}
-                          className="bg-gray-100 hover:bg-black hover:text-white px-5 py-2 rounded-xl transition-all font-black text-[10px] uppercase tracking-widest text-gray-500">
+                  <button key={type} onClick={() => addContentBlock(type as any)} className="bg-gray-100 hover:bg-black hover:text-white px-5 py-2 rounded-xl transition-all font-black text-[10px] uppercase tracking-widest text-gray-500">
                     + {type}
                   </button>
               ))}
@@ -366,7 +396,7 @@ export default function BlogEditor() {
           </div>
 
           <div className="space-y-4 max-w-4xl mx-auto">
-            {blog.content?.length ? blog.content?.map((block, i) => renderBlockEditor(block, i)) : (
+            {blog.content?.length ? blog.content.map((block, i) => renderBlockEditor(block, i)) : (
                 <div className="text-center py-20 border-2 border-dashed border-gray-100 rounded-[40px] text-gray-300 font-bold uppercase tracking-widest text-xs">
                   The canvas is empty. Start building your story.
                 </div>
@@ -374,13 +404,16 @@ export default function BlogEditor() {
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="border-t border-gray-50 pt-10 flex justify-end items-center gap-8">
-          <button onClick={() => navigate("/admin/blogs")} className="text-gray-400 font-black text-[10px] uppercase tracking-[0.3em] hover:text-gray-900 transition">
-            Discard changes
+        {/* Footer Actions */}
+        <div className="border-t border-gray-50 pt-8 flex justify-end items-center gap-6">
+          <button
+              onClick={() => navigate(`/${lang}/admin/${businessSlug}/blogs`)}
+              className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition"
+          >
+            Discard Changes
           </button>
           <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white px-20 py-6 rounded-[2.5rem] transition-all font-black shadow-2xl shadow-blue-200 active:scale-95 uppercase tracking-[0.2em] text-sm">
-            Publish Post
+            Update Blog
           </button>
         </div>
       </div>

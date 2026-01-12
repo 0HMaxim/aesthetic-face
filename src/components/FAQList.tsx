@@ -1,6 +1,6 @@
+import { useEffect } from "react";
 import FAQItem from "./FAQItem.tsx";
 import type { FAQ } from "../models/FAQ.ts";
-import { useEffect } from "react";
 
 interface FAQListProps {
   faqs: FAQ[];
@@ -9,14 +9,18 @@ interface FAQListProps {
   itemsPerPage?: number;
 }
 
-export default function FAQList({ faqs, currentPage, setCurrentPage, itemsPerPage = 10 }: FAQListProps) {
+export default function FAQList({
+                                  faqs,
+                                  currentPage,
+                                  setCurrentPage,
+                                  itemsPerPage = 10,
+                                }: FAQListProps) {
   const pageCount = Math.ceil(faqs.length / itemsPerPage);
   const currentFaqs = faqs.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
 
   const leftFaqs = currentFaqs.filter((_, i) => i % 2 === 0);
   const rightFaqs = currentFaqs.filter((_, i) => i % 2 === 1);
 
-  // скролл вверх при смене страницы
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
@@ -57,7 +61,9 @@ export default function FAQList({ faqs, currentPage, setCurrentPage, itemsPerPag
                               key={b}
                               onClick={() => setCurrentPage(b as number)}
                               className={`px-4 py-2 rounded-lg border text-foreground transition-colors duration-300 ${
-                                  b === currentPage ? "bg-primary text-white" : "bg-background hover:bg-primary hover:text-white"
+                                  b === currentPage
+                                      ? "bg-primary text-white"
+                                      : "bg-background hover:bg-primary hover:text-white"
                               }`}
                           >
                             {(b as number) + 1}

@@ -15,7 +15,11 @@ import { useFetchData } from "../../hooks/useFetchData.ts";
 import { SyncedRelationSelect } from "../../components/SyncedRelationSelect.tsx";
 
 export default function PriceEditor() {
-    const { id } = useParams();
+    const { businessSlug, id } = useParams<{
+        businessSlug: string;
+        id: string;
+    }>();
+
     const navigate = useNavigate();
     useTranslation(); // Убрано извлечение { i18n }, если оно не используется
 
@@ -30,17 +34,18 @@ export default function PriceEditor() {
     const [price, setPrice] = useState<PriceModel>(emptyPrice);
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-    const { data: relatedData, loading } = useFetchData(["services", "specials"]);
+    const { data, loading } = useFetchData(
+        ["prices", "services", "specials"],
+        businessSlug
+    );
 
     useEffect(() => {
-        if (id && id !== "new") {
-            get(ref(db, `prices/${id}`)).then((snapshot) => {
-                if (snapshot.exists()) {
-                    setPrice({ ...emptyPrice, ...snapshot.val(), id });
-                }
-            });
-        }
-    }, [id]);
+        if (!id || id === "new") return;
+
+        const found = data?.prices?.find(p => p.id === id);
+        if (found) setPrice({ ...emptyPrice, ...found });
+    }, [id, data?.prices]);
+
 
     const langs = ["uk", "ru", "en", "de"];
 
@@ -51,25 +56,40 @@ export default function PriceEditor() {
         }));
     };
 
-    const handleSave = async () => {
-        const newErrors: { [key: string]: string } = {};
+    const validate = () => {
+        const errors: Record<string, string> = {};
 
-        // Исправленная проверка trim для LocalizedText
-        const hasCategoryName = Object.values(price.category || {}).some(v =>
-            typeof v === 'string' && v.trim().length > 0
+        const hasCategoryName = Object.values(price.category || {}).some(
+            v => typeof v === "string" && v.trim()
         );
 
-        if (!hasCategoryName) newErrors.category = "Category name is required";
+        if (!hasCategoryName) errors.category = "Category name is required";
 
-        setErrors(newErrors);
-        if (Object.keys(newErrors).length > 0) return;
+        setErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
 
-        const priceId = id === "new" || !id ? push(ref(db, "prices")).key : id;
+    const handleSave = async () => {
+        if (!businessSlug) return;
+        if (!validate()) return;
+
+        const basePath = `businesses/${businessSlug}/prices`;
+        const baseRef = ref(db, basePath);
+
+        const priceId =
+            id && id !== "new" ? id : push(baseRef).key;
+
         if (!priceId) return;
 
-        await set(ref(db, `prices/${priceId}`), { ...price, id: priceId });
-        navigate("/admin/prices");
+        await set(ref(db, `${basePath}/${priceId}`), {
+            ...price,
+            id: priceId,
+        });
+
+        navigate(`/admin/${businessSlug}/prices`);
     };
+
+
 
     if (loading) return <div className="p-20 text-center animate-pulse font-black text-gray-300 tracking-widest uppercase">Loading Price Data...</div>;
 
@@ -85,7 +105,7 @@ export default function PriceEditor() {
                 </div>
 
                 <div className="border-t border-gray-50 pt-8 flex justify-end items-center gap-6">
-                    <button onClick={() => navigate("/admin/services")} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
+                    <button onClick={() => navigate(`/admin/${businessSlug}/prices`)} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
                         Discard Changes
                     </button>
                     <button
@@ -127,7 +147,7 @@ export default function PriceEditor() {
                         <SyncedRelationSelect<Service>
                             label="Connect to Services"
                             value={price.serviceIds || []}
-                            options={(relatedData.services || []) as Service[]}
+                            options={(data.services || []) as Service[]}
                             getLabel={(o) => String(o.title?.uk || "Untitled Service")}
                             getValue={(o) => o.id!}
                             onChange={(v) => setPrice({ ...price, serviceIds: v })}
@@ -139,7 +159,7 @@ export default function PriceEditor() {
                         <SyncedRelationSelect<Special>
                             label="Attach Special Offers"
                             value={(price.specials as unknown as string[]) || []}
-                            options={(relatedData.specials || []) as Special[]}
+                            options={(data.specials || []) as Special[]}
                             getLabel={(o) => String(o.title?.uk || "Untitled Special")}
                             getValue={(o) => o.id!}
                             onChange={(v) => setPrice({ ...price, specials: v.join(",") as any })}
@@ -305,7 +325,7 @@ export default function PriceEditor() {
 
             {/* Footer */}
             <div className="border-t border-gray-50 mt-16 pt-10 flex justify-end items-center gap-8">
-                <button onClick={() => navigate("/admin/prices")} className="text-gray-400 font-black text-[10px] uppercase tracking-[0.3em] hover:text-gray-900 transition">
+                <button onClick={() => navigate(`/admin/${businessSlug}/prices`)} className="text-gray-400 font-black text-[10px] uppercase tracking-[0.3em] hover:text-gray-900 transition">
                     Discard changes
                 </button>
                 <button onClick={handleSave} className="bg-gray-900 hover:bg-black text-white px-20 py-5 rounded-[2.5rem] transition-all font-black shadow-2xl active:scale-95 uppercase tracking-[0.2em] text-xs">

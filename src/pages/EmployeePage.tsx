@@ -8,24 +8,36 @@ import { Breadcrumbs } from "../components/Breadcrumbs.tsx";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { ref, get } from "firebase/database";
+import { useBusiness } from "../context/BusinessContext.tsx"; // Импортируем контекст
 
 export default function EmployeePage() {
-  const { slug } = useParams<{ slug: string }>();
+  // 1. Получаем и slug сотрудника, и businessSlug из URL
+  const { slug, businessSlug } = useParams<{ slug: string; businessSlug: string }>();
   const { i18n, t } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
+
+  // 2. Получаем мета-данные бизнеса для обложки
+  const { meta } = useBusiness();
 
   const [employee, setEmployee] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const topImage =
+  // Динамическая обложка из админки
+  const topImage = meta?.employeesHeaderImage ||
       "https://www.aestheticclinicmalaysia.com/wp-content/uploads/2023/10/Aesthetic-Clinic-Malaysia.jpg";
 
   useEffect(() => {
     async function fetchEmployee() {
+      if (!businessSlug || !slug) return;
+
       try {
-        const snapshot = await get(ref(db, "employees"));
+        // 3. ИСПРАВЛЕН ПУТЬ: теперь ищем внутри конкретного бизнеса
+        const employeesRef = ref(db, `businesses/${businessSlug}/employees`);
+        const snapshot = await get(employeesRef);
+
         if (snapshot.exists()) {
           const data = Object.values(snapshot.val());
+          // Ищем сотрудника по его слагу внутри этого бизнеса
           const found = data.find((emp: any) => emp.slug === slug);
           setEmployee(found || null);
         } else {
@@ -40,22 +52,23 @@ export default function EmployeePage() {
     }
 
     fetchEmployee();
-  }, [slug]);
+  }, [slug, businessSlug]);
 
   if (loading) {
-    return <div className="p-8 text-center text-lg">Завантаження...</div>;
+    return <div className="p-20 text-center animate-pulse font-black text-gray-300 tracking-widest uppercase">Завантаження...</div>;
   }
 
   if (!employee) {
     return (
-        <div className="p-8 text-center text-red-500 text-xl">
-          Співробітника не знайдено
+        <div className="p-20 text-center text-red-500 font-bold uppercase tracking-widest">
+          {t("employees.notFound") || "Співробітника не знайдено"}
         </div>
     );
   }
 
   return (
       <div className="w-full items-center justify-center">
+        {/* Теперь здесь динамическая картинка */}
         {topImage && <TopImage source={topImage} />}
 
         <div className="w-full px-4 md:px-[5rem]">
@@ -89,7 +102,8 @@ export default function EmployeePage() {
 
               <Button
                   as={Link}
-                  to={`/${lang}/employees/${employee.slug}`}
+                  // Исправлена ссылка на бронирование (добавлен businessSlug)
+                  to={`/${lang}/${businessSlug}/employees/${employee.slug}`}
                   className="md:w-fit py-[1.25rem] px-[3.5rem] rounded-[2.5rem]
                 flex items-center justify-center text-white text-[1.25rem]
                 font-semibold bg-black object-cover hover:bg-[var(--primary)]
