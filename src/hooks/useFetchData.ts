@@ -1,50 +1,57 @@
+// src/hooks/useFetchData.ts
 import { useState, useEffect } from "react";
 import { ref, get } from "firebase/database";
 import { db } from "../firebase";
 
-interface FirebaseItem {
-  id: string;
-  [key: string]: any;
-}
-
-export function useFetchData(nodes: string[], businessSlug: string | undefined) {
-  const [data, setData] = useState<{ [key: string]: FirebaseItem[] }>({});
+export function useFetchData<T extends Record<string, any[]>>(
+    nodes: (keyof T & string)[],
+    businessSlug?: string
+) {
+  // Используем Record, чтобы избежать проблем с Partial при доступе к ключам
+  const [data, setData] = useState<T>({} as T);
   const [loading, setLoading] = useState(true);
 
-  // Используем useMemo или превращаем массив в строку ПРАВИЛЬНО
-  const nodesKey = nodes.join(",");
-
   useEffect(() => {
-    // Если slug еще не определен, ничего не качаем
-    if (!businessSlug) return;
+    if (!businessSlug) {
+      setLoading(false);
+      return;
+    }
 
     const fetchAll = async () => {
-      setLoading(true); // Сбрасываем лоадинг при смене slug
-      const results: { [key: string]: FirebaseItem[] } = {};
+      setLoading(true);
+
+      // Явно типизируем объект результатов
+      const results = {} as T;
 
       try {
-        for (const node of nodes) {
-          // ИСПРАВЛЕННЫЙ ПУТЬ: добавляем businessSlug в путь запроса
-          const dbPath = `businesses/${businessSlug}/${node}`;
-          const snapshot = await get(ref(db, dbPath));
+        const promises = nodes.map(async (node) => {
+          const snapshot = await get(ref(db, `businesses/${businessSlug}/${node}`));
 
           if (snapshot.exists()) {
             const val = snapshot.val();
-            results[node] = Object.keys(val).map((id) => ({ id, ...val[id] }));
+            // Преобразуем объект Firebase в массив с ID
+            // Используем unknown как мост для приведения типов
+            results[node] = Object.entries(val).map(([id, item]) => ({
+              id,
+              ...(item as object),
+            })) as unknown as T[typeof node];
           } else {
-            results[node] = [];
+            results[node] = [] as unknown as T[typeof node];
           }
-        }
+        });
+
+        await Promise.all(promises);
         setData(results);
       } catch (error) {
-        console.error("Firebase fetch error:", error);
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchAll();
-  }, [nodesKey, businessSlug]); // Важно: следим за businessSlug!
+    // Используем JSON.stringify для стабильной зависимости массива
+  }, [JSON.stringify(nodes), businessSlug]);
 
   return { data, loading };
 }

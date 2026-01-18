@@ -23,12 +23,23 @@ export default function Gallery() {
     const employees = data.employees ?? [];
 
     const { meta } = useBusiness();
+
+    const dynamicTab = meta?.tabs
+        ? Object.values(meta.tabs).find(t => t.route === 'gallery' || t.route === '/gallery')
+        : null;
+
     const headerImage =
-        meta?.galleryHeaderImage || meta?.logo || "";
+        dynamicTab?.headerImage || "";
+
 
     const [selectedService, setSelectedService] = useState("all");
     const [selectedEmployee, setSelectedEmployee] = useState("all");
     const [currentPage, setCurrentPage] = useState(1);
+
+    const getTabLabel = (localizedValue: any) => {
+        if (!localizedValue) return "";
+        return localizedValue[lang] || localizedValue["en"] || "";
+    };
 
     const serviceOptions = useMemo(
         () => [
@@ -77,11 +88,13 @@ export default function Gallery() {
                 <Breadcrumbs />
 
                 <div className="py-8 mb-[3.5rem] w-full">
-                    <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">{t("gallery.title")}</h2>
+                    <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
+                        {getTabLabel(dynamicTab?.title) || t("FAQ.title")}
+                    </h2>
 
                     <div className="md:flex justify-between block">
                         <p className="text-base lg:text-2xl font-normal text-foreground duration-500 mb-4">
-                            {t("gallery.subtitle")}
+                            {getTabLabel(dynamicTab?.description) || t("FAQ.subtitle")}
                         </p>
 
                         <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">

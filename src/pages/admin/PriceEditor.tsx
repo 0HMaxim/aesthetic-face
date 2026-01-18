@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ref, push, set, get } from "firebase/database"; // Удален неиспользуемый update
+import { ref, push, set } from "firebase/database"; // Удален неиспользуемый update
 import { db } from "../../firebase.ts";
 import { useTranslation } from "react-i18next";
 
@@ -28,7 +28,7 @@ export default function PriceEditor() {
         columns: { duration: {}, procedure: {}, price: {} },
         sections: [],
         serviceIds: [],
-        specials: "", // Исправлено: строка вместо массива согласно TS2322
+        specials: "",
     };
 
     const [price, setPrice] = useState<PriceModel>(emptyPrice);
@@ -249,25 +249,38 @@ export default function PriceEditor() {
                             <div className="space-y-4">
                                 {(section.items || []).map((item, iIdx) => (
                                     <div key={iIdx} className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end bg-gray-50/50 p-6 rounded-[24px] border border-gray-50 relative group/item hover:bg-white transition-all hover:shadow-md">
-                                        <div className="lg:col-span-2">
-                                            <label className="text-[9px] font-black text-gray-400 uppercase ml-2 mb-2 block tracking-widest">Duration</label>
-                                            <input
-                                                className="w-full bg-white border border-gray-100 rounded-xl p-3 text-xs font-bold shadow-sm"
-                                                value={item.duration}
-                                                onChange={e => {
-                                                    const newSections = [...price.sections];
-                                                    newSections[sIdx].items[iIdx].duration = e.target.value;
-                                                    setPrice({ ...price, sections: newSections });
-                                                }}
-                                            />
+                                        {/* --- DURATION (Локализованный) --- */}
+                                        <div className="lg:col-span-4 space-y-2">
+                                            <label className="text-[9px] font-black text-gray-400 uppercase ml-2 mb-2 block tracking-widest">Duration / Time</label>
+                                            <div className="grid grid-cols-2 gap-2">
+                                                {langs.map(l => (
+                                                    <div key={l}>
+                                                        <div className="text-[7px] font-bold text-gray-300 uppercase ml-1">{l}</div>
+                                                        <input
+                                                            placeholder="45 min"
+                                                            className="w-full bg-white border border-gray-100 rounded-lg p-2 text-[10px] font-bold shadow-sm focus:ring-2 focus:ring-blue-50 outline-none"
+                                                            // Проверяем на объект, чтобы не упало если в базе старая строка
+                                                            value={typeof item.duration === 'object' ? (item.duration?.[l as keyof LocalizedText] || "") : ""}
+                                                            onChange={e => {
+                                                                const newSections = [...price.sections];
+                                                                const currentDuration = typeof item.duration === 'object' ? item.duration : { uk: "", ru: "", en: "", de: "" };
+                                                                newSections[sIdx].items[iIdx].duration = { ...currentDuration, [l]: e.target.value };
+                                                                setPrice({ ...price, sections: newSections });
+                                                            }}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
 
-                                        <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-3">
+
+                                        <div className="lg:col-span-5 grid grid-cols-2 gap-3">
+                                            <label className="col-span-2 text-[9px] font-black text-gray-400 uppercase ml-2 mb-1 block tracking-widest text-center lg:text-left">Program / Procedure Name</label>
                                             {langs.map(l => (
                                                 <div key={l}>
                                                     <label className="text-[8px] font-black text-gray-300 uppercase ml-2 mb-1 block tracking-tighter">{l}</label>
                                                     <input
-                                                        className="w-full bg-white border border-gray-100 rounded-xl p-3 text-[11px] font-medium"
+                                                        className="w-full bg-white border border-gray-100 rounded-xl p-3 text-[11px] font-medium focus:ring-2 focus:ring-blue-50 outline-none"
                                                         value={String(item.procedure?.[l as keyof LocalizedText] || "")}
                                                         onChange={e => {
                                                             const newSections = [...price.sections];

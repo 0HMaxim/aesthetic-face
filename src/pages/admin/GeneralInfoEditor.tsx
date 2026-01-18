@@ -4,7 +4,6 @@ import { ref, get, set } from "firebase/database";
 import { db } from "../../firebase";
 import type { GeneralInfo } from "../../models/GeneralInfo";
 import { useBusiness } from "../../context/BusinessContext.tsx";
-import {meta} from "@eslint/js";
 
 const LANGS = ["uk", "ru", "en", "de"] as const;
 

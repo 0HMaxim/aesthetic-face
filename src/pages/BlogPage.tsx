@@ -52,7 +52,8 @@ export default function BlogPage() {
 
     return (
         <div className="w-full flex flex-col items-center">
-            {blog.mainImage && <TopImage source={blog.mainImage} />}
+
+            <TopImage source={blog.mainImage} />
 
             <div className="w-full px-4 md:px-[5rem]">
                 <Breadcrumbs
@@ -100,7 +101,7 @@ export default function BlogPage() {
                         <h2 className="text-2xl md:text-4xl font-black mb-10 text-center md:text-left">
                             {t("blog.relatedSpecials")}
                         </h2>
-                        <SpecialsSlider items={relatedSpecials} />
+                        <SpecialsSlider />
                     </div>
                 )}
 

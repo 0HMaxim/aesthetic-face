@@ -11,10 +11,18 @@ export default function Home() {
   const { businessSlug, lang } = useParams<{ businessSlug?: string; lang?: string }>();
   const locale = lang || i18n.language;
 
-  const { meta } = useBusiness();
   const { info, loading } = useGeneralInfo(businessSlug);
 
-  const imageSrc = meta?.homeHeaderImage || meta?.logo || "https://nextmedasia.com/wp-content/uploads/2022/11/lede.jpg";
+  const { meta } = useBusiness();
+
+  const dynamicTab = meta?.tabs
+      ? Object.values(meta.tabs).find(t => t.route === 'home' || t.route === '/home')
+      : null;
+
+  const headerImage =
+      dynamicTab?.headerImage || "";
+
+
 
   if (loading) {
     return (
@@ -41,22 +49,24 @@ export default function Home() {
 
   return (
       <div className="w-full flex flex-col items-center justify-center">
-        <TopImage source={imageSrc} />
+        <TopImage source={headerImage} />
 
         <div className="w-full px-4 md:px-[5rem]">
           <Breadcrumbs />
 
           <div className="py-8 mb-[3.5rem] border-b border-gray-100">
-          <span className="inline-block bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full mb-4">
+          <span className="inline-block bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full mb-4 text-foreground bg-primary">
             {meta?.type || "Business"}
           </span>
 
-            <h1 className="text-5xl lg:text-8xl font-black mb-6 tracking-tighter uppercase leading-none">
-              {meta?.name?.[locale] ?? businessSlug}
-            </h1>
+            <div className="py-8 mb-[3.5rem]">
+              <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
+                {meta?.name?.[locale] ?? businessSlug}
+              </h2>
+
 
             {meta?.slogan?.[locale] && (
-                <p className="text-xl md:text-2xl font-medium text-blue-600/60 uppercase tracking-widest mb-10">
+                <p className="text-xl md:text-2xl font-medium uppercase tracking-widest mb-10 text-foreground">
                   {meta.slogan[locale]}
                 </p>
             )}
@@ -65,7 +75,7 @@ export default function Home() {
               <div className="lg:col-span-8">
                 {meta?.description?.[locale] ? (
                     <div className="prose prose-xl max-w-none">
-                      <p className="text-2xl leading-relaxed text-gray-600 font-light">{meta.description[locale]}</p>
+                      <p className="text-2xl leading-relaxed text-foreground font-light">{meta.description[locale]}</p>
                     </div>
                 ) : (
                     <p className="text-gray-300 italic">No description provided yet.</p>
@@ -94,15 +104,16 @@ export default function Home() {
 
           <div className="flex flex-col gap-8 pb-20">
             <div className="flex items-end justify-between mb-4">
-              <h2 className="text-4xl font-black uppercase tracking-tighter">Current Specials</h2>
+              <h2 className="text-4xl font-black text-foreground uppercase tracking-tighter">Current Specials</h2>
               <Link
                   to={`/${locale}/${businessSlug}/specials`}
-                  className="text-xs font-black uppercase tracking-widest text-blue-600 hover:text-black transition-colors"
+                  className="text-xs font-black text-foreground uppercase tracking-widest text-blue-600 hover:text-black transition-colors"
               >
                 View All →
               </Link>
             </div>
             <SpecialsSlider />
+          </div>
           </div>
         </div>
       </div>

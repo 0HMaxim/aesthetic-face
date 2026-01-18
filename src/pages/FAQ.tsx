@@ -7,19 +7,59 @@ import { Breadcrumbs } from "../components/Breadcrumbs.tsx";
 import FAQList from "../components/FAQList.tsx";
 import { useBusiness } from "../context/BusinessContext.tsx";
 import { useFetchData } from "../hooks/useFetchData.ts";
+import type {Service} from "../models/Service.ts";
+import type {FAQ} from "../models/FAQ.ts";
+import type {PriceModel} from "../models/Price.ts";
+import type {Blog} from "../models/Blog.ts";
+import type {Special} from "../models/Special.ts";
+import type {Employee} from "../models/Employee.ts";
+import type {Photo} from "../models/Photo.ts";
 
 export default function FAQ() {
-  const { t, i18n } = useTranslation();
+  const { businessSlug } = useParams<{  businessSlug: string }>();
+  const { i18n, t } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
-  const { businessSlug } = useParams<{ businessSlug: string }>();
 
-  const { data, loading } = useFetchData(["faqs", "services"], businessSlug);
+  // Получаем все данные через хук для конкретного бизнеса
+  const { data, loading } = useFetchData<{
+    services: Service[];
+    prices: PriceModel[];
+    blogs: Blog[];
+    specials: Special[];
+    employees: Employee[];
+    faqs: FAQ[];
+    photos: Photo[];
+  }>([
+    "services",
+    "prices",
+    "blogs",
+    "specials",
+    "employees",
+    "faqs",
+    "photos",
+  ], businessSlug);
+
+
   const faqs = data.faqs ?? [];
   const services = data.services ?? [];
 
+
+  const getTabLabel = (localizedValue: any) => {
+    if (!localizedValue) return "";
+    return localizedValue[lang] || localizedValue["en"] || "";
+  };
+
+
   const { meta } = useBusiness();
+
+  const dynamicTab = meta?.tabs
+      ? Object.values(meta.tabs).find(t => t.route === 'faq' || t.route === '/faq')
+      : null;
+
   const headerImage =
-      meta?.faqsHeaderImage || meta?.logo || "https://nextmedasia.com/wp-content/uploads/2022/11/lede.jpg";
+      dynamicTab?.headerImage || "";
+
+
 
   const [selectedService, setSelectedService] = useState("all");
   const [page, setPage] = useState(0);
@@ -50,19 +90,19 @@ export default function FAQ() {
 
   return (
       <div className="w-full items-center justify-center">
-        {headerImage && <TopImage source={headerImage} />}
+        <TopImage source={headerImage} />
 
         <div className="w-full px-4 md:px-[5rem]">
           <Breadcrumbs />
 
           <div className="py-8 mb-[3.5rem] w-full">
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
-              {t("FAQ.title") || "Частые вопросы"}
+              {getTabLabel(dynamicTab?.title) || t("FAQ.title")}
             </h2>
 
             <div className="md:flex justify-between block">
               <p className="text-base lg:text-2xl font-normal text-foreground duration-500 mb-4">
-                {t("FAQ.subtitle")}
+                {getTabLabel(dynamicTab?.description) || t("FAQ.subtitle")}
               </p>
 
               <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">

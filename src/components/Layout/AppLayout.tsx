@@ -21,15 +21,15 @@ export default function AppLayout() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    // 1. Синхронизация языка
+
     useEffect(() => {
         if (lang && i18n.language !== lang) i18n.changeLanguage(lang);
     }, [lang, i18n]);
 
-    // 2. ЗАГРУЗКА СПИСКА ВСЕХ БИЗНЕСОВ (делаем 1 раз при старте приложения)
+    // 1. load all businesses, (do 1 time at start project )
     useEffect(() => {
         const allRef = ref(db, "businesses");
-        const unsubscribe = onValue(allRef, (snapshot) => {
+        onValue(allRef, (snapshot) => {
             if (snapshot.exists()) {
                 const data = snapshot.val();
                 const list = Object.keys(data).map(slug => ({
@@ -39,17 +39,17 @@ export default function AppLayout() {
                 setAllBusinesses(list);
             }
         });
-        return () => off(allRef); // Очистка
-    }, [lang]); // Перезагружаем список только если сменился язык, чтобы обновить имена
+        return () => off(allRef);
+    }, [lang]);
 
-    // 3. ПОДПИСКА НА ТЕКУЩИЙ БИЗНЕС (перезапускается при смене businessSlug)
+    // 2. subscribe to current businesses (reload if businessSlug change)
     useEffect(() => {
         if (!businessSlug) return;
 
         setLoading(true);
         const metaRef = ref(db, `businesses/${businessSlug}/meta`);
 
-        const unsubscribe = onValue(metaRef, (snapshot) => {
+        onValue(metaRef, (snapshot) => {
             if (snapshot.exists()) {
                 setCurrentMeta(snapshot.val());
             } else {
@@ -61,14 +61,14 @@ export default function AppLayout() {
             setLoading(false);
         });
 
-        // Функция очистки: ПЕРЕД тем как запустится новый эффект для другого слага,
-        // мы отписываемся от старого слага.
+        // Clear Function: Befor new slug,
+        // Unsubscribe from old slug.
         return () => {
             off(metaRef);
         };
-    }, [businessSlug]); // Только при смене слага
+    }, [businessSlug]);
 
-    // 4. Скролл наверх
+    // 3. Scroll to top
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, [location.pathname]);
@@ -93,7 +93,7 @@ export default function AppLayout() {
             <div className="flex flex-col min-h-screen bg-background relative">
                 <Header />
 
-                {/* ПЕРЕКЛЮЧАТЕЛЬ БИЗНЕСА */}
+                {/* Business select */}
                 <div className="fixed bottom-10 left-6 z-[60]">
                     <motion.button
                         whileHover={{ scale: 1.05 }}

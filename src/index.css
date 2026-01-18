@@ -22,8 +22,6 @@ body {
   --foreground: #f4f4f5;
   --background: linear-gradient(90deg, #15173c,#2375ef);
   --secondary: linear-gradient(90deg, #1b2c55,#3d85a9,#63cac8,#b8edff);
-
-
   --primary: linear-gradient(90deg, #06071d,#06071d,#1a1f8d,#5a60e0,#d4d6fa);
   --muted: #D3D3D3;
 }

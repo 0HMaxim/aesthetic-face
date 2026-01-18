@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
-import { Button } from "@heroui/react";
 import { Breadcrumbs } from "../components/Breadcrumbs.tsx";
 import { TopImage } from "../components/TopImage.tsx";
 import type { Special } from "../models/Special.ts";
@@ -12,36 +11,46 @@ export default function Specials() {
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
   const { businessSlug } = useParams<{ businessSlug: string }>();
 
-  const { data, loading } = useFetchData(["specials"], businessSlug);
-  const specials = (data.specials ?? []) as Special[];
+  const { data, loading } = useFetchData<{
+    specials: Special[];
+  }>(["specials"], businessSlug);
+
+  const specials = data.specials ?? [];
 
   const { meta } = useBusiness();
 
+  const dynamicTab = meta?.tabs
+      ? Object.values(meta.tabs).find(t => t.route === 'specials' || t.route === '/specials')
+      : null;
+
   const headerImage =
-      meta?.specialsHeaderImage ||
-      meta?.galleryHeaderImage ||
-      meta?.logo ||
-      "";
+      dynamicTab?.headerImage || "";
+
+  const getTabLabel = (localizedValue: any) => {
+    if (!localizedValue) return "";
+    return localizedValue[lang] || localizedValue["en"] || "";
+  };
 
   if (loading) {
     return <p className="text-center py-10">{t("loading")}</p>;
   }
 
   return (
-      <div className="w-full flex flex-col items-center">
+      <div className="w-full items-center justify-center ">
         <TopImage source={headerImage} />
 
-        <div className="w-full px-4 md:px-[5rem] max-w-[120rem]">
+        <div className="w-full px-4 md:px-[5rem]">
           <Breadcrumbs />
 
           <div className="py-8 mb-[3.5rem]">
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
-              {t("specials.title")}
+              {getTabLabel(dynamicTab?.title) || t("services.title")}
             </h2>
-            <p className="text-base lg:text-2xl font-normal text-foreground">
-              {t("specials.subtitle")}
+            <p className="md:text-2xl text-[1.25rem] font-normal text-foreground/80 duration-500 max-w-[60rem]">
+              {getTabLabel(dynamicTab?.description)|| t("services.subtitle")}
             </p>
           </div>
+
 
           <div className="flex flex-col items-center gap-16 mb-20 w-full">
             {specials.map((item) => {
@@ -54,19 +63,21 @@ export default function Specials() {
 
               const link = `/${lang}/${businessSlug}/specials/${item.slug}`;
 
+              // ... (начало компонента без изменений)
+
               return (
                   <Link
                       key={item.id}
                       to={link}
                       className="
-                  group rounded-[2.5rem] shadow-md transition overflow-hidden
-                  w-full max-w-[85rem]
-                  h-auto md:h-[32rem]
-                  flex flex-col md:flex-row
-                  bg-primary
-                  hover:shadow-2xl
-                  duration-500
-                "
+                      group rounded-[2.5rem] shadow-md transition overflow-hidden
+                      w-full max-w-[85rem]
+                      h-auto md:h-[32rem]
+                      flex flex-col md:flex-row
+                      bg-primary
+                      hover:shadow-2xl
+                      duration-500
+                    "
                   >
                     <div className="p-8 md:p-14 text-foreground w-full md:w-[40%] flex flex-col h-full">
                       <div className="flex-grow">
@@ -78,18 +89,18 @@ export default function Specials() {
                         </p>
                       </div>
 
-                      <Button
-                          as={Link}
-                          to={link}
+                      {/* ИСПРАВЛЕНИЕ: Убираем as={Link} и to={link}, так как карточка уже является ссылкой */}
+                      <div
                           className="
-                      w-full md:w-fit px-10 py-7 rounded-full
-                      text-white font-bold text-sm uppercase tracking-widest
-                      bg-black hover:bg-white hover:text-black
-                      transition-all duration-500 mt-8
-                    "
+                            w-full md:w-fit px-10 py-4 rounded-full
+                            text-white font-bold text-sm uppercase tracking-widest
+                            bg-black group-hover:bg-white group-hover:text-black
+                            transition-all duration-500 mt-8
+                            flex items-center justify-center
+                          "
                       >
                         {t("specials.learnMore")}
-                      </Button>
+                      </div>
                     </div>
 
                     {item.mainImage && (

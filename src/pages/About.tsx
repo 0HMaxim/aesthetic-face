@@ -14,7 +14,12 @@ export default function About() {
     const { meta } = useBusiness();
     const { info, loading } = useGeneralInfo(businessSlug);
 
-    const imageSrc = meta?.aboutHeaderImage;
+    const dynamicTab = meta?.tabs
+        ? Object.values(meta.tabs).find(t => t.route === 'about' || t.route === '/about')
+        : null;
+
+    const headerImage =
+        dynamicTab?.headerImage || "";
 
     if (loading) {
         return <p className="text-center py-10">{t("loading")}</p>;
@@ -22,7 +27,8 @@ export default function About() {
 
     return (
         <div className="w-full flex flex-col items-center justify-center">
-            {imageSrc && <TopImage source={imageSrc} />}
+
+            <TopImage source={headerImage} />
 
             <div className="w-full px-4 md:px-[5rem]">
                 <Breadcrumbs />

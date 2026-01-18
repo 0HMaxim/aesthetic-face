@@ -114,9 +114,8 @@ export default function AdminPage() {
         const newRef = ref(db, `businesses/${slug}`);
 
         // Создаем абсолютно пустую структуру мета-данных
-        const emptyMeta = {
+        const emptyMeta : BusinessMeta = {
             name: { uk: "", ru: "", en: "", de: "" },
-            shortName: { uk: "", ru: "", en: "", de: "" },
             type: "other",
         };
 
@@ -145,18 +144,15 @@ export default function AdminPage() {
     return (
         <div className="min-h-screen bg-gray-50 text-foreground p-8">
             <div className="flex">
-                <Link
-                    to={
-                        selectedBusiness
-                            ? `/${lang}/${selectedBusiness}`
-                            : businesses.length > 0
-                                ? `/${lang}/${businesses[0].slug}`
-                                : `/${lang}`
-                    }
-                    className="p-4 bg-white shadow rounded-lg hover:shadow-lg transition inline-block mb-6"
-                >
-                    {t.home}
-                </Link>
+                {businessSlug && (
+                    <Link
+                        to={`/${lang}/${businessSlug}/`}
+                        className="hidden sm:flex items-center gap-2 bg-black/5 hover:bg-black text-black hover:text-white px-5 py-3 rounded-2xl transition-all duration-300 font-black text-[10px] uppercase tracking-widest border border-black/5 shadow-sm"
+                    >
+                        <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
+                        Home
+                    </Link>
+                )}
 
                 <div className="bg-blue-500 rounded-3xl ml-4 h-10">
                     <LanguageSwitcher />
@@ -181,10 +177,7 @@ export default function AdminPage() {
                 >
                     <option value="">-- --</option>
                     {businesses.map(b => {
-                        // Берем слаг (то, что вводили в prompt)
                         const slug = b.slug;
-                        // Берем имя из мета-данных, если оно там уже есть
-                        const name = b.meta?.shortName?.[lang] || b.meta?.name?.[lang];
 
                         return (
                             <option key={slug} value={slug}>

@@ -15,12 +15,14 @@ export default function PriceTable({ items, businessSlug, serviceId, subserviceI
   const { i18n } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
-  // Если items нет — получаем через useFetchData
-  const { data, loading } = useFetchData(["prices"], businessSlug);
+  // ИСПРАВЛЕНИЕ ТИПА: Передаем структуру объекта, которую ожидаем получить
+  const { data, loading } = useFetchData<{ prices: PriceModel[] }>(
+      ["prices"],
+      businessSlug
+  );
 
-
-  const prices: PriceModel[] = items ?? data?.prices ?? [];
-  const isLoading = !items && businessSlug && loading;
+  const prices: PriceModel[] = items ?? data.prices ?? [];
+  const isLoading = !items && !!businessSlug && loading;
 
   const targetId = subserviceId || serviceId;
   const filteredPrices = useMemo(() => {
@@ -124,13 +126,13 @@ export default function PriceTable({ items, businessSlug, serviceId, subserviceI
                                       active ? "bg-primary" : ""
                                   }`}
                               >
-                                <td className="pl-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-r border-muted">
-                                  {item?.duration || "—"}
+                                <td className="pl-[1rem]  py-[1rem] md:py-[1.5rem] border-r border-muted">
+                                  {item?.duration?.[lang] || "—"}
                                 </td>
-                                <td className="px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem]">
+                                <td className="px-[1rem]  py-[1rem] md:py-[1.5rem]">
                                   {item?.procedure?.[lang] || "—"}
                                 </td>
-                                <td className="px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-l border-muted flex flex-col md:flex-row items-start md:items-center justify-between">
+                                <td className="px-[1rem]  py-[1rem] md:py-[1.5rem] border-l h-full border-muted flex flex-col md:flex-row items-start md:items-center justify-between">
                                   <span className="text-nowrap">{item?.price || "—"}</span>
                                   <button
                                       onClick={() => toggleItem(`${idx}-${sIndex}-${iIndex}`)}

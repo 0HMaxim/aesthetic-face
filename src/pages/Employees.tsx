@@ -10,16 +10,25 @@ export default function Employees() {
   const { i18n, t } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
   const { businessSlug } = useParams<{ businessSlug: string }>();
-  const { meta } = useBusiness();
 
   const { data, loading } = useFetchData(["employees"], businessSlug);
   const employees = data.employees ?? [];
 
-  const headerImage =
-      meta?.employeesHeaderImage ||
-      "https://www.aestheticclinicmalaysia.com/wp-content/uploads/2023/10/Aesthetic-Clinic-Malaysia.jpg";
+  const { meta } = useBusiness();
 
-  const minExperience = 7;
+  const dynamicTab = meta?.tabs
+      ? Object.values(meta.tabs).find(t => t.route === 'employees' || t.route === '/employees')
+      : null;
+
+  const headerImage =
+      dynamicTab?.headerImage || "";
+
+
+  const getTabLabel = (localizedValue: any) => {
+    if (!localizedValue) return "";
+    return localizedValue[lang] || localizedValue["en"] || "";
+  };
+
 
   if (loading) return <p className="text-center py-10">{t("loading") || "Loading Specialists..."}</p>;
 
@@ -31,16 +40,15 @@ export default function Employees() {
         <div className="w-full px-4 md:px-[5rem]">
           <Breadcrumbs />
 
-          <div className="py-8 mb-[3.5rem]">
+          <div className="py-8 mb-[3.5rem] w-full">
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
-              {t("employees.title")}
+              {getTabLabel(dynamicTab?.title) || t("employees.title")}
             </h2>
-            <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">
-              {t("employees.subtitle", { years: minExperience })}
-            </span>
-            <p className="text-base lg:text-2xl font-normal text-foreground">
-              {t("employees.experience")}
-            </p>
+
+            <div className="md:flex justify-between block">
+              <p className="text-base lg:text-2xl font-normal text-foreground duration-500 mb-4">
+                {getTabLabel(dynamicTab?.description) || t("employees.subtitle")}
+              </p>
           </div>
 
           {/* Сетка карточек — ДИЗАЙН КАК БЫЛ (Цельная ссылка) */}
@@ -94,6 +102,7 @@ export default function Employees() {
               );
             })}
           </div>
+        </div>
         </div>
       </div>
   );

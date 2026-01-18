@@ -65,7 +65,11 @@ export default function FAQEditor() {
     if (!businessSlug) return;
 
     // Простейшая валидация заголовка
-    const hasQuestion = Object.values(faq.question || {}).some(v => v?.trim());
+    const hasQuestion = Object.values(faq.question || {}).some(
+        v => typeof v === "string" && v.trim() !== ""
+    );
+
+
     if (!hasQuestion) {
       setErrors({ question: "Please fill the question in at least one language" });
       return;

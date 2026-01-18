@@ -11,7 +11,6 @@ import type { LocalizedText } from "../../models/LocalizedText";
 import ImageInputBlock from "../../components/ImageInputBlock.tsx";
 
 export default function EmployeeEditor() {
-  // 1. Достаем lang и businessSlug из параметров URL
   const { id, lang, businessSlug } = useParams<{ id: string; lang: string; businessSlug: string }>();
   const navigate = useNavigate();
 
@@ -68,8 +67,6 @@ export default function EmployeeEditor() {
   };
 
 
-
-    // 2. Исправляем загрузку: добавляем путь бизнеса
     useEffect(() => {
       if (id && id !== "new") {
         const employeeRef = ref(db, `businesses/${businessSlug}/employees/${id}`);
@@ -88,7 +85,6 @@ export default function EmployeeEditor() {
     const handleSave = async () => {
       if (!validate()) return;
       try {
-        // Путь к коллекции сотрудников именно этого бизнеса
         const employeesListRef = ref(db, `businesses/${businessSlug}/employees`);
 
         const empId = id === "new" || !id
@@ -97,20 +93,17 @@ export default function EmployeeEditor() {
 
         if (!empId) return;
 
-        // Сохраняем по полному пути
         await set(ref(db, `businesses/${businessSlug}/employees/${empId}`), {
           ...employee,
           id: empId
         });
 
-        // 4. ВАЖНО: Навигация с учетом языка и слага бизнеса
         navigate(`/${lang}/admin/${businessSlug}/employees`);
       } catch (error) {
         console.error("Error saving employee:", error);
       }
     };
 
-    // 5. Не забываем обновить навигацию для кнопок "Cancel" и "Discard"
     const goBack = () => navigate(`/${lang}/admin/${businessSlug}/employees`);
 
     if (loading) return <div className="p-20 text-center animate-pulse font-black text-gray-300 tracking-widest uppercase">Loading Specialist...</div>;
@@ -118,7 +111,6 @@ export default function EmployeeEditor() {
     return (
         <div className="p-6 max-w-6xl mx-auto bg-white shadow-2xl rounded-[40px] my-10 border border-gray-100">
 
-          {/* Header */}
           <div className="flex justify-between items-center mb-12 border-b border-gray-50 pb-8">
             <div>
               <h1 className="text-4xl font-black text-gray-800 tracking-tighter uppercase">
@@ -137,7 +129,6 @@ export default function EmployeeEditor() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
-          {/* Left: Visuals & Tech Info */}
           <div className="lg:col-span-1 space-y-10">
             <div className="bg-gray-50/30 p-8 rounded-[32px] border border-gray-100 text-center">
               <label className="block font-black text-gray-400 mb-6 uppercase text-[10px] tracking-[0.3em]">Profile Photo</label>
@@ -161,10 +152,8 @@ export default function EmployeeEditor() {
             </div>
           </div>
 
-          {/* Right: Detailed Info */}
           <div className="lg:col-span-2 space-y-8">
 
-            {/* Basic Info Sections */}
             {(["fullName", "shortName", "position"] as const).map(field => (
                 <div key={field} className="p-8 border border-gray-100 rounded-[32px] bg-white shadow-sm hover:shadow-md transition-shadow">
                   <label className="block font-black text-gray-400 mb-5 uppercase text-[10px] tracking-[0.3em] ml-1">{field}</label>
@@ -183,7 +172,6 @@ export default function EmployeeEditor() {
                 </div>
             ))}
 
-            {/* Arrays Sections */}
             <div className="space-y-8">
               <LocalizedArraySection title="Specializations" field="specializations" employee={employee} setEmployee={setEmployee} />
               <LocalizedArraySection title="Academic Path" field="education" employee={employee} setEmployee={setEmployee} />
@@ -192,7 +180,6 @@ export default function EmployeeEditor() {
           </div>
         </div>
 
-        {/* Footer */}
         <div className="border-t border-gray-50 mt-16 pt-10 flex justify-end items-center gap-8">
           <button onClick={() => navigate("/admin/employees")} className="text-gray-400 font-black text-[10px] uppercase tracking-[0.3em] hover:text-gray-900 transition">
             Cancel
@@ -205,7 +192,6 @@ export default function EmployeeEditor() {
   );
 }
 
-// --- SUBCOMPONENTS ---
 
 function LocalizedArraySection({ title, field, employee, setEmployee }: any) {
   const languages = ["uk", "ru", "en", "de"];

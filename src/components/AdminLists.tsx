@@ -7,14 +7,25 @@ import type { PriceModel } from "../models/Price.ts";
 import type {FAQ} from "../models/FAQ.ts";
 import type {Photo} from "../models/Photo.ts";
 
+
+const localizedToString = (value?: string | string[]) => {
+    if (Array.isArray(value)) return value.join(", ");
+    return value ?? "";
+};
+
+
 // 1. СПИСОК БЛОГОВ (теперь экспортируется отдельно)
 export const AdminBlogList = ({ businessSlug }: { businessSlug: string }) => (
     <AdminEntityList<Blog>
         entityName="Blogs"
         firebasePath="blogs"
-        headerImageField="blogHeaderImage"
+        tabRoute="blogs"
         businessSlug={businessSlug}
-        getLabel={(item) => item.title?.uk || item.title?.en || "Untitled Blog"}
+        getLabel={(item) =>
+            localizedToString(item.title?.uk) ||
+            localizedToString(item.title?.en) ||
+            "Untitled Blog"
+        }
         getSlug={(item) => item.slug}
         newRoute={`/en/admin/${businessSlug}/blogs/new`}
         editRoute={(id) => `/en/admin/${businessSlug}/blogs/${id}`}
@@ -26,9 +37,13 @@ export const AdminServiceList = ({ businessSlug }: { businessSlug: string }) => 
     <AdminEntityList<Service>
         entityName="Services"
         firebasePath="services"
-        headerImageField="servicesHeaderImage"
+        tabRoute="services"
         businessSlug={businessSlug}
-        getLabel={(item) => item.title?.uk || item.title?.en || "Untitled Service"}
+        getLabel={(item) =>
+            localizedToString(item.title?.uk) ||
+            localizedToString(item.title?.en) ||
+            "Untitled Service"
+        }
         getSlug={(item) => item.slug}
         newRoute={`/en/admin/${businessSlug}/services/new`}
         editRoute={(id) => `/en/admin/${businessSlug}/services/${id}`}
@@ -38,13 +53,14 @@ export const AdminServiceList = ({ businessSlug }: { businessSlug: string }) => 
 export const AdminFAQList = ({ businessSlug }: { businessSlug: string }) => (
     <AdminEntityList<FAQ>
         entityName="FAQ"
-        firebasePath="faqs" // Убедитесь, что путь совпадает (обычно маленькими буквами)
-        headerImageField="faqsHeaderImage"
+        firebasePath="faqs"
+        tabRoute="faq"
         businessSlug={businessSlug}
-        // Используем question вместо title
-        getLabel={(item) => item.question?.uk || item.question?.en || "Untitled Question"}
-        // Slug не нужен, можно убрать эту строку или выводить ID:
-        // getSlug={(item) => item.id}
+        getLabel={(item) =>
+            localizedToString(item.question?.uk) ||
+            localizedToString(item.question?.en) ||
+            "Untitled Question"
+        }
         newRoute={`/en/admin/${businessSlug}/faq/new`}
         editRoute={(id) => `/en/admin/${businessSlug}/faq/${id}`}
     />
@@ -56,9 +72,13 @@ export const AdminSpecialList = ({ businessSlug }: { businessSlug: string }) => 
     <AdminEntityList<Special>
         entityName="Specials"
         firebasePath="specials"
-        headerImageField="specialsHeaderImage"
+        tabRoute="specials"
         businessSlug={businessSlug}
-        getLabel={(item) => item.title?.uk || item.title?.en || "Untitled Special"}
+        getLabel={(item) =>
+            localizedToString(item.title?.uk) ||
+            localizedToString(item.title?.en) ||
+            "Untitled Special"
+        }
         getSlug={(item) => item.slug}
         newRoute={`/en/admin/${businessSlug}/specials/new`}
         editRoute={(id) => `/en/admin/${businessSlug}/specials/${id}`}
@@ -70,9 +90,13 @@ export const AdminEmployeeList = ({ businessSlug }: { businessSlug: string }) =>
     <AdminEntityList<Employee>
         entityName="Employees"
         firebasePath="employees"
-        headerImageField="employeesHeaderImage"
+        tabRoute="employees"
         businessSlug={businessSlug}
-        getLabel={(item) => item.fullName?.uk || item.fullName?.en || "Unnamed"}
+        getLabel={(item) =>
+            localizedToString(item.fullName?.uk) ||
+            localizedToString(item.fullName?.en) ||
+            "Unnamed employee"
+        }
         newRoute={`/en/admin/${businessSlug}/employees/new`}
         editRoute={(id) => `/en/admin/${businessSlug}/employees/${id}`}
     />
@@ -83,9 +107,13 @@ export const AdminPriceList = ({ businessSlug }: { businessSlug: string }) => (
     <AdminEntityList<PriceModel>
         entityName="Prices"
         firebasePath="prices"
+        tabRoute="price"
         businessSlug={businessSlug}
-        headerImageField="pricesHeaderImage"
-        getLabel={(item) => item.category?.uk || "Unnamed Price"}
+        getLabel={(item) =>
+            localizedToString(item.category?.uk) ||
+            localizedToString(item.category?.en) ||
+            "Unnamed category price"
+        }
         newRoute={`/en/admin/${businessSlug}/prices/new`}
         editRoute={(id) => `/en/admin/${businessSlug}/prices/${id}`}
     />
@@ -96,9 +124,13 @@ export const AdminPhotoList = ({ businessSlug }: { businessSlug: string }) => (
     <AdminEntityList<Photo>
         entityName="Photos"
         firebasePath="photos"
+        tabRoute="gallery"
         businessSlug={businessSlug}
-        headerImageField="galleryHeaderImage"
-        getLabel={(item) => item.title?.uk || "Unnamed Price"}
+        getLabel={(item) =>
+            localizedToString(item.title?.uk) ||
+            localizedToString(item.title?.en) ||
+            "Unnamed category price"
+        }
         newRoute={`/en/admin/${businessSlug}/photos/new`}
         editRoute={(id) => `/en/admin/${businessSlug}/photos/${id}`}
     />

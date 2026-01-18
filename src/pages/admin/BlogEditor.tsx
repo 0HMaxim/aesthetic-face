@@ -18,7 +18,6 @@ import { useFetchData } from "../../hooks/useFetchData.ts";
 import { SyncedRelationSelect } from "../../components/SyncedRelationSelect.tsx";
 import { useBusiness } from "../../context/BusinessContext.tsx";
 
-// Константа инициализации вне компонента, чтобы не пересоздавалась
 const emptyBlog: Blog = {
   title: { uk: "", ru: "", en: "", de: "" },
   subtitle: { uk: "", ru: "", en: "", de: "" },
@@ -42,12 +41,10 @@ export default function BlogEditor() {
   const { slug: contextSlug, meta } = useBusiness();
   const navigate = useNavigate();
 
-  // Состояния
   const [blog, setBlog] = useState<Blog>(emptyBlog);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [dataLoading, setDataLoading] = useState(true);
 
-  // Загрузка связанных данных (сервисы, цены и т.д.)
   const { data: relatedData, loading: relatedLoading } = useFetchData([
     "services",
     "prices",
@@ -55,7 +52,6 @@ export default function BlogEditor() {
     "specials",
   ], businessSlug);
 
-  // Загрузка данных конкретного блога
   useEffect(() => {
     if (id === "new" || !id) {
       setBlog(emptyBlog);
@@ -77,7 +73,6 @@ export default function BlogEditor() {
 
   const displayName = meta?.name?.en || meta?.shortName?.en || contextSlug;
 
-  // Хендлеры
   const handleLocalizedChange = (field: keyof Blog, l: string, value: string) => {
     setBlog((prev) => ({
       ...prev,
@@ -165,7 +160,6 @@ export default function BlogEditor() {
     navigate(`/${lang}/admin/${businessSlug}/blogs`);
   };
 
-  // Рекурсивный рендер блоков
   const renderBlockEditor = (block: ContentBlock, index: number, parentIndex?: number) => {
     const blockLabel = parentIndex !== undefined ? `Child ${index + 1}` : `Block ${index + 1}`;
     return (
@@ -252,14 +246,12 @@ export default function BlogEditor() {
     );
   };
 
-  // Проверка состояния загрузки
   if (dataLoading || relatedLoading) {
     return <div className="p-20 text-center animate-pulse font-black text-gray-300 tracking-widest uppercase">Loading Blog Data...</div>;
   }
 
   return (
       <div className="p-6 max-w-6xl mx-auto bg-white shadow-2xl rounded-[40px] my-10 border border-gray-100">
-        {/* Top Action Bar */}
         <div className="flex justify-between items-center mb-12 border-b border-gray-50 pb-8">
           <div>
             <h1 className="text-4xl font-black text-gray-800 tracking-tighter uppercase">
@@ -280,7 +272,6 @@ export default function BlogEditor() {
           </div>
         </div>
 
-        {/* Basic Fields */}
         <div className="space-y-8 mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-gray-50/30 p-8 rounded-[32px] border border-gray-100 space-y-4">
@@ -322,7 +313,6 @@ export default function BlogEditor() {
           ))}
         </div>
 
-        {/* Ecosystem Section */}
         <div className="bg-blue-900 p-10 rounded-[40px] mb-12 shadow-2xl shadow-blue-200">
           <h2 className="text-white text-xs font-black mb-8 flex items-center gap-4 uppercase tracking-[0.4em]">
             <span className="w-12 h-[1px] bg-blue-400"></span>
@@ -382,7 +372,6 @@ export default function BlogEditor() {
           </div>
         </div>
 
-        {/* Content Builder */}
         <div className="mb-20">
           <div className="flex justify-between items-center mb-10 px-4">
             <h2 className="text-2xl font-black text-gray-800 uppercase tracking-tighter">Blog Builder</h2>
@@ -404,7 +393,6 @@ export default function BlogEditor() {
           </div>
         </div>
 
-        {/* Footer Actions */}
         <div className="border-t border-gray-50 pt-8 flex justify-end items-center gap-6">
           <button
               onClick={() => navigate(`/${lang}/admin/${businessSlug}/blogs`)}

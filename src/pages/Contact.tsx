@@ -7,7 +7,6 @@ import { Breadcrumbs } from "../components/Breadcrumbs";
 import { useBusiness } from "../context/BusinessContext";
 import { useGeneralInfo } from "../hooks/useGeneralInfo";
 
-// Иконки
 import MynauiClockFour from "~icons/mynaui/clock-four";
 import OcticonMail24 from "~icons/octicon/mail-24";
 import UilTelegramAlt from "~icons/uil/telegram-alt";
@@ -23,14 +22,16 @@ export default function Contact() {
   const { businessSlug } = useParams<{ businessSlug: string }>();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
-  const { meta } = useBusiness();
-
   const { info, loading } = useGeneralInfo(businessSlug);
 
+  const { meta } = useBusiness();
+
+  const dynamicTab = meta?.tabs
+      ? Object.values(meta.tabs).find(t => t.route === 'contact' || t.route === '/contact')
+      : null;
+
   const headerImage =
-      meta?.contactsHeaderImage ||
-      meta?.logo ||
-      "https://www.aestheticclinicmalaysia.com/wp-content/uploads/2023/10/Aesthetic-Clinic-Malaysia.jpg";
+      dynamicTab?.headerImage || "";
 
   const workingHours = useMemo(() => info?.working_hours ?? [], [info]);
   const messengers = useMemo(() => info?.messengers ?? {}, [info]);
@@ -46,7 +47,8 @@ export default function Contact() {
 
   return (
       <div className="w-full flex flex-col items-center justify-center">
-        {headerImage && <TopImage source={headerImage} />}
+
+        <TopImage source={headerImage} />
 
         <div className="w-full px-4 md:px-[5rem]">
           <Breadcrumbs />
@@ -56,10 +58,8 @@ export default function Contact() {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-8 mb-20">
-            {/* Левая колонка */}
             <div className="flex flex-wrap gap-6 lg:w-1/2">
 
-              {/* Телефон и адрес */}
               <div className="mb-[2rem] w-full md:w-[calc(50%-0.75rem)]">
                 <div className="flex items-center gap-8 mb-[1rem]">
                   <BiDashLg className="text-muted size-[2rem] md:size-[3rem]"/>
@@ -78,7 +78,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Рабочие часы */}
               <div className="mb-[2rem] w-full md:w-[calc(50%-0.75rem)]">
                 <div className="flex items-center gap-8 mb-[1rem]">
                   <BiDashLg className="text-muted size-[2rem] md:size-[3rem]"/>
@@ -101,7 +100,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Email */}
               <div className="mb-[2rem] w-full md:w-[calc(50%-0.75rem)]">
                 <div className="flex items-center gap-8 mb-[1rem]">
                   <BiDashLg className="text-muted size-[2rem] md:size-[3rem]"/>
@@ -118,7 +116,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Мессенджеры */}
               <div className="mb-[2rem] w-full md:w-[calc(50%-0.75rem)]">
                 <div className="flex items-center gap-8 mb-[1rem]">
                   <BiDashLg className="text-muted size-[2rem] md:size-[3rem]"/>
@@ -144,7 +141,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Социальные сети */}
               <div className="mb-[2rem] w-full md:w-[calc(50%-0.75rem)]">
                 <div className="flex items-center gap-8 mb-[1rem]">
                   <BiDashLg className="text-muted size-[2rem] md:size-[3rem]"/>
@@ -167,7 +163,6 @@ export default function Contact() {
 
             </div>
 
-            {/* Правая колонка: карта */}
             <div className="flex-1 h-[400px] lg:w-1/2 lg:h-auto overflow-hidden rounded-[2rem]">
               {info?.map ? (
                   <div className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full [&>iframe]:border-none" dangerouslySetInnerHTML={{ __html: info.map }} />

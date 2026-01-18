@@ -17,11 +17,17 @@ export default function Blogs() {
 
   const { meta } = useBusiness();
 
+  const dynamicTab = meta?.tabs
+      ? Object.values(meta.tabs).find(t => t.route === 'blogs' || t.route === '/blogs')
+      : null;
+
   const headerImage =
-      meta?.blogHeaderImage ||
-      meta?.galleryHeaderImage ||
-      meta?.logo ||
-      "";
+      dynamicTab?.headerImage || "";
+
+  const getTabLabel = (localizedValue: any) => {
+    if (!localizedValue) return "";
+    return localizedValue[lang] || localizedValue["en"] || "";
+  };
 
   if (loading) {
     return <p className="text-center py-10">{t("loading")}</p>;
@@ -34,10 +40,15 @@ export default function Blogs() {
         <div className="w-full px-4 md:px-[5rem]">
           <Breadcrumbs />
 
-          <div className="py-8 mb-[3.5rem]">
-            <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">{t("blog.title")}</h2>
-            <span className="block text-lg lg:text-4xl font-semibold mb-[0.5rem]">{t("blog.subtitle")}</span>
-          </div>
+          <div className="py-8 mb-[3.5rem] w-full">
+            <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
+              {getTabLabel(dynamicTab?.title) || t("blog.title")}
+            </h2>
+
+            <div className="md:flex justify-between block">
+              <p className="text-base lg:text-2xl font-normal text-foreground duration-500 mb-4">
+                {getTabLabel(dynamicTab?.description) || t("blog.subtitle")}
+              </p>
 
           <div className="flex flex-wrap gap-8 justify-center w-full">
             {blogs.map((item) => (
@@ -59,6 +70,8 @@ export default function Blogs() {
                   </Link>
                 </div>
             ))}
+          </div>
+            </div>
           </div>
         </div>
       </div>

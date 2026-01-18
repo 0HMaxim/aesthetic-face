@@ -1,24 +1,23 @@
-// index.tsx
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { HashRouter } from 'react-router-dom';
-import App from './App.tsx';
+import { HashRouter} from 'react-router-dom';
+import App from './App';
 import './index.css';
 import './i18n';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import { ThemeProvider } from './context/ThemeProvider';
 
-import {ThemeProvider} from './context/ThemeProvider.tsx';
+// Создаем компонент-прослойку прямо зд
 
-document.title = import.meta.env.VITE_APP_NAME || "My App";
 
-createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Root element not found');
+
+createRoot(rootElement).render(
     <React.StrictMode>
-      <ThemeProvider>
-        <HashRouter>
-          <App />
-        </HashRouter>
-      </ThemeProvider>
+        <ThemeProvider>
+            <HashRouter>
+                <App />
+            </HashRouter>
+        </ThemeProvider>
     </React.StrictMode>
 );

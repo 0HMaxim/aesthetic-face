@@ -98,13 +98,6 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
                 );
             }
 
-            case "blockquote":
-                return (
-                    <blockquote key={index} className="border-l-4 border-primary pl-6 my-10 italic text-xl md:text-2xl text-gray-600 bg-gray-50 py-6 rounded-r-lg w-full">
-                        {formatText(currentContent)}
-                    </blockquote>
-                );
-
             default:
                 return null;
         }

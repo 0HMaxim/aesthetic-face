@@ -2,7 +2,7 @@
   "name": "multi-business-site",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://0HMaxim.github.io/aesthetic-face",
+  "homepage": "https://0HMaxim.github.io/multi-business-site",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

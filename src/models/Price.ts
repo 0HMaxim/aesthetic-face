@@ -1,7 +1,7 @@
 import type { LocalizedText } from "./LocalizedText";
 
 export interface PriceItem {
-  duration: string; // или LocalizedText, если "45 хв / 45 min / 45 Minuten / 45 мин"
+  duration: LocalizedText;
   procedure: LocalizedText;
   price: string;
 }

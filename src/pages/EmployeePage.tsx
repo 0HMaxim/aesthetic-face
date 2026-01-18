@@ -17,14 +17,18 @@ export default function EmployeePage() {
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
 
   // 2. Получаем мета-данные бизнеса для обложки
-  const { meta } = useBusiness();
-
   const [employee, setEmployee] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Динамическая обложка из админки
-  const topImage = meta?.employeesHeaderImage ||
-      "https://www.aestheticclinicmalaysia.com/wp-content/uploads/2023/10/Aesthetic-Clinic-Malaysia.jpg";
+  const { meta } = useBusiness();
+
+  const dynamicTab = meta?.tabs
+      ? Object.values(meta.tabs).find(t => t.route === 'employees' || t.route === '/employees')
+      : null;
+
+  const headerImage =
+      dynamicTab?.headerImage || "";
 
   useEffect(() => {
     async function fetchEmployee() {
@@ -68,8 +72,7 @@ export default function EmployeePage() {
 
   return (
       <div className="w-full items-center justify-center">
-        {/* Теперь здесь динамическая картинка */}
-        {topImage && <TopImage source={topImage} />}
+        <TopImage source={headerImage} />
 
         <div className="w-full px-4 md:px-[5rem]">
           <Breadcrumbs employeeSlug={employee.slug} />

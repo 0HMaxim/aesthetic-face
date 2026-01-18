@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom"; // Добавили useParams
 import { useTranslation } from "react-i18next";
 import { db } from "../firebase.ts";
 import { get, ref } from "firebase/database";
@@ -14,7 +14,7 @@ interface BreadcrumbsProps {
   employeeSlug?: string;
   specialSlug?: string;
   blogSlug?: string;
-  currentTitle?: string;
+  currentTitle?: string | string[];
 }
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
@@ -26,6 +26,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
                                                         }) => {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
+  const { businessSlug } = useParams<{ businessSlug: string }>(); // Достаем slug бизнеса
   const location = useLocation();
 
   const [asyncTitle, setAsyncTitle] = useState<string>("");
@@ -38,19 +39,19 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
         let path = "";
         let slug = "";
 
-        if (blogSlug) { path = "blogs"; slug = blogSlug; }
-        else if (serviceSlug) { path = "services"; slug = serviceSlug; }
-        else if (specialSlug) { path = "specials"; slug = specialSlug; }
-        else if (employeeSlug) { path = "employees"; slug = employeeSlug; }
+        // Формируем путь к данным с учетом businessSlug
+        if (blogSlug) { path = `businesses/${businessSlug}/blogs`; slug = blogSlug; }
+        else if (serviceSlug) { path = `businesses/${businessSlug}/services`; slug = serviceSlug; }
+        else if (specialSlug) { path = `businesses/${businessSlug}/specials`; slug = specialSlug; }
+        else if (employeeSlug) { path = `businesses/${businessSlug}/employees`; slug = employeeSlug; }
 
-        if (!path || !slug) return;
+        if (!path || !slug || !businessSlug) return;
 
         const snap = await get(ref(db, path));
         if (snap.exists()) {
           const data = snap.val();
           const found: any = Object.values(data).find((item: any) => item.slug === slug);
           if (found) {
-            // Пытаемся достать заголовок из разных возможных полей модели
             const title = found.fullName?.[lang] || found.headerTitle?.[lang] || found.title?.[lang];
             setAsyncTitle(getLocalizedString(title));
           }
@@ -61,31 +62,34 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
     }
 
     fetchBreadcrumbData();
-  }, [blogSlug, serviceSlug, specialSlug, employeeSlug, currentTitle, lang]);
+  }, [blogSlug, serviceSlug, specialSlug, employeeSlug, currentTitle, lang, businessSlug]);
 
-  // Базовая крошка "Главная"
+  const finalTitle = getLocalizedString(currentTitle) || asyncTitle;
+
+  // Базовая ссылка теперь включает businessSlug
+  // Пример: /ru/my-restaurant
+  const baseHref = `/${lang}/${businessSlug}`;
+
   const items: { label: string; href: string }[] = [
-    { label: t("header.home"), href: `/${lang}` },
+    { label: t("header.home"), href: baseHref },
   ];
 
   const currentPath = location.pathname;
-  const finalTitle = currentTitle || asyncTitle;
 
-  // Логика добавления промежуточных и финальных категорий
+  // Везде добавляем businessSlug в href
   if (currentPath.includes("/employees")) {
-    items.push({ label: t("header.employees"), href: `/${lang}/employees` });
+    items.push({ label: t("header.employees"), href: `${baseHref}/employees` });
   }
   else if (currentPath.includes("/blogs")) {
-    items.push({ label: t("header.blog"), href: `/${lang}/blogs` });
+    items.push({ label: t("header.blog"), href: `${baseHref}/blogs` });
   }
   else if (currentPath.includes("/specials")) {
-    items.push({ label: t("header.specials"), href: `/${lang}/specials` });
+    items.push({ label: t("header.specials"), href: `${baseHref}/specials` });
   }
   else if (currentPath.includes("/services")) {
-    items.push({ label: t("header.services"), href: `/${lang}/services` });
+    items.push({ label: t("header.services"), href: `${baseHref}/services` });
   }
   else {
-    // Статические страницы (About, Price, etc.)
     const staticTabs = [
       { title: "header.about", link: "/about" },
       { title: "header.price", link: "/price" },
@@ -93,12 +97,12 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({
       { title: "header.gallery", link: "/gallery" },
       { title: "header.contact", link: "/contact" },
     ];
-    const cleanPath = currentPath.replace(`/${lang}`, "");
+    // Очищаем путь от префикса языка и бизнеса для сравнения
+    const cleanPath = currentPath.replace(`${baseHref}`, "");
     const matchedTab = staticTabs.find((tab) => cleanPath.startsWith(tab.link));
-    if (matchedTab) items.push({ label: t(matchedTab.title), href: `/${lang}${matchedTab.link}` });
+    if (matchedTab) items.push({ label: t(matchedTab.title), href: `${baseHref}${matchedTab.link}` });
   }
 
-  // Добавляем финальный заголовок страницы, если он загрузился или передан
   if (finalTitle && !items.find(item => item.label === finalTitle)) {
     items.push({ label: finalTitle, href: currentPath });
   }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
+import {Routes, Route, Navigate, useParams} from 'react-router-dom';
 import {ref, get, set} from 'firebase/database';
 import { db } from './firebase';
 
@@ -14,7 +14,7 @@ import Contact from './pages/Contact';
 import Blogs from './pages/Blogs';
 import Gallery from './pages/Gallery';
 import ServicePage from './pages/ServicePage';
-import SpecialPage from "./pages/SpecialPage";
+import {SpecialPage} from "./pages/SpecialPage";
 import BlogPage from "./pages/BlogPage";
 
 // Админка
@@ -37,6 +37,15 @@ import GeneralInfoEditor from "./pages/admin/GeneralInfoEditor";
 import Employees from "./pages/Employees";
 import EmployeePage from "./pages/EmployeePage";
 import MetaEditor from "./pages/admin/MetaEditor.tsx";
+import {BusinessProvider} from "./context/BusinessProvider.tsx";
+
+
+const BusinessDataWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const { businessSlug } = useParams<{ businessSlug: string }>();
+    if (!businessSlug) return <>{children}</>;
+    return <BusinessProvider slug={businessSlug}>{children}</BusinessProvider>;
+};
+
 
 const App: React.FC = () => {
     const locale = import.meta.env.VITE_APP_LOCALE || 'en';
@@ -52,10 +61,8 @@ const App: React.FC = () => {
                     if (keys.length > 0) setFirstBusiness(keys[0]);
                 }
             } catch (error) {
-                // Если база пустая или доступ закрыт, мы просто выводим лог
-                console.error("Firebase Auth/Permission Error:", error);
+                console.error("Firebase Error:", error);
             } finally {
-                // В любом случае (успех или ошибка) выключаем лоадер
                 setLoading(false);
             }
         };
@@ -94,88 +101,77 @@ const App: React.FC = () => {
     if (loading) return <div className="p-8">Загрузка...</div>;
 
     return (
-        <Routes>
-            {/* --- Корень сайта --- */}
-            <Route
-                path="/"
-                element={
-                    firstBusiness ? (
-                        <Navigate to={`/${locale}/${firstBusiness}`} replace />
-                    ) : (
-                        /* ВАЖНО: Убираем AppLayout отсюда, чтобы Header не пытался грузить undefined */
-                        <div className="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-black p-6 text-center">
-                            <div className="text-8xl mb-8 animate-bounce">🏗️</div>
-                            <h2 className="text-4xl font-black uppercase mb-4 tracking-tighter">
-                                No Business Data
-                            </h2>
-                            <p className="text-gray-500 mb-10 max-w-md text-lg">
-                                The database is empty. You need to create your first business profile to activate the site.
-                            </p>
-                            <button
-                                onClick={handleInitialCreate}
-                                className="bg-blue-600 text-white px-12 py-5 rounded-2xl font-bold text-xl shadow-2xl hover:bg-blue-700 transition"
-                            >
-                                + Create First Business
-                            </button>
-                        </div>
-                    )
-                }
-            />
+        <BusinessDataWrapper>
+            <Routes>
+                {/* Корень сайта: редирект на первый бизнес */}
+                <Route
+                    path="/"
+                    element={
+                        firstBusiness ? (
+                            <Navigate to={`/${locale}/${firstBusiness}`} replace />
+                        ) : (
+                            <div className="flex flex-col items-center justify-center min-h-screen">
+                                <h2>No Business Data</h2>
+                                <button onClick={handleInitialCreate}>+ Create First Business</button>
+                            </div>
+                        )
+                    }
+                />
 
+                {/* --- Админка: список всех бизнесов --- */}
+                <Route path="/admin" element={<AdminPage />} />
+                <Route path="/:lang/admin" element={<AdminPage />} />
+                <Route path="/:lang/admin/:businessSlug/*" element={<AdminPage />}>
+                    <Route path="meta" element={<MetaEditor />} />
+                    <Route path="generalinfo" element={<GeneralInfoEditor />} />
+                    <Route path="blogs" element={<BlogList />} />
+                    <Route path="blogs/new" element={<BlogEditor />} />
+                    <Route path="blogs/:id" element={<BlogEditor />} />
+                    <Route path="employees" element={<EmployeeList />} />
+                    <Route path="employees/new" element={<EmployeeEditor />} />
+                    <Route path="employees/:id" element={<EmployeeEditor />} />
+                    <Route path="faq" element={<FAQListA />} />
+                    <Route path="faq/new" element={<FAQEditor />} />
+                    <Route path="faq/:id" element={<FAQEditor />} />
+                    <Route path="prices" element={<PriceList />} />
+                    <Route path="prices/new" element={<PriceEditor />} />
+                    <Route path="prices/:id" element={<PriceEditor />} />
+                    <Route path="services" element={<ServiceList />} />
+                    <Route path="services/new" element={<ServiceEditor />} />
+                    <Route path="services/:id" element={<ServiceEditor />} />
+                    <Route path="specials" element={<SpecialList />} />
+                    <Route path="specials/new" element={<SpecialEditor />} />
+                    <Route path="specials/:id" element={<SpecialEditor />} />
+                    <Route path="photos" element={<PhotoList />} />
+                    <Route path="photos/new" element={<PhotoEditor />} />
+                    <Route path="photos/:id" element={<PhotoEditor />} />
+                </Route>
 
+                {/* --- Публичная часть --- */}
+                <Route
+                    path="/:lang/:businessSlug/*"
+                    element={
+                        firstBusiness ? <AppLayout /> : <Navigate to="/" replace />
+                    }
+                >
+                    <Route index element={<Home />} />
+                    <Route path="about" element={<About />} />
+                    <Route path="specials" element={<Specials />} />
+                    <Route path="specials/:slug" element={<SpecialPage />} />
+                    <Route path="services" element={<Services />} />
+                    <Route path="services/:slug" element={<ServicePage />} />
+                    <Route path="employees" element={<Employees />} />
+                    <Route path="employees/:slug" element={<EmployeePage />} />
+                    <Route path="price" element={<Price />} />
+                    <Route path="faq" element={<FAQ />} />
+                    <Route path="gallery" element={<Gallery />} />
+                    <Route path="blogs" element={<Blogs />} />
+                    <Route path="blogs/:slug" element={<BlogPage />} />
+                    <Route path="contact" element={<Contact />} />
+                </Route>
 
-            {/* --- Админка: список всех бизнесов --- */}
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="/:lang/admin" element={<AdminPage />} />
-            <Route path="/:lang/admin/:businessSlug/*" element={<AdminPage />}>
-                <Route path="meta" element={<MetaEditor />} />
-                <Route path="generalinfo" element={<GeneralInfoEditor />} />
-                <Route path="blogs" element={<BlogList />} />
-                <Route path="blogs/new" element={<BlogEditor />} />
-                <Route path="blogs/:id" element={<BlogEditor />} />
-                <Route path="employees" element={<EmployeeList />} />
-                <Route path="employees/new" element={<EmployeeEditor />} />
-                <Route path="employees/:id" element={<EmployeeEditor />} />
-                <Route path="faq" element={<FAQListA />} />
-                <Route path="faq/new" element={<FAQEditor />} />
-                <Route path="faq/:id" element={<FAQEditor />} />
-                <Route path="prices" element={<PriceList />} />
-                <Route path="prices/new" element={<PriceEditor />} />
-                <Route path="prices/:id" element={<PriceEditor />} />
-                <Route path="services" element={<ServiceList />} />
-                <Route path="services/new" element={<ServiceEditor />} />
-                <Route path="services/:id" element={<ServiceEditor />} />
-                <Route path="specials" element={<SpecialList />} />
-                <Route path="specials/new" element={<SpecialEditor />} />
-                <Route path="specials/:id" element={<SpecialEditor />} />
-                <Route path="photos" element={<PhotoList />} />
-                <Route path="photos/new" element={<PhotoEditor />} />
-                <Route path="photos/:id" element={<PhotoEditor />} />
-            </Route>
-
-            {/* --- Публичная часть --- */}
-            <Route
-                path="/:lang/:businessSlug/*"
-                element={
-                    firstBusiness ? <AppLayout /> : <Navigate to="/" replace />
-                }
-            >
-                <Route index element={<Home />} />
-                <Route path="about" element={<About />} />
-                <Route path="specials" element={<Specials />} />
-                <Route path="specials/:slug" element={<SpecialPage />} />
-                <Route path="services" element={<Services />} />
-                <Route path="services/:slug" element={<ServicePage />} />
-                <Route path="employees" element={<Employees />} />
-                <Route path="employees/:slug" element={<EmployeePage />} />
-                <Route path="price" element={<Price />} />
-                <Route path="faq" element={<FAQ />} />
-                <Route path="gallery" element={<Gallery />} />
-                <Route path="blogs" element={<Blogs />} />
-                <Route path="blogs/:slug" element={<BlogPage />} />
-                <Route path="contact" element={<Contact />} />
-            </Route>
-        </Routes>
+            </Routes>
+        </BusinessDataWrapper>
     );
 };
 
