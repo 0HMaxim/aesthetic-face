@@ -13,7 +13,7 @@ export default function ThemeSwitcher() {
   return (
       <button
           onClick={handleThemeChange}
-          className="h-full cursor-pointer transition-colors duration-200 min-w-[2rem] min-h-[2rem] "
+          className="h-full cursor-pointer transition-colors duration-200 min-w-[2rem] min-h-[2rem]"
       >
         {theme === 'light' && <SolarSunBold className="size-[2rem]" />}
         {theme === 'dark' && <SolarMoonLinear className="size-[2rem]" />}

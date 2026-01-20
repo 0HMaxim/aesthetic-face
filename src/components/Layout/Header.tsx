@@ -81,7 +81,7 @@ export default function Header() {
             {/* Главная */}
             <Link
                 to={`/${lang}/${businessSlug}`}
-                className="text-[1rem] font-semibold text-foreground hover:bg-secondary rounded-[5rem] p-[1.5rem] shadow-2xl"
+                className="text-[1rem] font-semibold text-foreground hover:bg-secondary rounded-[5rem] p-[1.5rem] shadow-2xl duration-500"
             >
               {getLocalizedText(meta.shortName, lang) || getLocalizedText(meta.name, lang) || "Home"}
             </Link>
@@ -91,7 +91,7 @@ export default function Header() {
                 <Link
                     key={tab.route || index}
                     to={`/${lang}/${businessSlug}/${tab.route}`}
-                    className="text-[1rem] font-semibold text-foreground hover:bg-secondary rounded-[5rem] p-[1.5rem] shadow-2xl"
+                    className="text-[1rem] font-semibold text-foreground hover:bg-secondary rounded-[5rem] p-[1.5rem] shadow-2xl duration-500"
                 >
                   {getLocalizedText(tab.shortName, lang)}
                 </Link>
@@ -131,7 +131,7 @@ export default function Header() {
               <Link
                   key={tab.route || index}
                   to={`/${lang}/${businessSlug}/${tab.route}`}
-                  className="text-xl font-medium p-4 border-b dark:border-white/10"
+                  className="text-xl font-medium p-4 border-b dark:border-white/10 "
                   onClick={() => setMenuOpen(false)}
               >
                 {getLocalizedText(tab.shortName, lang)}

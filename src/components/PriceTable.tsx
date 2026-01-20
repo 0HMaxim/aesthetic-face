@@ -55,12 +55,12 @@ export default function PriceTable({ items, businessSlug, serviceId, subserviceI
   return (
       <div className="w-full">
         {filteredPrices.map((data, idx) => (
-            <div key={idx} className="w-full border-b border-muted">
+            <div key={idx} className="w-full border-b border-muted duration-500 text-foreground">
               <button
                   onClick={() => toggleSection(idx)}
                   className="w-full text-left flex justify-between items-center relative"
               >
-                <h2 className="font-[800] text-[1.2rem] lg:text-[2rem] py-[0.8rem] lg:py-[1.5rem] select-text">
+                <h2 className="font-[800] text-[1.2rem] lg:text-[2rem] py-[0.8rem] lg:py-[1.5rem] select-text ">
                   {data.category?.[lang] || "No title"}
                 </h2>
                 <span
@@ -87,7 +87,7 @@ export default function PriceTable({ items, businessSlug, serviceId, subserviceI
                   </colgroup>
 
                   <thead>
-                  <tr className="border-b-2 border-muted text-[0.9rem] lg:text-[1.5rem]">
+                  <tr className="border-b-2 border-muted text-[0.9rem] lg:text-[1.5rem] duration-500 text-foreground">
                     <th className="px-[0.5rem] lg:px-[3rem] py-[0.5rem] lg:py-[1.5rem] font-[700] whitespace-nowrap">
                       {data.columns?.duration?.[lang] || "—"}
                     </th>
@@ -109,7 +109,7 @@ export default function PriceTable({ items, businessSlug, serviceId, subserviceI
                         <tr>
                           <td
                               colSpan={3}
-                              className="uppercase font-bold px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-b border-muted"
+                              className="uppercase font-bold px-[1rem] md:px-[3rem] py-[1rem] md:py-[1.5rem] border-b border-muted duration-500 text-foreground"
                           >
                             {section.subtitle?.[lang]}
                           </td>

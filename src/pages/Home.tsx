@@ -54,8 +54,8 @@ export default function Home() {
         <div className="w-full px-4 md:px-[5rem]">
           <Breadcrumbs />
 
-          <div className="py-8 mb-[3.5rem] border-b border-gray-100">
-          <span className="inline-block bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full mb-4 text-foreground bg-primary">
+          <div className="py-8 mb-[3.5rem] border-b border-gray-100 text-foreground duration-500 ">
+          <span className="inline-block bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full mb-4 bg-primary">
             {meta?.type || "Business"}
           </span>
 
@@ -66,16 +66,16 @@ export default function Home() {
 
 
             {meta?.slogan?.[locale] && (
-                <p className="text-xl md:text-2xl font-medium uppercase tracking-widest mb-10 text-foreground">
+                <p className="text-xl md:text-2xl font-medium uppercase tracking-widest mb-10 duration-500">
                   {meta.slogan[locale]}
                 </p>
             )}
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-10">
-              <div className="lg:col-span-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-10 ">
+              <div className="lg:col-span-8 ">
                 {meta?.description?.[locale] ? (
                     <div className="prose prose-xl max-w-none">
-                      <p className="text-2xl leading-relaxed text-foreground font-light">{meta.description[locale]}</p>
+                      <p className="text-2xl leading-relaxed text-foreground font-light duration-500">{meta.description[locale]}</p>
                     </div>
                 ) : (
                     <p className="text-gray-300 italic">No description provided yet.</p>
@@ -104,10 +104,10 @@ export default function Home() {
 
           <div className="flex flex-col gap-8 pb-20">
             <div className="flex items-end justify-between mb-4">
-              <h2 className="text-4xl font-black text-foreground uppercase tracking-tighter">Current Specials</h2>
+              <h2 className="text-4xl font-black text-foreground uppercase tracking-tighter duration-500">Current Specials</h2>
               <Link
                   to={`/${locale}/${businessSlug}/specials`}
-                  className="text-xs font-black text-foreground uppercase tracking-widest text-blue-600 hover:text-black transition-colors"
+                  className="text-xs font-black text-foreground uppercase tracking-widest text-blue-600 hover:text-black transition-colors duration-500"
               >
                 View All →
               </Link>

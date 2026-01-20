@@ -42,7 +42,7 @@ export default function Services() {
           <Breadcrumbs />
 
 
-          <div className="py-8 mb-[3.5rem]">
+          <div className="py-8 mb-[3.5rem] duration-500 text-foreground">
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
               {getTabLabel(dynamicTab?.title) || t("services.title")}
             </h2>

@@ -53,25 +53,25 @@ export default function Contact() {
         <div className="w-full px-4 md:px-[5rem]">
           <Breadcrumbs />
 
-          <div className="py-8 mb-[2.5rem]">
+          <div className="py-8 mb-[2.5rem] text-foreground duration-500">
             <h2 className="text-3xl lg:text-5xl font-extrabold mb-6">{t("contact.contacts")}</h2>
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-8 mb-20">
+          <div className="flex flex-col lg:flex-row gap-8 mb-20 text-foreground duration-500">
             <div className="flex flex-wrap gap-6 lg:w-1/2">
 
               <div className="mb-[2rem] w-full md:w-[calc(50%-0.75rem)]">
                 <div className="flex items-center gap-8 mb-[1rem]">
-                  <BiDashLg className="text-muted size-[2rem] md:size-[3rem]"/>
+                  <BiDashLg className="text-muted duration-500 size-[2rem] md:size-[3rem]"/>
                   <p className="font-semibold mb-1 text-[1.5rem] md:text-[2rem]">{t("contact.phone")}</p>
                 </div>
 
-                <div className="flex items-center gap-8">
-                  <MaterialSymbolsPhoneIphoneOutlineSharp className="text-foreground size-[2.2rem] md:size-[4rem]"/>
+                <div className="flex items-center gap-8 ">
+                  <MaterialSymbolsPhoneIphoneOutlineSharp className="text-foreground duration-500 size-[2.2rem] md:size-[4rem]"/>
                   <div>
                     {/* Адрес на отдельной строке */}
                     <p className="text-[1rem] md:text-[1.3rem] break-words">{info?.address?.[lang]}</p>
-                    <a href={`tel:${info?.phone?.[lang]}`} className="text-foreground text-[1.3rem] md:text-[1.7rem] font-[600]">
+                    <a href={`tel:${info?.phone?.[lang]}`} className="text-foreground duration-500 text-[1.3rem] md:text-[1.7rem] font-[600]">
                       {info?.phone?.[lang]}
                     </a>
                   </div>
@@ -80,12 +80,12 @@ export default function Contact() {
 
               <div className="mb-[2rem] w-full md:w-[calc(50%-0.75rem)]">
                 <div className="flex items-center gap-8 mb-[1rem]">
-                  <BiDashLg className="text-muted size-[2rem] md:size-[3rem]"/>
+                  <BiDashLg className="text-muted duration-500 size-[2rem] md:size-[3rem]"/>
                   <p className="font-semibold mb-1 text-[1.5rem] md:text-[2rem]">{t("contact.working_hours")}</p>
                 </div>
 
                 <div className="flex items-center gap-8">
-                  <MynauiClockFour className="text-foreground size-[2.2rem] md:size-[3rem]"/>
+                  <MynauiClockFour className="text-foreground duration-500 size-[2.2rem] md:size-[3rem]"/>
                   <div>
                     {workingHours.map((item, idx) => {
                       const daysArray = Array.isArray(item.days) ? item.days : [item.days];
@@ -102,14 +102,14 @@ export default function Contact() {
 
               <div className="mb-[2rem] w-full md:w-[calc(50%-0.75rem)]">
                 <div className="flex items-center gap-8 mb-[1rem]">
-                  <BiDashLg className="text-muted size-[2rem] md:size-[3rem]"/>
+                  <BiDashLg className="text-muted duration-500 size-[2rem] md:size-[3rem]"/>
                   <p className="font-semibold mb-1 text-[1.5rem] md:text-[2rem]">{t("contact.email")}</p>
                 </div>
 
-                <div className="flex items-center gap-8">
-                  <OcticonMail24 className="text-foreground size-[2.2rem] md:size-[3rem]"/>
+                <div className="flex items-center gap-8 ">
+                  <OcticonMail24 className="text-foreground duration-500 size-[2.2rem] md:size-[3rem]"/>
                   <div>
-                    <a href={`mailto:${info?.email}`} className="text-foreground text-[1.2rem] md:text-[1.5rem] font-[600] break-all">
+                    <a href={`mailto:${info?.email}`} className="text-foreground duration-500 text-[1.2rem] md:text-[1.5rem] font-[600] break-all">
                       {info?.email}
                     </a>
                   </div>
@@ -118,24 +118,24 @@ export default function Contact() {
 
               <div className="mb-[2rem] w-full md:w-[calc(50%-0.75rem)]">
                 <div className="flex items-center gap-8 mb-[1rem]">
-                  <BiDashLg className="text-muted size-[2rem] md:size-[3rem]"/>
+                  <BiDashLg className="text-muted duration-500 size-[2rem] md:size-[3rem]"/>
                   <p className="font-semibold mb-2 text-[1.5rem] md:text-[2rem]">{t("contact.write")}</p>
                 </div>
 
                 <div className="flex items-center gap-4">
                   {messengers.telegram && (
                       <a href={messengers.telegram} target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110">
-                        <UilTelegramAlt className="text-foreground size-[2.2rem] md:size-[3rem]" />
+                        <UilTelegramAlt className="text-foreground duration-500 size-[2.2rem] md:size-[3rem]" />
                       </a>
                   )}
                   {messengers.viber && (
                       <a href={messengers.viber} target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110">
-                        <SimpleIconsViber className="text-foreground size-[2.2rem] md:size-[3rem]" />
+                        <SimpleIconsViber className="text-foreground duration-500 size-[2.2rem] md:size-[3rem]" />
                       </a>
                   )}
                   {messengers.whatsapp && (
                       <a href={messengers.whatsapp} target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110">
-                        <IcBaselineWhatsapp className="text-foreground size-[2.5rem] md:size-[3.3rem]" />
+                        <IcBaselineWhatsapp className="text-foreground duration-500 size-[2.5rem] md:size-[3.3rem]" />
                       </a>
                   )}
                 </div>
@@ -143,19 +143,19 @@ export default function Contact() {
 
               <div className="mb-[2rem] w-full md:w-[calc(50%-0.75rem)]">
                 <div className="flex items-center gap-8 mb-[1rem]">
-                  <BiDashLg className="text-muted size-[2rem] md:size-[3rem]"/>
+                  <BiDashLg className="text-muted duration-500 size-[2rem] md:size-[3rem]"/>
                   <p className="font-semibold mb-2 text-[1.5rem] md:text-[2rem]">{t("contact.subscribe")}</p>
                 </div>
 
                 <div className="flex items-center gap-4">
                   {socials.instagram && (
                       <a href={socials.instagram} target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110">
-                        <StreamlineInstagram className="text-foreground size-[2.2rem] md:size-[3rem]" />
+                        <StreamlineInstagram className="text-foreground duration-500 size-[2.2rem] md:size-[3rem]" />
                       </a>
                   )}
                   {socials.facebook && (
                       <a href={socials.facebook} target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-110">
-                        <F7LogoFacebook className="text-foreground size-[2.2rem] md:size-[3rem]" />
+                        <F7LogoFacebook className="text-foreground duration-500 size-[2.2rem] md:size-[3rem]" />
                       </a>
                   )}
                 </div>

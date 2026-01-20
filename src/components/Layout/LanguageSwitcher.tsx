@@ -24,7 +24,7 @@ export default function LanguageSwitcher() {
   };
 
   return (
-      <div className="relative inline-block group">
+      <div className="relative inline-block group duration-500">
         {/* Текущий язык */}
         <div className="px-4 py-2 cursor-pointer uppercase">
           {i18n.language}
