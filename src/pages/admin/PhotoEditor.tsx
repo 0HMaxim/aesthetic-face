@@ -14,13 +14,17 @@ import { useFetchData } from "../../hooks/useFetchData.ts";
 import { SyncedRelationSelect } from "../../components/SyncedRelationSelect.tsx";
 import ImageInputBlock from "../../components/ImageInputBlock.tsx";
 import {useTranslation} from "react-i18next";
+import {adminPath} from "../../utils/adminNavigate.ts";
 
 export default function PhotoEditor() {
     const { i18n } = useTranslation();
-    const { businessSlug, id } = useParams<{
+    const { businessSlug, id, lang } = useParams<{
         businessSlug: string;
         id: string;
+        lang: string;
     }>();
+
+
     const navigate = useNavigate();
 
     const emptyPhoto: Photo = {
@@ -72,7 +76,7 @@ export default function PhotoEditor() {
             id: photoId,
         });
 
-        navigate(`/admin/${businessSlug}/photos`);
+        navigate(adminPath(lang!, businessSlug!, "photos"));
     };
 
     if (loading) return (
@@ -92,9 +96,13 @@ export default function PhotoEditor() {
                 </div>
 
                 <div className="border-t border-gray-50 pt-8 flex justify-end items-center gap-6">
-                    <button onClick={() => navigate(`/admin/${businessSlug}/photos`)} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
+                    <button
+                        onClick={() => navigate(adminPath(lang!, businessSlug!, "photos"))}
+                        className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition"
+                    >
                         Discard Changes
                     </button>
+
                     <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-2xl transition-all font-bold shadow-lg shadow-blue-100 active:scale-95">
                         Save Gallery
                     </button>
@@ -258,7 +266,10 @@ export default function PhotoEditor() {
                 </div>
             </div>
             <div className="border-t border-gray-50 pt-8 flex justify-end items-center gap-6">
-                <button onClick={() => navigate(`/admin/${businessSlug}/photos`)} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
+                <button
+                    onClick={() => navigate(adminPath(lang!, businessSlug!, "photos"))}
+                    className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition"
+                >
                     Discard Changes
                 </button>
                 <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-2xl transition-all font-bold shadow-lg shadow-blue-100 active:scale-95">

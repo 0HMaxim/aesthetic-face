@@ -1,10 +1,10 @@
 {
-  "title": "Фото",
-  "subtitle": "Ділимося фото наших клієнтів",
-  "category": "Категорія",
-  "procedure": "Проведено",
-  "employee": "Працівник",
-  "photos": "фото",
-  "selectCategory": "Оберіть категорiю",
-  "selectService": "Оберіть послугу"
+  "title": "Галерея",
+  "subtitle": "Візуальне втілення наших професійних стандартів",
+  "category": "Напрямок",
+  "procedure": "Послуга",
+  "employee": "Фахівець",
+  "photos": "Світлини",
+  "selectCategory": "Усі категорії",
+  "selectService": "Усі послуги"
 }

@@ -44,10 +44,10 @@ export default function Specials() {
 
           <div className="py-8 mb-[3.5rem] duration-500 text-foreground">
             <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
-              {getTabLabel(dynamicTab?.title) || t("services.title")}
+              {getTabLabel(dynamicTab?.title) || t("specials.title")}
             </h2>
             <p className="md:text-2xl text-[1.25rem] font-normal text-foreground/80 duration-500 max-w-[60rem]">
-              {getTabLabel(dynamicTab?.description)|| t("services.subtitle")}
+              {getTabLabel(dynamicTab?.description)|| t("specials.subtitle")}
             </p>
           </div>
 

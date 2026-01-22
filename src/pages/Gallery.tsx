@@ -82,19 +82,20 @@ export default function Gallery() {
 
     return (
         <div className="w-full items-center justify-center">
-            {headerImage && <TopImage source={headerImage} />}
+
+            <TopImage source={headerImage} />
 
             <div className="w-full px-4 md:px-[5rem]">
                 <Breadcrumbs />
 
                 <div className="py-8 mb-[3.5rem] w-full duration-500 text-foreground">
                     <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">
-                        {getTabLabel(dynamicTab?.title) || t("FAQ.title")}
+                        {getTabLabel(dynamicTab?.title) || t("gallery.title")}
                     </h2>
 
                     <div className="md:flex justify-between block">
                         <p className="text-base lg:text-2xl font-normal text-foreground duration-500 mb-4">
-                            {getTabLabel(dynamicTab?.description) || t("FAQ.subtitle")}
+                            {getTabLabel(dynamicTab?.description) || t("gallery.subtitle")}
                         </p>
 
                         <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-start md:items-center">

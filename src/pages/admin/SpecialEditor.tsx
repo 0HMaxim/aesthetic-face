@@ -15,6 +15,7 @@ import type { Blog } from "../../models/Blog.ts";
 import ImageInputBlock from "../../components/ImageInputBlock.tsx";
 import { useFetchData } from "../../hooks/useFetchData.ts";
 import { SyncedRelationSelect } from "../../components/SyncedRelationSelect.tsx";
+import {adminPath} from "../../utils/adminNavigate.ts";
 
 const emptySpecial: Special = {
   title: { uk: "", ru: "", en: "", de: "" },
@@ -191,7 +192,7 @@ export default function SpecialEditor() {
         id: sId,
         updatedAt: Date.now(),
       });
-      navigate(`/${lang}/admin/${businessSlug}/specials`);
+      navigate(adminPath(lang!, businessSlug!, "specials"));
     } catch (e) {
       console.error("Save error:", e);
     }
@@ -212,7 +213,7 @@ export default function SpecialEditor() {
             <p className="text-gray-400 text-sm font-medium tracking-tight mt-1">Configure promotion details and marketing links</p>
           </div>
           <div className="flex justify-end items-center gap-6">
-            <button onClick={() => navigate(`/${lang}/admin/${businessSlug}/specials`)} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
+            <button onClick={() => navigate(adminPath(lang!, businessSlug!, "specials"))} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
               Discard
             </button>
             <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-2xl transition-all font-bold shadow-lg shadow-blue-100 active:scale-95">
@@ -334,6 +335,15 @@ export default function SpecialEditor() {
                 </div>
             )}
           </div>
+        </div>
+
+        <div className="flex justify-end items-center gap-6">
+          <button onClick={() => navigate(adminPath(lang!, businessSlug!, "specials"))} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
+            Discard
+          </button>
+          <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-2xl transition-all font-bold shadow-lg shadow-blue-100 active:scale-95">
+            Save Special
+          </button>
         </div>
       </div>
   );

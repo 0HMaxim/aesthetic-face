@@ -1,10 +1,9 @@
 {
-  "title": "Blog",
-  "subtitle": "Sharing useful articles in cosmetology and more",
-  "learnMore": "Learn more",
-  "relatedServices": "Procedures mentioned in this article",
-  "relatedSubservices": "Related procedures",
+  "title": "Blog & Insights",
+  "subtitle": "Sharing professional expertise, latest news, and useful recommendations for your convenience",
+  "learnMore": "Read more",
+  "relatedServices": "Services mentioned in this article",
+  "relatedSubservices": "Related categories",
   "relatedSpecials": "Special offers",
-  "otherBlogs":  "Other blogs"
-
+  "otherBlogs": "Other articles"
 }

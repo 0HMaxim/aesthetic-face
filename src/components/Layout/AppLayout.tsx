@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import { Outlet, useLocation, useParams, useNavigate } from 'react-router-dom';
-import { ref, onValue, off } from "firebase/database"; // Добавили off
+import { ref, onValue, off } from "firebase/database";
 import { db } from "../../firebase";
 
 import Header from "./Header";
@@ -26,7 +26,6 @@ export default function AppLayout() {
         if (lang && i18n.language !== lang) i18n.changeLanguage(lang);
     }, [lang, i18n]);
 
-    // 1. load all businesses, (do 1 time at start project )
     useEffect(() => {
         const allRef = ref(db, "businesses");
         onValue(allRef, (snapshot) => {
@@ -42,7 +41,6 @@ export default function AppLayout() {
         return () => off(allRef);
     }, [lang]);
 
-    // 2. subscribe to current businesses (reload if businessSlug change)
     useEffect(() => {
         if (!businessSlug) return;
 
@@ -61,14 +59,11 @@ export default function AppLayout() {
             setLoading(false);
         });
 
-        // Clear Function: Befor new slug,
-        // Unsubscribe from old slug.
         return () => {
             off(metaRef);
         };
     }, [businessSlug]);
 
-    // 3. Scroll to top
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     }, [location.pathname]);
@@ -93,7 +88,6 @@ export default function AppLayout() {
             <div className="flex flex-col min-h-screen bg-background relative">
                 <Header />
 
-                {/* Business select */}
                 <div className="fixed bottom-10 left-6 z-[60]">
                     <motion.button
                         whileHover={{ scale: 1.05 }}
@@ -119,7 +113,7 @@ export default function AppLayout() {
                                             navigate(`/${lang}/${b.slug}`);
                                             setMenuOpen(false);
                                         }}
-                                        className={`w-full text-left p-3 rounded-xl transition-all font-bold text-sm ${
+                                        className={`w-full text-left p-3 rounded-xl transition-all font-bold text-black dark:text-white text-sm ${
                                             businessSlug === b.slug
                                                 ? "bg-blue-600 text-white"
                                                 : "hover:bg-gray-100 dark:hover:bg-white/5"

@@ -13,11 +13,14 @@ import type { LocalizedText } from "../../models/LocalizedText.ts";
 // Components
 import { useFetchData } from "../../hooks/useFetchData.ts";
 import { SyncedRelationSelect } from "../../components/SyncedRelationSelect.tsx";
+import {adminPath} from "../../utils/adminNavigate.ts";
+import {Button} from "@heroui/react";
 
 export default function PriceEditor() {
-    const { businessSlug, id } = useParams<{
+    const { businessSlug, id, lang } = useParams<{
         businessSlug: string;
         id: string;
+        lang: string;
     }>();
 
     const navigate = useNavigate();
@@ -76,8 +79,7 @@ export default function PriceEditor() {
         const basePath = `businesses/${businessSlug}/prices`;
         const baseRef = ref(db, basePath);
 
-        const priceId =
-            id && id !== "new" ? id : push(baseRef).key;
+        const priceId = id && id !== "new" ? id : push(baseRef).key;
 
         if (!priceId) return;
 
@@ -86,7 +88,8 @@ export default function PriceEditor() {
             id: priceId,
         });
 
-        navigate(`/admin/${businessSlug}/prices`);
+
+        navigate(adminPath(lang!, businessSlug!, "prices"));
     };
 
 
@@ -105,15 +108,19 @@ export default function PriceEditor() {
                 </div>
 
                 <div className="border-t border-gray-50 pt-8 flex justify-end items-center gap-6">
-                    <button onClick={() => navigate(`/admin/${businessSlug}/prices`)} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">
+                    <Button
+                        onClick={() => navigate(adminPath(lang!, businessSlug!, "prices"))}
+                        className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition"
+                    >
                         Discard Changes
-                    </button>
-                    <button
+                    </Button>
+
+                    <Button
                         onClick={handleSave}
                         className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-4 rounded-[2rem] transition-all font-black shadow-xl shadow-blue-100 active:scale-95 uppercase tracking-widest text-xs"
                     >
                         Save Price
-                    </button>
+                    </Button>
                 </div>
             </div>
 
@@ -205,12 +212,12 @@ export default function PriceEditor() {
                 <section className="space-y-8">
                     <div className="flex justify-between items-center px-6">
                         <h2 className="text-2xl font-black text-gray-900 uppercase tracking-tighter">Table Content</h2>
-                        <button
+                        <Button
                             onClick={() => setPrice({ ...price, sections: [...(price.sections || []), { subtitle: {}, items: [] }] })}
                             className="bg-gray-900 text-white text-[10px] font-black px-8 py-3 rounded-2xl uppercase tracking-widest hover:bg-black transition shadow-xl active:scale-95"
                         >
                             + Add Section
-                        </button>
+                        </Button>
                     </div>
 
                     {(price.sections || []).map((section, sIdx) => (
@@ -306,7 +313,7 @@ export default function PriceEditor() {
                                         </div>
 
                                         <div className="lg:col-span-1 flex justify-center pb-3">
-                                            <button
+                                            <Button
                                                 onClick={() => {
                                                     const newSections = [...price.sections];
                                                     newSections[sIdx].items.splice(iIdx, 1);
@@ -315,21 +322,21 @@ export default function PriceEditor() {
                                                 className="text-red-300 hover:text-red-500 transition-colors bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-sm"
                                             >
                                                 ✕
-                                            </button>
+                                            </Button>
                                         </div>
                                     </div>
                                 ))}
 
-                                <button
+                                <Button
                                     onClick={() => {
                                         const newSections = [...price.sections];
-                                        newSections[sIdx].items.push({ duration: "", procedure: {}, price: "" });
+                                        newSections[sIdx].items.push({ duration: {}, procedure: {}, price: "" });
                                         setPrice({ ...price, sections: newSections });
                                     }}
                                     className="w-full py-4 border-2 border-dashed border-gray-100 rounded-[20px] text-[10px] font-black text-gray-300 uppercase hover:border-blue-200 hover:text-blue-500 hover:bg-blue-50/20 transition-all mt-4 tracking-[0.2em]"
                                 >
                                     + Insert Line Item
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     ))}
@@ -338,9 +345,12 @@ export default function PriceEditor() {
 
             {/* Footer */}
             <div className="border-t border-gray-50 mt-16 pt-10 flex justify-end items-center gap-8">
-                <button onClick={() => navigate(`/admin/${businessSlug}/prices`)} className="text-gray-400 font-black text-[10px] uppercase tracking-[0.3em] hover:text-gray-900 transition">
-                    Discard changes
-                </button>
+                <Button
+                    onClick={() => navigate(adminPath(lang!, businessSlug!, "prices"))}
+                    className="text-gray-400 font-black text-[10px] uppercase tracking-[0.3em] hover:text-gray-900 transition"
+                >
+                    Discard Changes
+                </Button>
                 <button onClick={handleSave} className="bg-gray-900 hover:bg-black text-white px-20 py-5 rounded-[2.5rem] transition-all font-black shadow-2xl active:scale-95 uppercase tracking-[0.2em] text-xs">
                     Publish Price Structure
                 </button>

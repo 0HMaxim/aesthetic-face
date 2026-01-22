@@ -1,10 +1,10 @@
 {
-    "title": "Photos",
-    "subtitle": "We share photos of our clients",
+    "title": "Gallery",
+    "subtitle": "The visual embodiment of our professional standards",
     "category": "Category",
-    "procedure": "Procedure performed",
-    "employee": "Employee",
-    "photos": "photos",
-    "selectCategory": "Select category",
-    "selectService": "Select service"
+    "procedure": "Service",
+    "employee": "Specialist",
+    "photos": "Photos",
+    "selectCategory": "All Categories",
+    "selectService": "All Services"
 }

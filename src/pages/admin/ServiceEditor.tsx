@@ -14,6 +14,7 @@ import type { Special } from "../../models/Special.ts";
 import ImageInputBlock from "../../components/ImageInputBlock.tsx";
 import { useFetchData } from "../../hooks/useFetchData.ts";
 import { SyncedRelationSelect } from "../../components/SyncedRelationSelect.tsx";
+import {adminPath} from "../../utils/adminNavigate.ts";
 
 const emptyService: Service = {
   title: { uk: "", ru: "", en: "", de: "" },
@@ -206,7 +207,7 @@ export default function ServiceEditor() {
         updatedAt: Date.now(),
       });
 
-      navigate(`/${lang}/admin/${businessSlug}/services`);
+      navigate(adminPath(lang!, businessSlug!, "services"));
     } catch (error) {
       console.error("Save error:", error);
     }
@@ -225,7 +226,7 @@ export default function ServiceEditor() {
             <p className="text-gray-400 text-sm font-medium tracking-tight mt-1">Configure page layout and service dependencies</p>
           </div>
           <div className="flex justify-end items-center gap-6">
-            <button onClick={() => navigate(`/${lang}/admin/${businessSlug}/services`)} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">Discard</button>
+            <button onClick={() => navigate(adminPath(lang!, businessSlug!, "services"))} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">Discard</button>
             <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-2xl transition-all font-bold shadow-lg shadow-blue-100 active:scale-95">Save Service</button>
           </div>
         </div>
@@ -290,7 +291,7 @@ export default function ServiceEditor() {
 
         {/* Footer */}
         <div className="border-t border-gray-50 pt-8 flex justify-end items-center gap-6">
-          <button onClick={() => navigate(`/${lang}/admin/${businessSlug}/services`)} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">Discard</button>
+          <button onClick={() => navigate(adminPath(lang!, businessSlug!, "services"))} className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition">Discard</button>
           <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-2xl transition-all font-bold shadow-lg shadow-blue-100 active:scale-95 uppercase">Save Service</button>
         </div>
       </div>

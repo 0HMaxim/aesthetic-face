@@ -17,6 +17,7 @@ import ImageInputBlock from "../../components/ImageInputBlock.tsx";
 import { useFetchData } from "../../hooks/useFetchData.ts";
 import { SyncedRelationSelect } from "../../components/SyncedRelationSelect.tsx";
 import { useBusiness } from "../../context/BusinessContext.tsx";
+import {adminPath} from "../../utils/adminNavigate.ts";
 
 const emptyBlog: Blog = {
   title: { uk: "", ru: "", en: "", de: "" },
@@ -157,7 +158,7 @@ export default function BlogEditor() {
       updatedAt: Date.now(),
     });
 
-    navigate(`/${lang}/admin/${businessSlug}/blogs`);
+    navigate(adminPath(lang!, businessSlug!, "blogs"));
   };
 
   const renderBlockEditor = (block: ContentBlock, index: number, parentIndex?: number) => {
@@ -261,7 +262,7 @@ export default function BlogEditor() {
           </div>
           <div className="flex justify-end items-center gap-6">
             <button
-                onClick={() => navigate(`/${lang}/admin/${businessSlug}/blogs`)}
+                onClick={() => navigate(adminPath(lang!, businessSlug!, "blogs"))}
                 className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition"
             >
               Discard Changes
@@ -395,7 +396,7 @@ export default function BlogEditor() {
 
         <div className="border-t border-gray-50 pt-8 flex justify-end items-center gap-6">
           <button
-              onClick={() => navigate(`/${lang}/admin/${businessSlug}/blogs`)}
+              onClick={() => navigate(adminPath(lang!, businessSlug!, "blogs"))}
               className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition"
           >
             Discard Changes

@@ -4,6 +4,7 @@ import { ref, get, set } from "firebase/database";
 import { db } from "../../firebase";
 import type { GeneralInfo } from "../../models/GeneralInfo";
 import { useBusiness } from "../../context/BusinessContext.tsx";
+import {adminPath} from "../../utils/adminNavigate.ts";
 
 const LANGS = ["uk", "ru", "en", "de"] as const;
 
@@ -52,16 +53,17 @@ export default function GeneralInfoEditor() {
         if (!businessSlug) return;
 
         try {
-            // ПРИВЕДЕНО К ЕДИНОМУ СТИЛЮ: generalInfo (CamelCase)
             await set(ref(db, `businesses/${businessSlug}/generalInfo`), {
                 ...info,
                 updatedAt: Date.now(),
             });
-            navigate(`/${lang}/admin/${businessSlug}`);
+
+            navigate(adminPath(lang!, businessSlug!, "generalinfo"));
         } catch (error) {
             console.error("Save error:", error);
         }
     };
+
 
     if (loading) return <div className="p-20 text-center animate-pulse font-black text-gray-300 tracking-widest uppercase">Loading General Info...</div>;
 
@@ -74,7 +76,7 @@ export default function GeneralInfoEditor() {
                     <p className="text-gray-400 text-sm font-medium mt-1 uppercase tracking-wider">Contact Details & Location</p>
                 </div>
                 <div className="flex gap-4">
-                    <button onClick={() => navigate(-1)} className="text-gray-400 font-black text-xs uppercase tracking-widest px-4">Discard</button>
+                    <button onClick={() => navigate(adminPath(lang!, businessSlug!, "generalinfo"))} className="text-gray-400 font-black text-xs uppercase tracking-widest px-4">Discard</button>
                     <button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-2xl font-bold shadow-lg shadow-blue-100 active:scale-95 transition-all">Save All</button>
                 </div>
             </div>
@@ -239,6 +241,7 @@ export default function GeneralInfoEditor() {
             </div>
 
             <div className="mt-12 pt-8 border-t border-gray-50 flex justify-end">
+                <button onClick={() => navigate(adminPath(lang!, businessSlug!, "generalinfo"))} className="text-gray-400 font-black text-xs uppercase tracking-widest px-4">Discard</button>
                 <button
                     onClick={handleSave}
                     className="bg-blue-600 hover:bg-blue-700 text-white px-20 py-6 rounded-[2.5rem] transition-all font-black shadow-2xl active:scale-95 uppercase tracking-[0.2em] text-sm"

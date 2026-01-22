@@ -122,24 +122,33 @@ export default function PriceTable({ items, businessSlug, serviceId, subserviceI
                           return (
                               <tr
                                   key={iIndex}
-                                  className={`border-b border-muted duration-500 text-foreground ${
-                                      active ? "bg-primary" : ""
+                                  className={`border-b border-muted transition-colors duration-500 text-foreground ${
+                                      active ? "bg-primary text-white" : ""
                                   }`}
                               >
-                                <td className="pl-[1rem]  py-[1rem] md:py-[1.5rem] border-r border-muted">
+                                {/* Длительность */}
+                                <td className="pl-[0.5rem] lg:pl-[3rem] py-[1rem] md:py-[1.5rem] border-r border-muted whitespace-nowrap">
                                   {item?.duration?.[lang] || "—"}
                                 </td>
-                                <td className="px-[1rem]  py-[1rem] md:py-[1.5rem]">
+
+                                {/* Название услуги */}
+                                <td className="px-[1rem] lg:px-[3rem] py-[1rem] md:py-[1.5rem]">
                                   {item?.procedure?.[lang] || "—"}
                                 </td>
-                                <td className="px-[1rem]  py-[1rem] md:py-[1.5rem] border-l h-full border-muted flex flex-col md:flex-row items-start md:items-center justify-between">
-                                  <span className="text-nowrap">{item?.price || "—"}</span>
-                                  <button
-                                      onClick={() => toggleItem(`${idx}-${sIndex}-${iIndex}`)}
-                                      className="mt-1 md:mt-0 md:ml-2"
-                                  >
-                                    <SolarPowerBold className="size-[1rem] md:size-[1.5rem]" />
-                                  </button>
+
+                                {/* Цена + Кнопка */}
+                                <td className="px-[1rem] lg:px-[3rem] py-[1rem] md:py-[1.5rem] border-l border-muted">
+                                  <div className="flex items-center justify-end gap-2">
+      <span className="font-bold whitespace-nowrap">
+        {item?.price || "—"}
+      </span>
+                                    <button
+                                        onClick={() => toggleItem(key)}
+                                        className="hover:scale-110 transition-transform"
+                                    >
+                                      <SolarPowerBold className="size-[1rem] md:size-[1.5rem]" />
+                                    </button>
+                                  </div>
                                 </td>
                               </tr>
                           );

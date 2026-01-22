@@ -33,19 +33,19 @@ export default function About() {
             <div className="w-full px-4 md:px-[5rem]">
                 <Breadcrumbs />
 
-                <div className="py-8 mb-[2.5rem]">
-                    <h2 className="text-3xl lg:text-5xl font-extrabold mb-2">
+                <div className="py-8 mb-[2.5rem] text-foreground">
+                    <h2 className="text-3xl lg:text-5xl font-extrabold mb-2 ">
                         {meta?.shortName?.[locale] ?? meta?.name?.[locale] ?? "Business Name"}
                     </h2>
 
                     {meta?.slogan?.[locale] && (
-                        <p className="text-xl text-gray-600 mb-4">{meta.slogan[locale]}</p>
+                        <p className="text-xl mb-4">{meta.slogan[locale]}</p>
                     )}
                 </div>
 
                 {info && (
                     <div className="mb-8">
-                        <h3 className="text-xs font-black uppercase tracking-[0.3em] text-gray-400 mb-2">
+                        <h3 className="text-xs font-black uppercase tracking-[0.3em] text-foreground mb-2">
                             {t("contact.quick_info")}
                         </h3>
                         <div className="space-y-4">
@@ -53,7 +53,7 @@ export default function About() {
                                 <p className="text-[10px] font-black uppercase text-blue-500 tracking-widest mb-1">
                                     Address
                                 </p>
-                                <p className="text-lg font-bold text-gray-800">
+                                <p className="text-lg font-bold text-foreground">
                                     {info.address?.[locale] || "Address not set"}
                                 </p>
                             </div>
@@ -61,7 +61,7 @@ export default function About() {
                                 <p className="text-[10px] font-black uppercase text-blue-500 tracking-widest mb-1">
                                     Phone
                                 </p>
-                                <p className="text-lg font-bold text-gray-800">
+                                <p className="text-lg font-bold text-foreground">
                                     {info.phone?.[locale] || "No phone"}
                                 </p>
                             </div>
@@ -69,7 +69,7 @@ export default function About() {
                                 <p className="text-[10px] font-black uppercase text-blue-500 tracking-widest mb-1">
                                     Email
                                 </p>
-                                <p className="text-lg font-bold text-gray-800">{info.email || "No email"}</p>
+                                <p className="text-lg font-bold text-foreground">{info.email || "No email"}</p>
                             </div>
                         </div>
                     </div>

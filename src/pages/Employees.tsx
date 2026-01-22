@@ -6,6 +6,8 @@ import { Breadcrumbs } from "../components/Breadcrumbs.tsx";
 import { useFetchData } from "../hooks/useFetchData.ts";
 import { useBusiness } from "../context/BusinessContext.tsx";
 
+//import { uploadBusiness } from "../upload.ts";
+
 export default function Employees() {
   const { i18n, t } = useTranslation();
   const lang = i18n.language as "uk" | "ru" | "en" | "de";
@@ -29,6 +31,9 @@ export default function Employees() {
     return localizedValue[lang] || localizedValue["en"] || "";
   };
 
+
+// В самом верху файла, вне компонента:
+// uploadBusiness().then(() => console.log("Done!"));
 
   if (loading) return <p className="text-center py-10">{t("loading") || "Loading Specialists..."}</p>;
 

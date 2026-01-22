@@ -124,6 +124,7 @@ export default function MetaEditor() {
                     const updatedTab: MetaTab = currentTab
                         ? { ...currentTab, headerImage: url }
                         : {
+                            shortName: {},
                             headerImage: url,
                             title: { uk: "", ru: "", en: "", de: "" },
                             route: "",

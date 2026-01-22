@@ -9,6 +9,8 @@ import type { LocalizedText } from "../../models/LocalizedText";
 
 // Components
 import ImageInputBlock from "../../components/ImageInputBlock.tsx";
+import {adminPath} from "../../utils/adminNavigate.ts";
+import {Button} from "@heroui/react";
 
 export default function EmployeeEditor() {
   const { id, lang, businessSlug } = useParams<{ id: string; lang: string; businessSlug: string }>();
@@ -98,13 +100,11 @@ export default function EmployeeEditor() {
           id: empId
         });
 
-        navigate(`/${lang}/admin/${businessSlug}/employees`);
+        navigate(adminPath(lang!, businessSlug!, "employees"))
       } catch (error) {
         console.error("Error saving employee:", error);
       }
     };
-
-    const goBack = () => navigate(`/${lang}/admin/${businessSlug}/employees`);
 
     if (loading) return <div className="p-20 text-center animate-pulse font-black text-gray-300 tracking-widest uppercase">Loading Specialist...</div>;
 
@@ -118,9 +118,9 @@ export default function EmployeeEditor() {
               </h1>
             </div>
             <div className="flex gap-6">
-              <button onClick={goBack} className="text-gray-400 font-black text-xs uppercase tracking-widest">
+              <Button onClick={() => navigate(adminPath(lang!, businessSlug!, "employees"))} className="text-gray-400 font-black text-xs uppercase tracking-widest">
                 Discard Changes
-              </button>
+              </Button>
               <button onClick={handleSave} className="bg-blue-600 text-white px-10 py-3 rounded-2xl font-bold">
                 Save Employee
               </button>
@@ -181,7 +181,7 @@ export default function EmployeeEditor() {
         </div>
 
         <div className="border-t border-gray-50 mt-16 pt-10 flex justify-end items-center gap-8">
-          <button onClick={() => navigate("/admin/employees")} className="text-gray-400 font-black text-[10px] uppercase tracking-[0.3em] hover:text-gray-900 transition">
+          <button onClick={() => navigate(adminPath(lang!, businessSlug!, "employees"))} className="text-gray-400 font-black text-[10px] uppercase tracking-[0.3em] hover:text-gray-900 transition">
             Cancel
           </button>
           <button onClick={handleSave} className="bg-gray-900 hover:bg-black text-white px-20 py-5 rounded-[2.5rem] transition-all font-black shadow-2xl active:scale-95 uppercase tracking-[0.2em] text-xs">

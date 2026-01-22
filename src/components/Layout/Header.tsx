@@ -28,11 +28,12 @@ export default function Header() {
     if (!businessSlug) return;
 
     const fetchMeta = async () => {
+      setMeta(null);
+
       try {
         const snapshot = await get(ref(db, `businesses/${businessSlug}/meta`));
         if (snapshot.exists()) {
           const data = snapshot.val();
-          console.log("Header metadata loaded:", data); // ТЕПЕРЬ ТУТ БУДЕТ ВИДНО ДАННЫЕ
           setMeta(data);
         }
       } catch (err) {
@@ -81,7 +82,7 @@ export default function Header() {
             {/* Главная */}
             <Link
                 to={`/${lang}/${businessSlug}`}
-                className="text-[1rem] font-semibold text-foreground hover:bg-secondary rounded-[5rem] p-[1.5rem] shadow-2xl duration-500"
+                className="text-[1rem] font-semibold text-foreground hover:bg-blue-600 hover:text-white rounded-[5rem] p-[0.8rem_1.5rem] shadow-2xl duration-300 transition-colors"
             >
               {getLocalizedText(meta.shortName, lang) || getLocalizedText(meta.name, lang) || "Home"}
             </Link>
@@ -91,7 +92,7 @@ export default function Header() {
                 <Link
                     key={tab.route || index}
                     to={`/${lang}/${businessSlug}/${tab.route}`}
-                    className="text-[1rem] font-semibold text-foreground hover:bg-secondary rounded-[5rem] p-[1.5rem] shadow-2xl duration-500"
+                    className="text-[1rem] font-semibold text-foreground hover:bg-blue-600 hover:text-white rounded-[5rem] p-[0.8rem_1.5rem] shadow-2xl duration-300 transition-colors"
                 >
                   {getLocalizedText(tab.shortName, lang)}
                 </Link>

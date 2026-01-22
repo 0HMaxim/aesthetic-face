@@ -11,14 +11,13 @@ import type { Service } from "../../models/Service.ts";
 // Components
 import { useFetchData } from "../../hooks/useFetchData.ts";
 import { SyncedRelationSelect } from "../../components/SyncedRelationSelect.tsx";
+import {adminPath} from "../../utils/adminNavigate.ts";
 
 export default function FAQEditor() {
   const { id, businessSlug, lang = "en" } = useParams<{ id: string; businessSlug: string; lang: string }>();
   const navigate = useNavigate();
 
   // Путь для возврата (согласован с роутами App.tsx)
-  const backPath = `/${lang}/admin/${businessSlug}/faq`;
-
   const emptyFAQ: FAQ = {
     question: { uk: "", ru: "", en: "", de: "" },
     answer: { uk: "", ru: "", en: "", de: "" },
@@ -88,7 +87,9 @@ export default function FAQEditor() {
       };
 
       await set(ref(db, `businesses/${businessSlug}/faqs/${targetId}`), dataToSave);
-      navigate(backPath);
+
+      navigate(adminPath(lang!, businessSlug!, "employees"))
+
     } catch (e) {
       console.error("Save error:", e);
     }
@@ -117,7 +118,7 @@ export default function FAQEditor() {
           </div>
           <div className="flex justify-end items-center gap-6">
             <button
-                onClick={() => navigate(backPath)}
+                onClick={() => navigate(adminPath(lang!, businessSlug!, "faq"))}
                 className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition"
             >
               Discard
@@ -202,6 +203,21 @@ export default function FAQEditor() {
                   </div>
               ))}
             </div>
+          </div>
+
+          <div className="flex justify-end items-center gap-6">
+            <button
+                onClick={() => navigate(adminPath(lang!, businessSlug!, "faq"))}
+                className="text-gray-400 font-black text-xs uppercase tracking-widest hover:text-gray-600 transition"
+            >
+              Discard
+            </button>
+            <button
+                onClick={handleSave}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-2xl transition-all font-bold shadow-lg shadow-blue-100 active:scale-95"
+            >
+              Save FAQ
+            </button>
           </div>
         </div>
       </div>
