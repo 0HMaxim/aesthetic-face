@@ -63,7 +63,7 @@ export default function ServicePage() {
   const photos = data.photos || [];
 
   const service = services.find((s) => s.slug === slug);
-  if (!service || !service.id) return <div className="p-20 text-center font-black text-gray-400 uppercase">Service not found</div>;
+  if (!service || !service.id) return <div className="p-20 text-center font-black text-foreground text-gray-400 uppercase">Service not found</div>;
 
 
 
@@ -108,7 +108,7 @@ export default function ServicePage() {
           />
 
           <div className="py-8">
-            <h2 className="text-3xl lg:text-5xl font-[800] mb-[1.5rem]">{getLabel(service.title, lang)}</h2>
+            <h2 className="text-3xl lg:text-5xl font-[800] text-foreground mb-[1.5rem]">{getLabel(service.title, lang)}</h2>
           </div>
 
           <div className="flex flex-col gap-8">
@@ -116,7 +116,7 @@ export default function ServicePage() {
 
             {relatedSubservices.length > 0 && (
                 <div className="py-8">
-                  <h2 className="text-3xl lg:text-5xl font-[800] my-[1.5rem]">{t("servicePage.otherServices")}</h2>
+                  <h2 className="text-3xl lg:text-5xl font-[800] text-foreground my-[1.5rem]">{t("servicePage.otherServices")}</h2>
                   <div className="flex flex-wrap gap-4">
                     {relatedSubservices.map((sub) => (
                         <Link
@@ -133,7 +133,7 @@ export default function ServicePage() {
                               />
                           )}
                           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full bg-black/30 text-white p-4 text-center">
-                            <p className="text-[1rem] font-normal">{getLabel(sub.title, lang)}</p>
+                            <p className="text-[1rem] font-normal text-foreground">{getLabel(sub.title, lang)}</p>
                           </div>
                         </Link>
                     ))}
@@ -146,7 +146,7 @@ export default function ServicePage() {
             {/* Раздел сотрудников */}
             {relatedEmployees.length > 0 && (
                 <div className="py-12">
-                  <h2 className="text-3xl lg:text-4xl font-[800] mb-[3rem] text-center">
+                  <h2 className="text-3xl lg:text-4xl font-[800] text-foreground mb-[3rem] text-center">
                     {t("servicePage.employees") || "Наши специалисты"}
                   </h2>
                   <div className="flex flex-wrap justify-center gap-10">
@@ -175,11 +175,11 @@ export default function ServicePage() {
                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
                             </div>
                             <div className="p-8 text-center">
-                              <h3 className="text-2xl font-bold text-gray-800 group-hover:text-primary transition-colors duration-300">
+                              <h3 className="text-2xl font-bold text-foreground text-gray-800 group-hover:text-primary transition-colors duration-300">
                                 {name}
                               </h3>
                               {position && (
-                                  <p className="text-sm text-gray-500 mt-2 font-semibold tracking-[0.1em] uppercase">
+                                  <p className="text-sm text-gray-500 mt-2 font-semibold text-foreground tracking-[0.1em] uppercase">
                                     {position}
                                   </p>
                               )}
@@ -203,7 +203,7 @@ export default function ServicePage() {
             {/* Specials и Blogs аналогично исправлены через getLabel */}
             {relatedSpecials.length > 0 && (
                 <div className="py-12">
-                  <h2 className="text-3xl lg:text-4xl font-[800] mb-[2.5rem]">{t("blog.relatedSpecials") || "Special Offers"}</h2>
+                  <h2 className="text-3xl lg:text-4xl font-[800] text-foreground mb-[2.5rem]">{t("blog.relatedSpecials") || "Special Offers"}</h2>
                   <div className="flex justify-center items-center flex-wrap gap-6">
                     {relatedSpecials.map((item: Special) => {
                       const titleText = getLabel(item.title, lang);
@@ -218,12 +218,12 @@ export default function ServicePage() {
                               className="group rounded-2xl shadow-md transition overflow-hidden w-full sm:w-[32rem] md:w-[45rem] h-auto flex flex-col md:flex-row md:gap-[2rem] justify-between relative bg-primary mb-[6rem] hover:shadow-xl duration-500"
                           >
                             <div className="p-[2rem] text-foreground w-full md:w-2/6 flex flex-col">
-                              <h2 className="text-[1.8rem] font-extrabold mb-[1rem]">{titleText}</h2>
-                              <p className="text-[1.2rem] pl-[1.5rem] font-light mb-[1.5rem]">{subtitleText}</p>
+                              <h2 className="text-[1.8rem] font-extrabold text-foreground mb-[1rem]">{titleText}</h2>
+                              <p className="text-[1.2rem] pl-[1.5rem] font-light text-foreground mb-[1.5rem]">{subtitleText}</p>
                               <Button
                                   as={Link}
                                   to={`/${lang}/${businessSlug}/specials/${item.slug}`}
-                                  className="w-full md:w-auto px-[1.5rem] py-[0.75rem] rounded-[3.5rem] flex items-center justify-center text-white font-semibold bg-black hover:bg-primary transition-colors duration-500 mt-auto"
+                                  className="w-full md:w-auto px-[1.5rem] py-[0.75rem] rounded-[3.5rem] flex items-center justify-center text-foreground font-semibold bg-black hover:bg-primary transition-colors duration-500 mt-auto"
                               >
                                 {t("specials.learnMore")}
                               </Button>
@@ -256,13 +256,13 @@ export default function ServicePage() {
                                 style={{ backgroundImage: `url(${item.mainImage})` }}
                             ></span>
                           </Link>
-                          <Link to={`/${lang}/${businessSlug}/blogs/${item.slug}`} className="name fw600 block text-[1.3rem] font-semibold mt-4 px-4 hover:text-primary transition">
+                          <Link to={`/${lang}/${businessSlug}/blogs/${item.slug}`} className="name fw600 block text-[1.3rem] text-foreground font-semibold mt-4 px-4 hover:text-primary transition">
                             {getLabel(item.title, lang)}
                           </Link>
-                          <p className="excerpt text-[1rem] text-gray-600 mt-2 px-4 line-clamp-3">
+                          <p className="excerpt text-[1rem] text-foreground mt-2 px-4 line-clamp-3">
                             {getLabel(item.content?.find((block: ContentBlock) => block.type === "paragraph")?.content, lang) || "Опис відсутній"}
                           </p>
-                          <Link to={`/${lang}/${businessSlug}/blogs/${item.slug}`} className="more fw600 before block text-[1rem] font-semibold text-primary mt-4 mb-4 px-4 hover:underline">
+                          <Link to={`/${lang}/${businessSlug}/blogs/${item.slug}`} className="more fw600 before block text-[1rem] text-foreground font-semibold text-primary mt-4 mb-4 px-4 hover:underline">
                             {t("specials.learnMore")}
                           </Link>
                         </div>

@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Button } from "@heroui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import type { NavigationOptions } from "swiper/types";
@@ -17,7 +16,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-export const SpecialsSlider: React.FC = () => {
+interface SpecialsSliderProps {
+    excludeSlug?: string;
+}
+
+export const SpecialsSlider: React.FC<SpecialsSliderProps> = ({ excludeSlug }) => {
     const { i18n, t } = useTranslation();
     const { businessSlug } = useParams<{ businessSlug: string }>();
     const lang = i18n.language as "uk" | "ru" | "en" | "de";
@@ -34,16 +37,23 @@ export const SpecialsSlider: React.FC = () => {
         get(specialsRef).then((snapshot) => {
             if (snapshot.exists()) {
                 const data = snapshot.val();
-                const specialsArray = Object.keys(data).map((key) => ({
+                let specialsArray = Object.keys(data).map((key) => ({
                     id: key,
                     ...data[key],
                 })) as Special[];
+
+                // ФИЛЬТРАЦИЯ: убираем текущую акцию, если передан slug
+                if (excludeSlug) {
+                    specialsArray = specialsArray.filter(item => item.slug !== excludeSlug);
+                }
+
                 setSpecials(specialsArray);
             }
             setLoading(false);
         }).catch(() => setLoading(false));
-    }, [businessSlug]);
+    }, [businessSlug, excludeSlug]); // Добавляем excludeSlug в зависимости
 
+    // Если после фильтрации акций не осталось — не рендерим ничего
     if (loading || specials.length === 0) return null;
 
     return (
@@ -69,64 +79,76 @@ export const SpecialsSlider: React.FC = () => {
                 style={{ paddingBottom: "3rem" }}
             >
 
-            {specials.map((item) => (
-                <SwiperSlide
-                    key={item.id}
-                    className="!w-[38rem]
-                            !flex-shrink-0
-                            flex">
+                {specials.map((item) => (
+                    <SwiperSlide
+                        key={item.id}
+                        className="!w-[28rem] md:!w-[45rem] !h-auto flex"
+                    >
                         <Link
                             to={`/${lang}/${businessSlug}/specials/${item.slug}`}
                             className="
-                            group
-                            bg-primary
-                            rounded-2xl
-                            shadow-md
-                            hover:shadow-xl
-                            transition
-                            duration-500
-                            overflow-hidden
-                            flex
-                            flex-col
-                            md:flex-row
-                            justify-between
-                            w-full
-
-                            min-w-[40rem]
-                            min-h-[28px]
-
-                            md:min-h-[280px]
-                          "
+                group
+                bg-primary
+                rounded-[2.5rem]
+                shadow-sm
+                hover:shadow-2xl
+                transition-all
+                duration-500
+                overflow-hidden
+                flex
+                flex-col
+                md:flex-row
+                w-full
+                min-h-[32rem]
+                md:min-h-[20rem]
+                relative
+                border-none /* Убрал все бордеры */
+            "
                         >
+                            {/* Текст: 50% ширины */}
+                            <div className="p-8 md:p-10 w-full md:w-1/2 flex flex-col justify-between relative z-10">
+                                <div className="text-foreground transition-colors duration-500">
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-70 mb-4 block">
+                        {t("specials.tag") || "Special Offer"}
+                    </span>
 
-                            {/* Текст: занимает 2/6 (33%) ширины на больших экранах */}
-                            <div className="p-[2rem] text-foreground w-full md:w-2/6 flex flex-col justify-between">
-                                <div>
-                                    <h2 className="text-[1.6rem] xl:text-[1.8rem] font-extrabold mb-[1rem] leading-tight">
+                                    <h2 className="text-xl md:text-2xl font-[900] mb-4 leading-tight break-words">
                                         {item.title?.[lang]}
                                     </h2>
-                                    <p className="text-[1.1rem] xl:text-[1.2rem] font-light mb-[1.5rem] border-l-2 border-black/10 pl-4">
+
+                                    <p className="text-sm md:text-base font-medium opacity-80 line-clamp-3 border-l-2 border-foreground/20 pl-4 leading-relaxed">
                                         {item.subtitle?.[lang]}
                                     </p>
                                 </div>
 
-                                <Button
-                                    as="div"
-                                    className="w-full md:w-auto px-[1.5rem] py-[0.6rem] rounded-[3.5rem] flex items-center justify-center text-white font-semibold bg-black hover:bg-gray-800 transition-colors duration-500"
-                                >
-                                    {t("specials.learnMore")}
-                                </Button>
+                                <div className="mt-6">
+                                    {/* Кнопка: Текст теперь ЧЕТКО виден (инверсия фона) */}
+                                    <div
+                                        className="inline-flex px-8 py-3 rounded-full
+                        bg-black text-white
+                        dark:bg-white dark:text-black
+                        font-bold text-xs uppercase tracking-widest
+                        hover:bg-gray-800 dark:hover:bg-gray-200
+                        transition-all duration-300 shadow-lg"
+                                    >
+                                        {t("specials.learnMore")}
+                                    </div>
+                                </div>
                             </div>
 
-                            {/* Картинка: занимает 4/6 (66%) ширины */}
+                            {/* Картинка: 50% ширины */}
                             {item.mainImage && (
-                                <div className="w-full md:w-4/6 h-[12rem] md:h-full overflow-hidden">
+                                <div className="w-full md:w-1/2 h-[15rem] md:h-auto overflow-hidden relative">
                                     <img
                                         src={item.mainImage}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                                     />
-                                </div>
+                                    {/* Градиент для мягкого перехода */}
+                                    <div className="absolute inset-0 bg-gradient-to-r from-primary/40 to-transparent hidden md:block" />
 
+                                    {/* Оверлей для темной темы */}
+                                    <div className="absolute inset-0 bg-black/5 dark:bg-black/20 group-hover:opacity-0 transition-opacity duration-500" />
+                                </div>
                             )}
                         </Link>
                     </SwiperSlide>

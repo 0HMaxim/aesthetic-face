@@ -110,42 +110,31 @@ export default function MetaEditor() {
     };
 
     // Универсальный рендер картинок (для Logo, HomeHeader и Табов)
+    // Универсальный рендер картинок (для Logo, HomeHeader и Табов)
     const renderImageInput = (label: string, field: keyof BusinessMeta | "tabs", tabKey?: string) => {
         const currentTab = tabKey ? meta?.tabs?.[tabKey] : null;
         const currentImage = tabKey ? currentTab?.headerImage : (meta?.[field as keyof BusinessMeta] as string);
 
         const handleChange = (url: string) => {
-            setMeta((prev: BusinessMeta | null) => {
-                if (!prev) return null;
+            setMeta(prev => {
+                if (!prev || !tabKey || !prev.tabs) return prev;
 
-                if (tabKey) {
-                    const currentTab = prev.tabs?.[tabKey];
-
-                    const updatedTab: MetaTab = currentTab
-                        ? { ...currentTab, headerImage: url }
-                        : {
-                            shortName: {},
-                            headerImage: url,
-                            title: { uk: "", ru: "", en: "", de: "" },
-                            route: "",
-                            enabled: true
-                        };
-
-                    return {
-                        ...prev,
-                        tabs: {
-                            ...(prev.tabs || {}),
-                            [tabKey]: updatedTab
-                        }
-                    };
-                }
+                const tab = prev.tabs[tabKey];
+                if (!tab) return prev;
 
                 return {
                     ...prev,
-                    [field]: url
-                } as BusinessMeta;
+                    tabs: {
+                        ...prev.tabs,
+                        [tabKey]: {
+                            ...tab,
+                            headerImage: url,
+                        },
+                    },
+                };
             });
         };
+
 
         return (
             <div className="bg-gray-50/30 p-6 rounded-[32px] border border-gray-100 space-y-4 shadow-sm">
@@ -159,8 +148,8 @@ export default function MetaEditor() {
 
                 <ImageInputBlock image={currentImage || ""} onChange={handleChange} />
 
-                {/* Если это ТАБ, добавляем инпут для ссылки (route) */}
-                {tabKey && currentTab && (
+                {/* Если передан tabKey, рисуем инпут для Route этого конкретного таба */}
+                {tabKey && (
                     <div className="pt-2 border-t border-gray-200/50 mt-2">
                         <label className="block font-black text-gray-300 uppercase text-[8px] tracking-widest mb-1 ml-1">
                             Page Route / URL
@@ -168,14 +157,25 @@ export default function MetaEditor() {
                         <input
                             className="w-full border border-gray-200 rounded-lg p-2 text-xs font-mono bg-white outline-none focus:ring-2 focus:ring-blue-100 transition-all"
                             placeholder="e.g. services or /contacts"
-                            value={currentTab.route || ""}
-                            onChange={(e) => setMeta(prev => ({
-                                ...prev!,
-                                tabs: {
-                                    ...(prev?.tabs || {}),
-                                    [tabKey]: { ...currentTab, route: e.target.value }
-                                }
-                            }))}
+                            // Берем значение напрямую из meta по ключу
+                            value={meta?.tabs?.[tabKey]?.route || ""}
+                            // Обновляем роут именно для этого tabKey
+                            onChange={(e) => {
+                                const newRoute = e.target.value;
+                                setMeta(prev => {
+                                    if (!prev) return null;
+                                    return {
+                                        ...prev,
+                                        tabs: {
+                                            ...(prev.tabs || {}),
+                                            [tabKey]: {
+                                                ...(prev.tabs?.[tabKey] || { enabled: true, shortName: {}, title: {} }),
+                                                route: newRoute
+                                            }
+                                        }
+                                    };
+                                });
+                            }}
                         />
                     </div>
                 )}
@@ -248,7 +248,7 @@ export default function MetaEditor() {
                             <ImageInputBlock image={meta.logo || ""} onChange={(url) => setMeta({ ...meta, logo: url })} />
                         </div>
                     </div>
-                    {renderImageInput("Main Home Header", "homeHeaderImage" as any)}
+                    {renderImageInput("Home Header", "tabs", "home")}
                 </div>
 
                 {/* 3. Слоган и Описание */}

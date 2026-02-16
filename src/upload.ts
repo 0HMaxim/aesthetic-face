@@ -1,88 +1,150 @@
-import { ref, set } from "firebase/database";
+import { ref, set, push } from "firebase/database";
 import { db } from "./firebase";
+import type {Blog} from "./models/Blog.ts";
 
-// Данные нашего нового бизнеса (Клининг)
-export const businessData = {
-  slug: "clean-and-glow", // Это будет ключом в БД
-  meta: {
-    name: {
-      uk: "Clean & Glow — Професійний клінінг",
-      ru: "Clean & Glow — Профессиональный клининг",
-      en: "Clean & Glow — Professional Cleaning",
-      de: "Clean & Glow — Professionelle Reinigung"
-    },
-    shortName: {
-      uk: "Clean & Glow",
-      ru: "Clean & Glow",
-      en: "Clean & Glow",
-      de: "Clean & Glow"
-    },
-    type: "company",
-    slogan: {
-      uk: "Ми миємо — ви відпочиваєте",
-      ru: "Мы моем — вы отдыхаете",
-      en: "We clean — you relax",
-      de: "Wir reinigen — Sie entspannen sich"
-    },
-    description: {
-      uk: "Професійне прибирання квартир, будинків та офісів за допомогою еко-засобів.",
-      ru: "Профессиональная уборка квартир, домов и офисов при помощи эко-средств.",
-      en: "Professional cleaning of apartments, houses, and offices using eco-friendly products.",
-      de: "Professionelle Reinigung von Wohnungen und Büros mit umweltfreundlichen Mitteln."
-    },
-    logo: "https://example.com/logo-cleaning.png",
-    // Сразу создаем вкладки, чтобы они подтянулись в админку
-    tabs: {
-      "about": { route: "about", order: 0, enabled: true, shortName: { uk: "Про нас", ru: "О нас", en: "About", de: "Über uns" } },
-      "services": { route: "services", order: 1, enabled: true, shortName: { uk: "Послуги", ru: "Услуги", en: "Services", de: "Dienstleistungen" } },
-      "price": { route: "price", order: 2, enabled: true, shortName: { uk: "Ціни", ru: "Цены", en: "Prices", de: "Preise" } },
-      "contact": { route: "contact", order: 3, enabled: true, shortName: { uk: "Контакти", ru: "Контакты", en: "Contact", de: "Kontakt" } }
-    }
+
+export const itInterviewBlog: Omit<Blog, "id"> = {
+  slug: "how-to-learn-english-with-netflix",
+  mainImage: "https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=2070", // Атмосферное фото кинозала/экрана
+
+  title: {
+    en: "Binge-Watching with Benefit: Movies as Teachers",
+    ru: "Смотри и учись: как превратить Netflix в репетитора",
+    uk: "Дивись та вчись: як перетворити Netflix на репетитора",
+    de: "Binge-Watching mit Nutzen: Filme als Lehrer"
   },
-  generalInfo: {
-    address: {
-      uk: "Київ, вул. Велика Васильківська, 72",
-      ru: "Киев, ул. Большая Васильковская, 72",
-      en: "72 Velyka Vasylkivska St, Kyiv",
-      de: "Velyka Vasylkivska Str. 72, Kiew"
-    },
-    phone: {
-      uk: "+38 (050) 111-22-33",
-      ru: "+38 (050) 111-22-33",
-      en: "+38 (050) 111-22-33",
-      de: "+38 (050) 111-22-33"
-    },
-    email: "info@clean-glow.com",
-    working_hours: [
-      {
-        days: { uk: "Пн-Пт", ru: "Пн-Пт", en: "Mon-Fri", de: "Mo-Fr" },
-        hours: "08:00 - 21:00"
+
+  subtitle: {
+    en: "Stop using subtitles and start understanding real native speech",
+    ru: "Хватит читать субтитры — начни понимать живую речь",
+    uk: "Досить читати субтитри — почни розуміти живу мову",
+    de: "Hören Sie auf, Untertitel zu lesen, und verstehen Sie echte Sprache"
+  },
+
+  headerTitle: {
+    en: "Lifestyle Learning",
+    ru: "Обучение как стиль жизни",
+    uk: "Навчання як стиль життя",
+    de: "Lifestyle-Lernen"
+  },
+
+  services: [],
+  employees: [],
+
+  content: [
+    // 1. Heading (Center)
+    {
+      type: "heading",
+      align: "center",
+      content: {
+        en: "The Subtitle Trap",
+        ru: "Ловушка субтитров",
+        uk: "Пастка субтитрів",
+        de: "Die Untertitel-Falle"
       }
-    ],
-    messengers: {
-      telegram: "@clean_glow_bot",
-      whatsapp: "+380501112233"
     },
-    socials: {
-      instagram: "@clean.glow.kyiv",
-      facebook: "clean.glow.ukraine"
+    // 2. Paragraph (Left)
+    {
+      type: "paragraph",
+      align: "left",
+      content: {
+        en: "When you watch with subtitles in your native language, your brain turns off the ears and turns on the eyes. You aren't learning English; you are just reading a book with moving pictures.",
+        ru: "Когда вы смотрите с субтитрами на родном языке, ваш мозг отключает уши и включает глаза. Вы не учите английский — вы просто читаете книгу с движущимися картинками.",
+        uk: "Коли ви дивитеся з субтитрами рідною мовою, ваш мозок вимикає вуха і вмикає очі. Ви не вчите англійську — ви просто читаєте книгу з рухомими картинками.",
+        de: "Wenn Sie mit Untertiteln in Ihrer Muttersprache schauen, schaltet Ihr Gehirn die Ohren aus."
+      }
     },
-    map: "50.4316, 30.5164"
-  }
+    // 3. Image (Left) - Попкорн или уютный просмотр
+    {
+      type: "image",
+      media: "https://images.unsplash.com/photo-1524712245354-2c4e5e7124c5?q=80&w=1932",
+      align: "left",
+      children: [
+        {
+          type: "heading",
+          align: "left",
+          content: { en: "The 3-Step Strategy", ru: "Стратегия 3-х шагов", uk: "Стратегія 3-х кроків", de: "Die 3-Schritte-Strategie" }
+        },
+        {
+          type: "list",
+          align: "left",
+          content: {
+            en: [
+              "Watch a 5-minute scene with English subs",
+              "Rewatch the same scene WITHOUT subs",
+              "Shadowing: Repeat the lines after the actor",
+              "Write down 3 useful phrases (not single words)"
+            ],
+            ru: [
+              "Посмотрите 5-минутную сцену с англ. субтитрами",
+              "Пересмотрите ту же сцену БЕЗ субтитров",
+              "Shadowing: повторяйте реплики за актером",
+              "Выпишите 3 полезные фразы (не отдельные слова)"
+            ],
+            uk: [
+              "Подивіться 5-хвилинну сцену з англ. субтитрами",
+              "Перегляньте ту саму сцену БЕЗ субтитрів",
+              "Shadowing: повторюйте репліки за актором",
+              "Випишіть 3 корисні фрази (не окремі слова)"
+            ],
+            de: [
+              "Szene mit englischen Untertiteln schauen",
+              "Gleiche Szene OHNE Untertitel schauen",
+              "Shadowing-Technik anwenden",
+              "3 nützliche Phrasen aufschreiben"
+            ]
+          }
+        }
+      ]
+    },
+    // 4. Heading (Center)
+    {
+      type: "heading",
+      align: "center",
+      content: {
+        en: "What to Watch First?",
+        ru: "Что посмотреть в первую очередь?",
+        uk: "Що подивитися насамперед?",
+        de: "Was sollte man zuerst schauen?"
+      }
+    },
+    // 5. Paragraph (Center)
+    {
+      type: "paragraph",
+      align: "center",
+      content: {
+        en: "Start with sitcoms like 'Friends' or 'The Office'. The vocabulary is daily, the articulation is clear, and the jokes help you understand cultural context.",
+        ru: "Начните с ситкомов, таких как «Друзья» или «Офис». Там повседневная лексика, четкая дикция, а шутки помогают понять культурный контекст.",
+        uk: "Почніть із ситкомів, таких як «Друзі» або «Офіс». Там повсякденна лексика, чітка дикція, а жарти допомагають зрозуміти культурний контекст.",
+        de: "Beginnen Sie mit Sitcoms wie 'Friends' oder 'The Office'."
+      }
+    },
+    // 6. Image (Center) - Красивый кадр с камерой или пленкой
+    {
+      type: "image",
+      media: "https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=2059",
+      align: "center",
+    }
+  ]
 };
 
-export async function uploadBusiness() {
+export async function uploadBlog() {
+  const businessSlug = "LinguoFlow";
   try {
-    // Маршрут: businesses / [slug]
-    // Мы не используем push(), чтобы слаг был читаемым ключом (например, "clean-and-glow")
-    const businessRef = ref(db, `businesses/${businessData.slug}`);
+    const blogRef = ref(db, `businesses/${businessSlug}/blogs`);
+    const newBlogRef = push(blogRef);
+    if (!newBlogRef.key) return;
 
-    await set(businessRef, businessData);
-
-    console.log(`✅ Business "${businessData.slug}" uploaded successfully!`);
+    await set(newBlogRef, {
+      ...itInterviewBlog,
+      id: newBlogRef.key,
+      updatedAt: Date.now()
+    });
+    console.log(`✅ Blog post "IT Interview" uploaded!`);
   } catch (err) {
-    console.error("❌ Error uploading business:", err);
+    console.error("❌ Error uploading blog:", err);
   }
 }
 
-// Вызов функции
+
+uploadBlog()

@@ -7,7 +7,6 @@ export interface Service  {
   id?: string;
 
   parentServiceIds?: string[];
-
   subservices?: string[];
 
   title: LocalizedText;

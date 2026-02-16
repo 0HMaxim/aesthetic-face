@@ -57,27 +57,35 @@ export default function Services() {
                 <Link
                     key={service.id}
                     to={`/${lang}/${businessSlug}/services/${service.slug}`}
-                    className="group rounded-[10rem] shadow-md overflow-hidden
-                      lg:max-w-[30rem]
-                      md:max-h-[23rem]
-                      md:max-w-[25rem]
-                      max-[1024px]:min-w-[48%]
-                      h-[20rem]
-                      w-[24rem]
-                      hover:bg-[var(--primary)] transition duration-500 hover:shadow-xl relative"
+                    /* Убрал жесткие max-h, чтобы карточка могла дышать, но сохранил форму */
+                    className="group rounded-[3rem] md:rounded-[10rem] shadow-md overflow-hidden
+        relative flex-shrink-0
+        w-full sm:w-[calc(50%-1rem)] lg:w-[24rem] xl:w-[28rem]
+        h-[22rem] md:h-[25rem]
+        hover:shadow-2xl transition-all duration-500 "
                 >
                   {service.mainImage && (
                       <img
                           src={service.mainImage}
                           alt={getTabLabel(service.title)}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       />
                   )}
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-500" />
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full p-4 text-center">
-                    <p className="text-[1.5rem] font-bold text-white drop-shadow-md">
-                      {getTabLabel(service.title)}
-                    </p>
+
+                  {/* Оверлей: в темной теме делаем его чуть плотнее */}
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-primary/60 transition-colors duration-500" />
+
+                  {/* Контейнер для текста */}
+                  <div className="absolute inset-0 flex flex-col justify-end items-center p-6 md:p-10 text-center">
+                    <div className="bg-black/20 backdrop-blur-sm p-4 rounded-3xl w-full group-hover:bg-transparent transition-all">
+                      <p className="text-[1.25rem] md:text-[1.75rem] font-black text-white leading-tight
+                        break-words hyphens-auto line-clamp-2 uppercase tracking-tight shadow-black drop-shadow-lg">
+                        {getTabLabel(service.title)}
+                      </p>
+
+                      {/* Маленький индикатор, который появляется при наведении */}
+                      <div className="h-1 w-0 bg-white mx-auto mt-2 group-hover:w-12 transition-all duration-500 rounded-full" />
+                    </div>
                   </div>
                 </Link>
             ))}

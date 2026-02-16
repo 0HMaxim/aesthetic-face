@@ -43,7 +43,7 @@ export default function Footer() {
   const servicesTitle = servicesTab?.title?.[lang as any] ?? t("header.services");
 
   return (
-      <footer className="text-foreground bg- px-[4rem] md:px-[6rem] py-[6rem] md:py-[10rem] "
+      <footer className="text-foreground bg- px-[4rem] md:px-[6rem] py-[6rem] md:py-[10rem] mt-[3rem]"
               style={{ background: 'var(--secondary)' }}>
         <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[4rem] ">
 

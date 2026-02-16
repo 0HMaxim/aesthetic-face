@@ -106,6 +106,29 @@ export default function AdminPage() {
         }
     }, [businessSlug]);
 
+
+
+        useEffect(() => {
+            // 1. Находим корневой элемент (обычно <html> или <body>)
+            const root = window.document.documentElement;
+
+            // 2. Сохраняем старую тему, если захотим её вернуть при выходе из админки
+            const prevTheme = root.classList.contains('dark') ? 'dark' : 'light';
+
+            // 3. Принудительно ставим light
+            root.classList.remove('dark');
+            root.classList.add('light');
+
+            // (Опционально) Если вы хотите вернуть темную тему, когда пользователь уйдет из админки
+            return () => {
+                if (prevTheme === 'dark') {
+                    root.classList.add('dark');
+                    root.classList.remove('light');
+                }
+            };
+        }, []);
+
+
     // Создание нового бизнеса
     const handleCreateBusiness = async () => {
         const slug = prompt(t.newBusinessPrompt);
@@ -153,7 +176,7 @@ export default function AdminPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 text-foreground p-8">
+        <div className="min-h-screen bg-gray-50 text-foreground p-8 light">
             <div className="flex">
                 {businessSlug && (
                     <Link

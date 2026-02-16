@@ -7,7 +7,6 @@ export interface ContentBlock {
   widthPercent?: number;
   type: ContentBlockType;
   content?: LocalizedText;
-  sideText?: LocalizedText;
   children?: ContentBlock[];
   align?: "left" | "center" | "right";
   media?: string;

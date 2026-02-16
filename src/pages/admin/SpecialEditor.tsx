@@ -131,6 +131,24 @@ export default function SpecialEditor() {
     setSpecial({ ...special, content: updated });
   };
 
+  const toggleAlign = (index: number, parentIndex?: number) => {
+    const updated = [...(special.content || [])];
+    const aligns: ("left" | "center" | "right")[] = ["left", "center", "right"];
+
+    let currentBlock;
+    if (typeof parentIndex === "number") {
+      currentBlock = updated[parentIndex].children![index];
+    } else {
+      currentBlock = updated[index];
+    }
+
+    const currentIndex = aligns.indexOf(currentBlock.align || "left");
+    const nextIndex = (currentIndex + 1) % aligns.length;
+    currentBlock.align = aligns[nextIndex];
+
+    setSpecial({ ...special, content: updated });
+  };
+
   const renderBlockEditor = (block: ContentBlock, index: number, parentIndex?: number) => {
     const blockKey = `${parentIndex ?? "root"}-${index}`;
     return (
@@ -140,7 +158,19 @@ export default function SpecialEditor() {
             <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em] bg-blue-50 px-3 py-1 rounded-full">
               {parentIndex !== undefined ? `Child ${index + 1}` : `Block ${index + 1}`} — {block.type}
             </span>
-              <div className="flex gap-2">
+              <div className="flex gap-2 items-center">
+                {/* Кнопка переключения выравнивания */}
+                <button
+                    onClick={() => toggleAlign(index, parentIndex)}
+                    className="p-2 hover:bg-blue-50 rounded-xl transition text-[14px] border border-gray-50 flex items-center justify-center min-w-[40px]"
+                    title="Toggle Alignment"
+                >
+                  {block.align === "center" ? "≡" : block.align === "right" ? "⇶" : "≣"}
+                  <span className="ml-1 text-[8px] uppercase font-black">{block.align || "left"}</span>
+                </button>
+
+                <div className="h-4 w-[1px] bg-gray-100 mx-1" /> {/* Разделитель */}
+
                 <button onClick={() => moveContentBlock(index, "up", parentIndex)} className="p-2 hover:bg-gray-100 rounded-xl transition">↑</button>
                 <button onClick={() => moveContentBlock(index, "down", parentIndex)} className="p-2 hover:bg-gray-100 rounded-xl transition">↓</button>
                 <button onClick={() => removeContentBlock(index, parentIndex)} className="text-red-400 hover:text-red-600 font-bold text-[10px] uppercase ml-2 tracking-widest">Delete</button>
@@ -174,7 +204,19 @@ export default function SpecialEditor() {
                   ))}
                 </div>
             )}
+
+
             {block.children?.map((child, i) => renderBlockEditor(child, i, index))}
+
+            {block.type === "image" && (
+                <div className="flex gap-4 mt-6 border-t border-gray-50 pt-4">
+                  {["heading", "paragraph", "list"].map(t => (
+                      <button key={t} onClick={() => addContentBlock(t as any, index)} className="text-blue-500 text-[10px] font-black uppercase tracking-widest hover:text-blue-700 transition px-4 py-2 bg-blue-50 rounded-xl">
+                        + Add {t} caption
+                      </button>
+                  ))}
+                </div>
+            )}
           </div>
         </div>
     );
@@ -334,6 +376,9 @@ export default function SpecialEditor() {
                   No content blocks yet. Start building.
                 </div>
             )}
+
+
+
           </div>
         </div>
 

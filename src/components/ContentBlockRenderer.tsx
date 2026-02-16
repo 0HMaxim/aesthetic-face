@@ -30,14 +30,14 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
         switch (block.type) {
             case "heading":
                 return (
-                    <h2 key={index} className={`text-2xl md:text-3xl font-bold mb-4 w-full ${getTextAlign()}`}>
+                    <h2 key={index} className={`text-2xl md:text-3xl font-bold mb-4 w-full text-foreground ${getTextAlign()}`}>
                         {formatText(currentContent)}
                     </h2>
                 );
 
             case "paragraph":
                 return (
-                    <p key={index} className={`text-base md:text-xl mb-6 leading-relaxed w-full ${getTextAlign()}`} style={{ whiteSpace: "pre-line" }}>
+                    <p key={index} className={`text-base md:text-xl mb-6 leading-relaxed w-full text-foreground ${getTextAlign()}`} style={{ whiteSpace: "pre-line" }}>
                         {formatText(currentContent)}
                     </p>
                 );
@@ -48,9 +48,9 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
                     : String(currentContent || "").split("\n").filter(i => i.trim());
 
                 return (
-                    <ul key={index} className={`list-disc list-outside ml-6 mb-6 space-y-2 text-base md:text-lg w-full ${getTextAlign()}`}>
+                    <ul key={index} className={`list-disc list-outside ml-6 mb-6 space-y-2 text-base md:text-lg w-full text-foreground ${getTextAlign()}`}>
                         {items.map((item, idx) => (
-                            <li key={idx} className="pl-2">{item}</li>
+                            <li key={idx} className="pl-2 text-foreground">{item}</li>
                         ))}
                     </ul>
                 );
@@ -60,33 +60,39 @@ export const ContentBlockRenderer: React.FC<Props> = ({ content }) => {
                 const hasChildren = block.children && block.children.length > 0;
                 const width = block.widthPercent || 100;
 
+                // Рассчитываем стили контейнера для изображения
+                const imageContainerStyle: React.CSSProperties = {
+                    maxWidth: width < 100 ? `${width}%` : '800px',
+                    width: '100%',
+                };
+
                 return (
                     <div key={index}
-                         className={`my-10 flex flex-col w-full overflow-hidden
+                         className={`my-10 flex flex-col w-full 
                 ${hasChildren && align === "right" ? "md:flex-row-reverse md:gap-12" :
-                             hasChildren && align === "left" ? "md:flex-row md:gap-12" : "items-center gap-6"}
+                             hasChildren && align === "left" ? "md:flex-row md:gap-12" :
+                                 "items-center justify-center gap-6"} 
+                ${!hasChildren && align === "left" ? "items-start" : ""}
+                ${!hasChildren && align === "right" ? "items-end" : ""}
                `}
                     >
-                        {/* Контейнер картинки */}
+                        {/* Контейнер картинки с фиксированным ограничением */}
                         <div
-                            className={`flex-shrink-0 rounded-3xl shadow-md overflow-hidden h-fit
-                ${hasChildren ? "w-full md:w-1/2" : "w-full"}
-              `}
-                            style={!hasChildren ? {
-                                maxWidth: '100%',
-                                width: width < 100 ? `${width}%` : '100%'
-                            } : {}}
+                            className={`flex-shrink-0 rounded-[2rem] shadow-sm overflow-hidden h-fit
+                    ${hasChildren ? "w-full md:w-1/2" : ""}
+                `}
+                            style={imageContainerStyle}
                         >
                             <img
                                 src={block.media}
                                 alt=""
-                                className="w-full h-auto object-contain block" // object-contain вместо cover чтобы не резало
+                                className="w-full h-auto max-h-[65vh] object-contain block"
                             />
                         </div>
 
-                        {/* Контент рядом/под картинкой */}
+                        {/* Контент (children) */}
                         {hasChildren && (
-                            <div className="flex-1 flex flex-col min-w-0 w-full">
+                            <div className={`flex-1 flex flex-col min-w-0 w-full text-foreground ${getTextAlign()}`}>
                                 {block.children!.map((child, childIdx) => (
                                     <div key={childIdx} className="w-full">
                                         {renderBlock(child, childIdx)}

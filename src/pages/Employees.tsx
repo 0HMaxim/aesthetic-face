@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Button } from "@heroui/react";
 import { TopImage } from "../components/TopImage.tsx";
 import { Breadcrumbs } from "../components/Breadcrumbs.tsx";
 import { useFetchData } from "../hooks/useFetchData.ts";
@@ -31,9 +30,6 @@ export default function Employees() {
     return localizedValue[lang] || localizedValue["en"] || "";
   };
 
-
-// В самом верху файла, вне компонента:
-// uploadBusiness().then(() => console.log("Done!"));
 
   if (loading) return <p className="text-center py-10">{t("loading") || "Loading Specialists..."}</p>;
 
@@ -66,39 +62,42 @@ export default function Employees() {
                   <Link
                       key={item.id || index}
                       to={profileUrl}
-                      className="group flex flex-col md:flex-row bg-primary rounded-[4rem] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden w-full max-w-[45rem] min-h-[25rem] relative"
+                      className="group flex flex-col md:flex-row bg-primary rounded-[4rem] shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden w-full max-w-[45rem] min-h-[25rem] relative "
                   >
-                    <div className="flex flex-col justify-between p-8 md:p-12 md:w-1/2">
+                    {/* Контентная часть */}
+                    <div className="flex flex-col justify-between p-8 md:p-10 lg:p-12 md:w-1/2">
                       <div>
-                        <h2 className="text-2xl md:text-3xl font-black text-foreground mb-4 leading-tight group-hover:text-gray-500 transition-colors duration-300">
+                        <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2 leading-tight group-hover:text-foreground/70 transition-colors duration-300 break-words">
                           {item?.fullName?.[lang] || "No name"}
                         </h2>
 
-                        <p className="text-lg font-medium text-gray-500 uppercase tracking-widest mb-8">
+                        {/* ВОТ ОН: Твой серый цвет (gray-500) с поддержкой темной темы */}
+                        <p className="text-sm md:text-base font-bold text-gray-500 dark:text-gray-400 uppercase tracking-[0.2em] mb-6">
                           {item?.position?.[lang] || "No position"}
                         </p>
                       </div>
 
-                      <Button
-                          as="div"
-                          className="w-full md:w-fit px-8 py-6 rounded-full bg-black hover:bg-gray-800 text-white font-bold text-sm uppercase tracking-widest transition-all active:scale-95"
-                      >
-                        {t("employees.bookAppointment", {
-                          name: item?.shortName?.[lang] || "",
-                        })}
-                      </Button>
+                      {/* Кнопка с защитой от вылета */}
+                      <div className="w-full md:w-fit px-6 py-4 rounded-full bg-black hover:bg-gray-900 text-white font-bold transition-all active:scale-95 flex items-center justify-center text-center">
+                        <span className="text-[10px] sm:text-xs uppercase tracking-tighter sm:tracking-widest leading-tight break-words">
+                          {t("employees.bookAppointment", {
+                            name: item?.shortName?.[lang] || "",
+                          })}
+                        </span>
+                      </div>
                     </div>
 
-
-                    <div className="md:w-1/2 h-[25rem] md:h-auto overflow-hidden">
+                    {/* Фото часть */}
+                    <div className="md:w-1/2 h-[22rem] md:h-auto overflow-hidden relative">
                       {item.photo ? (
                           <img
                               src={item.photo}
                               alt={item?.fullName?.[lang]}
-                              className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                              /* object-top чтобы головы не резало */
+                              className="w-full h-full object-cover object-top grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                           />
                       ) : (
-                          <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-400 font-bold uppercase tracking-widest">
+                          <div className="w-full h-full bg-muted flex items-center justify-center text-muted-foreground font-bold uppercase tracking-widest text-xs">
                             No photo
                           </div>
                       )}

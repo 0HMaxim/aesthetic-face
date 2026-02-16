@@ -161,6 +161,24 @@ export default function BlogEditor() {
     navigate(adminPath(lang!, businessSlug!, "blogs"));
   };
 
+  const toggleAlign = (index: number, parentIndex?: number) => {
+    const updated = [...(blog.content || [])];
+    const aligns: ("left" | "center" | "right")[] = ["left", "center", "right"];
+
+    let currentBlock;
+    if (typeof parentIndex === "number") {
+      currentBlock = updated[parentIndex].children![index];
+    } else {
+      currentBlock = updated[index];
+    }
+
+    const currentIndex = aligns.indexOf(currentBlock.align || "left");
+    const nextIndex = (currentIndex + 1) % aligns.length;
+    currentBlock.align = aligns[nextIndex];
+
+    setBlog({ ...blog, content: updated });
+  };
+
   const renderBlockEditor = (block: ContentBlock, index: number, parentIndex?: number) => {
     const blockLabel = parentIndex !== undefined ? `Child ${index + 1}` : `Block ${index + 1}`;
     return (
@@ -168,7 +186,19 @@ export default function BlogEditor() {
           <div className="border border-gray-100 rounded-[32px] p-6 my-3 bg-white shadow-sm w-full transition-all hover:shadow-md">
             <div className="flex justify-between items-center mb-4">
               <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.2em] bg-blue-50 px-3 py-1 rounded-full">{blockLabel} — {block.type}</span>
-              <div className="flex gap-2">
+              <div className="flex gap-2 items-center">
+                {/* Кнопка переключения выравнивания */}
+                <button
+                    onClick={() => toggleAlign(index, parentIndex)}
+                    className="p-2 hover:bg-blue-50 rounded-xl transition text-[14px] border border-gray-50 flex items-center justify-center min-w-[40px]"
+                    title="Toggle Alignment"
+                >
+                  {block.align === "center" ? "≡" : block.align === "right" ? "⇶" : "≣"}
+                  <span className="ml-1 text-[8px] uppercase font-black">{block.align || "left"}</span>
+                </button>
+
+                <div className="h-4 w-[1px] bg-gray-100 mx-1" /> {/* Разделитель */}
+
                 <button onClick={() => moveContentBlock(index, "up", parentIndex)} className="p-2 hover:bg-gray-100 rounded-xl transition">↑</button>
                 <button onClick={() => moveContentBlock(index, "down", parentIndex)} className="p-2 hover:bg-gray-100 rounded-xl transition">↓</button>
                 <button onClick={() => removeContentBlock(index, parentIndex)} className="text-red-400 hover:text-red-600 font-bold text-[10px] uppercase ml-2 tracking-widest">Delete</button>
