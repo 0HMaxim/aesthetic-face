@@ -242,3 +242,16 @@ en: ...
 Administrators must be able to edit the content for each language independently without modifying the source code.
 
 Static UI labels may use i18next, but business content such as services, descriptions, prices, employees, FAQ, blog posts and general information must be managed through Firebase.
+
+## Colors / Theming
+
+All brand colors (gradients, accent colors) must be defined as CSS variables in `src/index.css` under `:root`.
+
+Do not hardcode brand color combinations (e.g. `from-rose-400 to-pink-600`) directly in components.
+
+Instead, use semantic utility classes defined in `index.css` via `@layer components`:
+- `bg-gradient-brand`
+- `text-gradient-brand`
+- `border-brand`
+
+If a new brand color or gradient variant is needed, add it as a CSS variable first, then expose it as a utility class — never inline the raw hex/Tailwind color stack in a component.

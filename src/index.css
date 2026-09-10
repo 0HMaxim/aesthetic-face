@@ -1,3 +1,172 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Brand palette — cream & brown */
+  --color-cream-50: #fdfbf6;
+  --color-cream-100: #f7efde;
+  --color-cream-200: #efdfc0;
+
+  --color-brown-300: #c8a165;
+  --color-brown-500: #9c6b3e;
+  --color-brown-600: #7a4b26;
+  --color-brown-700: #5e3a1e;
+  --color-brown-800: #4a2c17;
+
+  --color-brand-from: var(--color-brown-300);
+  --color-brand-to: var(--color-brown-600);
+  --color-brand-from-hover: var(--color-brown-500);
+  --color-brand-to-hover: var(--color-brown-700);
+
+  --gradient-brand: linear-gradient(to right, var(--color-brand-from), var(--color-brand-to));
+  --gradient-brand-hover: linear-gradient(to right, var(--color-brand-from-hover), var(--color-brand-to-hover));
+
+  --color-brand-50: var(--color-cream-50);
+  --color-pink-50: var(--color-cream-100);
+  --color-purple-50: var(--color-cream-200);
+  --color-gray-50: var(--color-cream-50);
+
+  --color-brand-text: var(--color-brown-600);
+  --color-brand-text-hover: var(--color-brown-800);
+
+  --color-accent-from: var(--color-brown-600);
+  --color-accent-to: var(--color-brown-800);
+
+  --gradient-accent: linear-gradient(to right, var(--color-accent-from), var(--color-accent-to));
+
+  /* Surface / text tokens — light theme */
+  --color-surface: #ffffff;
+  --color-surface-alt: var(--color-cream-50);
+  --color-navbar-bg: rgba(255, 255, 255, 0.95);
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-border: #f3f4f6;
+}
+
+.dark {
+  /* Brand palette stays warm, just shifted for dark surfaces */
+  --color-cream-50: #17130f;
+  --color-cream-100: #201a13;
+  --color-cream-200: #2a2117;
+
+  --color-brown-300: #d9b579;
+  --color-brown-500: #c8a165;
+  --color-brown-600: #e6c48f;
+  --color-brown-700: #efdab0;
+  --color-brown-800: #f7e9cf;
+
+  --color-brand-text: var(--color-brown-600);
+  --color-brand-text-hover: var(--color-brown-700);
+
+  --color-accent-from: var(--color-brown-500);
+  --color-accent-to: var(--color-brown-700);
+
+  /* Surface / text tokens — dark theme */
+  --color-surface: #14100c;
+  --color-surface-alt: #1c1712;
+  --color-navbar-bg: rgba(20, 16, 12, 0.9);
+  --color-text-primary: #f7efde;
+  --color-text-secondary: #cbb99e;
+  --color-border: #2a2117;
+}
+
+@layer components {
+  .bg-gradient-brand {
+    background-image: var(--gradient-brand);
+  }
+  .bg-gradient-brand:hover {
+    background-image: var(--gradient-brand-hover);
+  }
+  .text-gradient-brand {
+    background-image: var(--gradient-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .border-brand {
+    border-color: var(--color-brand-from);
+  }
+
+  .bg-hero-brand {
+    background-image: linear-gradient(to bottom right, var(--color-brand-50), var(--color-pink-50), var(--color-purple-50));
+  }
+  .bg-soft-brand {
+    background-image: linear-gradient(to bottom right, var(--color-brand-50), var(--color-pink-50));
+  }
+  .bg-section-brand {
+    background-image: linear-gradient(to bottom right, var(--color-gray-50), var(--color-brand-50));
+  }
+  .text-brand {
+    color: var(--color-brand-text);
+  }
+  .text-brand-hover:hover,
+  .group:hover .group-hover\:text-brand-hover {
+    color: var(--color-brand-text-hover);
+  }
+
+  .bg-gradient-accent {
+    background-image: var(--gradient-accent);
+  }
+  .text-gradient-accent {
+    background-image: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-page-accent {
+    background-image: linear-gradient(to bottom right, var(--color-pink-50), var(--color-surface), var(--color-purple-50));
+  }
+  .text-accent {
+    color: var(--color-accent-from);
+  }
+  .bg-brand-subtle {
+    background-color: var(--color-brand-50);
+  }
+
+  /* Surface / text utilities for theme-aware components */
+  .bg-navbar {
+    background-color: var(--color-navbar-bg);
+  }
+  .bg-surface {
+    background-color: var(--color-surface);
+  }
+  .text-primary {
+    color: var(--color-text-primary);
+  }
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+  .border-default {
+    border-color: var(--color-border);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-brand);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-brand-hover);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #c8a165 transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
