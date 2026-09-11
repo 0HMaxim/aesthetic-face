@@ -7,9 +7,13 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import ServiceDetails from "./pages/ServiceDetail.tsx";
 import { ThemeProvider } from './context/ThemeContext';
+import Prices from "./pages/Prices.tsx";
+import Footer from "./components/Footer.tsx";
+import useScrollToTop from "./hooks/useScrollToTop.ts";
 
 function AnimatedRoutes() {
     const location = useLocation();
+    useScrollToTop();
 
     return (
         <AnimatePresence mode="wait">
@@ -19,6 +23,7 @@ function AnimatedRoutes() {
                 <Route path="/services/:slug" element={<ServiceDetails />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/prices" element={<Prices />} />
             </Routes>
         </AnimatePresence>
     );
@@ -28,9 +33,12 @@ function App() {
     return (
         <ThemeProvider>
             <Router>
-                <div className="min-h-screen bg-white overflow-x-hidden">
+                <div className="min-h-screen bg-white overflow-x-hidden flex flex-col">
                     <Navbar />
-                    <AnimatedRoutes />
+                    <main className="flex-1">
+                        <AnimatedRoutes />
+                    </main>
+                    <Footer />
                 </div>
             </Router>
         </ThemeProvider>

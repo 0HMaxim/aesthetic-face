@@ -1,0 +1,116 @@
+{
+  "home": {
+    "hero": {
+      "subtitle": "Professionelle Gesichtsbehandlungen, Hautverjüngung und Laser-Haarentfernung im Herzen von Kiel",
+      "exploreServices": "Leistungen entdecken",
+      "bookAppointment": "Termin buchen"
+    },
+    "whyChooseUs": {
+      "title": "Warum wir?",
+      "subtitle": "Erleben Sie erstklassige ästhetische Pflege mit moderner Technologie und persönlicher Betreuung"
+    },
+    "features": [
+      { "title": "15+ Jahre Erfahrung", "description": "Zertifizierte Kosmetologinnen mit Expertenwissen" },
+      { "title": "Moderne Technologie", "description": "Neueste Geräte für Ästhetik und Laserbehandlungen" },
+      { "title": "Individuelle Betreuung", "description": "Persönlicher Ansatz für jeden Kunden" },
+      { "title": "Flexible Öffnungszeiten", "description": "Mo–Fr 10:00–20:00, Sa 10:00–18:00" }
+    ],
+    "servicesSection": {
+      "title": "Unsere Leistungen",
+      "subtitle": "Umfassende ästhetische Behandlungen, abgestimmt auf Ihre Bedürfnisse",
+      "learnMore": "Mehr erfahren",
+      "viewAll": "Alle Leistungen ansehen"
+    },
+    "cta": {
+      "title": "Bereit für Ihre Schönheitsreise?",
+      "subtitle": "Vereinbaren Sie eine Beratung mit unserem Expertenteam in der Küterstraße 5, Kiel",
+      "call": "Anrufen: +49 172 5464736",
+      "contactUs": "Kontaktieren Sie uns"
+    }
+  },
+
+  "common": {
+    "from": "ab"
+  },
+  "nav": {
+    "home": "Start",
+    "services": "Leistungen",
+    "prices": "Preise",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "visitUs": "Anfahrt",
+    "toggleTheme": "Design wechseln",
+    "changeLanguage": "Sprache ändern"
+  },
+  "serviceDetails": {
+    "backToServices": "Zurück zu den Leistungen",
+    "aboutTitle": "Über diese Behandlung",
+    "price": "Preis",
+    "duration": "Dauer",
+    "bookNow": "Termin buchen",
+    "otherServices": "Weitere Leistungen"
+  },
+  "prices": {
+    "backToHome": "Zur Startseite",
+    "title": "Preisliste",
+    "subtitle": "Transparente, aktuelle Preise für jede Behandlung.",
+    "noData": "Die Preisliste wird gerade aktualisiert. Bitte schauen Sie später wieder vorbei.",
+    "perProcedure": "Preis pro Behandlung",
+    "bookNow": "Termin buchen"
+  },
+  "servicesPage": {
+    "title": "Unsere Leistungen",
+    "subtitle": "Entdecken Sie unser umfassendes Angebot an Schönheits- und Wellnessbehandlungen, die Ihre natürliche Schönheit unterstreichen und für vollkommene Entspannung sorgen.",
+    "viewDetails": "Details ansehen",
+    "ctaTitle": "Bereit für Ihren neuen Look?",
+    "ctaSubtitle": "Buchen Sie noch heute Ihren Termin und genießen Sie die luxuriöse Behandlung, die Sie verdienen.",
+    "ctaButton": "Termin vereinbaren"
+  },
+  "footer": {
+    "description": "Ein exklusiver Beauty-Salon für Haut-, Haar- und Körperpflege.",
+    "links": {
+      "title": "Navigation",
+      "home": "Startseite",
+      "services": "Leistungen",
+      "about": "Über uns",
+      "contact": "Kontakt",
+      "prices": "Preise"
+    },
+    "contact": {
+      "title": "Kontakt"
+    },
+    "rights": "Alle Rechte vorbehalten."
+  },
+  "contact": {
+    "hero": {
+      "title": "Kontaktieren Sie uns",
+      "subtitle": "Vereinbaren Sie eine Beratung oder stellen Sie uns Ihre Fragen — wir helfen gerne."
+    },
+    "info": {
+      "title": "So erreichen Sie uns",
+      "address": "Adresse",
+      "phone": "Telefon",
+      "email": "E-Mail",
+      "hours": "Öffnungszeiten"
+    },
+    "form": {
+      "title": "Schreiben Sie uns",
+      "subtitle": "Hinterlassen Sie eine Anfrage, wir melden uns umgehend bei Ihnen.",
+      "name": "Name",
+      "email": "E-Mail",
+      "phone": "Telefon (optional)",
+      "message": "Nachricht",
+      "submit": "Nachricht senden",
+      "success": "Vielen Dank! Wir melden uns in Kürze bei Ihnen.",
+      "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+      "errors": {
+        "name": "Bitte geben Sie Ihren Namen ein",
+        "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+        "message": "Die Nachricht ist zu kurz"
+      }
+    },
+    "map": {
+      "title": "Unser Salon auf der Karte"
+    }
+  }
+}

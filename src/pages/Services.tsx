@@ -1,8 +1,13 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { services } from '../data/services';
+import {getLocalizedText} from "../utils/localization.ts";
 
 const Services = () => {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language.split('-')[0];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -41,11 +46,10 @@ const Services = () => {
               className="text-center mb-16"
           >
             <h1 className="text-5xl md:text-6xl font-bold text-gradient-accent mb-6">
-              Our Services
+              {t('servicesPage.title')}
             </h1>
             <p className="text-xl text-secondary max-w-3xl mx-auto">
-              Discover our comprehensive range of beauty and wellness treatments,
-              designed to enhance your natural beauty and provide ultimate relaxation.
+              {t('servicesPage.subtitle')}
             </p>
           </motion.div>
 
@@ -58,6 +62,8 @@ const Services = () => {
           >
             {services.map((service) => {
               const Icon = service.icon;
+              const title = getLocalizedText(service.title, lang);
+              const description = getLocalizedText(service.description, lang);
 
               return (
                   <motion.div
@@ -73,7 +79,7 @@ const Services = () => {
                     <div className="relative h-56 overflow-hidden">
                       <img
                           src={service.image}
-                          alt={service.title}
+                          alt={title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
@@ -93,23 +99,23 @@ const Services = () => {
                       {/* Title */}
                       <Link to={`/services/${service.slug}`}>
                         <h3 className="text-2xl font-bold text-primary mb-3 group-hover:text-accent transition-colors duration-300">
-                          {service.title}
+                          {title}
                         </h3>
                       </Link>
 
                       {/* Description */}
-                      <p className="text-secondary mb-6 leading-relaxed">{service.description}</p>
+                      <p className="text-secondary mb-6 leading-relaxed">{description}</p>
 
                       {/* Price and Duration */}
                       <div className="flex items-center justify-between pt-4 border-t border-default">
                         <div>
-                          <p className="text-sm text-secondary">Price</p>
+                          <p className="text-sm text-secondary">{t('serviceDetails.price')}</p>
                           <p className="text-lg font-semibold text-gradient-accent">
-                            {service.price}
+                            {t('common.from')} {service.price} €
                           </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm text-secondary">Duration</p>
+                          <p className="text-sm text-secondary">{t('serviceDetails.duration')}</p>
                           <p className="text-lg font-semibold text-primary">{service.duration}</p>
                         </div>
                       </div>
@@ -119,7 +125,7 @@ const Services = () => {
                           to={`/services/${service.slug}`}
                           className={`mt-6 flex items-center justify-center w-full py-3 px-6 rounded-xl bg-gradient-to-r ${service.gradient} text-white font-semibold shadow-md hover:shadow-lg transition-all duration-300`}
                       >
-                        View Details
+                        {t('servicesPage.viewDetails')}
                       </Link>
                     </div>
                   </motion.div>
@@ -135,17 +141,17 @@ const Services = () => {
               className="mt-20 text-center bg-gradient-accent rounded-3xl p-12 shadow-2xl"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Ready to Transform Your Look?
+              {t('servicesPage.ctaTitle')}
             </h2>
             <p className="text-pink-100 text-lg mb-8 max-w-2xl mx-auto">
-              Book your appointment today and experience the luxury treatment you deserve.
+              {t('servicesPage.ctaSubtitle')}
             </p>
             <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-accent px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Schedule Appointment
+              {t('servicesPage.ctaButton')}
             </motion.button>
           </motion.div>
         </div>

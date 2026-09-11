@@ -1,0 +1,116 @@
+{
+  "home": {
+    "hero": {
+      "subtitle": "Professional facial treatments, skin rejuvenation, and laser hair removal in the heart of Kiel",
+      "exploreServices": "Explore Services",
+      "bookAppointment": "Book Appointment"
+    },
+    "whyChooseUs": {
+      "title": "Why Choose Us",
+      "subtitle": "Experience premium aesthetic care with modern technology and personalized attention"
+    },
+    "features": [
+      { "title": "15+ Years Experience", "description": "Expert cosmetologists with certified training" },
+      { "title": "Modern Technology", "description": "Latest aesthetic and laser equipment" },
+      { "title": "Personalized Care", "description": "Individual approach for every client" },
+      { "title": "Flexible Schedule", "description": "Mon-Fri 10:00-20:00, Sat 10:00-18:00" }
+    ],
+    "servicesSection": {
+      "title": "Our Services",
+      "subtitle": "Comprehensive aesthetic treatments tailored to your needs",
+      "learnMore": "Learn More",
+      "viewAll": "View All Services"
+    },
+    "cta": {
+      "title": "Ready to Begin Your Beauty Journey?",
+      "subtitle": "Book a consultation with our expert team at Küterstraße 5, Kiel",
+      "call": "Call: +49 172 5464736",
+      "contactUs": "Contact Us"
+    }
+  },
+
+  "common": {
+    "from": "from"
+  },
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "prices": "Prices",
+    "about": "About",
+    "contact": "Contact",
+    "visitUs": "Visit Us",
+    "toggleTheme": "Toggle theme",
+    "changeLanguage": "Change language"
+  },
+  "serviceDetails": {
+    "backToServices": "Back to Services",
+    "aboutTitle": "About this treatment",
+    "price": "Price",
+    "duration": "Duration",
+    "bookNow": "Book Now",
+    "otherServices": "Other Services"
+  },
+  "prices": {
+    "backToHome": "Back to Home",
+    "title": "Price List",
+    "subtitle": "Transparent, up-to-date pricing for every treatment we offer.",
+    "noData": "Our price list is being updated. Please check back soon.",
+    "perProcedure": "Priced per procedure",
+    "bookNow": "Book Now"
+  },
+  "servicesPage": {
+    "title": "Our Services",
+    "subtitle": "Discover our comprehensive range of beauty and wellness treatments, designed to enhance your natural beauty and provide ultimate relaxation.",
+    "viewDetails": "View Details",
+    "ctaTitle": "Ready to Transform Your Look?",
+    "ctaSubtitle": "Book your appointment today and experience the luxury treatment you deserve.",
+    "ctaButton": "Schedule Appointment"
+  },
+  "footer": {
+    "description": "A premium beauty salon dedicated to skin, hair and body care.",
+    "links": {
+      "title": "Quick Links",
+      "home": "Home",
+      "services": "Services",
+      "about": "About Us",
+      "contact": "Contact",
+      "prices": "Prices"
+    },
+    "contact": {
+      "title": "Contact"
+    },
+    "rights": "All rights reserved."
+  },
+  "contact": {
+    "hero": {
+      "title": "Get In Touch",
+      "subtitle": "Book a consultation or ask us anything — we're happy to help."
+    },
+    "info": {
+      "title": "How to reach us",
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "hours": "Working Hours"
+    },
+    "form": {
+      "title": "Send Us a Message",
+      "subtitle": "Leave a request and we'll get back to you shortly.",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone (optional)",
+      "message": "Message",
+      "submit": "Send Message",
+      "success": "Thank you! We'll be in touch soon.",
+      "error": "Something went wrong. Please try again.",
+      "errors": {
+        "name": "Please enter your name",
+        "email": "Please enter a valid email",
+        "message": "Message is too short"
+      }
+    },
+    "map": {
+      "title": "Our salon on the map"
+    }
+  }
+}

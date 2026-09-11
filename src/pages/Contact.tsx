@@ -1,20 +1,58 @@
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { meta } from '../data/meta';
+import { getLocalizedText } from '../utils/localization.ts';
+import ContactInfoCard from '../components/Contactinfocard.tsx';
+import ContactForm from '../components/Contactform.tsx';
+import ContactMap from '../components/Contactmap.tsx';
 
-const Contact = () => {
-  return (
-      <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="min-h-screen pt-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-pink-50 via-white to-purple-50"
-      >
-        <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Contact Us</h1>
-          <p className="text-lg text-gray-600">Content coming soon.</p>
-        </div>
-      </motion.div>
-  );
-};
+export default function Contact() {
+    const { t, i18n } = useTranslation();
+    const shouldReduceMotion = useReducedMotion();
+    const lang = i18n.language;
 
-export default Contact;
+    return (
+        <main className="bg-surface-alt">
+            {/* Hero */}
+            <section className="mx-auto max-w-5xl px-6 pb-4 pt-28 text-center sm:pt-32 lg:pt-36">
+                <motion.p
+                    initial={shouldReduceMotion ? undefined : { opacity: 0, y: 12 }}
+                    animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-sm font-medium uppercase tracking-[0.2em] text-brand"
+                >
+                    Aesthetic Face Beauty Salon
+                </motion.p>
+                <motion.h1
+                    initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
+                    animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="mt-3 text-4xl font-semibold tracking-tight text-primary sm:text-5xl"
+                >
+                    <span className="text-gradient-brand">
+                        {t('contact.hero.title', 'Свяжитесь с нами')}
+                    </span>
+                </motion.h1>
+                <motion.p
+                    initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
+                    animate={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                    className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-secondary"
+                >
+                    {getLocalizedText(meta.description, lang)}
+                </motion.p>
+            </section>
+
+            {/* Info + Form */}
+            <section className="mx-auto grid max-w-5xl gap-6 px-6 py-14 sm:py-20 lg:grid-cols-2">
+                <ContactInfoCard />
+                <ContactForm />
+            </section>
+
+            {/* Map */}
+            <section className="mx-auto max-w-5xl px-6 pb-20 sm:pb-28">
+                <ContactMap address={getLocalizedText(meta.address, lang)} />
+            </section>
+        </main>
+    );
+}

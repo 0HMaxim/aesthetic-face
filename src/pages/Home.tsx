@@ -1,31 +1,27 @@
 import { motion } from 'motion/react';
 import { Sparkles, Award, Clock, Heart, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { services } from '../data/services';
+import {getLocalizedText} from "../utils/localization.ts";
 
 const Home = () => {
-  const features = [
-    {
-      icon: <Award className="w-8 h-8" />,
-      title: '15+ Years Experience',
-      description: 'Expert cosmetologists with certified training',
-    },
-    {
-      icon: <Sparkles className="w-8 h-8" />,
-      title: 'Modern Technology',
-      description: 'Latest aesthetic and laser equipment',
-    },
-    {
-      icon: <Heart className="w-8 h-8" />,
-      title: 'Personalized Care',
-      description: 'Individual approach for every client',
-    },
-    {
-      icon: <Clock className="w-8 h-8" />,
-      title: 'Flexible Schedule',
-      description: 'Mon-Fri 10:00-20:00, Sat 10:00-18:00',
-    },
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language.split('-')[0];
+
+  const featureIcons = [
+    <Award className="w-8 h-8" />,
+    <Sparkles className="w-8 h-8" />,
+    <Heart className="w-8 h-8" />,
+    <Clock className="w-8 h-8" />,
   ];
+
+  const features = (
+      t('home.features', { returnObjects: true }) as { title: string; description: string }[]
+  ).map((feature, index) => ({
+    ...feature,
+    icon: featureIcons[index],
+  }));
 
   const featuredServices = services.slice(0, 4);
 
@@ -55,7 +51,7 @@ const Home = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-xl md:text-2xl text-secondary mb-8 max-w-3xl mx-auto"
             >
-              Professional facial treatments, skin rejuvenation, and laser hair removal in the heart of Kiel
+              {t('home.hero.subtitle')}
             </motion.p>
 
             <motion.div
@@ -68,15 +64,16 @@ const Home = () => {
                   to="/services"
                   className="group px-8 py-4 bg-gradient-brand text-white rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
               >
-                <span className="font-semibold">Explore Services</span>
+                <span className="font-semibold">{t('home.hero.exploreServices')}</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
+
 
               <a
               href="tel:+491725464736"
               className="px-8 py-4 bg-surface text-primary rounded-full border-2 border-default hover:border-brand hover:shadow-lg hover:scale-105 transition-all duration-300 font-semibold"
               >
-              Book Appointment
+              {t('home.hero.bookAppointment')}
             </a>
           </motion.div>
       </div>
@@ -109,10 +106,10 @@ const Home = () => {
           className="text-center mb-16"
       >
         <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-          Why Choose Us
+          {t('home.features.title', { defaultValue: t('home.whyChooseUs.title') })}
         </h2>
         <p className="text-xl text-secondary max-w-2xl mx-auto">
-          Experience premium aesthetic care with modern technology and personalized attention
+          {t('home.whyChooseUs.subtitle')}
         </p>
       </motion.div>
 
@@ -153,49 +150,54 @@ const Home = () => {
           className="text-center mb-16"
       >
         <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
-          Our Services
+          {t('home.servicesSection.title')}
         </h2>
         <p className="text-xl text-secondary max-w-2xl mx-auto">
-          Comprehensive aesthetic treatments tailored to your needs
+          {t('home.servicesSection.subtitle')}
         </p>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {featuredServices.map((service, index) => (
-            <motion.div
-                key={service.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="group relative bg-surface rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
-            >
-              <div className="relative h-64 overflow-hidden">
-                <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-semibold text-primary mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-secondary mb-6">
-                  {service.description}
-                </p>
-                <Link
-                    to={`/services/${service.slug}`}
-                    className="inline-flex items-center space-x-2 text-brand font-semibold group-hover:text-brand-hover transition-colors duration-300"
-                >
-                  <span>Learn More</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
-                </Link>
-              </div>
-            </motion.div>
-        ))}
+        {featuredServices.map((service, index) => {
+          const title = getLocalizedText(service.title, lang);
+          const description = getLocalizedText(service.description, lang);
+
+          return (
+              <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ y: -8 }}
+                  className="group relative bg-surface rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500"
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                      src={service.image}
+                      alt={title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div className="p-8">
+                  <h3 className="text-2xl font-semibold text-primary mb-3">
+                    {title}
+                  </h3>
+                  <p className="text-secondary mb-6">
+                    {description}
+                  </p>
+                  <Link
+                      to={`/services/${service.slug}`}
+                      className="inline-flex items-center space-x-2 text-brand font-semibold group-hover:text-brand-hover transition-colors duration-300"
+                  >
+                    <span>{t('home.servicesSection.learnMore')}</span>
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
+                  </Link>
+                </div>
+              </motion.div>
+          );
+        })}
       </div>
 
       <motion.div
@@ -209,7 +211,7 @@ const Home = () => {
             to="/services"
             className="inline-flex items-center space-x-2 px-8 py-4 bg-gradient-brand text-white rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold"
         >
-          <span>View All Services</span>
+          <span>{t('home.servicesSection.viewAll')}</span>
           <ArrowRight className="w-5 h-5" />
         </Link>
       </motion.div>
@@ -226,24 +228,23 @@ const Home = () => {
           transition={{ duration: 0.6 }}
       >
         <h2 className="text-4xl md:text-5xl font-bold mb-6">
-          Ready to Begin Your Beauty Journey?
+          {t('home.cta.title')}
         </h2>
         <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-          Book a consultation with our expert team at Küterstraße 5, Kiel
+          {t('home.cta.subtitle')}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-
           <a
           href="tel:+491725464736"
           className="px-8 py-4 bg-white text-brand rounded-full hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold"
           >
-          Call: +49 172 5464736
+          {t('home.cta.call')}
         </a>
         <Link
             to="/contact"
             className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full hover:bg-white hover:text-brand hover:shadow-2xl hover:scale-105 transition-all duration-300 font-semibold"
         >
-          Contact Us
+          {t('home.cta.contactUs')}
         </Link>
     </div>
   </motion.div>
