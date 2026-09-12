@@ -1,7 +1,7 @@
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { Icon } from '@iconify/react';
 import { useTranslation } from 'react-i18next';
-import { getLocalizedText } from '../utils/localization.ts';
+import { getLocalizedText, getWorkingHoursGroups, useIsMobile } from '../utils/localization.ts';
 import { meta } from '../data/meta.ts';
 
 const infoItemVariants: Variants = {
@@ -16,7 +16,8 @@ const infoItemVariants: Variants = {
 export default function ContactInfoCard() {
     const { t, i18n } = useTranslation();
     const shouldReduceMotion = useReducedMotion();
-    const lang = i18n.language;
+    const lang = i18n.language.split('-')[0];
+    const isMobile = useIsMobile();
 
     const items = [
         {
@@ -35,11 +36,6 @@ export default function ContactInfoCard() {
             label: t('contact.info.email', 'Email'),
             value: meta.email,
             href: `mailto:${meta.email}`,
-        },
-        {
-            icon: 'ph:clock-bold',
-            label: t('contact.info.hours', 'Часы работы'),
-            value: getLocalizedText(meta.workingHours, lang),
         },
     ];
 
@@ -71,34 +67,65 @@ export default function ContactInfoCard() {
                                 {item.label}
                             </p>
                             {item.href ? (
-
                                 <a
                                     href={item.href}
-                                className="text-base font-medium text-primary transition-colors hover:text-brand"
-                                    >
+                                    className="text-base font-medium text-primary transition-colors hover:text-brand"
+                                >
                                     {item.value}
                                 </a>
-                                ) : (
+                            ) : (
                                 <p className="text-base font-medium text-primary">{item.value}</p>
-                        )}
-                    </div>
+                            )}
+                        </div>
                     </motion.li>
-                    ))}
+                ))}
+
+                {/* Часы работы — отдельно, т.к. значение многострочное (расписание по дням) */}
+                <motion.li
+                    custom={items.length}
+                    initial={shouldReduceMotion ? undefined : 'hidden'}
+                    whileInView={shouldReduceMotion ? undefined : 'visible'}
+                    viewport={{ once: true, margin: '-40px' }}
+                    variants={infoItemVariants}
+                    className="flex items-start gap-4"
+                >
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-brand text-white">
+                        <Icon icon="ph:clock-bold" className="h-5 w-5" />
+                    </span>
+                    <div className="w-full">
+                        <p className="text-xs font-medium uppercase tracking-wide text-secondary">
+                            {t('contact.info.hours', 'Часы работы')}
+                        </p>
+                        <ul className="mt-1 space-y-0.5">
+                            {getWorkingHoursGroups(meta.workingHours, lang, { showClosed: true }).map(
+                                (group, index) => (
+                                    <li
+                                        key={index}
+                                        className="flex justify-between gap-4 text-base font-medium text-primary"
+                                    >
+                                        <span>{isMobile ? group.shortLabel : group.label}</span>
+                                        <span>{group.hours}</span>
+                                    </li>
+                                )
+                            )}
+                        </ul>
+                    </div>
+                </motion.li>
             </ul>
 
             <div className="mt-8 flex gap-3 border-t border-default pt-6">
                 {meta.socialLinks.map((social) => (
                     <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-brand/20 text-secondary transition-all duration-300 hover:-translate-y-0.5 hover:border-transparent hover:bg-gradient-brand hover:text-white"
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={social.label}
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-brand/20 text-secondary transition-all duration-300 hover:-translate-y-0.5 hover:border-transparent hover:bg-gradient-brand hover:text-white"
                     >
-                    <Icon icon={social.icon} className="h-5 w-5" />
+                        <Icon icon={social.icon} className="h-5 w-5" />
                     </a>
-                    ))}
+                ))}
             </div>
         </div>
     );

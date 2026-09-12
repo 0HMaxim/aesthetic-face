@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect, forwardRef} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, MapPin, Clock } from 'lucide-react';
 import { Icon } from '@iconify/react';
@@ -8,14 +8,15 @@ import LanguageSwitcher from './LanguageSwitcher';
 import ThemeSwitcher from './ThemeSwitcher';
 import logo from '../assets/logo.png';
 import { meta } from '../data/meta';
-import { getLocalizedText } from '../utils/localization';
+import {getLocalizedText, summarizeWorkingHoursShort} from '../utils/localization';
+import NavInfoBar from "./NavInfoBar.tsx";
 
-const Navbar = () => {
+const Navbar = forwardRef<HTMLElement>((_, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const {t, i18n} = useTranslation();
-  const lang = i18n.language;
+  const lang = i18n.language.split('-')[0];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 24);
@@ -35,7 +36,7 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-navbar backdrop-blur-md shadow-sm">
+      <nav ref={ref} className="fixed top-0 left-0 right-0 z-50 bg-navbar backdrop-blur-md shadow-sm">
         {/* Info bar — сворачивается при скролле, только от md и выше */}
         <AnimatePresence initial={false}>
           {!scrolled && (
@@ -47,7 +48,8 @@ const Navbar = () => {
                   transition={{duration: 0.3, ease: 'easeInOut'}}
                   className="hidden overflow-hidden md:block"
               >
-                {/*<NavInfoBar/>*/}
+                <NavInfoBar/>
+
               </motion.div>
           )}
         </AnimatePresence>
@@ -60,16 +62,16 @@ const Navbar = () => {
               }`}
           >
             {/* Logo */}
-            <Link to="/" className="flex shrink-0 items-center space-x-2">
+            <Link to="/" className="flex shrink-0 items-center space-x-5">
               <img
                   src={logo}
                   alt="Aesthetic Face"
-                  className={`h-12 w-auto transition-all duration-300 ${
+                  className={`h-16 w-auto transition-all duration-300 ${
                       scrolled ? 'sm:h-14' : 'sm:h-20'
                   }`}
               />
               <span
-                  className={`hidden sm:inline whitespace-nowrap font-semibold text-gradient-brand transition-all duration-300 ${
+                  className={`hidden sm:inline whitespace-nowrap font-semibold font-serif text-gradient-brand transition-all duration-300 ${
                       scrolled ? 'text-2xl' : 'text-3xl'
                   }`}
               >
@@ -162,13 +164,13 @@ const Navbar = () => {
         <AnimatePresence>
           {isOpen && (
               <motion.div
-                  initial={{opacity: 0, height: 0}}
-                  animate={{opacity: 1, height: 'auto'}}
-                  exit={{opacity: 0, height: 0}}
-                  transition={{duration: 0.3}}
-                  className="md:hidden bg-surface border-t border-default overflow-hidden"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25 }}
+                  className="md:hidden absolute top-full left-0 right-0 max-h-[calc(100dvh-5rem)] overflow-y-auto bg-surface border-t border-default shadow-lg"
               >
-                <div className="px-4 py-6 space-y-4">
+                  <div className="px-4 py-6 space-y-4">
                   {navLinks.map((link) => (
                       <Link
                           key={link.path}
@@ -212,7 +214,7 @@ const Navbar = () => {
                     </p>
                     <p className="flex items-center gap-2">
                       <Clock size={16} className="shrink-0 text-brand"/>
-                      {getLocalizedText(meta.workingHours, lang)}
+                        {summarizeWorkingHoursShort(meta.workingHours, lang)}
                     </p>
                     <div className="flex items-center gap-3 pt-1">
                       {meta.socialLinks.map((social) => (
@@ -235,6 +237,7 @@ const Navbar = () => {
         </AnimatePresence>
       </nav>
   );
-};
+});
 
+Navbar.displayName = 'Navbar';
 export default Navbar;

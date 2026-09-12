@@ -1,3 +1,5 @@
+// src/types/PriceModel.ts
+
 import type { LocalizedText } from './LocalizedText';
 
 export interface PriceItem {

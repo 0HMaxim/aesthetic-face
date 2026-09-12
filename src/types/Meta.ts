@@ -1,3 +1,4 @@
+// src/types/SiteMeta.ts
 import type { LocalizedText } from './LocalizedText';
 
 export interface SocialLink {
@@ -6,10 +7,16 @@ export interface SocialLink {
     label: string;
 }
 
+export interface WorkingHoursEntry {
+    day: LocalizedText;
+    shortDay?: LocalizedText;
+    hours: LocalizedText;
+}
+
 export interface SiteMeta {
     description: LocalizedText;
     address: LocalizedText;
-    workingHours: LocalizedText;
+    workingHours: WorkingHoursEntry[]; // было LocalizedText — теперь массив по дням
     phone: string;
     email: string;
     socialLinks: SocialLink[];

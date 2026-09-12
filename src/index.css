@@ -42,6 +42,13 @@
   --color-text-primary: #111827;
   --color-text-secondary: #4b5563;
   --color-border: #f3f4f6;
+
+
+  --theme-transition-duration: 0.3s;
+
+  --color-row-divider: rgba(17, 24, 39, 0.08);
+  --color-row-hover: rgba(156, 107, 62, 0.08);
+
 }
 
 .dark {
@@ -69,6 +76,19 @@
   --color-text-primary: #f7efde;
   --color-text-secondary: #cbb99e;
   --color-border: #2a2117;
+
+  --color-row-divider: rgba(247, 239, 222, 0.1);
+  --color-row-hover: rgba(200, 161, 101, 0.12);
+}
+
+@layer base {
+  h1, h2, h3, h4{
+    font-family: theme('fontFamily.serif'); /* заголовки, акценты, цены */
+  }
+
+  body {
+    font-family: theme('fontFamily.sans'); /* весь остальной текст */
+  }
 }
 
 @layer components {
@@ -143,6 +163,29 @@
   .border-default {
     border-color: var(--color-border);
   }
+
+  .page-title {
+    @apply text-4xl md:text-5xl font-bold;
+  }
+  .page-subtitle {
+    @apply text-lg leading-relaxed;
+  }
+
+  /* H2 секции внутри страницы (Home секции) */
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-primary;
+  }
+  .section-subtitle {
+    @apply text-lg text-secondary max-w-2xl mx-auto;
+  }
+
+  .price-row-list > li {
+    border-top: 1px solid var(--color-row-divider);
+  }
+  .price-row-list > li:first-child {
+    border-top: none;
+  }
+
 }
 
 /* Custom Scrollbar */
@@ -169,7 +212,54 @@
   scrollbar-color: #c8a165 transparent;
 }
 
+
+
 html {
   scroll-behavior: smooth;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease,
+  color 0.3s ease,
+  --color-brand-from 0.3s ease,
+  --color-brand-to 0.3s ease,
+  --color-accent-from 0.3s ease,
+  --color-accent-to 0.3s ease;
+}
+
+@property --color-brand-from {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #c8a165;
+}
+@property --color-brand-to {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #7a4b26;
+}
+@property --color-accent-from {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #7a4b26;
+}
+@property --color-accent-to {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #4a2c17;
+}
+
+/* Переходы темы только для элементов, которые реально используют theme-переменные */
+body,
+.bg-surface,
+.bg-surface-alt,
+.bg-navbar,
+.text-primary,
+.text-secondary,
+.border-default,
+.bg-brand-subtle,
+.text-brand,
+.bg-page-accent,
+.bg-hero-brand,
+.bg-soft-brand,
+.bg-section-brand {
+  transition: background-color var(--theme-transition-duration) ease,
+  color var(--theme-transition-duration) ease,
+  border-color var(--theme-transition-duration) ease;
 }

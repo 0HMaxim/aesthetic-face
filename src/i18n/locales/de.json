@@ -48,7 +48,13 @@
     "price": "Preis",
     "duration": "Dauer",
     "bookNow": "Termin buchen",
-    "otherServices": "Weitere Leistungen"
+    "otherServices": "Weitere Leistungen",
+    "cta": {
+      "title": "Bereit für {{service}}?",
+      "subtitle": "Vereinbaren Sie jetzt einen Termin - ab {{price}} €.",
+      "call": "Anrufen",
+      "otherServices": "Weitere Leistungen"
+    }
   },
   "prices": {
     "backToHome": "Zur Startseite",
@@ -56,7 +62,13 @@
     "subtitle": "Transparente, aktuelle Preise für jede Behandlung.",
     "noData": "Die Preisliste wird gerade aktualisiert. Bitte schauen Sie später wieder vorbei.",
     "perProcedure": "Preis pro Behandlung",
-    "bookNow": "Termin buchen"
+    "bookNow": "Termin buchen",
+    "cta": {
+      "title": "Die passende Behandlung nicht gefunden?",
+      "subtitle": "Kontaktieren Sie uns - wir beraten Sie kostenlos und finden die passende Behandlung für Sie.",
+      "call": "Anrufen",
+      "contactUs": "Schreiben Sie uns"
+    }
   },
   "servicesPage": {
     "title": "Unsere Leistungen",
@@ -84,7 +96,7 @@
   "contact": {
     "hero": {
       "title": "Kontaktieren Sie uns",
-      "subtitle": "Vereinbaren Sie eine Beratung oder stellen Sie uns Ihre Fragen — wir helfen gerne."
+      "subtitle": "Vereinbaren Sie eine Beratung oder stellen Sie uns Ihre Fragen - wir helfen gerne."
     },
     "info": {
       "title": "So erreichen Sie uns",
@@ -111,6 +123,20 @@
     },
     "map": {
       "title": "Unser Salon auf der Karte"
+    },
+    "cta": {
+      "title": "Bereit, uns zu kontaktieren?",
+      "subtitle": "Rufen Sie uns bei Fragen an oder besuchen Sie uns persönlich - wir freuen uns auf Sie.",
+      "call": "Anrufen",
+      "viewServices": "Leistungen ansehen"
+    }
+  },
+  "about": {
+    "cta": {
+      "title": "Bereit, sich selbst verwöhnen zu lassen?",
+      "subtitle": "Vereinbaren Sie eine Beratung oder besuchen Sie uns persönlich - überzeugen Sie sich, warum man uns vertraut.",
+      "call": "Anrufen",
+      "viewServices": "Leistungen ansehen"
     }
   }
 }

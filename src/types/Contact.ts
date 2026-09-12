@@ -1,3 +1,4 @@
+// src/types/ContactFormData.ts
 export interface ContactFormData {
     name: string;
     email: string;
