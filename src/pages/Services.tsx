@@ -1,9 +1,11 @@
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ChevronRight, Home } from 'lucide-react';
 import { services } from '../data/services';
 import { getLocalizedText } from "../utils/localization.ts";
+import PageContainer, {CONTAINER_CLASS} from "../components/PageContainer.tsx";
+import CtaSection from "../components/CtaSection.tsx";
+import PageHero from "../components/PageHero.tsx";
 
 const Services = () => {
   const { t, i18n } = useTranslation();
@@ -39,73 +41,16 @@ const Services = () => {
           className="min-h-screen bg-page-accent"
       >
         {/* Hero */}
-        <motion.section
-            className="relative overflow-hidden text-white"
-            style={{ backgroundImage: 'var(--gradient-brand)' }}
-            initial="rest"
-            whileHover="hover"
-            animate="rest"
-        >
-          <motion.div
-              className="pointer-events-none absolute inset-0"
-              style={{ backgroundImage: 'var(--gradient-brand-hover)' }}
-              variants={{
-                rest: { opacity: 0 },
-                hover: { opacity: 1 },
-              }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
+          <PageHero
+              containerClassName={CONTAINER_CLASS}
+              title={t('servicesPage.title')}
+              subtitle={t('servicesPage.subtitle')}
+              breadcrumbs={[{ label: t('servicesPage.title') }]}
           />
-          <div className="absolute inset-0 bg-black/20" />
 
-          <motion.div
-              className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16"
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: {},
-                visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
-              }}
-          >
-            <motion.nav
-                aria-label="Breadcrumb"
-                variants={{
-                  hidden: { opacity: 0, y: -10 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-                }}
-                className="flex items-center space-x-2 text-white/80 text-sm mb-6"
-            >
-              <Link to="/" className="inline-flex items-center hover:text-white transition-colors duration-300">
-                <Home className="w-4 h-4" />
-              </Link>
-              <ChevronRight className="w-4 h-4 opacity-60" />
-              <span className="text-white font-medium">{t('servicesPage.title')}</span>
-            </motion.nav>
-
-            <motion.div
-                variants={{
-                  hidden: { opacity: 0, y: 24 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
-                }}
-            >
-              <h1 className="page-title text-white mb-3">
-                {t('servicesPage.title')}
-              </h1>
-              <p className="page-subtitle text-white/85 max-w-2xl">
-                {t('servicesPage.subtitle')}
-              </p>
-            </motion.div>
-          </motion.div>
-        </motion.section>
-
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto py-16">
-            {/* Services Grid */}
-            <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
+        <PageContainer className="py-16">
+          <motion.div variants={containerVariants} initial="hidden" animate="visible"
+                      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {services.map((service) => {
                 const Icon = service.icon;
                 const title = getLocalizedText(service.title, lang);
@@ -177,31 +122,19 @@ const Services = () => {
                     </motion.div>
                 );
               })}
-            </motion.div>
+          </motion.div>
+        </PageContainer>
+
 
             {/* CTA Section */}
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-                className="mt-20 text-center bg-gradient-accent rounded-3xl p-12 shadow-2xl"
-            >
-              <h2 className="section-title !text-white mb-4">
-                {t('servicesPage.ctaTitle')}
-              </h2>
-              <p className="text-pink-100 text-lg mb-8 max-w-2xl mx-auto">
-                {t('servicesPage.ctaSubtitle')}
-              </p>
-              <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-white text-accent px-8 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                {t('servicesPage.ctaButton')}
-              </motion.button>
-            </motion.div>
-          </div>
-        </div>
+          <CtaSection
+              title={t('servicesPage.ctaTitle')}
+              subtitle={t('servicesPage.ctaSubtitle')}
+              buttons={[
+                  { type: 'link', to: '/contact', label: t('servicesPage.ctaButton') },
+              ]}
+          />
+
       </motion.div>
   );
 };

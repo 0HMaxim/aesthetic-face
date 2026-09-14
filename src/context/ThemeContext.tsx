@@ -7,6 +7,11 @@ interface ThemeContextType {
     toggleTheme: () => void;
 }
 
+const THEME_COLORS: Record<Theme, string> = {
+    light: '#fdfbf6',
+    dark: '#14100c',
+};
+
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 const getInitialTheme = (): Theme => {
@@ -24,6 +29,12 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         document.documentElement.classList.toggle('dark', theme === 'dark');
         localStorage.setItem('theme', theme);
+
+        const meta = document.querySelector('meta[name="theme-color"]');
+        console.log('meta found:', meta, 'setting to', THEME_COLORS[theme]);
+        if (meta) {
+            meta.setAttribute('content', THEME_COLORS[theme]);
+        }
     }, [theme]);
 
     const toggleTheme = () => setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));

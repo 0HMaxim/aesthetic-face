@@ -14,14 +14,15 @@ export interface WorkingHoursEntry {
 }
 
 export interface SiteMeta {
+    businessName: string;
+    tagline: string; // вторая строка в hero-заголовке, напр. "Beauty Salon"
     description: LocalizedText;
     address: LocalizedText;
-    workingHours: WorkingHoursEntry[]; // было LocalizedText — теперь массив по дням
+    workingHours: WorkingHoursEntry[];
     phone: string;
     email: string;
     socialLinks: SocialLink[];
 }
-
 /**
  * Site-wide business content, stored as a single document in Firestore
  * (collection: "meta", doc id: "site").

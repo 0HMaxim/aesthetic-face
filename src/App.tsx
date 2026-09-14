@@ -1,5 +1,6 @@
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'motion/react';
+import { useEffect } from 'react';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import About from './pages/About';
@@ -10,6 +11,8 @@ import Prices from "./pages/Prices.tsx";
 import Footer from "./components/Footer.tsx";
 import useScrollToTop from "./hooks/useScrollToTop.ts";
 import MainLayout from "./layouts/MainLayout.tsx";
+import Faq from "./pages/Faq.tsx";
+import { meta } from './data/meta';
 
 function AnimatedRoutes() {
     const location = useLocation();
@@ -25,6 +28,7 @@ function AnimatedRoutes() {
                     <Route path="/prices" element={<Prices />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/faq" element={<Faq />} />
                 </Route>
             </Routes>
         </AnimatePresence>
@@ -32,6 +36,10 @@ function AnimatedRoutes() {
 }
 
 function App() {
+    useEffect(() => {
+        document.title = meta.businessName;
+    }, []);
+
     return (
         <ThemeProvider>
             <Router>

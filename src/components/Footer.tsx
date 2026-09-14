@@ -4,9 +4,11 @@ import { motion } from 'motion/react';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Icon } from '@iconify/react';
 import { meta } from '../data/meta';
+import { services } from '../data/services';
 import { getLocalizedText, summarizeWorkingHoursShort } from '../utils/localization';
 import type { FC } from 'react';
 import logo from '../assets/logo.png';
+import { FOOTER_CONTAINER_CLASS } from './PageContainer';
 
 interface FooterLink {
     label: string;
@@ -22,6 +24,8 @@ const fadeUp = {
     }),
 };
 
+const MAX_FOOTER_SERVICES = 6;
+
 const Footer: FC = () => {
     const { t, i18n } = useTranslation();
     const year = new Date().getFullYear();
@@ -34,13 +38,17 @@ const Footer: FC = () => {
         { label: t('footer.links.services'), to: '/services' },
         { label: t('footer.links.prices'), to: '/prices' },
         { label: t('footer.links.about'), to: '/about' },
+        { label: t('nav.faq'), to: '/faq' },
         { label: t('footer.links.contact'), to: '/contact' },
     ];
 
+    const footerServices = services.slice(0, MAX_FOOTER_SERVICES);
+    const hasMoreServices = services.length > MAX_FOOTER_SERVICES;
+
     return (
         <footer className="relative border-t border-default bg-surface-alt">
-            <div className="mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-14 lg:px-10">
-                <div className="grid grid-cols-1 gap-10 text-center sm:grid-cols-2 sm:text-left lg:grid-cols-3">
+            <div className={`${FOOTER_CONTAINER_CLASS} py-12 sm:py-14 lg:py-16`}>
+                <div className="grid grid-cols-1 gap-10 text-center sm:grid-cols-2 sm:gap-8 sm:text-left lg:grid-cols-4 lg:gap-8">
                     {/* Brand */}
                     <motion.div
                         variants={fadeUp}
@@ -53,11 +61,11 @@ const Footer: FC = () => {
                         <Link to="/" className="flex items-center gap-3">
                             <img
                                 src={logo}
-                                alt="Aesthetic Face"
+                                alt={meta.businessName}
                                 className="h-16 w-16 aspect-square shrink-0 rounded-full object-cover sm:h-20 sm:w-20"
                             />
                             <span className="text-gradient-brand font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
-                                Aesthetic Face
+                                {meta.businessName}
                             </span>
                         </Link>
 
@@ -109,13 +117,49 @@ const Footer: FC = () => {
                         </ul>
                     </motion.nav>
 
+                    {/* Services — динамический список из Firebase-driven данных */}
+                    <motion.nav
+                        variants={fadeUp}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: '-40px' }}
+                        custom={2}
+                        aria-label={t('footer.services.title', 'Послуги')}
+                    >
+                        <h3 className="text-base font-semibold uppercase tracking-wider text-primary">
+                            {t('footer.services.title', 'Послуги')}
+                        </h3>
+                        <ul className="mt-4 space-y-3">
+                            {footerServices.map((service) => (
+                                <li key={service.slug}>
+                                    <Link
+                                        to={`/services/${service.slug}`}
+                                        className="text-base text-secondary transition-colors duration-300 hover:text-gradient-brand"
+                                    >
+                                        {getLocalizedText(service.title, lang)}
+                                    </Link>
+                                </li>
+                            ))}
+                            {hasMoreServices && (
+                                <li>
+                                    <Link
+                                        to="/services"
+                                        className="text-base font-medium text-gradient-brand transition-opacity duration-300 hover:opacity-80"
+                                    >
+                                        {t('footer.services.viewAll', 'Всі послуги')} →
+                                    </Link>
+                                </li>
+                            )}
+                        </ul>
+                    </motion.nav>
+
                     {/* Contact — бизнес-контент из data/meta.ts */}
                     <motion.div
                         variants={fadeUp}
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true, margin: '-40px' }}
-                        custom={2}
+                        custom={3}
                     >
                         <h3 className="text-base font-semibold uppercase tracking-wider text-primary">
                             {t('footer.contact.title')}
@@ -146,15 +190,15 @@ const Footer: FC = () => {
                             </a>
                         </li>
 
-                        {/* Часы работы: сжатая сводка на мобильных, детальный список от sm */}
+                        {/* Часы работы: сжатая сводка на мобильных, детальный список от md */}
                         <li className="flex items-start justify-center gap-2 sm:justify-start">
                             <Clock size={20} strokeWidth={1.75} className="mt-0.5 shrink-0" />
                             <div>
-                                <p className="sm:hidden">
+                                <p className="md:hidden">
                                     {summarizeWorkingHoursShort(meta.workingHours, lang)}
                                 </p>
 
-                                <ul className="hidden space-y-1 text-left sm:block">
+                                <ul className="hidden space-y-1 text-left md:block">
                                     {meta.workingHours.map((entry, index) => (
                                         <li key={index} className="flex justify-between gap-4">
                                                 <span className="lg:hidden">
@@ -176,7 +220,7 @@ const Footer: FC = () => {
             {/* Bottom bar — чисто UI */}
             <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-default pt-6 sm:flex-row">
                 <p className="text-sm text-secondary">
-                    © {year} Aesthetic Face. {t('footer.rights')}
+                    © {year} {meta.businessName}. {t('footer.rights')}
                 </p>
             </div>
         </div>

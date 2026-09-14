@@ -23,8 +23,10 @@ const gridColsClass: Record<number, string> = {
 };
 
 // Текстовые блоки — держим в комфортной для чтения ширине,
-// даже если родительский контейнер (страница) шире
-const textConstraint = 'max-w-3xl mx-auto';
+// даже если родительский контейнер (страница) шире.
+// max-w-5xl (64rem) вместо max-w-3xl — меньше пустого пространства по бокам,
+// но строка всё ещё не превращается в неудобную для чтения "простыню".
+const textConstraint = 'max-w-5xl mx-auto';
 
 const containerVariants = {
     hidden: { opacity: 0 },

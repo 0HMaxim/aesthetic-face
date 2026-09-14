@@ -33,10 +33,11 @@
     "from": "ab"
   },
   "nav": {
-    "home": "Start",
+    "home": "Startseite",
     "services": "Leistungen",
     "prices": "Preise",
     "about": "Über uns",
+    "faq": "FAQ",
     "contact": "Kontakt",
     "visitUs": "Anfahrt",
     "toggleTheme": "Design wechseln",
@@ -54,7 +55,9 @@
       "subtitle": "Vereinbaren Sie jetzt einen Termin - ab {{price}} €.",
       "call": "Anrufen",
       "otherServices": "Weitere Leistungen"
-    }
+    },
+    "faqTitle": "Häufig gestellte Fragen",
+    "faqSubtitle": "Zur Leistung <accent>{{service}}</accent>"
   },
   "prices": {
     "backToHome": "Zur Startseite",
@@ -138,5 +141,15 @@
       "call": "Anrufen",
       "viewServices": "Leistungen ansehen"
     }
+  },
+  "faq": {
+    "title": "FAQ",
+    "subtitle": "Antworten auf die häufigsten Fragen unserer Kunden.",
+    "cta": {
+      "title": "Noch Fragen?",
+      "subtitle": "Vereinbaren Sie eine kostenlose Beratung – wir beantworten alles persönlich.",
+      "book": "Beratung buchen"
+    },
+    "filter": { "label": "Filter:" }
   }
 }

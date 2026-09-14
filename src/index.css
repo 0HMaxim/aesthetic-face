@@ -81,13 +81,22 @@
   --color-row-hover: rgba(200, 161, 101, 0.12);
 }
 
+
 @layer base {
-  h1, h2, h3, h4{
-    font-family: theme('fontFamily.serif'); /* заголовки, акценты, цены */
+  html, body {
+    background-color: var(--color-surface);
+  }
+  #root {
+    min-height: 100vh;
+    min-height: 100dvh; /* учитывает динамическую высоту вьюпорта Safari */
+    background-color: var(--color-surface);
+  }
+  h1, h2, h3, h4 {
+    font-family: theme('fontFamily.serif');
   }
 
   body {
-    font-family: theme('fontFamily.sans'); /* весь остальной текст */
+    font-family: theme('fontFamily.sans');
   }
 }
 

@@ -8,6 +8,7 @@ import {
   getLocalizedText,
   summarizeWorkingHoursShort,
 } from '../utils/localization.ts';
+import CtaSection from "../components/CtaSection.tsx";
 
 const Home = () => {
   const {t, i18n} = useTranslation();
@@ -50,10 +51,10 @@ const Home = () => {
                 transition={{duration: 0.8}}
             >
               <h1 className="text-5xl md:text-7xl font-bold text-primary mb-6">
-                Aesthetic Face
+                {meta.businessName}
                 <span className="block mt-2 text-gradient-brand">
-                Beauty Salon
-              </span>
+                  {meta.tagline}
+                </span>
               </h1>
             </motion.div>
 
@@ -232,82 +233,14 @@ const Home = () => {
         </section>
 
         {/* CTA Section */}
-        <motion.section
-            className="relative py-20 text-white overflow-hidden"
-            style={{ backgroundImage: 'var(--gradient-brand)' }}
-            initial="rest"
-            whileHover="hover"
-            animate="rest"
-        >
-          {/* Overlay с hover-градиентом — плавно проявляется через opacity, а не через смену background-image */}
-          <motion.div
-              className="pointer-events-none absolute inset-0"
-              style={{ backgroundImage: 'var(--gradient-brand-hover)' }}
-              variants={{
-                rest: { opacity: 0 },
-                hover: { opacity: 1 },
-              }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
-          />
-
-          {/* Свечение — тоже реагирует на hover секции */}
-          <motion.div
-              className="pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/10 blur-3xl"
-              variants={{
-                rest: { scale: 1, opacity: 0.5 },
-                hover: { scale: 1.25, opacity: 0.9 },
-              }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-          />
-
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-            >
-              <h2 className="section-title !text-white mb-6">
-                {t('home.cta.title')}
-              </h2>
-              <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-                {t('home.cta.subtitle')}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-
-                <motion.a
-                    href="tel:+491725464736"
-                    whileHover={{
-                      scale: 1.06,
-                      boxShadow: '0 20px 40px -10px rgba(0,0,0,0.35)',
-                      transition: { duration: 0.35, ease: 'easeOut' },
-                    }}
-                    whileTap={{ scale: 0.96, transition: { duration: 0.15 } }}
-                    className="relative z-10 px-8 py-4 bg-white text-brand rounded-full font-semibold"
-                >
-                  {t('home.cta.call')}
-                </motion.a>
-
-                <motion.div
-                    whileHover={{
-                      scale: 1.06,
-                      boxShadow: '0 20px 40px -10px rgba(0,0,0,0.35)',
-                      transition: { duration: 0.35, ease: 'easeOut' },
-                    }}
-                    whileTap={{ scale: 0.96, transition: { duration: 0.15 } }}
-                    className="relative z-10 rounded-full"
-                >
-                  <Link
-                      to="/contact"
-                      className="block px-8 py-4 bg-transparent border-2 border-white text-white rounded-full hover:bg-white hover:text-brand transition-colors duration-300 font-semibold"
-                  >
-                    {t('home.cta.contactUs')}
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </motion.section>
+        <CtaSection
+            title={t('home.cta.title')}
+            subtitle={t('home.cta.subtitle')}
+            buttons={[
+              { type: 'tel', href: `tel:${meta.phone}`, label: t('home.cta.call') },
+              { type: 'link', to: '/contact', label: t('home.cta.contactUs') },
+            ]}
+        />
       </motion.div>
   );
 };

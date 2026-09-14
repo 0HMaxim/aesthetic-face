@@ -37,6 +37,7 @@
     "services": "Services",
     "prices": "Prices",
     "about": "About",
+    "faq": "FAQ",
     "contact": "Contact",
     "visitUs": "Visit Us",
     "toggleTheme": "Toggle theme",
@@ -54,7 +55,9 @@
       "subtitle": "Book your appointment now - starting from {{price}} €.",
       "call": "Call us",
       "otherServices": "View Other Services"
-    }
+    },
+    "faqTitle": "Frequently Asked Questions",
+    "faqSubtitle": "About <accent>{{service}}</accent>"
   },
   "prices": {
     "backToHome": "Back to Home",
@@ -138,5 +141,15 @@
       "call": "Call Us",
       "viewServices": "View Services"
     }
+  },
+  "faq": {
+    "title": "FAQ",
+    "subtitle": "Answers to the questions we get asked most often.",
+    "cta": {
+      "title": "Still have a question?",
+      "subtitle": "Book a free consultation and we'll answer everything in person.",
+      "book": "Book a consultation"
+    },
+    "filter": { "label": "Filter:" }
   }
 }

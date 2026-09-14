@@ -7,6 +7,8 @@ import type { SiteMeta } from '../types/Meta';
  * meta, менять не придётся.
  */
 export const meta: SiteMeta = {
+    tagline: 'Beauty Salon',
+    businessName: 'Aesthetic Face',
     description: {
         uk: 'Преміальний салон краси, присвячений догляду за шкірою, волоссям і тілом.',
         ru: 'Премиальный салон красоты, посвящённый уходу за кожей, волосами и телом.',
@@ -59,7 +61,7 @@ export const meta: SiteMeta = {
     phone: '+491234567890',
     email: 'info@aestheticface.com',
     socialLinks: [
-        { icon: 'mdi:instagram', href: 'https://instagram.com', label: 'Instagram' },
+        { icon: 'mdi:instagram', href: 'https://www.instagram.com/aestheticface.de/', label: 'Instagram' },
         { icon: 'ic:baseline-facebook', href: 'https://facebook.com', label: 'Facebook' },
         { icon: 'mdi:whatsapp', href: 'https://wa.me', label: 'WhatsApp' },
     ],
